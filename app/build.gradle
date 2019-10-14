@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        applicationId "com.eagle.gallery.photos.videos.album.hd.gallery.editor"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 20010009
+        versionName "2.0.9"
+        multiDexEnabled true
+        setProperty("archivesBaseName", "gallery")
+        ndk {
+            abiFilters "armeabi-v7a","arm64-v8a"//, "x86"
+        }
+    }
+
+
+    buildTypes {
+        debug {
+            multiDexEnabled true
+            minifyEnabled false
+            shrinkResources false
+            /*applicationIdSuffix ".debug"*/
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            multiDexEnabled true
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/library_release.kotlin_module'
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'it.sephiroth.android.exif:library:1.0.1'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.9.6'
+    implementation 'com.google.vr:sdk-panowidget:1.180.0'
+    implementation 'com.google.vr:sdk-videowidget:1.180.0'
+    implementation 'org.apache.sanselan:sanselan:0.97-incubator'
+    implementation 'info.androidhive:imagefilters:1.0.7'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.caverock:androidsvg-aar:1.3'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.duolingo.open:rtl-viewpager:1.0.3'
+    implementation 'com.andrognito.patternlockview:patternlockview:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+
+    kapt 'androidx.room:room-compiler:2.0.0'
+    implementation 'androidx.room:room-runtime:2.0.0'
+    annotationProcessor 'androidx.room:room-compiler:2.0.0'
+    implementation project(":commons")
+    implementation project(":gestureviews")
+    implementation project(":scaleimageview2")
+
+    implementation 'com.wang.avi:library:2.1.3'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.tencent.bugly:crashreport:2.3.1'
+    implementation 'com.google.firebase:firebase-core:16.0.0'
+    implementation 'com.google.firebase:firebase-config:16.0.0'
+    implementation "com.google.android.gms:play-services-ads:15.0.1"
+    implementation 'jp.wasabeef:glide-transformations:4.0.0'
+    implementation 'jp.co.cyberagent.android:gpuimage:2.0.0'
+}
