@@ -17,7 +17,9 @@ Let's list some of its features worth mentioning:
 14. Showing extended details over fullscreen media with desired file properties
 15. Several different ways of sorting or grouping items, both ascending and descending
 
-Powered by Simple-Gallery (https://github.com/SimpleMobileTools/Simple-Gallery)
+Some Features powered by Simple-Gallery (https://github.com/SimpleMobileTools/Simple-Gallery)
+
+Thanks all the contributors and developers about the project, hope you like the gallery app.
 
 License
 -------
