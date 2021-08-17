@@ -1,5 +1,22 @@
 # Best Gallery
 
+Let's list some of its features worth mentioning:
+1. Search files in the gallery
+2. Make slideshow
+3. Notch support
+4. Pinning folders to the top
+5. Filtering media files by type
+6. Recycle bin for easy file recovery
+7. Fullscreen view orientation locking
+8. Marking favorite files for easy access
+9. Quick fullscreen media closing with down gesture
+10. An editor for modifying images and applying filters
+11. Password protection for protecting hidden items or the whole app
+12. Changing the thumbnail column count with gestures or menu buttons
+13. Customizable bottom actions at the fullscreen view for quick access
+14. Showing extended details over fullscreen media with desired file properties
+15. Several different ways of sorting or grouping items, both ascending and descending
+
 Powered by Simple-Gallery (https://github.com/SimpleMobileTools/Simple-Gallery)
 
 License
