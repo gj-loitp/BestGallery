@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdk 28
+    compileSdk 33
 //    compileSdkVersion 28
 //    buildToolsVersion "28.0.3"
     ndkVersion "25.2.9519653"
@@ -48,10 +48,10 @@ android {
         abortOnError false
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_11
+//        targetCompatibility JavaVersion.VERSION_11
+//    }
 
     packagingOptions {
         exclude 'META-INF/library_release.kotlin_module'
@@ -62,6 +62,7 @@ android {
             dirs 'libs'
         }
     }
+    namespace 'com.eagle.gallery.pro'
 }
 
 dependencies {
@@ -85,9 +86,9 @@ dependencies {
     implementation 'com.andrognito.patternlockview:patternlockview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
 
-    kapt 'androidx.room:room-compiler:2.0.0'
-    implementation 'androidx.room:room-runtime:2.0.0'
-    annotationProcessor 'androidx.room:room-compiler:2.0.0'
+    kapt 'androidx.room:room-compiler:2.5.2'
+    implementation 'androidx.room:room-runtime:2.5.2'
+    annotationProcessor 'androidx.room:room-compiler:2.5.2'
     implementation project(":commons")
     implementation project(":gestureviews")
     implementation project(":scaleimageview2")

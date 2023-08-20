@@ -10,25 +10,76 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.eagle.commons.dialogs.PropertiesDialog
-import com.eagle.commons.extensions.*
+import com.eagle.commons.extensions.beGone
+import com.eagle.commons.extensions.beVisible
+import com.eagle.commons.extensions.beVisibleIf
+import com.eagle.commons.extensions.getFilenameFromPath
+import com.eagle.commons.extensions.getFilenameFromUri
+import com.eagle.commons.extensions.getFinalUriFromPath
+import com.eagle.commons.extensions.getParentPath
+import com.eagle.commons.extensions.getRealPathFromURI
+import com.eagle.commons.extensions.getUriMimeType
+import com.eagle.commons.extensions.isGif
+import com.eagle.commons.extensions.isGone
+import com.eagle.commons.extensions.isRawFast
+import com.eagle.commons.extensions.isSvg
+import com.eagle.commons.extensions.isVideoFast
+import com.eagle.commons.extensions.scanPathRecursively
+import com.eagle.commons.extensions.showSideloadingDialog
+import com.eagle.commons.extensions.toast
 import com.eagle.commons.helpers.IS_FROM_GALLERY
 import com.eagle.commons.helpers.PERMISSION_WRITE_STORAGE
 import com.eagle.commons.helpers.REAL_FILE_PATH
 import com.eagle.commons.helpers.SIDELOADING_TRUE
 import com.eagle.gallery.pro.BuildConfig
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.extensions.*
+import com.eagle.gallery.pro.extensions.config
+import com.eagle.gallery.pro.extensions.hideSystemUI
+import com.eagle.gallery.pro.extensions.navigationBarHeight
+import com.eagle.gallery.pro.extensions.openEditor
+import com.eagle.gallery.pro.extensions.openPath
+import com.eagle.gallery.pro.extensions.parseFileChannel
+import com.eagle.gallery.pro.extensions.setAs
+import com.eagle.gallery.pro.extensions.sharePath
+import com.eagle.gallery.pro.extensions.showSystemUI
 import com.eagle.gallery.pro.fragments.PhotoFragment
 import com.eagle.gallery.pro.fragments.VideoFragment
 import com.eagle.gallery.pro.fragments.ViewPagerFragment
-import com.eagle.gallery.pro.helpers.*
+import com.eagle.gallery.pro.helpers.BOTTOM_ACTION_EDIT
+import com.eagle.gallery.pro.helpers.BOTTOM_ACTION_PROPERTIES
+import com.eagle.gallery.pro.helpers.BOTTOM_ACTION_SET_AS
+import com.eagle.gallery.pro.helpers.BOTTOM_ACTION_SHARE
+import com.eagle.gallery.pro.helpers.IS_VIEW_INTENT
+import com.eagle.gallery.pro.helpers.MEDIUM
+import com.eagle.gallery.pro.helpers.PATH
+import com.eagle.gallery.pro.helpers.TYPE_GIFS
+import com.eagle.gallery.pro.helpers.TYPE_IMAGES
+import com.eagle.gallery.pro.helpers.TYPE_RAWS
+import com.eagle.gallery.pro.helpers.TYPE_SVGS
+import com.eagle.gallery.pro.helpers.TYPE_VIDEOS
 import com.eagle.gallery.pro.models.Medium
-import kotlinx.android.synthetic.main.bottom_actions.*
-import kotlinx.android.synthetic.main.fragment_holder.*
+import kotlinx.android.synthetic.main.bottom_actions.bottom_change_orientation
+import kotlinx.android.synthetic.main.bottom_actions.bottom_copy
+import kotlinx.android.synthetic.main.bottom_actions.bottom_delete
+import kotlinx.android.synthetic.main.bottom_actions.bottom_edit
+import kotlinx.android.synthetic.main.bottom_actions.bottom_favorite
+import kotlinx.android.synthetic.main.bottom_actions.bottom_move
+import kotlinx.android.synthetic.main.bottom_actions.bottom_properties
+import kotlinx.android.synthetic.main.bottom_actions.bottom_rename
+import kotlinx.android.synthetic.main.bottom_actions.bottom_rotate
+import kotlinx.android.synthetic.main.bottom_actions.bottom_set_as
+import kotlinx.android.synthetic.main.bottom_actions.bottom_share
+import kotlinx.android.synthetic.main.bottom_actions.bottom_show_on_map
+import kotlinx.android.synthetic.main.bottom_actions.bottom_slideshow
+import kotlinx.android.synthetic.main.bottom_actions.bottom_toggle_file_visibility
+import kotlinx.android.synthetic.main.fragment_holder.bottom_actions
+import kotlinx.android.synthetic.main.fragment_holder.fragment_holder
+import kotlinx.android.synthetic.main.fragment_holder.top_shadow
 import java.io.File
 import java.io.FileInputStream
 
-open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(), ViewPagerFragment.FragmentListener {
+open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
+    ViewPagerFragment.FragmentListener {
     private var mMedium: Medium? = null
     private var mIsFullScreen = false
     private var mIsFromGallery = false
@@ -108,15 +159,18 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
 
         if (mUri!!.scheme == "file") {
             if (filename.contains('.')) {
-                scanPathRecursively(mUri!!.path)
-                sendViewPagerIntent(mUri!!.path)
+                scanPathRecursively(mUri!!.path ?: "")
+                sendViewPagerIntent(mUri!!.path ?: "")
                 finish()
                 return
             }
         } else {
             val path = applicationContext.getRealPathFromURI(mUri!!) ?: ""
-            if (path != mUri.toString() && path.isNotEmpty() && mUri!!.authority != "mms" && filename.contains('.')) {
-                scanPathRecursively(mUri!!.path)
+            if (path != mUri.toString() && path.isNotEmpty() && mUri!!.authority != "mms" && filename.contains(
+                    '.'
+                )
+            ) {
+                scanPathRecursively(mUri!!.path ?: "")
                 sendViewPagerIntent(path)
                 finish()
                 return
@@ -136,7 +190,19 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
         }
 
         mIsVideo = type == TYPE_VIDEOS
-        mMedium = Medium(null, filename, mUri.toString(), mUri!!.path.getParentPath(), 0, 0, file.length(), type, 0, false, 0L)
+        mMedium = Medium(
+            null,
+            filename,
+            mUri.toString(),
+            mUri!!.path?.getParentPath() ?: "",
+            0,
+            0,
+            file.length(),
+            type,
+            0,
+            false,
+            0L
+        )
         supportActionBar?.title = mMedium!!.name
         bundle.putSerializable(MEDIUM, mMedium)
 
@@ -144,7 +210,8 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
             mFragment = if (mIsVideo) VideoFragment() else PhotoFragment()
             mFragment!!.listener = this
             mFragment!!.arguments = bundle
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_placeholder, mFragment!!).commit()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_placeholder, mFragment!!).commit()
         }
 
         if (config.blackBackground) {
@@ -186,13 +253,19 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
         }
 
         if (isPanorama) {
-            Intent(applicationContext, com.eagle.gallery.pro.activities.PanoramaVideoActivity::class.java).apply {
+            Intent(
+                applicationContext,
+                com.eagle.gallery.pro.activities.PanoramaVideoActivity::class.java
+            ).apply {
                 putExtra(PATH, realPath)
                 startActivity(this)
             }
         } else {
             val mimeType = getUriMimeType(mUri.toString(), newUri)
-            Intent(applicationContext, com.eagle.gallery.pro.activities.VideoPlayerActivity::class.java).apply {
+            Intent(
+                applicationContext,
+                com.eagle.gallery.pro.activities.VideoPlayerActivity::class.java
+            ).apply {
                 setDataAndType(newUri, mimeType)
                 addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                 if (intent.extras != null) {
@@ -224,9 +297,12 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
         val visibleBottomActions = if (config.bottomActions) config.visibleBottomActions else 0
 
         menu.apply {
-            findItem(R.id.menu_set_as).isVisible = mMedium?.isImage() == true && visibleBottomActions and BOTTOM_ACTION_SET_AS == 0
-            findItem(R.id.menu_edit).isVisible = mMedium?.isImage() == true && mUri?.scheme == "file" && visibleBottomActions and BOTTOM_ACTION_EDIT == 0
-            findItem(R.id.menu_properties).isVisible = mUri?.scheme == "file" && visibleBottomActions and BOTTOM_ACTION_PROPERTIES == 0
+            findItem(R.id.menu_set_as).isVisible =
+                mMedium?.isImage() == true && visibleBottomActions and BOTTOM_ACTION_SET_AS == 0
+            findItem(R.id.menu_edit).isVisible =
+                mMedium?.isImage() == true && mUri?.scheme == "file" && visibleBottomActions and BOTTOM_ACTION_EDIT == 0
+            findItem(R.id.menu_properties).isVisible =
+                mUri?.scheme == "file" && visibleBottomActions and BOTTOM_ACTION_PROPERTIES == 0
             findItem(R.id.menu_share).isVisible = visibleBottomActions and BOTTOM_ACTION_SHARE == 0
         }
 
@@ -250,7 +326,7 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
     }
 
     private fun showProperties() {
-        PropertiesDialog(this, mUri!!.path)
+        PropertiesDialog(this, mUri!!.path ?: "")
     }
 
     private fun initBottomActions() {
@@ -259,7 +335,8 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
     }
 
     private fun initBottomActionsLayout() {
-        bottom_actions.layoutParams.height = resources.getDimension(R.dimen.bottom_actions_height).toInt() + navigationBarHeight
+        bottom_actions.layoutParams.height =
+            resources.getDimension(R.dimen.bottom_actions_height).toInt() + navigationBarHeight
         if (config.bottomActions) {
             bottom_actions.beVisible()
         } else {
@@ -268,8 +345,19 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
     }
 
     private fun initBottomActionButtons() {
-        arrayListOf(bottom_favorite, bottom_delete, bottom_rotate, bottom_properties, bottom_change_orientation, bottom_slideshow, bottom_show_on_map,
-                bottom_toggle_file_visibility, bottom_rename, bottom_copy, bottom_move).forEach {
+        arrayListOf(
+            bottom_favorite,
+            bottom_delete,
+            bottom_rotate,
+            bottom_properties,
+            bottom_change_orientation,
+            bottom_slideshow,
+            bottom_show_on_map,
+            bottom_toggle_file_visibility,
+            bottom_rename,
+            bottom_copy,
+            bottom_move
+        ).forEach {
             it.beGone()
         }
 

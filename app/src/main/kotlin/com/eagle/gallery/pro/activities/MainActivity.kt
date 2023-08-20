@@ -2,7 +2,11 @@ package com.eagle.gallery.pro.activities
 
 import android.app.Activity
 import android.app.SearchManager
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.ClipData
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -19,22 +23,103 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eagle.commons.dialogs.ConfirmationDialog
 import com.eagle.commons.dialogs.CreateNewFolderDialog
 import com.eagle.commons.dialogs.FilePickerDialog
-import com.eagle.commons.extensions.*
-import com.eagle.commons.helpers.*
+import com.eagle.commons.extensions.appLaunched
+import com.eagle.commons.extensions.beGone
+import com.eagle.commons.extensions.beGoneIf
+import com.eagle.commons.extensions.beVisible
+import com.eagle.commons.extensions.beVisibleIf
+import com.eagle.commons.extensions.checkWhatsNew
+import com.eagle.commons.extensions.deleteFiles
+import com.eagle.commons.extensions.getAdjustedPrimaryColor
+import com.eagle.commons.extensions.getFilePublicUri
+import com.eagle.commons.extensions.getFilenameFromPath
+import com.eagle.commons.extensions.getLatestMediaByDateId
+import com.eagle.commons.extensions.getLatestMediaId
+import com.eagle.commons.extensions.getMimeType
+import com.eagle.commons.extensions.getStorageDirectories
+import com.eagle.commons.extensions.handleAppPasswordProtection
+import com.eagle.commons.extensions.handleHiddenFolderPasswordProtection
+import com.eagle.commons.extensions.hasOTGConnected
+import com.eagle.commons.extensions.hasPermission
+import com.eagle.commons.extensions.internalStoragePath
+import com.eagle.commons.extensions.isGif
+import com.eagle.commons.extensions.isGone
+import com.eagle.commons.extensions.isImageFast
+import com.eagle.commons.extensions.isMediaFile
+import com.eagle.commons.extensions.isRawFast
+import com.eagle.commons.extensions.isSvg
+import com.eagle.commons.extensions.isVideoFast
+import com.eagle.commons.extensions.isVisible
+import com.eagle.commons.extensions.onGlobalLayout
+import com.eagle.commons.extensions.sdCardPath
+import com.eagle.commons.extensions.showErrorToast
+import com.eagle.commons.extensions.showOTGPermissionDialog
+import com.eagle.commons.extensions.toFileDirItem
+import com.eagle.commons.extensions.toast
+import com.eagle.commons.helpers.DAY_SECONDS
+import com.eagle.commons.helpers.PERMISSION_READ_STORAGE
+import com.eagle.commons.helpers.PERMISSION_WRITE_STORAGE
+import com.eagle.commons.helpers.SORT_BY_DATE_MODIFIED
+import com.eagle.commons.helpers.SORT_BY_DATE_TAKEN
+import com.eagle.commons.helpers.SORT_BY_SIZE
+import com.eagle.commons.helpers.SORT_DESCENDING
+import com.eagle.commons.helpers.WAS_PROTECTION_HANDLED
+import com.eagle.commons.helpers.isNougatPlus
+import com.eagle.commons.helpers.sumByLong
 import com.eagle.commons.models.FileDirItem
 import com.eagle.commons.models.Release
 import com.eagle.commons.views.MyGridLayoutManager
 import com.eagle.commons.views.MyRecyclerView
-import com.eagle.gallery.pro.App
 import com.eagle.gallery.pro.BuildConfig
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.adapters.DirectoryAdapter
 import com.eagle.gallery.pro.databases.GalleryDatabase
 import com.eagle.gallery.pro.dialogs.ChangeSortingDialog
 import com.eagle.gallery.pro.dialogs.ChangeViewTypeDialog
 import com.eagle.gallery.pro.dialogs.FilterMediaDialog
-import com.eagle.gallery.pro.extensions.*
-import com.eagle.gallery.pro.helpers.*
+import com.eagle.gallery.pro.extensions.addTempFolderIfNeeded
+import com.eagle.gallery.pro.extensions.checkAppendingHidden
+import com.eagle.gallery.pro.extensions.config
+import com.eagle.gallery.pro.extensions.deleteDBPath
+import com.eagle.gallery.pro.extensions.galleryDB
+import com.eagle.gallery.pro.extensions.getCachedDirectories
+import com.eagle.gallery.pro.extensions.getCachedMedia
+import com.eagle.gallery.pro.extensions.getDirMediaTypes
+import com.eagle.gallery.pro.extensions.getDirsToShow
+import com.eagle.gallery.pro.extensions.getDistinctPath
+import com.eagle.gallery.pro.extensions.getFavoritePaths
+import com.eagle.gallery.pro.extensions.getPathLocation
+import com.eagle.gallery.pro.extensions.getSortedDirectories
+import com.eagle.gallery.pro.extensions.launchAbout
+import com.eagle.gallery.pro.extensions.launchCamera
+import com.eagle.gallery.pro.extensions.launchSettings
+import com.eagle.gallery.pro.extensions.movePathsInRecycleBin
+import com.eagle.gallery.pro.extensions.movePinnedDirectoriesToFront
+import com.eagle.gallery.pro.extensions.removeInvalidDBDirectories
+import com.eagle.gallery.pro.extensions.storeDirectoryItems
+import com.eagle.gallery.pro.extensions.tryDeleteFileDirItem
+import com.eagle.gallery.pro.extensions.updateDBDirectory
+import com.eagle.gallery.pro.extensions.updateWidgets
+import com.eagle.gallery.pro.helpers.DIRECTORY
+import com.eagle.gallery.pro.helpers.FAVORITES
+import com.eagle.gallery.pro.helpers.GET_ANY_INTENT
+import com.eagle.gallery.pro.helpers.GET_IMAGE_INTENT
+import com.eagle.gallery.pro.helpers.GET_VIDEO_INTENT
+import com.eagle.gallery.pro.helpers.GROUP_BY_DATE_TAKEN
+import com.eagle.gallery.pro.helpers.GROUP_DESCENDING
+import com.eagle.gallery.pro.helpers.MAX_COLUMN_COUNT
+import com.eagle.gallery.pro.helpers.MONTH_MILLISECONDS
+import com.eagle.gallery.pro.helpers.MediaFetcher
+import com.eagle.gallery.pro.helpers.PICKED_PATHS
+import com.eagle.gallery.pro.helpers.RECYCLE_BIN
+import com.eagle.gallery.pro.helpers.SET_WALLPAPER_INTENT
+import com.eagle.gallery.pro.helpers.SHOW_ALL
+import com.eagle.gallery.pro.helpers.SHOW_TEMP_HIDDEN_DURATION
+import com.eagle.gallery.pro.helpers.TYPE_GIFS
+import com.eagle.gallery.pro.helpers.TYPE_IMAGES
+import com.eagle.gallery.pro.helpers.TYPE_RAWS
+import com.eagle.gallery.pro.helpers.TYPE_SVGS
+import com.eagle.gallery.pro.helpers.TYPE_VIDEOS
+import com.eagle.gallery.pro.helpers.VIEW_TYPE_GRID
 import com.eagle.gallery.pro.interfaces.DirectoryDao
 import com.eagle.gallery.pro.interfaces.DirectoryOperationsListener
 import com.eagle.gallery.pro.interfaces.MediumDao
@@ -42,14 +127,23 @@ import com.eagle.gallery.pro.jobs.NewPhotoFetcher
 import com.eagle.gallery.pro.models.AlbumCover
 import com.eagle.gallery.pro.models.Directory
 import com.eagle.gallery.pro.models.Medium
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.directories_empty_text
+import kotlinx.android.synthetic.main.activity_main.directories_empty_text_label
+import kotlinx.android.synthetic.main.activity_main.directories_grid
+import kotlinx.android.synthetic.main.activity_main.directories_horizontal_fastscroller
+import kotlinx.android.synthetic.main.activity_main.directories_refresh_layout
+import kotlinx.android.synthetic.main.activity_main.directories_vertical_fastscroller
+import kotlinx.android.synthetic.main.activity_main.loading
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
-import java.io.*
-import java.util.*
-import kotlin.collections.ArrayList
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileNotFoundException
+import java.io.InputStream
+import java.io.OutputStream
 
-class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), DirectoryOperationsListener {
+class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
+    DirectoryOperationsListener {
 
     companion object {
         var isClickHome: Boolean = false
@@ -76,8 +170,10 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
     private var mIsSearchOpen = false
     private var mLatestMediaId = 0L
     private var mLatestMediaDateId = 0L
-    private var mCurrentPathPrefix = ""                 // used at "Group direct subfolders" for navigation
-    private var mOpenedSubfolders = arrayListOf("")     // used at "Group direct subfolders" for navigating Up with the back button
+    private var mCurrentPathPrefix =
+        ""                 // used at "Group direct subfolders" for navigation
+    private var mOpenedSubfolders =
+        arrayListOf("")     // used at "Group direct subfolders" for navigating Up with the back button
     private var mLastMediaHandler = Handler()
     private var mTempShowHiddenHandler = Handler()
     private var mZoomListener: MyRecyclerView.MyZoomListener? = null
@@ -118,8 +214,9 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
         mIsGetAnyContentIntent = isGetAnyContentIntent(intent)
         mIsSetWallpaperIntent = isSetWallpaperIntent(intent)
         mAllowPickingMultiple = intent.getBooleanExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
-        mIsThirdPartyIntent = mIsPickImageIntent || mIsPickVideoIntent || mIsGetImageContentIntent || mIsGetVideoContentIntent ||
-                mIsGetAnyContentIntent || mIsSetWallpaperIntent
+        mIsThirdPartyIntent =
+            mIsPickImageIntent || mIsPickVideoIntent || mIsGetImageContentIntent || mIsGetVideoContentIntent ||
+                    mIsGetAnyContentIntent || mIsSetWallpaperIntent
 
         directories_refresh_layout.setOnRefreshListener { getDirectories() }
         directories_refresh_layout.setColorSchemeResources(R.color.color_primary)
@@ -290,10 +387,14 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
             menuInflater.inflate(R.menu.menu_main, menu)
             val useBin = config.useRecycleBin
             menu.apply {
-                findItem(R.id.increase_column_count).isVisible = config.viewTypeFolders == VIEW_TYPE_GRID && config.dirColumnCnt < MAX_COLUMN_COUNT
-                findItem(R.id.reduce_column_count).isVisible = config.viewTypeFolders == VIEW_TYPE_GRID && config.dirColumnCnt > 1
-                findItem(R.id.hide_the_recycle_bin).isVisible = useBin && config.showRecycleBinAtFolders
-                findItem(R.id.show_the_recycle_bin).isVisible = useBin && !config.showRecycleBinAtFolders
+                findItem(R.id.increase_column_count).isVisible =
+                    config.viewTypeFolders == VIEW_TYPE_GRID && config.dirColumnCnt < MAX_COLUMN_COUNT
+                findItem(R.id.reduce_column_count).isVisible =
+                    config.viewTypeFolders == VIEW_TYPE_GRID && config.dirColumnCnt > 1
+                findItem(R.id.hide_the_recycle_bin).isVisible =
+                    useBin && config.showRecycleBinAtFolders
+                findItem(R.id.show_the_recycle_bin).isVisible =
+                    useBin && !config.showRecycleBinAtFolders
                 setupSearch(this)
             }
         }
@@ -335,7 +436,8 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
         mWasProtectionHandled = savedInstanceState.getBoolean(WAS_PROTECTION_HANDLED, false)
     }
 
-    private fun getRecyclerAdapter() = directories_grid.adapter as? com.eagle.gallery.pro.adapters.DirectoryAdapter
+    private fun getRecyclerAdapter() =
+        directories_grid.adapter as? com.eagle.gallery.pro.adapters.DirectoryAdapter
 
     private fun storeStateVariables() {
         config.apply {
@@ -367,23 +469,25 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
             })
         }
 
-        MenuItemCompat.setOnActionExpandListener(mSearchMenuItem, object : MenuItemCompat.OnActionExpandListener {
-            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
-                mIsSearchOpen = true
-                directories_refresh_layout.isEnabled = false
-                return true
-            }
-
-            // this triggers on device rotation too, avoid doing anything
-            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
-                if (mIsSearchOpen) {
-                    mIsSearchOpen = false
-                    directories_refresh_layout.isEnabled = config.enablePullToRefresh
-                    setupAdapter(mDirs, "")
+        MenuItemCompat.setOnActionExpandListener(
+            mSearchMenuItem,
+            object : MenuItemCompat.OnActionExpandListener {
+                override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                    mIsSearchOpen = true
+                    directories_refresh_layout.isEnabled = false
+                    return true
                 }
-                return true
-            }
-        })
+
+                // this triggers on device rotation too, avoid doing anything
+                override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                    if (mIsSearchOpen) {
+                        mIsSearchOpen = false
+                        directories_refresh_layout.isEnabled = config.enablePullToRefresh
+                        setupAdapter(mDirs, "")
+                    }
+                    return true
+                }
+            })
     }
 
     private fun startNewPhotoFetcher() {
@@ -400,7 +504,10 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
             val newFolder = File(config.tempFolderPath)
             if (newFolder.exists() && newFolder.isDirectory) {
                 if (newFolder.list()?.isEmpty() == true) {
-                    toast(String.format(getString(R.string.deleting_folder), config.tempFolderPath), Toast.LENGTH_LONG)
+                    toast(
+                        String.format(getString(R.string.deleting_folder), config.tempFolderPath),
+                        Toast.LENGTH_LONG
+                    )
                     tryDeleteFileDirItem(newFolder.toFileDirItem(applicationContext), true, true)
                 }
             }
@@ -411,7 +518,11 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
     private fun checkOTGPath() {
         Thread {
             if (!config.wasOTGHandled && hasPermission(PERMISSION_WRITE_STORAGE) && hasOTGConnected() && config.OTGPath.isEmpty()) {
-                getStorageDirectories().firstOrNull { it.trimEnd('/') != internalStoragePath && it.trimEnd('/') != sdCardPath }?.apply {
+                getStorageDirectories().firstOrNull {
+                    it.trimEnd('/') != internalStoragePath && it.trimEnd(
+                        '/'
+                    ) != sdCardPath
+                }?.apply {
                     config.wasOTGHandled = true
                     val otgPath = trimEnd('/')
                     config.OTGPath = otgPath
@@ -420,7 +531,12 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
 
                 if (config.OTGPath.isEmpty()) {
                     runOnUiThread {
-                        ConfirmationDialog(this, getString(R.string.usb_detected), positive = R.string.ok, negative = 0) {
+                        ConfirmationDialog(
+                            this,
+                            getString(R.string.usb_detected),
+                            positive = R.string.ok,
+                            negative = 0
+                        ) {
                             config.wasOTGHandled = true
                             showOTGPermissionDialog()
                         }
@@ -433,7 +549,7 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
     private fun checkDefaultSpamFolders() {
         if (!config.spamFoldersChecked) {
             val spamFolders = arrayListOf(
-                    "/storage/emulated/0/Android/data/com.facebook.orca/files/stickers"
+                "/storage/emulated/0/Android/data/com.facebook.orca/files/stickers"
             )
 
             spamFolders.forEach {
@@ -550,13 +666,23 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
     }
 
     override fun deleteFolders(folders: ArrayList<File>) {
-        val fileDirItems = folders.asSequence().filter { it.isDirectory }.map { FileDirItem(it.absolutePath, it.name, true) }.toMutableList() as ArrayList<FileDirItem>
+        val fileDirItems = folders.asSequence().filter { it.isDirectory }
+            .map { FileDirItem(it.absolutePath, it.name, true) }
+            .toMutableList() as ArrayList<FileDirItem>
         when {
             fileDirItems.isEmpty() -> return
-            fileDirItems.size == 1 -> toast(String.format(getString(R.string.deleting_folder), fileDirItems.first().name))
+            fileDirItems.size == 1 -> toast(
+                String.format(
+                    getString(R.string.deleting_folder),
+                    fileDirItems.first().name
+                )
+            )
+
             else -> {
-                val baseString = if (config.useRecycleBin) R.plurals.moving_items_into_bin else R.plurals.delete_items
-                val deletingItems = resources.getQuantityString(baseString, fileDirItems.size, fileDirItems.size)
+                val baseString =
+                    if (config.useRecycleBin) R.plurals.moving_items_into_bin else R.plurals.delete_items
+                val deletingItems =
+                    resources.getQuantityString(baseString, fileDirItems.size, fileDirItems.size)
                 toast(deletingItems)
             }
         }
@@ -592,7 +718,10 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
         }
     }
 
-    private fun deleteFilteredFileDirItems(fileDirItems: ArrayList<FileDirItem>, folders: ArrayList<File>) {
+    private fun deleteFilteredFileDirItems(
+        fileDirItems: ArrayList<FileDirItem>,
+        folders: ArrayList<File>,
+    ) {
         deleteFiles(fileDirItems) {
             runOnUiThread {
                 refreshItems()
@@ -618,10 +747,16 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
         val layoutManager = directories_grid.layoutManager as MyGridLayoutManager
         if (config.scrollHorizontally) {
             layoutManager.orientation = RecyclerView.HORIZONTAL
-            directories_refresh_layout.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            directories_refresh_layout.layoutParams = FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
         } else {
             layoutManager.orientation = RecyclerView.VERTICAL
-            directories_refresh_layout.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            directories_refresh_layout.layoutParams = FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
         }
 
         layoutManager.spanCount = config.dirColumnCnt
@@ -680,7 +815,10 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
         val layoutManager = directories_grid.layoutManager as MyGridLayoutManager
         layoutManager.spanCount = 1
         layoutManager.orientation = RecyclerView.VERTICAL
-        directories_refresh_layout.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        directories_refresh_layout.layoutParams = FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         mZoomListener = null
     }
 
@@ -725,33 +863,42 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
         }
     }
 
-    private fun isPickImageIntent(intent: Intent) = isPickIntent(intent) && (hasImageContentData(intent) || isImageType(intent))
+    private fun isPickImageIntent(intent: Intent) =
+        isPickIntent(intent) && (hasImageContentData(intent) || isImageType(intent))
 
-    private fun isPickVideoIntent(intent: Intent) = isPickIntent(intent) && (hasVideoContentData(intent) || isVideoType(intent))
+    private fun isPickVideoIntent(intent: Intent) =
+        isPickIntent(intent) && (hasVideoContentData(intent) || isVideoType(intent))
 
     private fun isPickIntent(intent: Intent) = intent.action == Intent.ACTION_PICK
 
-    private fun isGetContentIntent(intent: Intent) = intent.action == Intent.ACTION_GET_CONTENT && intent.type != null
+    private fun isGetContentIntent(intent: Intent) =
+        intent.action == Intent.ACTION_GET_CONTENT && intent.type != null
 
     private fun isGetImageContentIntent(intent: Intent) = isGetContentIntent(intent) &&
-            (intent.type.startsWith("image/") || intent.type == MediaStore.Images.Media.CONTENT_TYPE)
+            (intent.type?.startsWith("image/") == true || intent.type == MediaStore.Images.Media.CONTENT_TYPE)
 
     private fun isGetVideoContentIntent(intent: Intent) = isGetContentIntent(intent) &&
-            (intent.type.startsWith("video/") || intent.type == MediaStore.Video.Media.CONTENT_TYPE)
+            (intent.type?.startsWith("video/") == true || intent.type == MediaStore.Video.Media.CONTENT_TYPE)
 
-    private fun isGetAnyContentIntent(intent: Intent) = isGetContentIntent(intent) && intent.type == "*/*"
+    private fun isGetAnyContentIntent(intent: Intent) =
+        isGetContentIntent(intent) && intent.type == "*/*"
 
-    private fun isSetWallpaperIntent(intent: Intent?) = intent?.action == Intent.ACTION_SET_WALLPAPER
+    private fun isSetWallpaperIntent(intent: Intent?) =
+        intent?.action == Intent.ACTION_SET_WALLPAPER
 
-    private fun hasImageContentData(intent: Intent) = (intent.data == MediaStore.Images.Media.EXTERNAL_CONTENT_URI ||
-            intent.data == MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+    private fun hasImageContentData(intent: Intent) =
+        (intent.data == MediaStore.Images.Media.EXTERNAL_CONTENT_URI ||
+                intent.data == MediaStore.Images.Media.INTERNAL_CONTENT_URI)
 
-    private fun hasVideoContentData(intent: Intent) = (intent.data == MediaStore.Video.Media.EXTERNAL_CONTENT_URI ||
-            intent.data == MediaStore.Video.Media.INTERNAL_CONTENT_URI)
+    private fun hasVideoContentData(intent: Intent) =
+        (intent.data == MediaStore.Video.Media.EXTERNAL_CONTENT_URI ||
+                intent.data == MediaStore.Video.Media.INTERNAL_CONTENT_URI)
 
-    private fun isImageType(intent: Intent) = (intent.type?.startsWith("image/") == true || intent.type == MediaStore.Images.Media.CONTENT_TYPE)
+    private fun isImageType(intent: Intent) =
+        (intent.type?.startsWith("image/") == true || intent.type == MediaStore.Images.Media.CONTENT_TYPE)
 
-    private fun isVideoType(intent: Intent) = (intent.type?.startsWith("video/") == true || intent.type == MediaStore.Video.Media.CONTENT_TYPE)
+    private fun isVideoType(intent: Intent) =
+        (intent.type?.startsWith("video/") == true || intent.type == MediaStore.Video.Media.CONTENT_TYPE)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
@@ -763,7 +910,12 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
                         intent.extras?.containsKey(MediaStore.EXTRA_OUTPUT) == true && intent.flags and Intent.FLAG_GRANT_WRITE_URI_PERMISSION != 0 -> {
                             resultUri = fillExtraOutput(resultData)
                         }
-                        resultData.extras?.containsKey(PICKED_PATHS) == true -> fillPickedPaths(resultData, resultIntent)
+
+                        resultData.extras?.containsKey(PICKED_PATHS) == true -> fillPickedPaths(
+                            resultData,
+                            resultIntent
+                        )
+
                         else -> fillIntentPath(resultData, resultIntent)
                     }
                 }
@@ -784,14 +936,16 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
     }
 
     private fun fillExtraOutput(resultData: Intent): Uri? {
-        val file = File(resultData.data.path)
+        val file = File(resultData.data?.path ?: "")
         var inputStream: InputStream? = null
         var outputStream: OutputStream? = null
         try {
-            val output = intent.extras.get(MediaStore.EXTRA_OUTPUT) as Uri
+            val output = intent.extras?.get(MediaStore.EXTRA_OUTPUT) as Uri
             inputStream = FileInputStream(file)
             outputStream = contentResolver.openOutputStream(output)
-            inputStream.copyTo(outputStream)
+            if (outputStream != null) {
+                inputStream.copyTo(outputStream)
+            }
         } catch (e: SecurityException) {
             showErrorToast(e)
         } catch (ignored: FileNotFoundException) {
@@ -805,9 +959,11 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
     }
 
     private fun fillPickedPaths(resultData: Intent, resultIntent: Intent) {
-        val paths = resultData.extras.getStringArrayList(PICKED_PATHS)
-        val uris = paths.map { getFilePublicUri(File(it), BuildConfig.APPLICATION_ID) } as ArrayList
-        val clipData = ClipData("Attachment", arrayOf("image/*", "video/*"), ClipData.Item(uris.removeAt(0)))
+        val paths = resultData.extras?.getStringArrayList(PICKED_PATHS)
+        val uris =
+            paths?.map { getFilePublicUri(File(it), BuildConfig.APPLICATION_ID) } as ArrayList
+        val clipData =
+            ClipData("Attachment", arrayOf("image/*", "video/*"), ClipData.Item(uris.removeAt(0)))
 
         uris.forEach {
             clipData.addItem(ClipData.Item(it))
@@ -819,9 +975,9 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
 
     private fun fillIntentPath(resultData: Intent, resultIntent: Intent) {
         val data = resultData.data
-        val path = if (data.toString().startsWith("/")) data.toString() else data.path
+        val path = if (data.toString().startsWith("/")) data.toString() else data?.path
         val uri = getFilePublicUri(File(path), BuildConfig.APPLICATION_ID)
-        val type = path.getMimeType()
+        val type = path?.getMimeType()
         resultIntent.setDataAndTypeAndNormalize(uri, type)
         resultIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     }
@@ -855,7 +1011,9 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
         // if hidden item showing is disabled but all Favorite items are hidden, hide the Favorites folder
         if (!config.shouldShowHidden) {
             val favoritesFolder = newDirs.firstOrNull { it.areFavorites() }
-            if (favoritesFolder != null && favoritesFolder.tmb.getFilenameFromPath().startsWith('.')) {
+            if (favoritesFolder != null && favoritesFolder.tmb.getFilenameFromPath()
+                    .startsWith('.')
+            ) {
                 newDirs.remove(favoritesFolder)
             }
         }
@@ -866,7 +1024,8 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
         runOnUiThread {
             checkPlaceholderVisibility(dirs)
 
-            val allowHorizontalScroll = config.scrollHorizontally && config.viewTypeFolders == VIEW_TYPE_GRID
+            val allowHorizontalScroll =
+                config.scrollHorizontally && config.viewTypeFolders == VIEW_TYPE_GRID
             directories_vertical_fastscroller.beVisibleIf(directories_grid.isVisible() && !allowHorizontalScroll)
             directories_horizontal_fastscroller.beVisibleIf(directories_grid.isVisible() && allowHorizontalScroll)
             setupAdapter(dirs.clone() as ArrayList<Directory>)
@@ -892,14 +1051,30 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
                     return
                 }
 
-                val curMedia = mediaFetcher.getFilesFrom(directory.path, getImagesOnly, getVideosOnly, getProperDateTaken, getProperFileSize, favoritePaths, false)
+                val curMedia = mediaFetcher.getFilesFrom(
+                    directory.path,
+                    getImagesOnly,
+                    getVideosOnly,
+                    getProperDateTaken,
+                    getProperFileSize,
+                    favoritePaths,
+                    false
+                )
                 val newDir = if (curMedia.isEmpty()) {
                     if (directory.path != tempFolderPath) {
                         dirPathsToRemove.add(directory.path)
                     }
                     directory
                 } else {
-                    createDirectoryFromMedia(directory.path, curMedia, albumCovers, hiddenString, includedFolders, isSortingAscending, getProperFileSize)
+                    createDirectoryFromMedia(
+                        directory.path,
+                        curMedia,
+                        albumCovers,
+                        hiddenString,
+                        includedFolders,
+                        isSortingAscending,
+                        getProperFileSize
+                    )
                 }
 
                 // we are looping through the already displayed folders looking for changes, do not do anything if nothing changed
@@ -965,7 +1140,15 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
                 return
             }
 
-            val newMedia = mediaFetcher.getFilesFrom(folder, getImagesOnly, getVideosOnly, getProperDateTaken, getProperFileSize, favoritePaths, false)
+            val newMedia = mediaFetcher.getFilesFrom(
+                folder,
+                getImagesOnly,
+                getVideosOnly,
+                getProperDateTaken,
+                getProperFileSize,
+                favoritePaths,
+                false
+            )
             if (newMedia.isEmpty()) {
                 continue
             }
@@ -979,7 +1162,15 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
                 }
             }
 
-            val newDir = createDirectoryFromMedia(folder, newMedia, albumCovers, hiddenString, includedFolders, isSortingAscending, getProperFileSize)
+            val newDir = createDirectoryFromMedia(
+                folder,
+                newMedia,
+                albumCovers,
+                hiddenString,
+                includedFolders,
+                isSortingAscending,
+                getProperFileSize
+            )
             dirs.add(newDir)
             setupAdapter(dirs)
             try {
@@ -1021,8 +1212,15 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
         directories_grid.beVisibleIf(directories_empty_text_label.isGone())
     }
 
-    private fun createDirectoryFromMedia(path: String, curMedia: ArrayList<Medium>, albumCovers: ArrayList<AlbumCover>, hiddenString: String,
-                                         includedFolders: MutableSet<String>, isSortingAscending: Boolean, getProperFileSize: Boolean): Directory {
+    private fun createDirectoryFromMedia(
+        path: String,
+        curMedia: ArrayList<Medium>,
+        albumCovers: ArrayList<AlbumCover>,
+        hiddenString: String,
+        includedFolders: MutableSet<String>,
+        isSortingAscending: Boolean,
+        getProperFileSize: Boolean,
+    ): Directory {
         var thumbnail = curMedia.firstOrNull { File(it.path).exists() }?.path ?: ""
         albumCovers.forEach {
             if (it.path == path && File(it.tmb).exists()) {
@@ -1033,11 +1231,30 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
         val firstItem = curMedia.first()
         val lastItem = curMedia.last()
         val dirName = checkAppendingHidden(path, hiddenString, includedFolders)
-        val lastModified = if (isSortingAscending) Math.min(firstItem.modified, lastItem.modified) else Math.max(firstItem.modified, lastItem.modified)
-        val dateTaken = if (isSortingAscending) Math.min(firstItem.taken, lastItem.taken) else Math.max(firstItem.taken, lastItem.taken)
+        val lastModified =
+            if (isSortingAscending) Math.min(firstItem.modified, lastItem.modified) else Math.max(
+                firstItem.modified,
+                lastItem.modified
+            )
+        val dateTaken =
+            if (isSortingAscending) Math.min(firstItem.taken, lastItem.taken) else Math.max(
+                firstItem.taken,
+                lastItem.taken
+            )
         val size = if (getProperFileSize) curMedia.sumByLong { it.size } else 0L
         val mediaTypes = curMedia.getDirMediaTypes()
-        return Directory(null, path, thumbnail, dirName, curMedia.size, lastModified, dateTaken, size, getPathLocation(path), mediaTypes)
+        return Directory(
+            null,
+            path,
+            thumbnail,
+            dirName,
+            curMedia.size,
+            lastModified,
+            dateTaken,
+            size,
+            getPathLocation(path),
+            mediaTypes
+        )
     }
 
     private fun setupAdapter(dirs: ArrayList<Directory>, textToSearch: String = "") {
@@ -1048,14 +1265,24 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
         }
 
         val currAdapter = directories_grid.adapter
-        val distinctDirs = dirs.distinctBy { it.path.getDistinctPath() }.toMutableList() as ArrayList<Directory>
+        val distinctDirs =
+            dirs.distinctBy { it.path.getDistinctPath() }.toMutableList() as ArrayList<Directory>
         val sortedDirs = getSortedDirectories(distinctDirs)
-        var dirsToShow = getDirsToShow(sortedDirs, mDirs, mCurrentPathPrefix).clone() as ArrayList<Directory>
+        var dirsToShow =
+            getDirsToShow(sortedDirs, mDirs, mCurrentPathPrefix).clone() as ArrayList<Directory>
 
         if (currAdapter == null) {
             initZoomListener()
-            val fastscroller = if (config.scrollHorizontally) directories_horizontal_fastscroller else directories_vertical_fastscroller
-            com.eagle.gallery.pro.adapters.DirectoryAdapter(this, dirsToShow, this, directories_grid, isPickIntent(intent) || isGetAnyContentIntent(intent), fastscroller) {
+            val fastscroller =
+                if (config.scrollHorizontally) directories_horizontal_fastscroller else directories_vertical_fastscroller
+            com.eagle.gallery.pro.adapters.DirectoryAdapter(
+                this,
+                dirsToShow,
+                this,
+                directories_grid,
+                isPickIntent(intent) || isGetAnyContentIntent(intent),
+                fastscroller
+            ) {
                 val clickedDir = it as Directory
                 val path = clickedDir.path
                 if (clickedDir.subfoldersCount == 1 || !config.groupDirectSubfolders) {
@@ -1077,10 +1304,14 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
             measureRecyclerViewContent(dirsToShow)
         } else {
             if (textToSearch.isNotEmpty()) {
-                dirsToShow = dirsToShow.filter { it.name.contains(textToSearch, true) }.sortedBy { !it.name.startsWith(textToSearch, true) }.toMutableList() as ArrayList
+                dirsToShow = dirsToShow.filter { it.name.contains(textToSearch, true) }
+                    .sortedBy { !it.name.startsWith(textToSearch, true) }
+                    .toMutableList() as ArrayList
             }
             runOnUiThread {
-                (directories_grid.adapter as? com.eagle.gallery.pro.adapters.DirectoryAdapter)?.updateDirs(dirsToShow)
+                (directories_grid.adapter as? com.eagle.gallery.pro.adapters.DirectoryAdapter)?.updateDirs(
+                    dirsToShow
+                )
                 measureRecyclerViewContent(dirsToShow)
             }
         }
@@ -1092,7 +1323,8 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
     }
 
     private fun setupScrollDirection() {
-        val allowHorizontalScroll = config.scrollHorizontally && config.viewTypeFolders == VIEW_TYPE_GRID
+        val allowHorizontalScroll =
+            config.scrollHorizontally && config.viewTypeFolders == VIEW_TYPE_GRID
         directories_vertical_fastscroller.isHorizontal = false
         directories_vertical_fastscroller.beGoneIf(allowHorizontalScroll)
 
@@ -1101,12 +1333,18 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
 
         if (allowHorizontalScroll) {
             directories_horizontal_fastscroller.allowBubbleDisplay = config.showInfoBubble
-            directories_horizontal_fastscroller.setViews(directories_grid, directories_refresh_layout) {
+            directories_horizontal_fastscroller.setViews(
+                directories_grid,
+                directories_refresh_layout
+            ) {
                 directories_horizontal_fastscroller.updateBubbleText(getBubbleTextItem(it))
             }
         } else {
             directories_vertical_fastscroller.allowBubbleDisplay = config.showInfoBubble
-            directories_vertical_fastscroller.setViews(directories_grid, directories_refresh_layout) {
+            directories_vertical_fastscroller.setViews(
+                directories_grid,
+                directories_refresh_layout
+            ) {
                 directories_vertical_fastscroller.updateBubbleText(getBubbleTextItem(it))
             }
         }
@@ -1151,7 +1389,8 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
 
     private fun getCurrentlyDisplayedDirs() = getRecyclerAdapter()?.dirs ?: ArrayList()
 
-    private fun getBubbleTextItem(index: Int) = getRecyclerAdapter()?.dirs?.getOrNull(index)?.getBubbleText(config.directorySorting, this)
+    private fun getBubbleTextItem(index: Int) =
+        getRecyclerAdapter()?.dirs?.getOrNull(index)?.getBubbleText(config.directorySorting, this)
             ?: ""
 
     private fun setupLatestMediaId() {
@@ -1209,7 +1448,8 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
                 val internalPath = internalStoragePath
                 val checkedPaths = ArrayList<String>()
                 val oftenRepeatedPaths = ArrayList<String>()
-                val paths = mDirs.map { it.path.removePrefix(internalPath) }.toMutableList() as ArrayList<String>
+                val paths = mDirs.map { it.path.removePrefix(internalPath) }
+                    .toMutableList() as ArrayList<String>
                 paths.forEach {
                     val parts = it.split("/")
                     var currentString = ""
@@ -1273,10 +1513,12 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Director
     }
 
 
-
     private fun registerReceiver() {
         try {
-            registerReceiver(mHomeKeyEventReceiver, IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS))
+            registerReceiver(
+                mHomeKeyEventReceiver,
+                IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)
+            )
         } catch (e: Exception) {
             e.printStackTrace()
         }

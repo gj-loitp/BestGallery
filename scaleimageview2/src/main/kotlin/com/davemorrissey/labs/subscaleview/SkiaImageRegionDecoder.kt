@@ -20,18 +20,27 @@ class SkiaImageRegionDecoder : ImageRegionDecoder {
         when {
             uriString.startsWith(ASSET_PREFIX) -> {
                 val assetName = uriString.substring(ASSET_PREFIX.length)
-                decoder = BitmapRegionDecoder.newInstance(context.assets.open(assetName, AssetManager.ACCESS_RANDOM), false)
+                decoder = BitmapRegionDecoder.newInstance(
+                    context.assets.open(
+                        assetName,
+                        AssetManager.ACCESS_RANDOM
+                    ), false
+                )
             }
+
             else -> {
                 var inputStream: InputStream? = null
                 try {
                     val contentResolver = context.contentResolver
                     inputStream = contentResolver.openInputStream(uri)
-                    decoder = BitmapRegionDecoder.newInstance(inputStream, false)
+                    decoder = inputStream?.let {
+                        BitmapRegionDecoder.newInstance(it, false)
+                    }
                 } finally {
                     try {
                         inputStream?.close()
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
             }
@@ -47,7 +56,7 @@ class SkiaImageRegionDecoder : ImageRegionDecoder {
                 options.inSampleSize = sampleSize
                 options.inPreferredConfig = Bitmap.Config.RGB_565
                 return decoder!!.decodeRegion(sRect, options)
-                        ?: throw RuntimeException("Skia image decoder returned null bitmap - image format may not be supported")
+                    ?: throw RuntimeException("Skia image decoder returned null bitmap - image format may not be supported")
             } else {
                 throw IllegalStateException("Cannot decode region after decoder has been recycled")
             }

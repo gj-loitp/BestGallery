@@ -23,7 +23,22 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.eagle.commons.dialogs.ConfirmationDialog
-import com.eagle.commons.extensions.*
+import com.eagle.commons.extensions.beGoneIf
+import com.eagle.commons.extensions.beVisibleIf
+import com.eagle.commons.extensions.deleteFiles
+import com.eagle.commons.extensions.getAdjustedPrimaryColor
+import com.eagle.commons.extensions.getFilenameFromPath
+import com.eagle.commons.extensions.getLatestMediaByDateId
+import com.eagle.commons.extensions.getLatestMediaId
+import com.eagle.commons.extensions.handleHiddenFolderPasswordProtection
+import com.eagle.commons.extensions.isGone
+import com.eagle.commons.extensions.isMediaFile
+import com.eagle.commons.extensions.isVideoFast
+import com.eagle.commons.extensions.isVisible
+import com.eagle.commons.extensions.onGlobalLayout
+import com.eagle.commons.extensions.showErrorToast
+import com.eagle.commons.extensions.toast
+import com.eagle.commons.extensions.updateActionBarTitle
 import com.eagle.commons.helpers.PERMISSION_WRITE_STORAGE
 import com.eagle.commons.helpers.REQUEST_EDIT_IMAGE
 import com.eagle.commons.helpers.SORT_BY_RANDOM
@@ -31,12 +46,51 @@ import com.eagle.commons.models.FileDirItem
 import com.eagle.commons.views.MyGridLayoutManager
 import com.eagle.commons.views.MyRecyclerView
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.adapters.MediaAdapter
-import com.eagle.gallery.pro.asynctasks.GetMediaAsynctask
 import com.eagle.gallery.pro.databases.GalleryDatabase
-import com.eagle.gallery.pro.dialogs.*
-import com.eagle.gallery.pro.extensions.*
-import com.eagle.gallery.pro.helpers.*
+import com.eagle.gallery.pro.dialogs.ChangeGroupingDialog
+import com.eagle.gallery.pro.dialogs.ChangeSortingDialog
+import com.eagle.gallery.pro.dialogs.ChangeViewTypeDialog
+import com.eagle.gallery.pro.dialogs.ExcludeFolderDialog
+import com.eagle.gallery.pro.dialogs.FilterMediaDialog
+import com.eagle.gallery.pro.extensions.addNoMedia
+import com.eagle.gallery.pro.extensions.config
+import com.eagle.gallery.pro.extensions.containsNoMedia
+import com.eagle.gallery.pro.extensions.deleteDBPath
+import com.eagle.gallery.pro.extensions.emptyAndDisableTheRecycleBin
+import com.eagle.gallery.pro.extensions.emptyTheRecycleBin
+import com.eagle.gallery.pro.extensions.galleryDB
+import com.eagle.gallery.pro.extensions.getCachedMedia
+import com.eagle.gallery.pro.extensions.getHumanizedFilename
+import com.eagle.gallery.pro.extensions.isDownloadsFolder
+import com.eagle.gallery.pro.extensions.launchAbout
+import com.eagle.gallery.pro.extensions.launchCamera
+import com.eagle.gallery.pro.extensions.launchSettings
+import com.eagle.gallery.pro.extensions.movePathsInRecycleBin
+import com.eagle.gallery.pro.extensions.openPath
+import com.eagle.gallery.pro.extensions.recycleBinPath
+import com.eagle.gallery.pro.extensions.removeNoMedia
+import com.eagle.gallery.pro.extensions.restoreRecycleBinPaths
+import com.eagle.gallery.pro.extensions.showRecycleBinEmptyingDialog
+import com.eagle.gallery.pro.extensions.tryDeleteFileDirItem
+import com.eagle.gallery.pro.extensions.updateWidgets
+import com.eagle.gallery.pro.helpers.DIRECTORY
+import com.eagle.gallery.pro.helpers.FAVORITES
+import com.eagle.gallery.pro.helpers.GET_ANY_INTENT
+import com.eagle.gallery.pro.helpers.GET_IMAGE_INTENT
+import com.eagle.gallery.pro.helpers.GET_VIDEO_INTENT
+import com.eagle.gallery.pro.helpers.GROUP_BY_NONE
+import com.eagle.gallery.pro.helpers.MAX_COLUMN_COUNT
+import com.eagle.gallery.pro.helpers.MediaFetcher
+import com.eagle.gallery.pro.helpers.PATH
+import com.eagle.gallery.pro.helpers.PICKED_PATHS
+import com.eagle.gallery.pro.helpers.RECYCLE_BIN
+import com.eagle.gallery.pro.helpers.SET_WALLPAPER_INTENT
+import com.eagle.gallery.pro.helpers.SHOW_ALL
+import com.eagle.gallery.pro.helpers.SHOW_FAVORITES
+import com.eagle.gallery.pro.helpers.SHOW_RECYCLE_BIN
+import com.eagle.gallery.pro.helpers.SHOW_TEMP_HIDDEN_DURATION
+import com.eagle.gallery.pro.helpers.SLIDESHOW_START_ON_ENTER
+import com.eagle.gallery.pro.helpers.VIEW_TYPE_GRID
 import com.eagle.gallery.pro.interfaces.DirectoryDao
 import com.eagle.gallery.pro.interfaces.MediaOperationsListener
 import com.eagle.gallery.pro.interfaces.MediumDao
@@ -44,11 +98,15 @@ import com.eagle.gallery.pro.models.Medium
 import com.eagle.gallery.pro.models.ThumbnailItem
 import com.eagle.gallery.pro.models.ThumbnailSection
 import com.wang.avi.AVLoadingIndicatorView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_media.*
+import kotlinx.android.synthetic.main.activity_media.media_empty_text
+import kotlinx.android.synthetic.main.activity_media.media_empty_text_label
+import kotlinx.android.synthetic.main.activity_media.media_grid
+import kotlinx.android.synthetic.main.activity_media.media_horizontal_fastscroller
+import kotlinx.android.synthetic.main.activity_media.media_refresh_layout
+import kotlinx.android.synthetic.main.activity_media.media_vertical_fastscroller
+import kotlinx.android.synthetic.main.activity_media.viewStub
 import java.io.File
 import java.io.IOException
-import java.util.*
 
 class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOperationsListener {
     private val LAST_MEDIA_CHECK_PERIOD = 3000L
@@ -102,7 +160,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
         media_refresh_layout.setColorSchemeResources(R.color.color_primary)
         media_refresh_layout.setOnRefreshListener { getMedia() }
         try {
-            mPath = intent.getStringExtra(DIRECTORY)
+            mPath = intent.getStringExtra(DIRECTORY) ?: ""
         } catch (e: Exception) {
             showErrorToast(e)
             finish()

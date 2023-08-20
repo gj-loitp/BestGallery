@@ -45,7 +45,7 @@ class MediaFetcher(val context: Context) {
 
         return try {
             val cursor = context.contentResolver.query(uri, projection, selection, selectionArgs, null)
-            parseCursor(cursor)
+            parseCursor(cursor!!)
         } catch (e: Exception) {
             ArrayList()
         }

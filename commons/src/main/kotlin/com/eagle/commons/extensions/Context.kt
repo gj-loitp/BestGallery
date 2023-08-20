@@ -63,20 +63,20 @@ fun Context.updateTextColors(viewGroup: ViewGroup, tmpTextColor: Int = 0, tmpAcc
 
     val cnt = viewGroup.childCount
     (0 until cnt).map { viewGroup.getChildAt(it) }
-            .forEach {
-                when (it) {
-                    is MyTextView -> it.setColors(textColor, accentColor, backgroundColor)
-                    is MyAppCompatSpinner -> it.setColors(textColor, accentColor, backgroundColor)
-                    is MySwitchCompat -> it.setColors(textColor, accentColor, backgroundColor)
-                    is MyCompatRadioButton -> it.setColors(textColor, accentColor, backgroundColor)
-                    is MyAppCompatCheckbox -> it.setColors(textColor, accentColor, backgroundColor)
-                    is MyEditText -> it.setColors(textColor, accentColor, backgroundColor)
-                    is MyFloatingActionButton -> it.setColors(textColor, accentColor, backgroundColor)
-                    is MySeekBar -> it.setColors(textColor, accentColor, backgroundColor)
-                    is MyButton -> it.setColors(textColor, accentColor, backgroundColor)
-                    is ViewGroup -> updateTextColors(it, textColor, accentColor)
-                }
+        .forEach {
+            when (it) {
+                is MyTextView -> it.setColors(textColor, accentColor, backgroundColor)
+                is MyAppCompatSpinner -> it.setColors(textColor, accentColor, backgroundColor)
+                is MySwitchCompat -> it.setColors(textColor, accentColor, backgroundColor)
+                is MyCompatRadioButton -> it.setColors(textColor, accentColor, backgroundColor)
+                is MyAppCompatCheckbox -> it.setColors(textColor, accentColor, backgroundColor)
+                is MyEditText -> it.setColors(textColor, accentColor, backgroundColor)
+                is MyFloatingActionButton -> it.setColors(textColor, accentColor, backgroundColor)
+                is MySeekBar -> it.setColors(textColor, accentColor, backgroundColor)
+                is MyButton -> it.setColors(textColor, accentColor, backgroundColor)
+                is ViewGroup -> updateTextColors(it, textColor, accentColor)
             }
+        }
 }
 
 fun Context.getLinkTextColor(): Int {
@@ -87,9 +87,11 @@ fun Context.getLinkTextColor(): Int {
     }
 }
 
-fun Context.isBlackAndWhiteTheme() = baseConfig.textColor == Color.WHITE && baseConfig.primaryColor == Color.BLACK && baseConfig.backgroundColor == Color.BLACK
+fun Context.isBlackAndWhiteTheme() =
+    baseConfig.textColor == Color.WHITE && baseConfig.primaryColor == Color.BLACK && baseConfig.backgroundColor == Color.BLACK
 
-fun Context.getAdjustedPrimaryColor() = if (isBlackAndWhiteTheme()) Color.WHITE else baseConfig.primaryColor
+fun Context.getAdjustedPrimaryColor() =
+    if (isBlackAndWhiteTheme()) Color.WHITE else baseConfig.primaryColor
 
 fun Context.toast(id: Int, length: Int = Toast.LENGTH_SHORT) {
     toast(getString(id), length)
@@ -166,7 +168,10 @@ fun Context.getRealPathFromURI(uri: Uri): String? {
     if (isDownloadsDocument(uri)) {
         val id = DocumentsContract.getDocumentId(uri)
         if (id.areDigitsOnly()) {
-            val newUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), id.toLong())
+            val newUri = ContentUris.withAppendedId(
+                Uri.parse("content://downloads/public_downloads"),
+                id.toLong()
+            )
             val path = getDataColumn(newUri)
             if (path != null) {
                 return path
@@ -200,7 +205,11 @@ fun Context.getRealPathFromURI(uri: Uri): String? {
     return getDataColumn(uri)
 }
 
-fun Context.getDataColumn(uri: Uri, selection: String? = null, selectionArgs: Array<String>? = null): String? {
+fun Context.getDataColumn(
+    uri: Uri,
+    selection: String? = null,
+    selectionArgs: Array<String>? = null,
+): String? {
     var cursor: Cursor? = null
     try {
         val projection = arrayOf(MediaStore.Files.FileColumns.DATA)
@@ -217,11 +226,16 @@ fun Context.getDataColumn(uri: Uri, selection: String? = null, selectionArgs: Ar
 
 private fun isMediaDocument(uri: Uri) = uri.authority == "com.android.providers.media.documents"
 
-private fun isDownloadsDocument(uri: Uri) = uri.authority == "com.android.providers.downloads.documents"
+private fun isDownloadsDocument(uri: Uri) =
+    uri.authority == "com.android.providers.downloads.documents"
 
-private fun isExternalStorageDocument(uri: Uri) = uri.authority == "com.android.externalstorage.documents"
+private fun isExternalStorageDocument(uri: Uri) =
+    uri.authority == "com.android.externalstorage.documents"
 
-fun Context.hasPermission(permId: Int) = ContextCompat.checkSelfPermission(this, getPermissionString(permId)) == PackageManager.PERMISSION_GRANTED
+fun Context.hasPermission(permId: Int) = ContextCompat.checkSelfPermission(
+    this,
+    getPermissionString(permId)
+) == PackageManager.PERMISSION_GRANTED
 
 fun Context.getPermissionString(id: Int) = when (id) {
     PERMISSION_READ_STORAGE -> Manifest.permission.READ_EXTERNAL_STORAGE
@@ -296,20 +310,24 @@ fun Context.getFilenameFromUri(uri: Uri): String {
 }
 
 fun Context.getMimeTypeFromUri(uri: Uri): String {
-    var mimetype = uri.path.getMimeType()
-    if (mimetype.isEmpty()) {
+    var mimetype = uri.path?.getMimeType()
+    if (mimetype?.isEmpty() == true) {
         try {
             mimetype = contentResolver.getType(uri)
         } catch (e: IllegalStateException) {
+            e.printStackTrace()
         }
     }
-    return mimetype
+    return mimetype ?: ""
 }
 
 fun Context.ensurePublicUri(path: String, applicationId: String): Uri? {
     val uri = Uri.parse(path)
     return when {
-        isPathOnOTG(path) && baseConfig.OTGPartition.isNotEmpty() && baseConfig.OTGTreeUri.isNotEmpty() -> getDocumentFile(path)?.uri
+        isPathOnOTG(path) && baseConfig.OTGPartition.isNotEmpty() && baseConfig.OTGTreeUri.isNotEmpty() -> getDocumentFile(
+            path
+        )?.uri
+
         uri.scheme == "content" -> uri
         else -> {
             val newPath = if (uri.toString().startsWith("/")) uri.toString() else uri.path
@@ -362,15 +380,23 @@ fun Context.getSharedThemeSync(cursorLoader: CursorLoader): SharedTheme? {
             val primaryColor = cursor.getIntValue(COL_PRIMARY_COLOR)
             val appIconColor = cursor.getIntValue(COL_APP_ICON_COLOR)
             val lastUpdatedTS = cursor.getIntValue(COL_LAST_UPDATED_TS)
-            return SharedTheme(textColor, backgroundColor, primaryColor, appIconColor, lastUpdatedTS)
+            return SharedTheme(
+                textColor,
+                backgroundColor,
+                primaryColor,
+                appIconColor,
+                lastUpdatedTS
+            )
         }
     }
     return null
 }
 
-fun Context.getMyContentProviderCursorLoader() = CursorLoader(this, MyContentProvider.MY_CONTENT_URI, null, null, null, null)
+fun Context.getMyContentProviderCursorLoader() =
+    CursorLoader(this, MyContentProvider.MY_CONTENT_URI, null, null, null, null)
 
-fun Context.getDialogTheme() = if (baseConfig.backgroundColor.getContrastColor() == Color.WHITE) R.style.MyDialogTheme_Dark else R.style.MyDialogTheme
+fun Context.getDialogTheme() =
+    if (baseConfig.backgroundColor.getContrastColor() == Color.WHITE) R.style.MyDialogTheme_Dark else R.style.MyDialogTheme
 
 fun Context.getCurrentFormattedDateTime(): String {
     val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.getDefault())
@@ -397,7 +423,8 @@ fun Context.getUriMimeType(path: String, newUri: Uri): String {
 
 fun Context.isThankYouInstalled() = isPackageInstalled("com.eagle.thankyou")
 
-fun Context.isAProApp() = packageName.startsWith("com.eagle.") && packageName.removeSuffix(".debug").endsWith(".pro")
+fun Context.isAProApp() =
+    packageName.startsWith("com.eagle.") && packageName.removeSuffix(".debug").endsWith(".pro")
 
 fun Context.isPackageInstalled(pkgName: String): Boolean {
     return try {
@@ -410,7 +437,15 @@ fun Context.isPackageInstalled(pkgName: String): Boolean {
 
 // format day bits to strings like "Mon, Tue, Wed"
 fun Context.getSelectedDaysString(bitMask: Int): String {
-    val dayBits = arrayListOf(MONDAY_BIT, TUESDAY_BIT, WEDNESDAY_BIT, THURSDAY_BIT, FRIDAY_BIT, SATURDAY_BIT, SUNDAY_BIT)
+    val dayBits = arrayListOf(
+        MONDAY_BIT,
+        TUESDAY_BIT,
+        WEDNESDAY_BIT,
+        THURSDAY_BIT,
+        FRIDAY_BIT,
+        SATURDAY_BIT,
+        SUNDAY_BIT
+    )
     val weekDays = resources.getStringArray(R.array.week_days_short).toList() as ArrayList<String>
 
     if (baseConfig.isSundayFirst) {
@@ -427,7 +462,8 @@ fun Context.getSelectedDaysString(bitMask: Int): String {
     return days.trim().trimEnd(',')
 }
 
-fun Context.formatMinutesToTimeString(totalMinutes: Int) = formatSecondsToTimeString(totalMinutes * 60)
+fun Context.formatMinutesToTimeString(totalMinutes: Int) =
+    formatSecondsToTimeString(totalMinutes * 60)
 
 fun Context.formatSecondsToTimeString(totalSeconds: Int): String {
     val days = totalSeconds / DAY_SECONDS
@@ -446,12 +482,14 @@ fun Context.formatSecondsToTimeString(totalSeconds: Int): String {
     }
 
     if (minutes > 0) {
-        val minutesString = String.format(resources.getQuantityString(R.plurals.minutes, minutes, minutes))
+        val minutesString =
+            String.format(resources.getQuantityString(R.plurals.minutes, minutes, minutes))
         timesString.append("$minutesString, ")
     }
 
     if (seconds > 0) {
-        val secondsString = String.format(resources.getQuantityString(R.plurals.seconds, seconds, seconds))
+        val secondsString =
+            String.format(resources.getQuantityString(R.plurals.seconds, seconds, seconds))
         timesString.append(secondsString)
     }
 
@@ -462,7 +500,8 @@ fun Context.formatSecondsToTimeString(totalSeconds: Int): String {
     return result
 }
 
-fun Context.getFormattedMinutes(minutes: Int, showBefore: Boolean = true) = getFormattedSeconds(if (minutes <= 0) minutes else minutes * 60, showBefore)
+fun Context.getFormattedMinutes(minutes: Int, showBefore: Boolean = true) =
+    getFormattedSeconds(if (minutes <= 0) minutes else minutes * 60, showBefore)
 
 fun Context.getFormattedSeconds(seconds: Int, showBefore: Boolean = true) = when (seconds) {
     -1 -> getString(R.string.no_reminder)
@@ -473,26 +512,36 @@ fun Context.getFormattedSeconds(seconds: Int, showBefore: Boolean = true) = when
                 val base = if (showBefore) R.plurals.years_before else R.plurals.by_years
                 resources.getQuantityString(base, seconds / YEAR_SECONDS, seconds / YEAR_SECONDS)
             }
+
             seconds % MONTH_SECONDS == 0 -> {
                 val base = if (showBefore) R.plurals.months_before else R.plurals.by_months
                 resources.getQuantityString(base, seconds / MONTH_SECONDS, seconds / MONTH_SECONDS)
             }
+
             seconds % WEEK_SECONDS == 0 -> {
                 val base = if (showBefore) R.plurals.weeks_before else R.plurals.by_weeks
                 resources.getQuantityString(base, seconds / WEEK_SECONDS, seconds / WEEK_SECONDS)
             }
+
             seconds % DAY_SECONDS == 0 -> {
                 val base = if (showBefore) R.plurals.days_before else R.plurals.by_days
                 resources.getQuantityString(base, seconds / DAY_SECONDS, seconds / DAY_SECONDS)
             }
+
             seconds % HOUR_SECONDS == 0 -> {
                 val base = if (showBefore) R.plurals.hours_before else R.plurals.by_hours
                 resources.getQuantityString(base, seconds / HOUR_SECONDS, seconds / HOUR_SECONDS)
             }
+
             seconds % MINUTE_SECONDS == 0 -> {
                 val base = if (showBefore) R.plurals.minutes_before else R.plurals.by_minutes
-                resources.getQuantityString(base, seconds / MINUTE_SECONDS, seconds / MINUTE_SECONDS)
+                resources.getQuantityString(
+                    base,
+                    seconds / MINUTE_SECONDS,
+                    seconds / MINUTE_SECONDS
+                )
             }
+
             else -> {
                 val base = if (showBefore) R.plurals.seconds_before else R.plurals.by_seconds
                 resources.getQuantityString(base, seconds, seconds)
@@ -501,7 +550,8 @@ fun Context.getFormattedSeconds(seconds: Int, showBefore: Boolean = true) = when
     }
 }
 
-fun Context.getDefaultAlarmUri(type: Int) = RingtoneManager.getDefaultUri(if (type == ALARM_SOUND_TYPE_NOTIFICATION) RingtoneManager.TYPE_NOTIFICATION else RingtoneManager.TYPE_ALARM)
+fun Context.getDefaultAlarmUri(type: Int) =
+    RingtoneManager.getDefaultUri(if (type == ALARM_SOUND_TYPE_NOTIFICATION) RingtoneManager.TYPE_NOTIFICATION else RingtoneManager.TYPE_ALARM)
 
 fun Context.getDefaultAlarmTitle(type: Int): String {
     val alarmString = getString(R.string.alarm)
@@ -512,38 +562,44 @@ fun Context.getDefaultAlarmTitle(type: Int): String {
     }
 }
 
-fun Context.getDefaultAlarmSound(type: Int) = AlarmSound(0, getDefaultAlarmTitle(type), getDefaultAlarmUri(type).toString())
+fun Context.getDefaultAlarmSound(type: Int) =
+    AlarmSound(0, getDefaultAlarmTitle(type), getDefaultAlarmUri(type).toString())
 
 fun Context.grantReadUriPermission(uriString: String) {
     try {
         // ensure custom reminder sounds play well
-        grantUriPermission("com.android.systemui", Uri.parse(uriString), Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        grantUriPermission(
+            "com.android.systemui",
+            Uri.parse(uriString),
+            Intent.FLAG_GRANT_READ_URI_PERMISSION
+        )
     } catch (ignored: Exception) {
     }
 }
 
-fun Context.storeNewYourAlarmSound(resultData: Intent): AlarmSound {
-    val uri = resultData.data
-    var filename = getFilenameFromUri(uri)
-    if (filename.isEmpty()) {
-        filename = getString(R.string.alarm)
-    }
-
-    val token = object : TypeToken<ArrayList<AlarmSound>>() {}.type
-    val yourAlarmSounds = Gson().fromJson<ArrayList<AlarmSound>>(baseConfig.yourAlarmSounds, token) ?: ArrayList()
-    val newAlarmSoundId = (yourAlarmSounds.maxBy { it.id }?.id ?: YOUR_ALARM_SOUNDS_MIN_ID) + 1
-    val newAlarmSound = AlarmSound(newAlarmSoundId, filename, uri.toString())
-    if (yourAlarmSounds.firstOrNull { it.uri == uri.toString() } == null) {
-        yourAlarmSounds.add(newAlarmSound)
-    }
-
-    baseConfig.yourAlarmSounds = Gson().toJson(yourAlarmSounds)
-
-    val takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-    contentResolver.takePersistableUriPermission(uri, takeFlags)
-
-    return newAlarmSound
-}
+//fun Context.storeNewYourAlarmSound(resultData: Intent): AlarmSound {
+//    val uri = resultData.data
+//    var filename = getFilenameFromUri(uri)
+//    if (filename.isEmpty()) {
+//        filename = getString(R.string.alarm)
+//    }
+//
+//    val token = object : TypeToken<ArrayList<AlarmSound>>() {}.type
+//    val yourAlarmSounds =
+//        Gson().fromJson<ArrayList<AlarmSound>>(baseConfig.yourAlarmSounds, token) ?: ArrayList()
+//    val newAlarmSoundId = (yourAlarmSounds.maxBy { it.id }?.id ?: YOUR_ALARM_SOUNDS_MIN_ID) + 1
+//    val newAlarmSound = AlarmSound(newAlarmSoundId, filename, uri.toString())
+//    if (yourAlarmSounds.firstOrNull { it.uri == uri.toString() } == null) {
+//        yourAlarmSounds.add(newAlarmSound)
+//    }
+//
+//    baseConfig.yourAlarmSounds = Gson().toJson(yourAlarmSounds)
+//
+//    val takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+//    contentResolver.takePersistableUriPermission(uri, takeFlags)
+//
+//    return newAlarmSound
+//}
 
 @RequiresApi(Build.VERSION_CODES.N)
 fun Context.saveImageRotation(path: String, degrees: Int): Boolean {
@@ -554,8 +610,10 @@ fun Context.saveImageRotation(path: String, degrees: Int): Boolean {
         val documentFile = getSomeDocumentFile(path)
         if (documentFile != null) {
             val parcelFileDescriptor = contentResolver.openFileDescriptor(documentFile.uri, "rw")
-            val fileDescriptor = parcelFileDescriptor.fileDescriptor
-            saveExifRotation(ExifInterface(fileDescriptor), degrees)
+            parcelFileDescriptor?.fileDescriptor?.let {
+                val fileDescriptor = it
+                saveExifRotation(ExifInterface(fileDescriptor), degrees)
+            }
             return true
         }
     }
@@ -563,7 +621,8 @@ fun Context.saveImageRotation(path: String, degrees: Int): Boolean {
 }
 
 fun Context.saveExifRotation(exif: ExifInterface, degrees: Int) {
-    val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+    val orientation =
+        exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
     val orientationDegrees = (orientation.degreesFromOrientation() + degrees) % 360
     exif.setAttribute(ExifInterface.TAG_ORIENTATION, orientationDegrees.orientationFromDegrees())
     exif.saveAttributes()
@@ -585,10 +644,16 @@ fun Context.checkAppIconColor() {
 }
 
 fun Context.toggleAppIconColor(appId: String, colorIndex: Int, color: Int, enable: Boolean) {
-    val className = "${appId.removeSuffix(".debug")}.activities.SplashActivity${appIconColorStrings[colorIndex]}"
-    val state = if (enable) PackageManager.COMPONENT_ENABLED_STATE_ENABLED else PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+    val className =
+        "${appId.removeSuffix(".debug")}.activities.SplashActivity${appIconColorStrings[colorIndex]}"
+    val state =
+        if (enable) PackageManager.COMPONENT_ENABLED_STATE_ENABLED else PackageManager.COMPONENT_ENABLED_STATE_DISABLED
     try {
-        packageManager.setComponentEnabledSetting(ComponentName(appId, className), state, PackageManager.DONT_KILL_APP)
+        packageManager.setComponentEnabledSetting(
+            ComponentName(appId, className),
+            state,
+            PackageManager.DONT_KILL_APP
+        )
         if (enable) {
             baseConfig.lastIconColor = color
         }
@@ -596,12 +661,15 @@ fun Context.toggleAppIconColor(appId: String, colorIndex: Int, color: Int, enabl
     }
 }
 
-fun Context.getAppIconColors() = resources.getIntArray(R.array.md_app_icon_colors).toCollection(ArrayList())
+fun Context.getAppIconColors() =
+    resources.getIntArray(R.array.md_app_icon_colors).toCollection(ArrayList())
 
 fun Context.getLaunchIntent() = packageManager.getLaunchIntentForPackage(baseConfig.appId)
 
-fun Context.getCanAppBeUpgraded() = proPackages.contains(baseConfig.appId.removeSuffix(".debug").removePrefix("com.eagle."))
+fun Context.getCanAppBeUpgraded() =
+    proPackages.contains(baseConfig.appId.removeSuffix(".debug").removePrefix("com.eagle."))
 
-fun Context.getProUrl() = "https://play.google.com/store/apps/details?id=${baseConfig.appId.removeSuffix(".debug")}.pro"
+fun Context.getProUrl() =
+    "https://play.google.com/store/apps/details?id=${baseConfig.appId.removeSuffix(".debug")}.pro"
 
 fun Context.getTimeFormat() = if (baseConfig.use24HourFormat) TIME_FORMAT_24 else TIME_FORMAT_12

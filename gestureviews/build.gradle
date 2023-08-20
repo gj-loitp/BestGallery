@@ -2,14 +2,13 @@ apply plugin: 'com.android.library'
 
 android {
 //    compileSdkVersion 28
-    compileSdk 28
+    compileSdk 33
 
     defaultConfig {
         minSdkVersion 14
 //        targetSdkVersion 33
-        versionCode VERSION_CODE.toInteger()
-        versionName VERSION_NAME
     }
+    namespace 'com.alexvasilkov.gestures'
 //    compileOptions {
 //        sourceCompatibility JavaVersion.VERSION_1_8
 //        targetCompatibility JavaVersion.VERSION_1_8

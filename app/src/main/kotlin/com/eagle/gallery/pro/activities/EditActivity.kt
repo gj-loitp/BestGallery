@@ -52,7 +52,7 @@ import kotlinx.android.synthetic.main.bottom_editor_draw_actions.*
 import kotlinx.android.synthetic.main.bottom_editor_primary_actions.*
 import java.io.*
 
-class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImageView.OnCropImageCompleteListener {
+class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener {
     companion object {
         init {
             System.loadLibrary("NativeImageProcessor")
@@ -111,7 +111,11 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
     override fun onResume() {
         super.onResume()
         isEditingWithThirdParty = false
-        bottom_draw_width.setColors(config.textColor, getAdjustedPrimaryColor(), config.backgroundColor)
+        bottom_draw_width.setColors(
+            config.textColor,
+            getAdjustedPrimaryColor(),
+            config.backgroundColor
+        )
     }
 
     override fun onStop() {
@@ -143,7 +147,7 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
             return
         }
 
-        uri = intent.data
+        uri = intent.data!!
         if (uri.scheme != "file" && uri.scheme != "content") {
             toast(R.string.unknown_file_location)
             finish()
@@ -151,7 +155,7 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
         }
 
         if (intent.extras?.containsKey(REAL_FILE_PATH) == true) {
-            val realPath = intent.extras.getString(REAL_FILE_PATH)
+            val realPath = intent.extras!!.getString(REAL_FILE_PATH) ?: ""
             uri = when {
                 isPathOnOTG(realPath) -> uri
                 realPath.startsWith("file:/") -> Uri.parse(realPath)
@@ -164,14 +168,20 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
         }
 
         saveUri = when {
-            intent.extras?.containsKey(MediaStore.EXTRA_OUTPUT) == true -> intent.extras!!.get(MediaStore.EXTRA_OUTPUT) as Uri
+            intent.extras?.containsKey(MediaStore.EXTRA_OUTPUT) == true -> intent.extras!!.get(
+                MediaStore.EXTRA_OUTPUT
+            ) as Uri
+
             else -> uri
         }
 
         isCropIntent = intent.extras?.get(CROP) == "true"
         if (isCropIntent) {
             bottom_editor_primary_actions.beGone()
-            (bottom_editor_crop_rotate_actions.layoutParams as RelativeLayout.LayoutParams).addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 1)
+            (bottom_editor_crop_rotate_actions.layoutParams as RelativeLayout.LayoutParams).addRule(
+                RelativeLayout.ALIGN_PARENT_BOTTOM,
+                1
+            )
         }
 
         loadDefaultImageView()
@@ -186,7 +196,8 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
                 config.lastEditorCropOtherAspectRatioY = 1
             }
 
-            lastOtherAspectRatio = Pair(config.lastEditorCropOtherAspectRatioX, config.lastEditorCropOtherAspectRatioY)
+            lastOtherAspectRatio =
+                Pair(config.lastEditorCropOtherAspectRatioX, config.lastEditorCropOtherAspectRatioY)
         }
         updateAspectRatio(config.lastEditorCropAspectRatio)
     }
@@ -197,39 +208,53 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
         editor_draw_canvas.beGone()
 
         val options = RequestOptions()
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
 
         Glide.with(this)
-                .asBitmap()
-                .load(uri)
-                .apply(options)
-                .listener(object : RequestListener<Bitmap> {
-                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap>?, isFirstResource: Boolean) = false
+            .asBitmap()
+            .load(uri)
+            .apply(options)
+            .listener(object : RequestListener<Bitmap> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Bitmap>?,
+                    isFirstResource: Boolean,
+                ) = false
 
-                    override fun onResourceReady(bitmap: Bitmap?, model: Any?, target: Target<Bitmap>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                        val currentFilter = getFiltersAdapter()?.getCurrentFilter()
-                        if (filterInitialBitmap == null) {
-                            loadCropImageView()
-                            bottomCropRotateClicked()
-                        }
-
-                        if (filterInitialBitmap != null && currentFilter != null && currentFilter.filter.name != getString(R.string.none)) {
-                            default_image_view.onGlobalLayout {
-                                applyFilter(currentFilter)
-                            }
-                        } else {
-                            filterInitialBitmap = bitmap
-                        }
-
-                        if (isCropIntent) {
-                            bottom_primary_filter.beGone()
-                            bottom_primary_draw.beGone()
-                        }
-
-                        return false
+                override fun onResourceReady(
+                    bitmap: Bitmap?,
+                    model: Any?,
+                    target: Target<Bitmap>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    val currentFilter = getFiltersAdapter()?.getCurrentFilter()
+                    if (filterInitialBitmap == null) {
+                        loadCropImageView()
+                        bottomCropRotateClicked()
                     }
-                }).into(default_image_view)
+
+                    if (filterInitialBitmap != null && currentFilter != null && currentFilter.filter.name != getString(
+                            R.string.none
+                        )
+                    ) {
+                        default_image_view.onGlobalLayout {
+                            applyFilter(currentFilter)
+                        }
+                    } else {
+                        filterInitialBitmap = bitmap
+                    }
+
+                    if (isCropIntent) {
+                        bottom_primary_filter.beGone()
+                        bottom_primary_draw.beGone()
+                    }
+
+                    return false
+                }
+            }).into(default_image_view)
     }
 
     private fun loadCropImageView() {
@@ -268,17 +293,17 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
         val size = Point()
         windowManager.defaultDisplay.getSize(size)
         val options = RequestOptions()
-                .format(DecodeFormat.PREFER_ARGB_8888)
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .fitCenter()
+            .format(DecodeFormat.PREFER_ARGB_8888)
+            .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .fitCenter()
 
         try {
             val builder = Glide.with(applicationContext)
-                    .asBitmap()
-                    .load(uri)
-                    .apply(options)
-                    .into(editor_draw_canvas.width, editor_draw_canvas.height)
+                .asBitmap()
+                .load(uri)
+                .apply(options)
+                .into(editor_draw_canvas.width, editor_draw_canvas.height)
 
             val bitmap = builder.get()
             runOnUiThread {
@@ -301,7 +326,7 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
         try {
             if (isNougatPlus()) {
                 inputStream = contentResolver.openInputStream(uri)
-                oldExif = ExifInterface(inputStream)
+                oldExif = inputStream?.let { ExifInterface(it) }
             }
         } catch (e: Exception) {
         } finally {
@@ -313,8 +338,10 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
         } else if (editor_draw_canvas.isVisible()) {
             val bitmap = editor_draw_canvas.getBitmap()
             if (saveUri.scheme == "file") {
-                SaveAsDialog(this, saveUri.path, true) {
-                    saveBitmapToFile(bitmap, it, true)
+                saveUri.path?.let {
+                    SaveAsDialog(this, it, true) {
+                        saveBitmapToFile(bitmap, it, true)
+                    }
                 }
             } else if (saveUri.scheme == "content") {
                 val filePathGetter = getNewFilePath()
@@ -336,7 +363,8 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
 
                 Thread {
                     try {
-                        val originalBitmap = Glide.with(applicationContext).asBitmap().load(uri).submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get()
+                        val originalBitmap = Glide.with(applicationContext).asBitmap().load(uri)
+                            .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get()
                         currentFilter.filter.processFilter(originalBitmap)
                         saveBitmapToFile(originalBitmap, it, false)
                     } catch (e: OutOfMemoryError) {
@@ -357,16 +385,19 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
                         return@Thread
                     }
 
-                    val originalBitmap = Glide.with(applicationContext).asBitmap().load(uri).submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get()
-                    currentFilter!!.filter.processFilter(originalBitmap)
+                    val originalBitmap = Glide.with(applicationContext).asBitmap().load(uri)
+                        .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get()
+                    currentFilter.filter.processFilter(originalBitmap)
                     shareBitmap(originalBitmap)
                 }
+
                 crop_image_view.isVisible() -> {
                     isSharingBitmap = true
                     runOnUiThread {
                         crop_image_view.getCroppedImageAsync()
                     }
                 }
+
                 editor_draw_canvas.isVisible() -> shareBitmap(editor_draw_canvas.getBitmap())
             }
         }.start()
@@ -374,7 +405,7 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
 
     private fun getTempImagePath(bitmap: Bitmap, callback: (path: String?) -> Unit) {
         val bytes = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, bytes)
+        bitmap.compress(CompressFormat.PNG, 0, bytes)
 
         val folder = File(cacheDir, TEMP_FOLDER_NAME)
         if (!folder.exists()) {
@@ -412,7 +443,7 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
         }
     }
 
-    private fun getFiltersAdapter() = bottom_actions_filter_list.adapter as? com.eagle.gallery.pro.adapters.FiltersAdapter
+    private fun getFiltersAdapter() = bottom_actions_filter_list.adapter as? FiltersAdapter
 
     private fun setupBottomActions() {
         setupPrimaryActionButtons()
@@ -580,19 +611,31 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
 
         if (currPrimaryAction == PRIMARY_ACTION_FILTER && bottom_actions_filter_list.adapter == null) {
             Thread {
-                val thumbnailSize = resources.getDimension(R.dimen.bottom_filters_thumbnail_size).toInt()
+                val thumbnailSize =
+                    resources.getDimension(R.dimen.bottom_filters_thumbnail_size).toInt()
                 val bitmap = Glide.with(this)
-                        .asBitmap()
-                        .load(uri).listener(object : RequestListener<Bitmap> {
-                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
-                                showErrorToast(e.toString())
-                                return false
-                            }
+                    .asBitmap()
+                    .load(uri).listener(object : RequestListener<Bitmap> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Bitmap>?,
+                            isFirstResource: Boolean,
+                        ): Boolean {
+                            showErrorToast(e.toString())
+                            return false
+                        }
 
-                            override fun onResourceReady(resource: Bitmap?, model: Any?, target: Target<Bitmap>?, dataSource: DataSource?, isFirstResource: Boolean) = false
-                        })
-                        .submit(thumbnailSize, thumbnailSize)
-                        .get()
+                        override fun onResourceReady(
+                            resource: Bitmap?,
+                            model: Any?,
+                            target: Target<Bitmap>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean,
+                        ) = false
+                    })
+                    .submit(thumbnailSize, thumbnailSize)
+                    .get()
 
                 runOnUiThread {
                     val filterThumbnailsManager = FilterThumbnailsManager()
@@ -607,8 +650,9 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
                     }
 
                     val filterItems = filterThumbnailsManager.processThumbs()
-                    val adapter = com.eagle.gallery.pro.adapters.FiltersAdapter(applicationContext, filterItems) {
-                        val layoutManager = bottom_actions_filter_list.layoutManager as LinearLayoutManager
+                    val adapter = FiltersAdapter(applicationContext, filterItems) {
+                        val layoutManager =
+                            bottom_actions_filter_list.layoutManager as LinearLayoutManager
                         applyFilter(filterItems[it])
 
                         if (it == layoutManager.findLastCompletelyVisibleItemPosition() || it == layoutManager.findLastVisibleItemPosition()) {
@@ -632,7 +676,7 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
     }
 
     private fun applyFilter(filterItem: FilterItem) {
-        val newBitmap = Bitmap.createBitmap(filterInitialBitmap)
+        val newBitmap = filterInitialBitmap?.let { Bitmap.createBitmap(it) }
         default_image_view.setImageBitmap(filterItem.filter.processFilter(newBitmap))
     }
 
@@ -661,7 +705,13 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
     }
 
     private fun updateAspectRatioButtons() {
-        arrayOf(bottom_aspect_ratio_free, bottom_aspect_ratio_one_one, bottom_aspect_ratio_four_three, bottom_aspect_ratio_sixteen_nine, bottom_aspect_ratio_other).forEach {
+        arrayOf(
+            bottom_aspect_ratio_free,
+            bottom_aspect_ratio_one_one,
+            bottom_aspect_ratio_four_three,
+            bottom_aspect_ratio_sixteen_nine,
+            bottom_aspect_ratio_other
+        ).forEach {
             it.setTextColor(Color.WHITE)
         }
 
@@ -740,7 +790,7 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
 
             if (isCropIntent) {
                 if (saveUri.scheme == "file") {
-                    saveBitmapToFile(bitmap, saveUri.path, true)
+                    saveUri.path?.let { saveBitmapToFile(bitmap, it, true) }
                 } else {
                     var inputStream: InputStream? = null
                     var outputStream: OutputStream? = null
@@ -749,7 +799,9 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
                         bitmap.compress(CompressFormat.JPEG, 100, stream)
                         inputStream = ByteArrayInputStream(stream.toByteArray())
                         outputStream = contentResolver.openOutputStream(saveUri)
-                        inputStream.copyTo(outputStream)
+                        if (outputStream != null) {
+                            inputStream.copyTo(outputStream)
+                        }
                     } finally {
                         inputStream?.close()
                         outputStream?.close()
@@ -763,8 +815,10 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
                     finish()
                 }
             } else if (saveUri.scheme == "file") {
-                SaveAsDialog(this, saveUri.path, true) {
-                    saveBitmapToFile(bitmap, it, true)
+                saveUri.path?.let {
+                    SaveAsDialog(this, it, true) {
+                        saveBitmapToFile(bitmap, it, true)
+                    }
                 }
             } else if (saveUri.scheme == "content") {
                 val filePathGetter = getNewFilePath()
@@ -789,14 +843,19 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
         if (newPath.isEmpty()) {
             val filename = applicationContext.getFilenameFromContentUri(saveUri) ?: ""
             if (filename.isNotEmpty()) {
-                val path = if (intent.extras?.containsKey(REAL_FILE_PATH) == true) intent.getStringExtra(REAL_FILE_PATH).getParentPath() else internalStoragePath
+                val path =
+                    if (intent.extras?.containsKey(REAL_FILE_PATH) == true) intent.getStringExtra(
+                        REAL_FILE_PATH
+                    )?.getParentPath() else internalStoragePath
                 newPath = "$path/$filename"
                 shouldAppendFilename = false
             }
         }
 
         if (newPath.isEmpty()) {
-            newPath = "$internalStoragePath/${getCurrentFormattedDateTime()}.${saveUri.toString().getFilenameExtension()}"
+            newPath = "$internalStoragePath/${getCurrentFormattedDateTime()}.${
+                saveUri.toString().getFilenameExtension()
+            }"
             shouldAppendFilename = false
         }
 
@@ -824,7 +883,12 @@ class EditActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImag
     }
 
     @TargetApi(Build.VERSION_CODES.N)
-    private fun saveBitmap(file: File, bitmap: Bitmap, out: OutputStream, showSavingToast: Boolean) {
+    private fun saveBitmap(
+        file: File,
+        bitmap: Bitmap,
+        out: OutputStream,
+        showSavingToast: Boolean,
+    ) {
         if (showSavingToast) {
             toast(R.string.saving)
         }

@@ -32,7 +32,8 @@ fun String.getBasePath(context: Context): String {
 }
 
 fun String.isAValidFilename(): Boolean {
-    val ILLEGAL_CHARACTERS = charArrayOf('/', '\n', '\r', '\t', '\u0000', '`', '?', '*', '\\', '<', '>', '|', '\"', ':')
+    val ILLEGAL_CHARACTERS =
+        charArrayOf('/', '\n', '\r', '\t', '\u0000', '`', '?', '*', '\\', '<', '>', '|', '\"', ':')
     ILLEGAL_CHARACTERS.forEach {
         if (contains(it))
             return false
@@ -109,7 +110,9 @@ fun String.getExifProperties(exif: ExifInterface): String {
 
 @TargetApi(Build.VERSION_CODES.N)
 fun String.getExifDateTaken(exif: ExifInterface, context: Context): String {
-    val dateTime = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL) ?: exif.getAttribute(ExifInterface.TAG_DATETIME)
+    val dateTime = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL) ?: exif.getAttribute(
+        ExifInterface.TAG_DATETIME
+    )
     dateTime.let {
         if (it?.isNotEmpty() == true) {
             try {
@@ -200,8 +203,10 @@ fun String.getVideoResolution(): Point? {
     return try {
         val retriever = MediaMetadataRetriever()
         retriever.setDataSource(this)
-        val width = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH).toInt()
-        val height = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT).toInt()
+        val width = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH)
+            ?.toIntOrNull() ?: 0
+        val height = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT)
+            ?.toIntOrNull() ?: 0
         Point(width, height)
     } catch (ignored: Exception) {
         null
@@ -231,7 +236,12 @@ fun String.substringTo(cnt: Int): String {
     }
 }
 
-fun String.highlightTextPart(textToHighlight: String, color: Int, highlightAll: Boolean = false, ignoreCharsBetweenDigits: Boolean = false): SpannableString {
+fun String.highlightTextPart(
+    textToHighlight: String,
+    color: Int,
+    highlightAll: Boolean = false,
+    ignoreCharsBetweenDigits: Boolean = false,
+): SpannableString {
     val spannableString = SpannableString(this)
     if (textToHighlight.isEmpty()) {
         return spannableString
@@ -244,7 +254,8 @@ fun String.highlightTextPart(textToHighlight: String, color: Int, highlightAll: 
             indexes.add(startIndex)
         }
 
-        startIndex = normalizeString().indexOf(textToHighlight, startIndex + textToHighlight.length, true)
+        startIndex =
+            normalizeString().indexOf(textToHighlight, startIndex + textToHighlight.length, true)
         if (!highlightAll) {
             break
         }
@@ -257,7 +268,12 @@ fun String.highlightTextPart(textToHighlight: String, color: Int, highlightAll: 
             val pattern = Pattern.compile(regex)
             val result = pattern.matcher(normalizeString())
             if (result.find()) {
-                spannableString.setSpan(ForegroundColorSpan(color), result.start(), result.end(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+                spannableString.setSpan(
+                    ForegroundColorSpan(color),
+                    result.start(),
+                    result.end(),
+                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                )
             }
         } catch (ignored: Exception) {
         }
@@ -268,7 +284,12 @@ fun String.highlightTextPart(textToHighlight: String, color: Int, highlightAll: 
     indexes.forEach {
         val endIndex = Math.min(it + textToHighlight.length, length)
         try {
-            spannableString.setSpan(ForegroundColorSpan(color), it, endIndex, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+            spannableString.setSpan(
+                ForegroundColorSpan(color),
+                it,
+                endIndex,
+                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+            )
         } catch (ignored: IndexOutOfBoundsException) {
         }
     }
@@ -277,7 +298,8 @@ fun String.highlightTextPart(textToHighlight: String, color: Int, highlightAll: 
 }
 
 // remove diacritics, for example č -> c
-fun String.normalizeString() = Normalizer.normalize(this, Normalizer.Form.NFD).replace(normalizeRegex, "")
+fun String.normalizeString() =
+    Normalizer.normalize(this, Normalizer.Form.NFD).replace(normalizeRegex, "")
 
 fun String.getMimeType(): String {
     val typesMap = HashMap<String, String>().apply {

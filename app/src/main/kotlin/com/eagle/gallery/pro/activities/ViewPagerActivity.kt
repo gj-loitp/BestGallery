@@ -46,7 +46,8 @@ import org.greenrobot.eventbus.EventBus
 import java.io.File
 import java.util.*
 
-class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), ViewPager.OnPageChangeListener, ViewPagerFragment.FragmentListener {
+class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
+    ViewPager.OnPageChangeListener, ViewPagerFragment.FragmentListener {
     private val REQUEST_VIEW_VIDEO = 1
 
     private var mPath = ""
@@ -74,7 +75,8 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
 
         top_shadow.layoutParams.height = statusBarHeight + actionBarHeight
         checkNotchSupport()
-        (com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.clone() as ArrayList<ThumbnailItem>).filter { it is Medium }.mapTo(mMediaFiles) { it as Medium }
+        (com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.clone() as ArrayList<ThumbnailItem>).filter { it is Medium }
+            .mapTo(mMediaFiles) { it as Medium }
 
         handlePermission(PERMISSION_WRITE_STORAGE) {
             if (it) {
@@ -144,31 +146,47 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
 
         val rotationDegrees = getCurrentPhotoFragment()?.mCurrentRotationDegrees ?: 0
         menu.apply {
-            findItem(R.id.menu_show_on_map).isVisible = visibleBottomActions and BOTTOM_ACTION_SHOW_ON_MAP == 0
-            findItem(R.id.menu_slideshow).isVisible = visibleBottomActions and BOTTOM_ACTION_SLIDESHOW == 0
-            findItem(R.id.menu_properties).isVisible = visibleBottomActions and BOTTOM_ACTION_PROPERTIES == 0
-            findItem(R.id.menu_delete).isVisible = visibleBottomActions and BOTTOM_ACTION_DELETE == 0
+            findItem(R.id.menu_show_on_map).isVisible =
+                visibleBottomActions and BOTTOM_ACTION_SHOW_ON_MAP == 0
+            findItem(R.id.menu_slideshow).isVisible =
+                visibleBottomActions and BOTTOM_ACTION_SLIDESHOW == 0
+            findItem(R.id.menu_properties).isVisible =
+                visibleBottomActions and BOTTOM_ACTION_PROPERTIES == 0
+            findItem(R.id.menu_delete).isVisible =
+                visibleBottomActions and BOTTOM_ACTION_DELETE == 0
             findItem(R.id.menu_share).isVisible = visibleBottomActions and BOTTOM_ACTION_SHARE == 0
-            findItem(R.id.menu_edit).isVisible = visibleBottomActions and BOTTOM_ACTION_EDIT == 0 && !currentMedium.isSVG()
-            findItem(R.id.menu_rename).isVisible = visibleBottomActions and BOTTOM_ACTION_RENAME == 0 && !currentMedium.getIsInRecycleBin()
-            findItem(R.id.menu_rotate).isVisible = currentMedium.isImage() && visibleBottomActions and BOTTOM_ACTION_ROTATE == 0
-            findItem(R.id.menu_set_as).isVisible = visibleBottomActions and BOTTOM_ACTION_SET_AS == 0
+            findItem(R.id.menu_edit).isVisible =
+                visibleBottomActions and BOTTOM_ACTION_EDIT == 0 && !currentMedium.isSVG()
+            findItem(R.id.menu_rename).isVisible =
+                visibleBottomActions and BOTTOM_ACTION_RENAME == 0 && !currentMedium.getIsInRecycleBin()
+            findItem(R.id.menu_rotate).isVisible =
+                currentMedium.isImage() && visibleBottomActions and BOTTOM_ACTION_ROTATE == 0
+            findItem(R.id.menu_set_as).isVisible =
+                visibleBottomActions and BOTTOM_ACTION_SET_AS == 0
             findItem(R.id.menu_copy_to).isVisible = visibleBottomActions and BOTTOM_ACTION_COPY == 0
             findItem(R.id.menu_move_to).isVisible = visibleBottomActions and BOTTOM_ACTION_MOVE == 0
             findItem(R.id.menu_save_as).isVisible = rotationDegrees != 0
-            findItem(R.id.menu_hide).isVisible = !currentMedium.isHidden() && visibleBottomActions and BOTTOM_ACTION_TOGGLE_VISIBILITY == 0 && !currentMedium.getIsInRecycleBin()
-            findItem(R.id.menu_unhide).isVisible = currentMedium.isHidden() && visibleBottomActions and BOTTOM_ACTION_TOGGLE_VISIBILITY == 0 && !currentMedium.getIsInRecycleBin()
-            findItem(R.id.menu_add_to_favorites).isVisible = !currentMedium.isFavorite && visibleBottomActions and BOTTOM_ACTION_TOGGLE_FAVORITE == 0
-            findItem(R.id.menu_remove_from_favorites).isVisible = currentMedium.isFavorite && visibleBottomActions and BOTTOM_ACTION_TOGGLE_FAVORITE == 0
-            findItem(R.id.menu_restore_file).isVisible = currentMedium.path.startsWith(recycleBinPath)
-            findItem(R.id.menu_change_orientation).isVisible = rotationDegrees == 0 && visibleBottomActions and BOTTOM_ACTION_CHANGE_ORIENTATION == 0
-            findItem(R.id.menu_change_orientation).icon = resources.getDrawable(getChangeOrientationIcon())
+            findItem(R.id.menu_hide).isVisible =
+                !currentMedium.isHidden() && visibleBottomActions and BOTTOM_ACTION_TOGGLE_VISIBILITY == 0 && !currentMedium.getIsInRecycleBin()
+            findItem(R.id.menu_unhide).isVisible =
+                currentMedium.isHidden() && visibleBottomActions and BOTTOM_ACTION_TOGGLE_VISIBILITY == 0 && !currentMedium.getIsInRecycleBin()
+            findItem(R.id.menu_add_to_favorites).isVisible =
+                !currentMedium.isFavorite && visibleBottomActions and BOTTOM_ACTION_TOGGLE_FAVORITE == 0
+            findItem(R.id.menu_remove_from_favorites).isVisible =
+                currentMedium.isFavorite && visibleBottomActions and BOTTOM_ACTION_TOGGLE_FAVORITE == 0
+            findItem(R.id.menu_restore_file).isVisible =
+                currentMedium.path.startsWith(recycleBinPath)
+            findItem(R.id.menu_change_orientation).isVisible =
+                rotationDegrees == 0 && visibleBottomActions and BOTTOM_ACTION_CHANGE_ORIENTATION == 0
+            findItem(R.id.menu_change_orientation).icon =
+                resources.getDrawable(getChangeOrientationIcon())
             findItem(R.id.menu_rotate).setShowAsAction(
-                    if (rotationDegrees != 0) {
-                        MenuItem.SHOW_AS_ACTION_ALWAYS
-                    } else {
-                        MenuItem.SHOW_AS_ACTION_IF_ROOM
-                    })
+                if (rotationDegrees != 0) {
+                    MenuItem.SHOW_AS_ACTION_ALWAYS
+                } else {
+                    MenuItem.SHOW_AS_ACTION_IF_ROOM
+                }
+            )
         }
 
         if (visibleBottomActions != 0) {
@@ -226,7 +244,7 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
             }
         } else {
             try {
-                mPath = intent.getStringExtra(PATH)
+                mPath = intent.getStringExtra(PATH) ?: ""
                 mShowAll = config.showAll
             } catch (e: Exception) {
                 showErrorToast(e)
@@ -236,7 +254,7 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
         }
 
         if (intent.extras?.containsKey(REAL_FILE_PATH) == true) {
-            mPath = intent.extras.getString(REAL_FILE_PATH)
+            mPath = intent.extras?.getString(REAL_FILE_PATH) ?: ""
         }
 
         if (mPath.isEmpty()) {
@@ -309,8 +327,19 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
                 top_shadow.animate().alpha(newAlpha).start()
                 if (bottom_actions.isVisible()) {
                     bottom_actions.animate().alpha(newAlpha).start()
-                    arrayOf(bottom_favorite, bottom_edit, bottom_share, bottom_delete, bottom_rotate, bottom_properties, bottom_change_orientation,
-                            bottom_slideshow, bottom_show_on_map, bottom_toggle_file_visibility, bottom_rename).forEach {
+                    arrayOf(
+                        bottom_favorite,
+                        bottom_edit,
+                        bottom_share,
+                        bottom_delete,
+                        bottom_rotate,
+                        bottom_properties,
+                        bottom_change_orientation,
+                        bottom_slideshow,
+                        bottom_show_on_map,
+                        bottom_toggle_file_visibility,
+                        bottom_rename
+                    ).forEach {
                         it.isClickable = !mIsFullScreen
                     }
                 }
@@ -330,7 +359,19 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
                         }
 
                         val duration = if (type == TYPE_VIDEOS) mPath.getVideoDuration() else 0
-                        val medium = Medium(null, mPath.getFilenameFromPath(), mPath, mPath.getParentPath(), System.currentTimeMillis(), System.currentTimeMillis(), File(mPath).length(), type, duration, false, 0)
+                        val medium = Medium(
+                            null,
+                            mPath.getFilenameFromPath(),
+                            mPath,
+                            mPath.getParentPath(),
+                            System.currentTimeMillis(),
+                            System.currentTimeMillis(),
+                            File(mPath).length(),
+                            type,
+                            duration,
+                            false,
+                            0
+                        )
                         galleryDB.MediumDao().insert(medium)
                     }
                 } catch (e: Exception) {
@@ -362,7 +403,8 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
     }
 
     private fun updatePagerItems(media: MutableList<Medium>) {
-        val pagerAdapter = com.eagle.gallery.pro.adapters.MyPagerAdapter(this, supportFragmentManager, media)
+        val pagerAdapter =
+            com.eagle.gallery.pro.adapters.MyPagerAdapter(this, supportFragmentManager, media)
         if (!isDestroyed) {
             view_pager.apply {
                 adapter = pagerAdapter
@@ -404,10 +446,10 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
         val oldPosition = view_pager.currentItem
         val animator = ValueAnimator.ofInt(0, view_pager.width)
         animator.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationRepeat(animation: Animator?) {
+            override fun onAnimationRepeat(animation: Animator) {
             }
 
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 if (view_pager.isFakeDragging) {
                     try {
                         view_pager.endFakeDrag()
@@ -421,11 +463,11 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
                 }
             }
 
-            override fun onAnimationCancel(animation: Animator?) {
+            override fun onAnimationCancel(animation: Animator) {
                 view_pager.endFakeDrag()
             }
 
-            override fun onAnimationStart(animation: Animator?) {
+            override fun onAnimationStart(animation: Animator) {
             }
         })
 
@@ -599,7 +641,12 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
                 toast(R.string.saving)
                 Thread {
                     val photoFragment = getCurrentPhotoFragment() ?: return@Thread
-                    saveRotatedImageToFile(currPath, newPath, photoFragment.mCurrentRotationDegrees, true) {
+                    saveRotatedImageToFile(
+                        currPath,
+                        newPath,
+                        photoFragment.mCurrentRotationDegrees,
+                        true
+                    ) {
                         toast(R.string.file_saved)
                         getCurrentPhotoFragment()?.mCurrentRotationDegrees = 0
                         invalidateOptionsMenu()
@@ -632,7 +679,10 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
         return false
     }
 
-    private fun getCurrentFragment() = (view_pager.adapter as com.eagle.gallery.pro.adapters.MyPagerAdapter).getCurrentFragment(view_pager.currentItem)
+    private fun getCurrentFragment() =
+        (view_pager.adapter as com.eagle.gallery.pro.adapters.MyPagerAdapter).getCurrentFragment(
+            view_pager.currentItem
+        )
 
     private fun showProperties() {
         if (getCurrentMedium() != null) {
@@ -704,7 +754,8 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
     }
 
     private fun initBottomActionsLayout() {
-        bottom_actions.layoutParams.height = resources.getDimension(R.dimen.bottom_actions_height).toInt() + navigationBarHeight
+        bottom_actions.layoutParams.height =
+            resources.getDimension(R.dimen.bottom_actions_height).toInt() + navigationBarHeight
         if (config.bottomActions) {
             bottom_actions.beVisible()
         } else {
@@ -750,7 +801,8 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
                 ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE -> ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
                 else -> ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             }
-            mIsOrientationLocked = requestedOrientation != ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+            mIsOrientationLocked =
+                requestedOrientation != ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
             updateBottomActionIcons(getCurrentMedium())
         }
 
@@ -934,14 +986,21 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
 
     private fun refreshViewPager() {
         if (config.getFileSorting(mDirectory) and SORT_BY_RANDOM == 0) {
-            com.eagle.gallery.pro.asynctasks.GetMediaAsynctask(applicationContext, mDirectory, false, false, mShowAll) {
+            com.eagle.gallery.pro.asynctasks.GetMediaAsynctask(
+                applicationContext,
+                mDirectory,
+                false,
+                false,
+                mShowAll
+            ) {
                 gotMedia(it)
             }.execute()
         }
     }
 
     private fun gotMedia(thumbnailItems: ArrayList<ThumbnailItem>) {
-        val media = thumbnailItems.asSequence().filter { it is Medium }.map { it as Medium }.toMutableList() as ArrayList<Medium>
+        val media = thumbnailItems.asSequence().filter { it is Medium }.map { it as Medium }
+            .toMutableList() as ArrayList<Medium>
         if (isDirEmpty(media) || media.hashCode() == mPrevHashcode) {
             return
         }
@@ -972,8 +1031,12 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
     }
 
     private fun deleteDirectoryIfEmpty() {
-        val fileDirItem = FileDirItem(mDirectory, mDirectory.getFilenameFromPath(), File(mDirectory).isDirectory)
-        if (config.deleteEmptyFolders && !fileDirItem.isDownloadsFolder() && fileDirItem.isDirectory && fileDirItem.getProperFileCount(true) == 0) {
+        val fileDirItem =
+            FileDirItem(mDirectory, mDirectory.getFilenameFromPath(), File(mDirectory).isDirectory)
+        if (config.deleteEmptyFolders && !fileDirItem.isDownloadsFolder() && fileDirItem.isDirectory && fileDirItem.getProperFileCount(
+                true
+            ) == 0
+        ) {
             tryDeleteFileDirItem(fileDirItem, true, true)
         }
 
@@ -986,8 +1049,10 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
             try {
                 val pathToLoad = getCurrentPath()
                 val exif = android.media.ExifInterface(pathToLoad)
-                val orientation = exif.getAttributeInt(android.media.ExifInterface.TAG_ORIENTATION, -1)
-                flipSides = orientation == ExifInterface.ORIENTATION_ROTATE_90 || orientation == ExifInterface.ORIENTATION_ROTATE_270
+                val orientation =
+                    exif.getAttributeInt(android.media.ExifInterface.TAG_ORIENTATION, -1)
+                flipSides =
+                    orientation == ExifInterface.ORIENTATION_ROTATE_90 || orientation == ExifInterface.ORIENTATION_ROTATE_270
             } catch (e: Exception) {
             }
             val res = getCurrentPath().getResolution() ?: return

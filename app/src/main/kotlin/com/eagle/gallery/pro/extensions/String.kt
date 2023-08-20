@@ -13,11 +13,17 @@ fun String.getFileKey(): String {
     return "${file.absolutePath}${file.lastModified()}"
 }
 
-fun String.isThisOrParentIncluded(includedPaths: MutableSet<String>) = includedPaths.any { startsWith(it, true) }
+fun String.isThisOrParentIncluded(includedPaths: MutableSet<String>) =
+    includedPaths.any { startsWith(it, true) }
 
-fun String.isThisOrParentExcluded(excludedPaths: MutableSet<String>) = excludedPaths.any { startsWith(it, true) }
+fun String.isThisOrParentExcluded(excludedPaths: MutableSet<String>) =
+    excludedPaths.any { startsWith(it, true) }
 
-fun String.shouldFolderBeVisible(excludedPaths: MutableSet<String>, includedPaths: MutableSet<String>, showHidden: Boolean): Boolean {
+fun String.shouldFolderBeVisible(
+    excludedPaths: MutableSet<String>,
+    includedPaths: MutableSet<String>,
+    showHidden: Boolean,
+): Boolean {
     if (isEmpty()) {
         return false
     }
@@ -63,7 +69,10 @@ fun String.getVideoDuration(): Int {
     try {
         val retriever = MediaMetadataRetriever()
         retriever.setDataSource(this)
-        seconds = Math.round(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION).toInt() / 1000f)
+        seconds = Math.round(
+            (retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)?.toIntOrNull()
+                ?: 0) / 1000f
+        )
     } catch (e: Exception) {
     }
     return seconds

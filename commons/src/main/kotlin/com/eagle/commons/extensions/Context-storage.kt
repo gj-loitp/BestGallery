@@ -26,12 +26,14 @@ import java.util.regex.Pattern
 // http://stackoverflow.com/a/40582634/1967672
 fun Context.getSDCardPath(): String {
     val directories = getStorageDirectories().filter {
-        it != getInternalStoragePath() && (baseConfig.OTGPartition.isEmpty() || !it.endsWith(baseConfig.OTGPartition))
+        it != getInternalStoragePath() && (baseConfig.OTGPartition.isEmpty() || !it.endsWith(
+            baseConfig.OTGPartition
+        ))
     }
 
     val fullSDpattern = Pattern.compile("^/storage/[A-Za-z0-9]{4}-[A-Za-z0-9]{4}$")
     var sdCardPath = directories.firstOrNull { fullSDpattern.matcher(it).matches() }
-            ?: directories.firstOrNull { !physicalPaths.contains(it.toLowerCase()) } ?: ""
+        ?: directories.firstOrNull { !physicalPaths.contains(it.toLowerCase()) } ?: ""
 
     // on some devices no method retrieved any SD card path, so test if its not sdcard1 by any chance. It happened on an Android 5.1
     if (sdCardPath.trimEnd('/').isEmpty()) {
@@ -80,7 +82,7 @@ fun Context.getStorageDirectories(): Array<String> {
     if (TextUtils.isEmpty(rawEmulatedStorageTarget)) {
         if (isMarshmallowPlus()) {
             getExternalFilesDirs(null).filterNotNull().map { it.absolutePath }
-                    .mapTo(paths) { it.substring(0, it.indexOf("Android/data")) }
+                .mapTo(paths) { it.substring(0, it.indexOf("Android/data")) }
         } else {
             if (TextUtils.isEmpty(rawExternalStorage)) {
                 paths.addAll(physicalPaths)
@@ -108,19 +110,22 @@ fun Context.getStorageDirectories(): Array<String> {
     }
 
     if (!TextUtils.isEmpty(rawSecondaryStoragesStr)) {
-        val rawSecondaryStorages = rawSecondaryStoragesStr.split(File.pathSeparator.toRegex()).dropLastWhile(String::isEmpty).toTypedArray()
+        val rawSecondaryStorages = rawSecondaryStoragesStr.split(File.pathSeparator.toRegex())
+            .dropLastWhile(String::isEmpty).toTypedArray()
         Collections.addAll(paths, *rawSecondaryStorages)
     }
     return paths.map { it.trimEnd('/') }.toTypedArray()
 }
 
 fun Context.getHumanReadablePath(path: String): String {
-    return getString(when (path) {
-        "/" -> R.string.root
-        internalStoragePath -> R.string.internal
-        otgPath -> R.string.usb
-        else -> R.string.sd_card
-    })
+    return getString(
+        when (path) {
+            "/" -> R.string.root
+            internalStoragePath -> R.string.internal
+            otgPath -> R.string.usb
+            else -> R.string.sd_card
+        }
+    )
 }
 
 fun Context.humanizePath(path: String): String {
@@ -132,7 +137,8 @@ fun Context.humanizePath(path: String): String {
     }
 }
 
-fun Context.getInternalStoragePath() = Environment.getExternalStorageDirectory().absolutePath.trimEnd('/')
+fun Context.getInternalStoragePath() =
+    Environment.getExternalStorageDirectory().absolutePath.trimEnd('/')
 
 fun Context.isPathOnSD(path: String) = sdCardPath.isNotEmpty() && path.startsWith(sdCardPath)
 
@@ -155,7 +161,10 @@ fun Context.hasProperStoredTreeUri(isOTG: Boolean): Boolean {
 
 fun Context.isAStorageRootFolder(path: String): Boolean {
     val trimmed = path.trimEnd('/')
-    return trimmed.isEmpty() || trimmed.equals(internalStoragePath, true) || trimmed.equals(sdCardPath, true) || trimmed.equals(otgPath, true)
+    return trimmed.isEmpty() || trimmed.equals(internalStoragePath, true) || trimmed.equals(
+        sdCardPath,
+        true
+    ) || trimmed.equals(otgPath, true)
 }
 
 fun Context.getMyFileUri(file: File): Uri {
@@ -170,7 +179,7 @@ fun Context.tryFastDocumentDelete(path: String, allowDeleteFolder: Boolean): Boo
     val document = getFastDocumentFile(path)
     return if (document?.isFile == true || allowDeleteFolder) {
         try {
-            DocumentsContract.deleteDocument(contentResolver, document?.uri)
+            DocumentsContract.deleteDocument(contentResolver, document?.uri!!)
         } catch (e: Exception) {
             false
         }
@@ -189,7 +198,8 @@ fun Context.getFastDocumentFile(path: String): DocumentFile? {
     }
 
     val relativePath = Uri.encode(path.substring(baseConfig.sdCardPath.length).trim('/'))
-    val externalPathPart = baseConfig.sdCardPath.split("/").lastOrNull(String::isNotEmpty)?.trim('/') ?: return null
+    val externalPathPart =
+        baseConfig.sdCardPath.split("/").lastOrNull(String::isNotEmpty)?.trim('/') ?: return null
     val fullUri = "${baseConfig.treeUri}/document/$externalPathPart%3A$relativePath"
     return DocumentFile.fromSingleUri(this, Uri.parse(fullUri))
 }
@@ -200,7 +210,8 @@ fun Context.getOTGFastDocumentFile(path: String): DocumentFile? {
     }
 
     if (baseConfig.OTGPartition.isEmpty()) {
-        baseConfig.OTGPartition = baseConfig.OTGTreeUri.removeSuffix("%3A").substringAfterLast('/').trimEnd('/')
+        baseConfig.OTGPartition =
+            baseConfig.OTGTreeUri.removeSuffix("%3A").substringAfterLast('/').trimEnd('/')
         updateOTGPathFromPartition()
     }
 
@@ -349,7 +360,12 @@ fun Context.updateLastModified(path: String, lastModified: Long) {
     }
 }
 
-fun Context.getOTGItems(path: String, shouldShowHidden: Boolean, getProperFileSize: Boolean, callback: (ArrayList<FileDirItem>) -> Unit) {
+fun Context.getOTGItems(
+    path: String,
+    shouldShowHidden: Boolean,
+    getProperFileSize: Boolean,
+    callback: (ArrayList<FileDirItem>) -> Unit,
+) {
     val items = ArrayList<FileDirItem>()
     val OTGTreeUri = baseConfig.OTGTreeUri
     var rootUri = DocumentFile.fromTreeUri(applicationContext, Uri.parse(OTGTreeUri))
@@ -437,13 +453,21 @@ fun Context.rescanDeletedPath(path: String, callback: (() -> Unit)? = null) {
     }
 }
 
-fun Context.trySAFFileDelete(fileDirItem: FileDirItem, allowDeleteFolder: Boolean = false, callback: ((wasSuccess: Boolean) -> Unit)? = null) {
+fun Context.trySAFFileDelete(
+    fileDirItem: FileDirItem,
+    allowDeleteFolder: Boolean = false,
+    callback: ((wasSuccess: Boolean) -> Unit)? = null,
+) {
     var fileDeleted = tryFastDocumentDelete(fileDirItem.path, allowDeleteFolder)
     if (!fileDeleted) {
         val document = getDocumentFile(fileDirItem.path)
         if (document != null && (fileDirItem.isDirectory == document.isDirectory)) {
             try {
-                fileDeleted = (document.isFile || allowDeleteFolder) && DocumentsContract.deleteDocument(applicationContext.contentResolver, document.uri)
+                fileDeleted =
+                    (document.isFile || allowDeleteFolder) && DocumentsContract.deleteDocument(
+                        applicationContext.contentResolver,
+                        document.uri
+                    )
             } catch (ignored: Exception) {
             }
         }
@@ -465,18 +489,18 @@ fun Context.updateOTGPathFromPartition() {
 
 // avoid these being set as SD card paths
 private val physicalPaths = arrayListOf(
-        "/storage/sdcard1", // Motorola Xoom
-        "/storage/extsdcard", // Samsung SGS3
-        "/storage/sdcard0/external_sdcard", // User request
-        "/mnt/extsdcard", "/mnt/sdcard/external_sd", // Samsung galaxy family
-        "/mnt/external_sd", "/mnt/media_rw/sdcard1", // 4.4.2 on CyanogenMod S3
-        "/removable/microsd", // Asus transformer prime
-        "/mnt/emmc", "/storage/external_SD", // LG
-        "/storage/ext_sd", // HTC One Max
-        "/storage/removable/sdcard1", // Sony Xperia Z1
-        "/data/sdext", "/data/sdext2", "/data/sdext3", "/data/sdext4", "/sdcard1", // Sony Xperia Z
-        "/sdcard2", // HTC One M8s
-        "/storage/usbdisk0",
-        "/storage/usbdisk1",
-        "/storage/usbdisk2"
+    "/storage/sdcard1", // Motorola Xoom
+    "/storage/extsdcard", // Samsung SGS3
+    "/storage/sdcard0/external_sdcard", // User request
+    "/mnt/extsdcard", "/mnt/sdcard/external_sd", // Samsung galaxy family
+    "/mnt/external_sd", "/mnt/media_rw/sdcard1", // 4.4.2 on CyanogenMod S3
+    "/removable/microsd", // Asus transformer prime
+    "/mnt/emmc", "/storage/external_SD", // LG
+    "/storage/ext_sd", // HTC One Max
+    "/storage/removable/sdcard1", // Sony Xperia Z1
+    "/data/sdext", "/data/sdext2", "/data/sdext3", "/data/sdext4", "/sdcard1", // Sony Xperia Z
+    "/sdcard2", // HTC One M8s
+    "/storage/usbdisk0",
+    "/storage/usbdisk1",
+    "/storage/usbdisk2"
 )

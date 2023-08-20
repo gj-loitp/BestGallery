@@ -19,7 +19,8 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_set_wallpaper.*
 import kotlinx.android.synthetic.main.bottom_set_wallpaper_actions.*
 
-class SetWallpaperActivity : com.eagle.gallery.pro.activities.SimpleActivity(), CropImageView.OnCropImageCompleteListener {
+class SetWallpaperActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
+    CropImageView.OnCropImageCompleteListener {
     private val PICK_IMAGE = 1
     private var isLandscapeRatio = true
     private var wallpaperFlag = -1
@@ -32,7 +33,10 @@ class SetWallpaperActivity : com.eagle.gallery.pro.activities.SimpleActivity(), 
         setContentView(R.layout.activity_set_wallpaper)
 
         if (intent.data == null) {
-            val pickIntent = Intent(applicationContext, com.eagle.gallery.pro.activities.MainActivity::class.java)
+            val pickIntent = Intent(
+                applicationContext,
+                com.eagle.gallery.pro.activities.MainActivity::class.java
+            )
             pickIntent.action = Intent.ACTION_PICK
             pickIntent.type = "image/*"
             startActivityForResult(pickIntent, PICK_IMAGE)
@@ -44,7 +48,7 @@ class SetWallpaperActivity : com.eagle.gallery.pro.activities.SimpleActivity(), 
     }
 
     private fun handleImage(intent: Intent) {
-        uri = intent.data
+        uri = intent.data!!
         if (uri.scheme != "file" && uri.scheme != "content") {
             toast(R.string.unknown_file_location)
             finish()
@@ -72,10 +76,11 @@ class SetWallpaperActivity : com.eagle.gallery.pro.activities.SimpleActivity(), 
 
     private fun setupAspectRatio() {
         try {
-            val wallpaperWidth = if (isLandscapeRatio) wallpaperManager.desiredMinimumWidth else wallpaperManager.desiredMinimumWidth / 2
+            val wallpaperWidth =
+                if (isLandscapeRatio) wallpaperManager.desiredMinimumWidth else wallpaperManager.desiredMinimumWidth / 2
             crop_image_view.setAspectRatio(wallpaperWidth, wallpaperManager.desiredMinimumHeight)
             bottom_set_wallpaper_aspect_ratio.setImageResource(if (isLandscapeRatio) R.drawable.ic_minimize else R.drawable.ic_maximize)
-        } catch (e : Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
@@ -102,9 +107,13 @@ class SetWallpaperActivity : com.eagle.gallery.pro.activities.SimpleActivity(), 
     private fun confirmWallpaper() {
         if (isNougatPlus()) {
             val items = arrayListOf(
-                    RadioItem(WallpaperManager.FLAG_SYSTEM, getString(R.string.home_screen)),
-                    RadioItem(WallpaperManager.FLAG_LOCK, getString(R.string.lock_screen)),
-                    RadioItem(WallpaperManager.FLAG_SYSTEM or WallpaperManager.FLAG_LOCK, getString(R.string.home_and_lock_screen)))
+                RadioItem(WallpaperManager.FLAG_SYSTEM, getString(R.string.home_screen)),
+                RadioItem(WallpaperManager.FLAG_LOCK, getString(R.string.lock_screen)),
+                RadioItem(
+                    WallpaperManager.FLAG_SYSTEM or WallpaperManager.FLAG_LOCK,
+                    getString(R.string.home_and_lock_screen)
+                )
+            )
 
             RadioGroupDialog(this, items) {
                 wallpaperFlag = it as Int
@@ -131,7 +140,8 @@ class SetWallpaperActivity : com.eagle.gallery.pro.activities.SimpleActivity(), 
                     val wantedHeight = wallpaperManager.desiredMinimumHeight
                     val ratio = wantedHeight / bitmap.height.toFloat()
                     val wantedWidth = (bitmap.width * ratio).toInt()
-                    val scaledBitmap = Bitmap.createScaledBitmap(bitmap, wantedWidth, wantedHeight, true)
+                    val scaledBitmap =
+                        Bitmap.createScaledBitmap(bitmap, wantedWidth, wantedHeight, true)
                     if (isNougatPlus()) {
                         wallpaperManager.setBitmap(scaledBitmap, null, true, wallpaperFlag)
                     } else {

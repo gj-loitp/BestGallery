@@ -14,35 +14,38 @@ import com.eagle.gallery.pro.extensions.config
 
 open class SimpleActivity : BaseSimpleActivity() {
     val observer = object : ContentObserver(null) {
-        override fun onChange(selfChange: Boolean, uri: Uri) {
+        override fun onChange(selfChange: Boolean, uri: Uri?) {
             super.onChange(selfChange, uri)
-            val path = getRealPathFromURI(uri)
-            if (path != null) {
-                addPathToDB(path)
+
+            uri?.let {
+                val path = getRealPathFromURI(it)
+                if (path != null) {
+                    addPathToDB(path)
+                }
             }
         }
     }
 
     override fun getAppIconIDs() = arrayListOf(
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher,
+        R.mipmap.ic_launcher
     )
 
     override fun getAppLauncherName() = getString(R.string.app_launcher_name)
@@ -64,8 +67,16 @@ open class SimpleActivity : BaseSimpleActivity() {
 
     protected fun registerFileUpdateListener() {
         try {
-            contentResolver.registerContentObserver(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, true, observer)
-            contentResolver.registerContentObserver(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, true, observer)
+            contentResolver.registerContentObserver(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                true,
+                observer
+            )
+            contentResolver.registerContentObserver(
+                MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+                true,
+                observer
+            )
         } catch (ignored: Exception) {
         }
     }

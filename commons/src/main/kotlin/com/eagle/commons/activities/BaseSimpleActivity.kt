@@ -121,7 +121,8 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
                 return
             }
 
-            val recentsIcon = BitmapFactory.decodeResource(resources, appIconIDs[currentAppIconColorIndex])
+            val recentsIcon =
+                BitmapFactory.decodeResource(resources, appIconIDs[currentAppIconColorIndex])
             val title = getAppLauncherName()
             val color = baseConfig.primaryColor
 
@@ -141,13 +142,17 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
     }
 
     fun setTranslucentNavigation() {
-        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
+            WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
         super.onActivityResult(requestCode, resultCode, resultData)
         if (requestCode == OPEN_DOCUMENT_TREE && resultCode == Activity.RESULT_OK && resultData != null) {
-            if (isProperSDFolder(resultData.data)) {
+            val data = resultData.data
+            if (data != null && isProperSDFolder(data)) {
                 if (resultData.dataString == baseConfig.OTGTreeUri) {
                     toast(R.string.sd_card_usb_same)
                     return
@@ -161,18 +166,26 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
                 startActivityForResult(intent, requestCode)
             }
         } else if (requestCode == OPEN_DOCUMENT_TREE_OTG && resultCode == Activity.RESULT_OK && resultData != null) {
-            if (isProperOTGFolder(resultData.data)) {
+            val data = resultData.data
+            if (data != null && isProperOTGFolder(data)) {
                 if (resultData.dataString == baseConfig.treeUri) {
                     funAfterSAFPermission?.invoke(false)
                     toast(R.string.sd_card_usb_same)
                     return
                 }
-                baseConfig.OTGTreeUri = resultData.dataString
-                baseConfig.OTGPartition = baseConfig.OTGTreeUri.removeSuffix("%3A").substringAfterLast('/').trimEnd('/')
+                resultData.dataString?.let {
+                    baseConfig.OTGTreeUri = it
+                }
+                baseConfig.OTGPartition =
+                    baseConfig.OTGTreeUri.removeSuffix("%3A").substringAfterLast('/').trimEnd('/')
                 updateOTGPathFromPartition()
 
-                val takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-                applicationContext.contentResolver.takePersistableUriPermission(resultData.data, takeFlags)
+                val takeFlags =
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                applicationContext.contentResolver.takePersistableUriPermission(
+                    data,
+                    takeFlags
+                )
 
                 funAfterSAFPermission?.invoke(true)
                 funAfterSAFPermission = null
@@ -188,21 +201,35 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
         val treeUri = resultData.data
         baseConfig.treeUri = treeUri.toString()
 
-        val takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-        applicationContext.contentResolver.takePersistableUriPermission(treeUri, takeFlags)
+        val takeFlags =
+            Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+        treeUri?.let {
+            applicationContext.contentResolver.takePersistableUriPermission(it, takeFlags)
+        }
     }
 
-    private fun isProperSDFolder(uri: Uri) = isExternalStorageDocument(uri) && isRootUri(uri) && !isInternalStorage(uri)
+    private fun isProperSDFolder(uri: Uri) =
+        isExternalStorageDocument(uri) && isRootUri(uri) && !isInternalStorage(uri)
 
-    private fun isProperOTGFolder(uri: Uri) = isExternalStorageDocument(uri) && isRootUri(uri) && !isInternalStorage(uri)
+    private fun isProperOTGFolder(uri: Uri) =
+        isExternalStorageDocument(uri) && isRootUri(uri) && !isInternalStorage(uri)
 
     private fun isRootUri(uri: Uri) = DocumentsContract.getTreeDocumentId(uri).endsWith(":")
 
-    private fun isInternalStorage(uri: Uri) = isExternalStorageDocument(uri) && DocumentsContract.getTreeDocumentId(uri).contains("primary")
+    private fun isInternalStorage(uri: Uri) =
+        isExternalStorageDocument(uri) && DocumentsContract.getTreeDocumentId(uri)
+            .contains("primary")
 
-    private fun isExternalStorageDocument(uri: Uri) = "com.android.externalstorage.documents" == uri.authority
+    private fun isExternalStorageDocument(uri: Uri) =
+        "com.android.externalstorage.documents" == uri.authority
 
-    fun startAboutActivity(appNameId: Int, licenseMask: Int, versionName: String, faqItems: ArrayList<FAQItem>, showFAQBeforeMail: Boolean) {
+    fun startAboutActivity(
+        appNameId: Int,
+        licenseMask: Int,
+        versionName: String,
+        faqItems: ArrayList<FAQItem>,
+        showFAQBeforeMail: Boolean,
+    ) {
     }
 
     fun startCustomizationActivity() {
@@ -226,8 +253,15 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
         }
     }
 
-    fun copyMoveFilesTo(fileDirItems: ArrayList<FileDirItem>, source: String, destination: String, isCopyOperation: Boolean, copyPhotoVideoOnly: Boolean,
-                        copyHidden: Boolean, callback: (destinationPath: String) -> Unit) {
+    fun copyMoveFilesTo(
+        fileDirItems: ArrayList<FileDirItem>,
+        source: String,
+        destination: String,
+        isCopyOperation: Boolean,
+        copyPhotoVideoOnly: Boolean,
+        copyHidden: Boolean,
+        callback: (destinationPath: String) -> Unit,
+    ) {
         if (source == destination) {
             toast(R.string.source_and_destination_same)
             return
@@ -242,11 +276,26 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
             copyMoveCallback = callback
             var fileCountToCopy = fileDirItems.size
             if (isCopyOperation) {
-                startCopyMove(fileDirItems, destination, isCopyOperation, copyPhotoVideoOnly, copyHidden)
+                startCopyMove(
+                    fileDirItems,
+                    destination,
+                    isCopyOperation,
+                    copyPhotoVideoOnly,
+                    copyHidden
+                )
             } else {
-                if (isPathOnOTG(source) || isPathOnOTG(destination) || isPathOnSD(source) || isPathOnSD(destination) || fileDirItems.first().isDirectory) {
+                if (isPathOnOTG(source) || isPathOnOTG(destination) || isPathOnSD(source) || isPathOnSD(
+                        destination
+                    ) || fileDirItems.first().isDirectory
+                ) {
                     handleSAFDialog(source) {
-                        startCopyMove(fileDirItems, destination, isCopyOperation, copyPhotoVideoOnly, copyHidden)
+                        startCopyMove(
+                            fileDirItems,
+                            destination,
+                            isCopyOperation,
+                            copyPhotoVideoOnly,
+                            copyHidden
+                        )
                     }
                 } else {
                     try {
@@ -258,8 +307,17 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
                                 var newFile = File(destinationFolder, oldFileDirItem.name)
                                 if (newFile.exists()) {
                                     when {
-                                        getConflictResolution(it, newFile.absolutePath) == CONFLICT_SKIP -> fileCountToCopy--
-                                        getConflictResolution(it, newFile.absolutePath) == CONFLICT_KEEP_BOTH -> newFile = getAlternativeFile(newFile)
+                                        getConflictResolution(
+                                            it,
+                                            newFile.absolutePath
+                                        ) == CONFLICT_SKIP -> fileCountToCopy--
+
+                                        getConflictResolution(
+                                            it,
+                                            newFile.absolutePath
+                                        ) == CONFLICT_KEEP_BOTH -> newFile =
+                                            getAlternativeFile(newFile)
+
                                         else ->
                                             // this file is guaranteed to be on the internal storage, so just delete it this way
                                             newFile.delete()
@@ -276,11 +334,19 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
                             }
 
                             if (updatedPaths.isEmpty()) {
-                                copyMoveListener.copySucceeded(false, fileCountToCopy == 0, destination)
+                                copyMoveListener.copySucceeded(
+                                    false,
+                                    fileCountToCopy == 0,
+                                    destination
+                                )
                             } else {
                                 rescanPaths(updatedPaths) {
                                     runOnUiThread {
-                                        copyMoveListener.copySucceeded(false, fileCountToCopy <= updatedPaths.size, destination)
+                                        copyMoveListener.copySucceeded(
+                                            false,
+                                            fileCountToCopy <= updatedPaths.size,
+                                            destination
+                                        )
                                     }
                                 }
                             }
@@ -297,36 +363,62 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
         var fileIndex = 1
         var newFile: File?
         do {
-            val newName = String.format("%s(%d).%s", file.nameWithoutExtension, fileIndex, file.extension)
+            val newName =
+                String.format("%s(%d).%s", file.nameWithoutExtension, fileIndex, file.extension)
             newFile = File(file.parent, newName)
             fileIndex++
         } while (File(newFile!!.absolutePath).exists())
         return newFile
     }
 
-    private fun startCopyMove(files: ArrayList<FileDirItem>, destinationPath: String, isCopyOperation: Boolean, copyPhotoVideoOnly: Boolean, copyHidden: Boolean) {
+    private fun startCopyMove(
+        files: ArrayList<FileDirItem>,
+        destinationPath: String,
+        isCopyOperation: Boolean,
+        copyPhotoVideoOnly: Boolean,
+        copyHidden: Boolean,
+    ) {
         checkConflicts(files, destinationPath, 0, LinkedHashMap()) {
             toast(if (isCopyOperation) R.string.copying else R.string.moving)
             val pair = Pair(files, destinationPath)
-            CopyMoveTask(this, isCopyOperation, copyPhotoVideoOnly, it, copyMoveListener, copyHidden).execute(pair)
+            CopyMoveTask(
+                this,
+                isCopyOperation,
+                copyPhotoVideoOnly,
+                it,
+                copyMoveListener,
+                copyHidden
+            ).execute(pair)
         }
     }
 
-    fun checkConflicts(files: ArrayList<FileDirItem>, destinationPath: String, index: Int, conflictResolutions: LinkedHashMap<String, Int>,
-                       callback: (resolutions: LinkedHashMap<String, Int>) -> Unit) {
+    fun checkConflicts(
+        files: ArrayList<FileDirItem>,
+        destinationPath: String,
+        index: Int,
+        conflictResolutions: LinkedHashMap<String, Int>,
+        callback: (resolutions: LinkedHashMap<String, Int>) -> Unit,
+    ) {
         if (index == files.size) {
             callback(conflictResolutions)
             return
         }
 
         val file = files[index]
-        val newFileDirItem = FileDirItem("$destinationPath/${file.name}", file.name, file.isDirectory)
+        val newFileDirItem =
+            FileDirItem("$destinationPath/${file.name}", file.name, file.isDirectory)
         if (File(newFileDirItem.path).exists()) {
             FileConflictDialog(this, newFileDirItem) { resolution, applyForAll ->
                 if (applyForAll) {
                     conflictResolutions.clear()
                     conflictResolutions[""] = resolution
-                    checkConflicts(files, destinationPath, files.size, conflictResolutions, callback)
+                    checkConflicts(
+                        files,
+                        destinationPath,
+                        files.size,
+                        conflictResolutions,
+                        callback
+                    )
                 } else {
                     conflictResolutions[newFileDirItem.path] = resolution
                     checkConflicts(files, destinationPath, index + 1, conflictResolutions, callback)
@@ -344,11 +436,19 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
         } else {
             isAskingPermissions = true
             actionOnPermission = callback
-            ActivityCompat.requestPermissions(this, arrayOf(getPermissionString(permissionId)), GENERIC_PERM_HANDLER)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(getPermissionString(permissionId)),
+                GENERIC_PERM_HANDLER
+            )
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray,
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         isAskingPermissions = false
         if (requestCode == GENERIC_PERM_HANDLER && grantResults.isNotEmpty()) {

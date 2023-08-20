@@ -48,7 +48,11 @@ class SkiaPooledImageRegionDecoder : ImageRegionDecoder {
     private fun lazyInit() {
         if (lazyInited.compareAndSet(false, true) && fileLength < Long.MAX_VALUE) {
             Thread {
-                while (decoderPool != null && allowAdditionalDecoder(decoderPool!!.size(), fileLength)) {
+                while (decoderPool != null && allowAdditionalDecoder(
+                        decoderPool!!.size(),
+                        fileLength
+                    )
+                ) {
                     try {
                         if (decoderPool != null) {
                             initialiseDecoder()
@@ -62,7 +66,7 @@ class SkiaPooledImageRegionDecoder : ImageRegionDecoder {
 
     private fun initialiseDecoder() {
         val uriString = uri!!.toString()
-        val decoder: BitmapRegionDecoder
+        var decoder: BitmapRegionDecoder? = null
         var fileLength = Long.MAX_VALUE
         when {
             uriString.startsWith(ASSET_PREFIX) -> {
@@ -71,47 +75,71 @@ class SkiaPooledImageRegionDecoder : ImageRegionDecoder {
                     val descriptor = context!!.assets.openFd(assetName)
                     fileLength = descriptor.length
                 } catch (e: Exception) {
+                    e.printStackTrace()
                 }
 
-                decoder = BitmapRegionDecoder.newInstance(context!!.assets.open(assetName, AssetManager.ACCESS_RANDOM), false)
+                context?.let {
+                    BitmapRegionDecoder.newInstance(
+                        it.assets.open(
+                            assetName,
+                            AssetManager.ACCESS_RANDOM
+                        ), false
+                    )?.let { b ->
+                        decoder = b
+                    }
+                }
             }
+
             uriString.startsWith(FILE_SCHEME) -> {
-                decoder = BitmapRegionDecoder.newInstance(uriString.substring(FILE_SCHEME.length), false)
+                decoder =
+                    BitmapRegionDecoder.newInstance(uriString.substring(FILE_SCHEME.length), false)
                 try {
                     val file = File(uriString)
                     if (file.exists()) {
                         fileLength = file.length()
                     }
                 } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
+
             else -> {
                 var inputStream: InputStream? = null
                 try {
                     val contentResolver = context!!.contentResolver
                     inputStream = contentResolver.openInputStream(uri!!)
-                    decoder = BitmapRegionDecoder.newInstance(inputStream, false)
+                    if (inputStream != null) {
+                        BitmapRegionDecoder.newInstance(inputStream, false)?.let {
+                            decoder = it
+                        }
+                    }
                     try {
                         val descriptor = contentResolver.openAssetFileDescriptor(uri!!, "r")
                         if (descriptor != null) {
                             fileLength = descriptor.length
                         }
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 } finally {
                     try {
                         inputStream?.close()
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
             }
         }
 
         this.fileLength = fileLength
-        imageDimensions.set(decoder.width, decoder.height)
+        decoder?.let {
+            imageDimensions.set(it.width, it.height)
+        }
         decoderLock.writeLock().lock()
         try {
-            decoderPool?.add(decoder)
+            decoder?.let {
+                decoderPool?.add(it)
+            }
         } finally {
             decoderLock.writeLock().unlock()
         }
@@ -132,7 +160,7 @@ class SkiaPooledImageRegionDecoder : ImageRegionDecoder {
                         options.inSampleSize = sampleSize
                         options.inPreferredConfig = Bitmap.Config.RGB_565
                         return decoder.decodeRegion(sRect, options)
-                                ?: throw RuntimeException("Skia image decoder returned null bitmap - image format may not be supported")
+                            ?: throw RuntimeException("Skia image decoder returned null bitmap - image format may not be supported")
                     }
                 } finally {
                     if (decoder != null) {
