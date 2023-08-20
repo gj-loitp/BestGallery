@@ -29,11 +29,11 @@ dependencies {
     api 'com.github.ajalt.reprint:core:3.3.0@aar'
     api 'me.drakeet.support:toastcompat:1.1.0'
     implementation 'com.google.android.material:material:1.9.0'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
     implementation 'com.andrognito.patternlockview:patternlockview:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.21"
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.duolingo.open:rtl-viewpager:2.0.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.15.1'
 }
