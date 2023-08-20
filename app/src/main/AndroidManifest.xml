@@ -30,17 +30,17 @@
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+<!--        <meta-data-->
+<!--            android:name="com.google.android.gms.version"-->
+<!--            android:value="@integer/google_play_services_version" />-->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity
-            android:name="com.google.android.gms.ads.AdActivity"
-            android:theme="@style/google_ad_style"
-            tools:replace="android:theme" />
+<!--        <activity-->
+<!--            android:name="com.google.android.gms.ads.AdActivity"-->
+<!--            android:theme="@style/google_ad_style"-->
+<!--            tools:replace="android:theme" />-->
 
         <activity
             android:name="com.eagle.gallery.pro.activities.MainActivity"

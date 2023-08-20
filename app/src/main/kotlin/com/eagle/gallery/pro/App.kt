@@ -5,7 +5,6 @@ import androidx.multidex.MultiDexApplication
 import com.github.ajalt.reprint.core.Reprint
 import com.eagle.commons.extensions.checkUseEnglish
 import com.eagle.gallery.pro.activities.ActivityLifeCallbacks
-import com.google.firebase.FirebaseApp
 
 class App : MultiDexApplication() {
 
@@ -20,9 +19,9 @@ class App : MultiDexApplication() {
         super.onCreate()
         mContext = applicationContext
 
-        Thread {
-            FirebaseApp.initializeApp(this)
-        }.start()
+//        Thread {
+//            FirebaseApp.initializeApp(this)
+//        }.start()
 
 
         checkUseEnglish()
