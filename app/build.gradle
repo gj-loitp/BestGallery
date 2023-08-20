@@ -6,6 +6,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
+    ndkVersion "25.2.9519653"
 
     defaultConfig {
         applicationId "com.eagle.gallery.photos.videos.album.hd.gallery.editor"
