@@ -927,7 +927,7 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(), Vie
         }
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         initBottomActionsLayout()
     }

@@ -157,7 +157,7 @@ open class PanoramaVideoActivity : com.eagle.gallery.pro.activities.SimpleActivi
         }
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         setupButtons()
     }

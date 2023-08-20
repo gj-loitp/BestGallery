@@ -205,7 +205,7 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
         finish()
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         initBottomActionsLayout()
     }
