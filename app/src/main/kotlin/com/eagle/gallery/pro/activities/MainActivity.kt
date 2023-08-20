@@ -142,7 +142,7 @@ import java.io.FileNotFoundException
 import java.io.InputStream
 import java.io.OutputStream
 
-class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
+class MainActivity : SimpleActivity(),
     DirectoryOperationsListener {
 
     companion object {
@@ -626,7 +626,7 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
 
     private fun showAllMedia() {
         config.showAll = true
-        Intent(this, com.eagle.gallery.pro.activities.MediaActivity::class.java).apply {
+        Intent(this, MediaActivity::class.java).apply {
             putExtra(DIRECTORY, "")
 
             if (mIsThirdPartyIntent) {
@@ -983,7 +983,7 @@ class MainActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
     }
 
     private fun itemClicked(path: String) {
-        Intent(this, com.eagle.gallery.pro.activities.MediaActivity::class.java).apply {
+        Intent(this, MediaActivity::class.java).apply {
             putExtra(DIRECTORY, path)
             handleMediaIntent(this)
         }
