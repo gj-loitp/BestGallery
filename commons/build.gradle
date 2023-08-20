@@ -25,7 +25,7 @@ android {
 }
 
 dependencies {
-    api 'androidx.appcompat:appcompat:1.0.2'
+    api 'androidx.appcompat:appcompat:1.6.1'
     api 'com.github.ajalt.reprint:core:3.3.0@aar'
     api 'me.drakeet.support:toastcompat:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
