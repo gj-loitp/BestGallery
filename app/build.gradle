@@ -48,10 +48,10 @@ android {
         abortOnError false
     }
 
-//    compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_11
-//        targetCompatibility JavaVersion.VERSION_11
-//    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 
     packagingOptions {
         exclude 'META-INF/library_release.kotlin_module'
