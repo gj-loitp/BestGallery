@@ -4,14 +4,15 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdk 28
+//    compileSdkVersion 28
+//    buildToolsVersion "28.0.3"
     ndkVersion "25.2.9519653"
 
     defaultConfig {
         applicationId "com.eagle.gallery.photos.videos.album.hd.gallery.editor"
         minSdkVersion 21
-        targetSdkVersion 28
+//        targetSdkVersion 28
         versionCode 20010009
         versionName "2.0.9"
         multiDexEnabled true
