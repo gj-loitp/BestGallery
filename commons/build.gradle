@@ -4,13 +4,10 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-//    compileSdkVersion propCompileSdkVersion
     compileSdk 33
-//    buildToolsVersion propBuildToolsVersion
 
     defaultConfig {
         minSdkVersion 21
-//        targetSdkVersion propTargetSdkVersion
     }
 
     buildTypes {
