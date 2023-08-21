@@ -1,19 +1,6 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-//    ext {
-//        propCompileSdkVersion = 33
-//        propBuildToolsVersion = "33.0.0"
-//        propMinSdkVersion = 21
-//        propTargetSdkVersion = propCompileSdkVersion
-//        propVersionCode = 1
-//        propVersionName = '5.10.30'
-//        kotlin_version = '1.6.21'
-//    }
-
     repositories {
         google()
-//        jcenter()
         gradlePluginPortal()
         mavenCentral()
     }
@@ -22,21 +9,18 @@ buildscript {
         classpath 'com.android.tools.build:gradle:7.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
         classpath 'com.google.gms:google-services:4.3.15'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
 allprojects {
     repositories {
         google()
-//        jcenter()
         gradlePluginPortal()
         mavenCentral()
         maven { url "https://jitpack.io" }
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
