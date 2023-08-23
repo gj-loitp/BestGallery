@@ -169,8 +169,10 @@ public class GestureControllerForPager extends GestureController {
     }
 
     @Override
-    protected boolean onScroll(@NonNull MotionEvent e1, @NonNull MotionEvent e2,
-            float dx, float dy) {
+    protected boolean onScroll(@NonNull MotionEvent e1,
+                               @NonNull MotionEvent e2,
+                               float dx,
+                               float dy) {
 
         if (viewPager == null) {
             return super.onScroll(e1, e2, dx, dy);
@@ -191,8 +193,10 @@ public class GestureControllerForPager extends GestureController {
     }
 
     @Override
-    protected boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2,
-            float vx, float vy) {
+    protected boolean onFling(@NonNull MotionEvent e1,
+                              @NonNull MotionEvent e2,
+                              float vx,
+                              float vy) {
 
         return !hasViewPagerX() && super.onFling(e1, e2, vx, vy);
     }
@@ -399,6 +403,7 @@ public class GestureControllerForPager extends GestureController {
                     pager.endFakeDrag();
                 }
             } catch (Exception ignored) {
+                ignored.printStackTrace();
             }
         }
     }

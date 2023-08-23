@@ -12,12 +12,6 @@ import com.alexvasilkov.gestures.utils.MathUtils;
 
 import androidx.annotation.Nullable;
 
-/**
- * Helper class that holds reference to {@link Settings} object and controls some aspects of view
- * {@link State}, such as movement bounds restrictions
- * (see {@link #getMovementArea(State, RectF)}) and dynamic min / max zoom levels
- * (see {@link #getMinZoom(State)} and {@link #getMaxZoom(State)}).
- */
 public class StateController {
 
     // Temporary objects
@@ -26,7 +20,6 @@ public class StateController {
     private static final RectF tmpRectF = new RectF();
     private static final Point tmpPoint = new Point();
     private static final PointF tmpPointF = new PointF();
-
 
     private final Settings settings;
     private final ZoomBounds zoomBounds;
@@ -66,7 +59,9 @@ public class StateController {
         if (isResetRequired) {
             // Applying initial state
             state.set(0f, 0f, zoomBounds.set(state).getFitZoom(), 0f);
-            GravityUtils.getImagePosition(state, settings, tmpRect);
+            GravityUtils.getImagePosition(state,
+                    settings,
+                    tmpRect);
             state.translateTo(tmpRect.left, tmpRect.top);
 
             // We can correctly reset state only when we have both image size and viewport size
@@ -76,7 +71,13 @@ public class StateController {
             return !isResetRequired;
         } else {
             // Restricts state's translation and zoom bounds, disallowing overscroll / overzoom.
-            restrictStateBounds(state, state, Float.NaN, Float.NaN, false, false, true);
+            restrictStateBounds(state,
+                    state,
+                    Float.NaN,
+                    Float.NaN,
+                    false,
+                    false,
+                    true);
             return false;
         }
     }
@@ -87,7 +88,10 @@ public class StateController {
 
     public void applyZoomPatch(State state) {
         if (zoomPatch > 0f) {
-            state.set(state.getX(), state.getY(), state.getZoom() * zoomPatch, state.getRotation());
+            state.set(state.getX(),
+                    state.getY(),
+                    state.getZoom() * zoomPatch,
+                    state.getRotation());
         }
     }
 
@@ -98,7 +102,7 @@ public class StateController {
     /**
      * Maximizes zoom if it closer to min zoom or minimizes it if it closer to max zoom.
      *
-     * @param state Current state
+     * @param state  Current state
      * @param pivotX Pivot's X coordinate
      * @param pivotY Pivot's Y coordinate
      * @return End state for toggle animation.
@@ -120,22 +124,32 @@ public class StateController {
     /**
      * Restricts state's translation and zoom bounds.
      *
-     * @param state State to be restricted
-     * @param prevState Previous state to calculate overscroll and overzoom (optional)
-     * @param pivotX Pivot's X coordinate
-     * @param pivotY Pivot's Y coordinate
-     * @param allowOverscroll Whether overscroll is allowed
-     * @param allowOverzoom Whether overzoom is allowed
+     * @param state            State to be restricted
+     * @param prevState        Previous state to calculate overscroll and overzoom (optional)
+     * @param pivotX           Pivot's X coordinate
+     * @param pivotY           Pivot's Y coordinate
+     * @param allowOverscroll  Whether overscroll is allowed
+     * @param allowOverzoom    Whether overzoom is allowed
      * @param restrictRotation Whether rotation should be restricted to a nearest N*90 angle
      * @return End state to animate changes or null if no changes are required.
      */
     @SuppressWarnings("SameParameterValue") // Using same method params as in restrictStateBounds
     @Nullable
-    State restrictStateBoundsCopy(State state, State prevState, float pivotX, float pivotY,
-            boolean allowOverscroll, boolean allowOverzoom, boolean restrictRotation) {
+    State restrictStateBoundsCopy(State state,
+                                  State prevState,
+                                  float pivotX,
+                                  float pivotY,
+                                  boolean allowOverscroll,
+                                  boolean allowOverzoom,
+                                  boolean restrictRotation) {
         tmpState.set(state);
-        boolean changed = restrictStateBounds(tmpState, prevState, pivotX, pivotY,
-                allowOverscroll, allowOverzoom, restrictRotation);
+        boolean changed = restrictStateBounds(tmpState,
+                prevState,
+                pivotX,
+                pivotY,
+                allowOverscroll,
+                allowOverzoom,
+                restrictRotation);
         return changed ? tmpState.copy() : null;
     }
 
@@ -144,17 +158,22 @@ public class StateController {
      * {@code allowOverscroll (allowOverzoom)} parameter is true then resilience
      * will be applied to translation (zoom) changes if they are out of bounds.
      *
-     * @param state State to be restricted
-     * @param prevState Previous state to calculate overscroll and overzoom (optional)
-     * @param pivotX Pivot's X coordinate
-     * @param pivotY Pivot's Y coordinate
-     * @param allowOverscroll Whether overscroll is allowed
-     * @param allowOverzoom Whether overzoom is allowed
+     * @param state            State to be restricted
+     * @param prevState        Previous state to calculate overscroll and overzoom (optional)
+     * @param pivotX           Pivot's X coordinate
+     * @param pivotY           Pivot's Y coordinate
+     * @param allowOverscroll  Whether overscroll is allowed
+     * @param allowOverzoom    Whether overzoom is allowed
      * @param restrictRotation Whether rotation should be restricted to a nearest N*90 angle
      * @return true if state was changed, false otherwise.
      */
-    boolean restrictStateBounds(State state, State prevState, float pivotX, float pivotY,
-            boolean allowOverscroll, boolean allowOverzoom, boolean restrictRotation) {
+    boolean restrictStateBounds(State state,
+                                State prevState,
+                                float pivotX,
+                                float pivotY,
+                                boolean allowOverscroll,
+                                boolean allowOverzoom,
+                                boolean restrictRotation) {
 
         if (!settings.isRestrictBounds()) {
             return false;
@@ -186,7 +205,11 @@ public class StateController {
 
         // Applying elastic overzoom
         if (prevState != null) {
-            zoom = applyZoomResilience(zoom, prevState.getZoom(), minZoom, maxZoom, extraZoom);
+            zoom = applyZoomResilience(zoom,
+                    prevState.getZoom(),
+                    minZoom,
+                    maxZoom,
+                    extraZoom);
         }
 
         if (!State.equals(zoom, state.getZoom())) {
@@ -231,8 +254,11 @@ public class StateController {
         return isStateChanged;
     }
 
-    private float applyZoomResilience(float zoom, float prevZoom,
-            float minZoom, float maxZoom, float overzoom) {
+    private float applyZoomResilience(float zoom,
+                                      float prevZoom,
+                                      float minZoom,
+                                      float maxZoom,
+                                      float overzoom) {
         if (overzoom == 1f) {
             return zoom;
         }
@@ -256,8 +282,11 @@ public class StateController {
         }
     }
 
-    private float applyTranslationResilience(float value, float prevValue,
-            float boundsMin, float boundsMax, float overscroll) {
+    private float applyTranslationResilience(float value,
+                                             float prevValue,
+                                             float boundsMin,
+                                             float boundsMax,
+                                             float overscroll) {
         if (overscroll == 0f) {
             return value;
         }
@@ -297,7 +326,7 @@ public class StateController {
      * @return Max zoom level as it's used by state controller.
      * Note, that it may be different from {@link Settings#getMaxZoom()}.
      */
-    @SuppressWarnings({ "unused", "WeakerAccess" }) // Public API
+    @SuppressWarnings({"unused", "WeakerAccess"}) // Public API
     public float getMaxZoom(State state) {
         return zoomBounds.set(state).getMaxZoom();
     }
@@ -317,12 +346,11 @@ public class StateController {
      * part of the viewport in which image can move.
      *
      * @param state Current state
-     * @param out Output movement area rectangle
+     * @param out   Output movement area rectangle
      */
     public void getMovementArea(State state, RectF out) {
         movBounds.set(state).getExternalBounds(out);
     }
-
 
     /*
      * Deprecated methods.
@@ -349,7 +377,7 @@ public class StateController {
     }
 
     /**
-     * @param out Output movement area rectangle
+     * @param out   Output movement area rectangle
      * @param state Current state
      * @deprecated User {@link #getMovementArea(State, RectF)} instead.
      */
@@ -360,7 +388,7 @@ public class StateController {
     }
 
     /**
-     * @param value Value to be restricted
+     * @param value    Value to be restricted
      * @param minValue Min value
      * @param maxValue Max value
      * @return Restricted value
@@ -373,9 +401,9 @@ public class StateController {
     }
 
     /**
-     * @param out Interpolated state (output)
-     * @param start Start state
-     * @param end End state
+     * @param out    Interpolated state (output)
+     * @param start  Start state
+     * @param end    End state
      * @param factor Factor
      * @deprecated Use {@link MathUtils#interpolate(State, State, State, float)}.
      */
@@ -386,28 +414,34 @@ public class StateController {
     }
 
     /**
-     * @param out Interpolated state (output)
-     * @param start Start state
+     * @param out         Interpolated state (output)
+     * @param start       Start state
      * @param startPivotX Pivot point's X coordinate in start state coordinates
      * @param startPivotY Pivot point's Y coordinate in start state coordinates
-     * @param end End state
-     * @param endPivotX Pivot point's X coordinate in end state coordinates
-     * @param endPivotY Pivot point's Y coordinate in end state coordinates
-     * @param factor Factor
+     * @param end         End state
+     * @param endPivotX   Pivot point's X coordinate in end state coordinates
+     * @param endPivotY   Pivot point's Y coordinate in end state coordinates
+     * @param factor      Factor
      * @deprecated Use
      * {@link MathUtils#interpolate(State, State, float, float, State, float, float, float)}.
      */
     @SuppressWarnings("unused") // Public API
     @Deprecated
-    public static void interpolate(State out, State start, float startPivotX, float startPivotY,
-            State end, float endPivotX, float endPivotY, float factor) {
+    public static void interpolate(State out,
+                                   State start,
+                                   float startPivotX,
+                                   float startPivotY,
+                                   State end,
+                                   float endPivotX,
+                                   float endPivotY,
+                                   float factor) {
         MathUtils.interpolate(out, start, startPivotX, startPivotY,
                 end, endPivotX, endPivotY, factor);
     }
 
     /**
-     * @param start Start value
-     * @param end End value
+     * @param start  Start value
+     * @param end    End value
      * @param factor Factor
      * @return Interpolated value
      * @deprecated Use {@link MathUtils#interpolate(float, float, float)}.
@@ -419,9 +453,9 @@ public class StateController {
     }
 
     /**
-     * @param out Interpolated rectangle (output)
-     * @param start Start rectangle
-     * @param end End rectangle
+     * @param out    Interpolated rectangle (output)
+     * @param start  Start rectangle
+     * @param end    End rectangle
      * @param factor Factor
      * @deprecated Use {@link MathUtils#interpolate(RectF, RectF, RectF, float)},
      */

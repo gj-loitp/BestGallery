@@ -117,18 +117,14 @@ public class GestureController implements View.OnTouchListener {
         targetView = view;
         settings = new Settings();
         stateController = new StateController(settings);
-
         animationEngine = new LocalAnimationEngine(view);
         InternalGesturesListener internalListener = new InternalGesturesListener();
         gestureDetector = new GestureDetector(context, internalListener);
         scaleDetector = new ScaleGestureDetectorFixed(context, internalListener);
         rotateDetector = new RotationGestureDetector(context, internalListener);
-
         exitController = new ExitController(view, this);
-
         flingScroller = new OverScroller(context);
         stateScroller = new FloatScroller();
-
         flingBounds = new MovementBounds(settings);
 
         final ViewConfiguration configuration = ViewConfiguration.get(context);
@@ -143,7 +139,7 @@ public class GestureController implements View.OnTouchListener {
      * @param listener Gestures listener
      * @see GestureController.OnGestureListener
      */
-    @SuppressWarnings({ "unused", "WeakerAccess" }) // Public API
+    @SuppressWarnings({"unused", "WeakerAccess"}) // Public API
     public void setOnGesturesListener(@Nullable OnGestureListener listener) {
         gestureListener = listener;
     }
@@ -154,7 +150,7 @@ public class GestureController implements View.OnTouchListener {
      * @param listener State's source changes listener
      * @see OnStateSourceChangeListener
      */
-    @SuppressWarnings({ "unused", "WeakerAccess" }) // Public API
+    @SuppressWarnings({"unused", "WeakerAccess"}) // Public API
     public void setOnStateSourceChangeListener(@Nullable OnStateSourceChangeListener listener) {
         sourceListener = listener;
     }
@@ -175,7 +171,7 @@ public class GestureController implements View.OnTouchListener {
      * @param listener State changes listener to be removed
      * @see #addOnStateChangeListener(OnStateChangeListener)
      */
-    @SuppressWarnings({ "unused", "WeakerAccess" }) // Public API
+    @SuppressWarnings({"unused", "WeakerAccess"}) // Public API
     public void removeOnStateChangeListener(OnStateChangeListener listener) {
         stateListeners.remove(listener);
     }
@@ -186,7 +182,7 @@ public class GestureController implements View.OnTouchListener {
      * {@link View#setOnLongClickListener(View.OnLongClickListener)} or use
      * {@link View#setLongClickable(boolean)}.
      */
-    @SuppressWarnings({ "unused", "WeakerAccess" }) // Public API
+    @SuppressWarnings({"unused", "WeakerAccess"}) // Public API
     @Deprecated
     public void setLongPressEnabled(boolean enabled) {
         targetView.setLongClickable(true);
@@ -306,7 +302,13 @@ public class GestureController implements View.OnTouchListener {
         State endStateRestricted = null;
         if (keepInBounds) {
             endStateRestricted = stateController.restrictStateBoundsCopy(
-                    endState, prevState, pivotX, pivotY, false, false, true);
+                    endState,
+                    prevState,
+                    pivotX,
+                    pivotY,
+                    false,
+                    false,
+                    true);
         }
         if (endStateRestricted == null) {
             endStateRestricted = endState;
@@ -350,7 +352,7 @@ public class GestureController implements View.OnTouchListener {
         return !flingScroller.isFinished();
     }
 
-    @SuppressWarnings({ "unused", "WeakerAccess" }) // Public API
+    @SuppressWarnings({"unused", "WeakerAccess"}) // Public API
     public boolean isAnimating() {
         return isAnimatingState() || isAnimatingFling();
     }
@@ -376,7 +378,7 @@ public class GestureController implements View.OnTouchListener {
         stopFlingAnimation();
     }
 
-    @SuppressWarnings({ "UnusedParameters", "WeakerAccess" }) // Public API (can be overridden)
+    @SuppressWarnings({"UnusedParameters", "WeakerAccess"}) // Public API (can be overridden)
     protected void onStateAnimationFinished(boolean forced) {
         isAnimatingInBounds = false;
         pivotX = Float.NaN;
@@ -468,7 +470,13 @@ public class GestureController implements View.OnTouchListener {
             isStateChangedDuringTouch = false;
 
             stateController.restrictStateBounds(
-                    state, prevState, pivotX, pivotY, true, true, false);
+                    state,
+                    prevState,
+                    pivotX,
+                    pivotY,
+                    true,
+                    true,
+                    false);
 
             if (!state.equals(prevState)) {
                 notifyStateUpdated();
@@ -481,7 +489,13 @@ public class GestureController implements View.OnTouchListener {
 
             if (!exitController.isExitDetected()) {
                 State restrictedState = stateController.restrictStateBoundsCopy(
-                        state, prevState, pivotX, pivotY, true, false, true);
+                        state,
+                        prevState,
+                        pivotX,
+                        pivotY,
+                        true,
+                        false,
+                        true);
                 animateStateTo(restrictedState, false);
             }
         }
@@ -584,8 +598,10 @@ public class GestureController implements View.OnTouchListener {
         }
     }
 
-    protected boolean onScroll(@NonNull MotionEvent e1, @NonNull MotionEvent e2,
-            float dx, float dy) {
+    protected boolean onScroll(@NonNull MotionEvent e1,
+                               @NonNull MotionEvent e2,
+                               float dx,
+                               float dy) {
 
         if (!settings.isPanEnabled() || isAnimatingState()) {
             return false;
@@ -615,8 +631,10 @@ public class GestureController implements View.OnTouchListener {
         return isScrollDetected;
     }
 
-    protected boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2,
-            float vx, float vy) {
+    protected boolean onFling(@NonNull MotionEvent e1,
+                              @NonNull MotionEvent e2,
+                              float vx,
+                              float vy) {
 
         if (!settings.isPanEnabled() || !settings.isFlingEnabled() || isAnimatingState()) {
             return false;
@@ -739,7 +757,7 @@ public class GestureController implements View.OnTouchListener {
         return true;
     }
 
-    @SuppressWarnings({ "UnusedParameters", "WeakerAccess" }) // Public API (can be overridden)
+    @SuppressWarnings({"UnusedParameters", "WeakerAccess"}) // Public API (can be overridden)
     protected void onScaleEnd(ScaleGestureDetector detector) {
         if (isScaleDetected) {
             exitController.onScaleEnd();
@@ -775,7 +793,7 @@ public class GestureController implements View.OnTouchListener {
         return true;
     }
 
-    @SuppressWarnings({ "UnusedParameters", "WeakerAccess" }) // Public API (can be overridden)
+    @SuppressWarnings({"UnusedParameters", "WeakerAccess"}) // Public API (can be overridden)
     protected void onRotationEnd(RotationGestureDetector detector) {
         if (isRotationDetected) {
             exitController.onRotationEnd();
@@ -824,8 +842,14 @@ public class GestureController implements View.OnTouchListener {
                         || Float.isNaN(endPivotX) || Float.isNaN(endPivotY)) {
                     MathUtils.interpolate(state, stateStart, stateEnd, factor);
                 } else {
-                    MathUtils.interpolate(state, stateStart, pivotX, pivotY,
-                            stateEnd, endPivotX, endPivotY, factor);
+                    MathUtils.interpolate(state,
+                            stateStart,
+                            pivotX,
+                            pivotY,
+                            stateEnd,
+                            endPivotX,
+                            endPivotY,
+                            factor);
                 }
 
                 shouldProceed = true;
@@ -1018,8 +1042,10 @@ public class GestureController implements View.OnTouchListener {
         }
 
         @Override
-        public boolean onScroll(@NonNull MotionEvent e1, @NonNull MotionEvent e2,
-                float distanceX, float distanceY) {
+        public boolean onScroll(@NonNull MotionEvent e1,
+                                @NonNull MotionEvent e2,
+                                float distanceX,
+                                float distanceY) {
             return GestureController.this.onScroll(e1, e2, distanceX, distanceY);
         }
 
@@ -1029,8 +1055,10 @@ public class GestureController implements View.OnTouchListener {
         }
 
         @Override
-        public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2,
-                float velocityX, float velocityY) {
+        public boolean onFling(@NonNull MotionEvent e1,
+                               @NonNull MotionEvent e2,
+                               float velocityX,
+                               float velocityY) {
             return GestureController.this.onFling(e1, e2, velocityX, velocityY);
         }
 

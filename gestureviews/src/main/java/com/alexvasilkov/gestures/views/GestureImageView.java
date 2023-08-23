@@ -133,7 +133,7 @@ public class GestureImageView extends ImageView
      * @param listener Snapshot listener
      * @deprecated Use {@link #crop()} method instead.
      */
-    @SuppressWarnings({ "deprecation", "unused" }) // Public API
+    @SuppressWarnings({"deprecation", "unused"}) // Public API
     @Deprecated
     public void getSnapshot(OnSnapshotLoadedListener listener) {
         if (getDrawable() != null) {

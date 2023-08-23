@@ -101,7 +101,6 @@
         <attr name="gest_disableBounds" />
     </declare-styleable>
 
-
     <declare-styleable name="CropAreaView">
         <attr name="gest_backgroundColor" format="reference|color" />
         <attr name="gest_borderColor" format="reference|color" />

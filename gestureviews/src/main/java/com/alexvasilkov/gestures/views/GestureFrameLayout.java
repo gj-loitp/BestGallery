@@ -142,7 +142,10 @@ public class GestureFrameLayout extends FrameLayout implements GestureView, Anim
     }
 
     @Override
-    protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
+    protected void onSizeChanged(int width,
+                                 int height,
+                                 int oldWidth,
+                                 int oldHeight) {
         super.onSizeChanged(width, height, oldWidth, oldHeight);
 
         controller.getSettings().setViewport(width - getPaddingLeft() - getPaddingRight(),
@@ -162,8 +165,11 @@ public class GestureFrameLayout extends FrameLayout implements GestureView, Anim
     }
 
     @Override
-    protected void measureChildWithMargins(View child, int parentWidthMeasureSpec, int widthUsed,
-            int parentHeightMeasureSpec, int heightUsed) {
+    protected void measureChildWithMargins(View child,
+                                           int parentWidthMeasureSpec,
+                                           int widthUsed,
+                                           int parentHeightMeasureSpec,
+                                           int heightUsed) {
         final MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
 
         final int extraW = getPaddingLeft() + getPaddingRight()
