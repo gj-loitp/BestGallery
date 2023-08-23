@@ -53,8 +53,8 @@ public class ExitController {
     private float initialY;
     private float initialZoom;
 
-
-    public ExitController(View view, GestureController gestureController) {
+    public ExitController(View view,
+                          GestureController gestureController) {
         controller = gestureController;
         animatorView = view instanceof AnimatorView ? ((AnimatorView) view) : null;
 

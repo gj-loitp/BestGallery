@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
  * @deprecated Use {@link GestureTransitions} class with {@link FromTracker} and
  * {@link IntoTracker} instead.
  */
-@SuppressWarnings({ "WeakerAccess", "unused" }) // Class is left for compatibility
+@SuppressWarnings({"WeakerAccess", "unused"}) // Class is left for compatibility
 @Deprecated
 public interface ViewsTracker<ID> {
 

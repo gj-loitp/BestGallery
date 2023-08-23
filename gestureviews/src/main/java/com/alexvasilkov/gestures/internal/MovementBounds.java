@@ -217,11 +217,11 @@ public class MovementBounds {
     /**
      * Restricts x &amp; y coordinates to current bounds (as calculated in {@link #set(State)}).
      *
-     * @param x X coordinate
-     * @param y Y coordinate
+     * @param x      X coordinate
+     * @param y      Y coordinate
      * @param extraX Extra area bounds (horizontal)
      * @param extraY Extra area bounds (vertical)
-     * @param out Output rectangle
+     * @param out    Output rectangle
      */
     public void restrict(float x, float y, float extraX, float extraY, PointF out) {
         tmpPointArr[0] = x;
@@ -248,8 +248,14 @@ public class MovementBounds {
         out.set(tmpPointArr[0], tmpPointArr[1]);
     }
 
-    public void restrict(float x, float y, PointF out) {
-        restrict(x, y, 0f, 0f, out);
+    public void restrict(float x,
+                         float y,
+                         PointF out) {
+        restrict(x,
+                y,
+                0f,
+                0f,
+                out);
     }
 
 }

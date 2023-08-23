@@ -21,7 +21,9 @@ abstract class FromBaseListener<P extends View, ID> extends RequestListener<ID> 
 
     private boolean isFullyOpened;
 
-    FromBaseListener(P parentView, FromTracker<ID> tracker, boolean autoScroll) {
+    FromBaseListener(P parentView,
+                     FromTracker<ID> tracker,
+                     boolean autoScroll) {
         this.parentView = parentView;
         this.tracker = tracker;
         this.autoScroll = autoScroll;
@@ -31,17 +33,13 @@ abstract class FromBaseListener<P extends View, ID> extends RequestListener<ID> 
 
     abstract void scrollToPosition(P parentView, int pos);
 
-
     @Override
     protected void initAnimator(ViewsTransitionAnimator<ID> animator) {
         super.initAnimator(animator);
 
-        animator.addPositionUpdateListener(new PositionUpdateListener() {
-            @Override
-            public void onPositionUpdate(float pos, boolean isLeaving) {
-                parentView.setVisibility(pos == 1f && !isLeaving ? View.INVISIBLE : View.VISIBLE);
-                isFullyOpened = pos == 1f;
-            }
+        animator.addPositionUpdateListener((pos, isLeaving) -> {
+            parentView.setVisibility(pos == 1f && !isLeaving ? View.INVISIBLE : View.VISIBLE);
+            isFullyOpened = pos == 1f;
         });
     }
 

@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 /**
  * @deprecated Use {@link GestureTransitions} instead.
  */
-@SuppressWarnings({ "deprecation", "unused", "WeakerAccess" }) // Class is left for compatibility
+@SuppressWarnings({"deprecation", "unused", "WeakerAccess"}) // Class is left for compatibility
 @Deprecated
 public class ViewsTransitionBuilder<ID> {
 

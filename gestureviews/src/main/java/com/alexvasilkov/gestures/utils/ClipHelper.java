@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 /**
  * Helper class to implement view clipping (with {@link ClipView} interface).
- *
+ * <p>
  * Usage: call {@link #clipView(RectF, float)} method when needed and override
  * {@link View#draw(Canvas)} method:
  * <pre>{@code

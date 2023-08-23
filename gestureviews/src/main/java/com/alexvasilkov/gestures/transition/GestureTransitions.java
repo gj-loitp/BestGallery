@@ -24,7 +24,8 @@ public class GestureTransitions<ID> {
     @SuppressWarnings("deprecation")
     private final ViewsTransitionAnimator<ID> animator = new ViewsTransitionAnimator<>();
 
-    private GestureTransitions() {}
+    private GestureTransitions() {
+    }
 
     public static <ID> GestureTransitions<ID> from(@NonNull RequestListener<ID> listener) {
         final GestureTransitions<ID> builder = new GestureTransitions<>();

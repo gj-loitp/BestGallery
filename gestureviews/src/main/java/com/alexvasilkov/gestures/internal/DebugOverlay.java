@@ -33,7 +33,8 @@ public class DebugOverlay {
 
     private static Field stateSourceField;
 
-    private DebugOverlay() {}
+    private DebugOverlay() {
+    }
 
     public static void drawDebug(View view, Canvas canvas) {
         final GestureController controller = ((GestureView) view).getController();
@@ -44,27 +45,46 @@ public class DebugOverlay {
         final float textSize = UnitsUtils.toPixels(context, TEXT_SIZE);
 
         canvas.save();
-        canvas.translate(view.getPaddingLeft(), view.getPaddingTop());
+        canvas.translate(view.getPaddingLeft(),
+                view.getPaddingTop());
 
         // Viewport
-        rectF.set(0f, 0f, settings.getViewportW(), settings.getViewportH());
-        drawRect(canvas, rectF, Color.GRAY, stroke);
+        rectF.set(0f,
+                0f,
+                settings.getViewportW(),
+                settings.getViewportH());
+        drawRect(canvas,
+                rectF,
+                Color.GRAY,
+                stroke);
 
         // Movement area
         GravityUtils.getMovementAreaPosition(settings, rect);
         rectF.set(rect);
-        drawRect(canvas, rectF, Color.GREEN, stroke);
+        drawRect(canvas,
+                rectF,
+                Color.GREEN,
+                stroke);
 
         // Image bounds with rotation
         controller.getState().get(matrix);
         canvas.save();
         canvas.concat(matrix);
-        rectF.set(0f, 0f, settings.getImageW(), settings.getImageH());
-        drawRect(canvas, rectF, Color.YELLOW, stroke / controller.getState().getZoom());
+        rectF.set(0f,
+                0f,
+                settings.getImageW(),
+                settings.getImageH());
+        drawRect(canvas,
+                rectF,
+                Color.YELLOW,
+                stroke / controller.getState().getZoom());
         canvas.restore();
 
         // Image bounds
-        rectF.set(0f, 0f, settings.getImageW(), settings.getImageH());
+        rectF.set(0f,
+                0f,
+                settings.getImageW(),
+                settings.getImageH());
         controller.getState().get(matrix);
         matrix.mapRect(rectF);
         drawRect(canvas, rectF, Color.RED, stroke);
@@ -82,13 +102,20 @@ public class DebugOverlay {
         } else if (pos > 0f) {
             String direction = animator.isLeaving() ? "EXIT" : "ENTER";
             String text = String.format(Locale.US, "%s %.0f%%", direction, pos * 100f);
-            drawText(canvas, settings, text, Color.MAGENTA, textSize);
+            drawText(canvas,
+                    settings,
+                    text,
+                    Color.MAGENTA,
+                    textSize);
         }
 
         canvas.restore();
     }
 
-    private static void drawRect(Canvas canvas, RectF rect, int color, float stroke) {
+    private static void drawRect(Canvas canvas,
+                                 RectF rect,
+                                 int color,
+                                 float stroke) {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(stroke);
         rectF.inset(0.5f * stroke, 0.5f * stroke);
@@ -96,8 +123,11 @@ public class DebugOverlay {
         canvas.drawRect(rect, paint);
     }
 
-    private static void drawText(Canvas canvas, Settings settings, String text,
-            int color, float textSize) {
+    private static void drawText(Canvas canvas,
+                                 Settings settings,
+                                 String text,
+                                 int color,
+                                 float textSize) {
         // Text settings
         paint.setTextSize(textSize);
         paint.setTypeface(Typeface.MONOSPACE);
@@ -106,7 +136,10 @@ public class DebugOverlay {
         final float halfSize = 0.5f * textSize;
 
         // Computing text background
-        paint.getTextBounds(text, 0, text.length(), rect);
+        paint.getTextBounds(text,
+                0,
+                text.length(),
+                rect);
         rectF.set(rect);
         rectF.offset(-rectF.centerX(), -rectF.centerY());
         GravityUtils.getMovementAreaPosition(settings, rect);
@@ -116,15 +149,24 @@ public class DebugOverlay {
         // Drawing background
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.WHITE);
-        canvas.drawRoundRect(rectF, halfSize, halfSize, paint);
+        canvas.drawRoundRect(rectF,
+                halfSize,
+                halfSize,
+                paint);
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.GRAY);
-        canvas.drawRoundRect(rectF, halfSize, halfSize, paint);
+        canvas.drawRoundRect(rectF,
+                halfSize,
+                halfSize,
+                paint);
 
         // Drawing text
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(color);
-        canvas.drawText(text, rectF.centerX(), rectF.bottom - halfSize, paint);
+        canvas.drawText(text,
+                rectF.centerX(),
+                rectF.bottom - halfSize,
+                paint);
     }
 
 
@@ -137,6 +179,7 @@ public class DebugOverlay {
                 stateSourceField = GestureController.class.getDeclaredField("stateSource");
                 stateSourceField.setAccessible(true);
             } catch (Exception ignored) {
+                ignored.printStackTrace();
             }
         }
 
@@ -144,6 +187,7 @@ public class DebugOverlay {
             try {
                 return (StateSource) stateSourceField.get(controller);
             } catch (Exception ignored) {
+                ignored.printStackTrace();
             }
         }
 

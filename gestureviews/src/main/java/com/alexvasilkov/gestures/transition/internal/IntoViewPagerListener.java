@@ -38,18 +38,15 @@ public class IntoViewPagerListener<ID> extends ViewsTransitionAnimator.RequestLi
     protected void initAnimator(ViewsTransitionAnimator<ID> animator) {
         super.initAnimator(animator);
 
-        animator.addPositionUpdateListener(new PositionUpdateListener() {
-            @Override
-            public void onPositionUpdate(float pos, boolean isLeaving) {
-                if (pos == 1f && isLeaving && getAnimator().getRequestedId() != null) {
-                    if (preventExit) {
-                        skipExit();
-                    }
-                    switchToCurrentPage();
+        animator.addPositionUpdateListener((pos, isLeaving) -> {
+            if (pos == 1f && isLeaving && getAnimator().getRequestedId() != null) {
+                if (preventExit) {
+                    skipExit();
                 }
-
-                viewPager.setVisibility(pos == 0f && isLeaving ? View.INVISIBLE : View.VISIBLE);
+                switchToCurrentPage();
             }
+
+            viewPager.setVisibility(pos == 0f && isLeaving ? View.INVISIBLE : View.VISIBLE);
         });
     }
 
