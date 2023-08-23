@@ -1,4 +1,4 @@
-package com.davemorrissey.labs.subscaleview
+package com.roy.labs.subscaleview
 
 import android.annotation.SuppressLint
 import android.content.Context

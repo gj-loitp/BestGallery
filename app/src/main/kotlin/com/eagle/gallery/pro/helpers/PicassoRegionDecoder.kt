@@ -3,7 +3,7 @@ package com.eagle.gallery.pro.helpers
 import android.content.Context
 import android.graphics.*
 import android.net.Uri
-import com.davemorrissey.labs.subscaleview.ImageRegionDecoder
+import com.roy.labs.subscaleview.ImageRegionDecoder
 
 class PicassoRegionDecoder(val showHighestQuality: Boolean) : ImageRegionDecoder {
     private var decoder: BitmapRegionDecoder? = null

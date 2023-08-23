@@ -1,10 +1,10 @@
-package com.davemorrissey.labs.subscaleview
+package com.roy.labs.subscaleview
 
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.*
 import android.net.Uri
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView.Companion.ASSET_PREFIX
+import com.roy.labs.subscaleview.SubsamplingScaleImageView.Companion.ASSET_PREFIX
 import java.io.InputStream
 import java.util.concurrent.locks.ReentrantReadWriteLock
 

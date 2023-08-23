@@ -18,7 +18,6 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import com.alexvasilkov.gestures.GestureController
 import com.alexvasilkov.gestures.State
 import com.bumptech.glide.Glide
@@ -32,15 +31,13 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
 import com.bumptech.glide.request.target.Target
-import com.davemorrissey.labs.subscaleview.DecoderFactory
-import com.davemorrissey.labs.subscaleview.ImageDecoder
-import com.davemorrissey.labs.subscaleview.ImageRegionDecoder
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+import com.roy.labs.subscaleview.DecoderFactory
+import com.roy.labs.subscaleview.ImageDecoder
+import com.roy.labs.subscaleview.ImageRegionDecoder
+import com.roy.labs.subscaleview.SubsamplingScaleImageView
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.extensions.*
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.activities.PanoramaPhotoActivity
-import com.eagle.gallery.pro.activities.PhotoActivity
 import com.eagle.gallery.pro.extensions.*
 import com.eagle.gallery.pro.helpers.MEDIUM
 import com.eagle.gallery.pro.helpers.PATH

@@ -38,7 +38,7 @@
 
     </com.alexvasilkov.gestures.views.GestureFrameLayout>
 
-    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+    <com.roy.labs.subscaleview.SubsamplingScaleImageView
         android:id="@+id/subsampling_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
