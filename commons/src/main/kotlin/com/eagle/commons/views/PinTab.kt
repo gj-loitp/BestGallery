@@ -21,21 +21,21 @@ class PinTab(context: Context, attrs: AttributeSet) : RelativeLayout(context, at
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        context.updateTextColors(pin_lock_holder)
+        context.updateTextColors(pinLockHolder)
 
-        pin_0.setOnClickListener { addNumber("0") }
-        pin_1.setOnClickListener { addNumber("1") }
-        pin_2.setOnClickListener { addNumber("2") }
-        pin_3.setOnClickListener { addNumber("3") }
-        pin_4.setOnClickListener { addNumber("4") }
-        pin_5.setOnClickListener { addNumber("5") }
-        pin_6.setOnClickListener { addNumber("6") }
-        pin_7.setOnClickListener { addNumber("7") }
-        pin_8.setOnClickListener { addNumber("8") }
-        pin_9.setOnClickListener { addNumber("9") }
-        pin_c.setOnClickListener { clear() }
-        pin_ok.setOnClickListener { confirmPIN() }
-        pin_ok.applyColorFilter(context.baseConfig.textColor)
+        pin0.setOnClickListener { addNumber("0") }
+        pin1.setOnClickListener { addNumber("1") }
+        pin2.setOnClickListener { addNumber("2") }
+        pin3.setOnClickListener { addNumber("3") }
+        pin4.setOnClickListener { addNumber("4") }
+        pin5.setOnClickListener { addNumber("5") }
+        pin6.setOnClickListener { addNumber("6") }
+        pin7.setOnClickListener { addNumber("7") }
+        pin8.setOnClickListener { addNumber("8") }
+        pin9.setOnClickListener { addNumber("9") }
+        pinC.setOnClickListener { clear() }
+        pinOk.setOnClickListener { confirmPIN() }
+        pinOk.applyColorFilter(context.baseConfig.textColor)
     }
 
     override fun initTab(requiredHash: String, listener: HashListener, scrollView: MyScrollView) {
@@ -67,7 +67,7 @@ class PinTab(context: Context, attrs: AttributeSet) : RelativeLayout(context, at
         } else if (hash.isEmpty()) {
             hash = newHash
             resetPin()
-            pin_lock_title.setText(R.string.repeat_pin)
+            pinLockTitle.setText(R.string.repeat_pin)
         } else if (hash == newHash) {
             hashListener.receivedHash(hash, PROTECTION_PIN)
         } else {
@@ -75,7 +75,7 @@ class PinTab(context: Context, attrs: AttributeSet) : RelativeLayout(context, at
             context.toast(R.string.wrong_pin)
             if (requiredHash.isEmpty()) {
                 hash = ""
-                pin_lock_title.setText(R.string.enter_pin)
+                pinLockTitle.setText(R.string.enter_pin)
             }
         }
         performHapticFeedback()
@@ -83,11 +83,11 @@ class PinTab(context: Context, attrs: AttributeSet) : RelativeLayout(context, at
 
     private fun resetPin() {
         pin = ""
-        pin_lock_current_pin.text = ""
+        pinLockCurrentPin.text = ""
     }
 
     private fun updatePinCode() {
-        pin_lock_current_pin.text = "*".repeat(pin.length)
+        pinLockCurrentPin.text = "*".repeat(pin.length)
         if (hash.isNotEmpty() && hash == getHashedPin()) {
             hashListener.receivedHash(hash, PROTECTION_PIN)
         }
