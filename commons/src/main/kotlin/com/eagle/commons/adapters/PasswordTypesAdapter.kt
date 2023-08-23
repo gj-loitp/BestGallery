@@ -33,8 +33,8 @@ class PasswordTypesAdapter(val context: Context, val requiredHash: String, val h
     override fun isViewFromObject(view: View, item: Any) = view == item
 
     private fun layoutSelection(position: Int): Int = when (position) {
-        0 -> R.layout.tab_pattern
-        1 -> R.layout.tab_pin
+        0 -> R.layout.v_tab_pattern
+        1 -> R.layout.v_tab_pin
         2 -> R.layout.tab_fingerprint
         else -> throw RuntimeException("Only 3 tabs allowed")
     }

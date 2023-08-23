@@ -15,7 +15,9 @@ import com.eagle.commons.extensions.updateTextColors
 import com.eagle.commons.helpers.PROTECTION_PATTERN
 import com.eagle.commons.interfaces.HashListener
 import com.eagle.commons.interfaces.SecurityTab
-import kotlinx.android.synthetic.main.tab_pattern.view.*
+import kotlinx.android.synthetic.main.v_tab_pattern.view.patternLockHolder
+import kotlinx.android.synthetic.main.v_tab_pattern.view.patternLockTitle
+import kotlinx.android.synthetic.main.v_tab_pattern.view.patternLockView
 
 class PatternTab(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs), SecurityTab {
     private var hash = ""
@@ -26,9 +28,9 @@ class PatternTab(context: Context, attrs: AttributeSet) : RelativeLayout(context
     override fun onFinishInflate() {
         super.onFinishInflate()
         val textColor = context.baseConfig.textColor
-        context.updateTextColors(pattern_lock_holder)
+        context.updateTextColors(patternLockHolder)
 
-        pattern_lock_view.setOnTouchListener { v, event ->
+        patternLockView.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> scrollView?.isScrollable = false
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> scrollView?.isScrollable = true
@@ -36,11 +38,11 @@ class PatternTab(context: Context, attrs: AttributeSet) : RelativeLayout(context
             false
         }
 
-        pattern_lock_view.correctStateColor = context.baseConfig.primaryColor
-        pattern_lock_view.normalStateColor = textColor
-        pattern_lock_view.addPatternLockListener(object : PatternLockViewListener {
+        patternLockView.correctStateColor = context.baseConfig.primaryColor
+        patternLockView.normalStateColor = textColor
+        patternLockView.addPatternLockListener(object : PatternLockViewListener {
             override fun onComplete(pattern: MutableList<PatternLockView.Dot>?) {
-                receivedHash(PatternLockUtils.patternToSha1(pattern_lock_view, pattern))
+                receivedHash(PatternLockUtils.patternToSha1(patternLockView, pattern))
             }
 
             override fun onCleared() {}
@@ -62,23 +64,23 @@ class PatternTab(context: Context, attrs: AttributeSet) : RelativeLayout(context
         when {
             hash.isEmpty() -> {
                 hash = newHash
-                pattern_lock_view.clearPattern()
-                pattern_lock_title.setText(R.string.repeat_pattern)
+                patternLockView.clearPattern()
+                patternLockTitle.setText(R.string.repeat_pattern)
             }
             hash == newHash -> {
-                pattern_lock_view.setViewMode(PatternLockView.PatternViewMode.CORRECT)
+                patternLockView.setViewMode(PatternLockView.PatternViewMode.CORRECT)
                 Handler().postDelayed({
                     hashListener.receivedHash(hash, PROTECTION_PATTERN)
                 }, 300)
             }
             else -> {
-                pattern_lock_view.setViewMode(PatternLockView.PatternViewMode.WRONG)
+                patternLockView.setViewMode(PatternLockView.PatternViewMode.WRONG)
                 context.toast(R.string.wrong_pattern)
                 Handler().postDelayed({
-                    pattern_lock_view.clearPattern()
+                    patternLockView.clearPattern()
                     if (requiredHash.isEmpty()) {
                         hash = ""
-                        pattern_lock_title.setText(R.string.insert_pattern)
+                        patternLockTitle.setText(R.string.insert_pattern)
                     }
                 }, 1000)
             }
