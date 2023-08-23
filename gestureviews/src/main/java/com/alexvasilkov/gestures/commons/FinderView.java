@@ -104,7 +104,7 @@ public class FinderView extends View {
     /**
      * Sets borders width in particular units. Default value is {@link #DEFAULT_BORDER_WIDTH} dp.
      *
-     * @param unit One of {@link TypedValue}.COMPLEX_UNIT_* constants
+     * @param unit  One of {@link TypedValue}.COMPLEX_UNIT_* constants
      * @param width Finder area borders width in given unit
      */
     public void setBorderWidth(int unit, float width) {
@@ -161,7 +161,10 @@ public class FinderView extends View {
     }
 
     @Override
-    protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
+    protected void onSizeChanged(int width,
+                                 int height,
+                                 int oldWidth,
+                                 int oldHeight) {
         update();
     }
 

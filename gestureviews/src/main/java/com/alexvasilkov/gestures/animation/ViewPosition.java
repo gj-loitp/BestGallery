@@ -55,8 +55,10 @@ public class ViewPosition {
         this.image = new Rect();
     }
 
-    private ViewPosition(@NonNull Rect view, @NonNull Rect viewport,
-            @NonNull Rect visible, @NonNull Rect image) {
+    private ViewPosition(@NonNull Rect view,
+                         @NonNull Rect viewport,
+                         @NonNull Rect visible,
+                         @NonNull Rect image) {
         this.view = view;
         this.viewport = viewport;
         this.visible = visible;
@@ -84,7 +86,10 @@ public class ViewPosition {
 
         targetView.getLocationOnScreen(tmpLocation);
 
-        view.set(0, 0, targetView.getWidth(), targetView.getHeight());
+        view.set(0,
+                0,
+                targetView.getWidth(),
+                targetView.getHeight());
         view.offset(tmpLocation[0], tmpLocation[1]);
 
         viewport.set(targetView.getPaddingLeft(),
@@ -96,7 +101,10 @@ public class ViewPosition {
         boolean isVisible = targetView.getGlobalVisibleRect(visible);
         if (!isVisible) {
             // Assuming we are starting from center of invisible view
-            visible.set(view.centerX(), view.centerY(), view.centerX() + 1, view.centerY() + 1);
+            visible.set(view.centerX(),
+                    view.centerY(),
+                    view.centerX() + 1,
+                    view.centerY() + 1);
         }
 
         if (targetView instanceof ImageView) {
@@ -111,10 +119,17 @@ public class ViewPosition {
 
                 // Getting image position within the view
                 ImageViewHelper.applyScaleType(imageView.getScaleType(),
-                        drawableWidth, drawableHeight, viewport.width(), viewport.height(),
-                        imageView.getImageMatrix(), tmpMatrix);
+                        drawableWidth,
+                        drawableHeight,
+                        viewport.width(),
+                        viewport.height(),
+                        imageView.getImageMatrix(),
+                        tmpMatrix);
 
-                tmpSrc.set(0f, 0f, drawableWidth, drawableHeight);
+                tmpSrc.set(0f,
+                        0f,
+                        drawableWidth,
+                        drawableHeight);
                 tmpMatrix.mapRect(tmpDst, tmpSrc);
 
                 // Calculating image position on screen
@@ -151,7 +166,7 @@ public class ViewPosition {
      * Computes view position and stores it in given {@code pos}. Note, that view should be already
      * attached and laid out before calling this method.
      *
-     * @param pos Output position
+     * @param pos  Output position
      * @param view View for which we want to get on-screen location
      * @return true if view position is changed, false otherwise
      */
@@ -162,7 +177,7 @@ public class ViewPosition {
     /**
      * Computes minimal view position for given point.
      *
-     * @param pos Output view position
+     * @param pos   Output view position
      * @param point Target point
      */
     public static void apply(@NonNull ViewPosition pos, @NonNull Point point) {
@@ -183,9 +198,10 @@ public class ViewPosition {
         String viewportStr = viewport.flattenToString();
         String visibleStr = visible.flattenToString();
         String imageStr = image.flattenToString();
-        return TextUtils.join(DELIMITER, new String[] {
-                viewStr, viewportStr, visibleStr, imageStr
-        });
+        return TextUtils.join(DELIMITER,
+                new String[]{
+                        viewStr, viewportStr, visibleStr, imageStr
+                });
     }
 
     /**

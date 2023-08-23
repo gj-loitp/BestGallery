@@ -193,7 +193,7 @@ public class ViewPositionAnimator {
      * Note, if {@code from} view was changed (i.e. during list adapter refresh) you should
      * update to new view using {@link #update(View)} method.
      *
-     * @param from 'From' view
+     * @param from          'From' view
      * @param withAnimation Whether to animate entering or immediately jump to entered state
      */
     public void enter(@NonNull View from, boolean withAnimation) {
@@ -211,7 +211,7 @@ public class ViewPositionAnimator {
      * Note, if {@code from} view position was changed (i.e. during list adapter refresh) you
      * should update to new view using {@link #update(ViewPosition)} method.
      *
-     * @param fromPos 'From' view position
+     * @param fromPos       'From' view position
      * @param withAnimation Whether to animate entering or immediately jump to entered state
      */
     public void enter(@NonNull ViewPosition fromPos, boolean withAnimation) {
@@ -447,7 +447,7 @@ public class ViewPositionAnimator {
      * <p>
      * Only use this method if you understand what you do.
      *
-     * @param state Target ('to') state
+     * @param state    Target ('to') state
      * @param position Target ('to') position
      * @see #getToPosition()
      */
@@ -476,13 +476,13 @@ public class ViewPositionAnimator {
      * it will cleanup all internal stuff. So you will need to call {@link #enter(View, boolean)}
      * or {@link #enter(ViewPosition, boolean)} again in order to continue using animator.
      *
-     * @param pos Current position
+     * @param pos     Current position
      * @param leaving Whether we we are in exiting direction ({@code true}) or in entering
-     * ({@code false})
+     *                ({@code false})
      * @param animate Whether we should start animating from given position and in given direction
      */
     public void setState(@FloatRange(from = 0f, to = 1f) float pos,
-            boolean leaving, boolean animate) {
+                         boolean leaving, boolean animate) {
         if (!isActivated) {
             throw new IllegalStateException(
                     "You should call enter(...) before calling setState(...)");
@@ -531,8 +531,14 @@ public class ViewPositionAnimator {
         if (isToUpdated && isFromUpdated && canUpdate) {
             State state = toController.getState();
 
-            MathUtils.interpolate(state, fromState, fromPivotX, fromPivotY,
-                    toState, toPivotX, toPivotY, position / toPosition);
+            MathUtils.interpolate(state,
+                    fromState,
+                    fromPivotX,
+                    fromPivotY,
+                    toState,
+                    toPivotX,
+                    toPivotY,
+                    position / toPosition);
 
             toController.updateState();
 
@@ -540,13 +546,20 @@ public class ViewPositionAnimator {
             final float clipPosition = position / toPosition;
 
             if (toClipView != null) {
-                MathUtils.interpolate(clipRectTmp, fromClip, toClip, clipPosition);
-                toClipView.clipView(skipClip ? null : clipRectTmp, state.getRotation());
+                MathUtils.interpolate(clipRectTmp,
+                        fromClip,
+                        toClip,
+                        clipPosition);
+                toClipView.clipView(skipClip ? null : clipRectTmp,
+                        state.getRotation());
             }
             if (toClipBounds != null) {
                 // Bounds clipping should stay longer in 'From' state
                 final float boundsClipPos = clipPosition * clipPosition;
-                MathUtils.interpolate(clipRectTmp, fromBoundsClip, toBoundsClip, boundsClipPos);
+                MathUtils.interpolate(clipRectTmp,
+                        fromBoundsClip,
+                        toBoundsClip,
+                        boundsClipPos);
                 toClipBounds.clipBounds(skipClip ? null : clipRectTmp);
             }
         }
@@ -685,10 +698,14 @@ public class ViewPositionAnimator {
         // Computing clip rect in 'To' view coordinates without rotation
         tmpMatrix.postRotate(-toState.getRotation(), toPivotX, toPivotY);
         tmpMatrix.mapRect(toClip);
-        toClip.offset(toPos.viewport.left - toPos.view.left, toPos.viewport.top - toPos.view.top);
+        toClip.offset(toPos.viewport.left - toPos.view.left,
+                toPos.viewport.top - toPos.view.top);
 
         // 'To' bounds clip is entire 'To' view rect in 'To' view coordinates
-        toBoundsClip.set(0f, 0f, toPos.view.width(), toPos.view.height());
+        toBoundsClip.set(0f,
+                0f,
+                toPos.view.width(),
+                toPos.view.height());
 
         isToUpdated = true;
 
@@ -743,13 +760,25 @@ public class ViewPositionAnimator {
         // animated, otherwise it will look like part of 'From' view is instantly becoming visible.
         fromBoundsClip.set(0f, 0f, toPos.view.width(), toPos.view.height());
         fromBoundsClip.left = compareAndSetClipBound(
-                fromBoundsClip.left, fromPos.view.left, fromPos.visible.left, toPos.view.left);
+                fromBoundsClip.left,
+                fromPos.view.left,
+                fromPos.visible.left,
+                toPos.view.left);
         fromBoundsClip.top = compareAndSetClipBound(
-                fromBoundsClip.top, fromPos.view.top, fromPos.visible.top, toPos.view.top);
+                fromBoundsClip.top,
+                fromPos.view.top,
+                fromPos.visible.top,
+                toPos.view.top);
         fromBoundsClip.right = compareAndSetClipBound(
-                fromBoundsClip.right, fromPos.view.right, fromPos.visible.right, toPos.view.left);
+                fromBoundsClip.right,
+                fromPos.view.right,
+                fromPos.visible.right,
+                toPos.view.left);
         fromBoundsClip.bottom = compareAndSetClipBound(
-                fromBoundsClip.bottom, fromPos.view.bottom, fromPos.visible.bottom, toPos.view.top);
+                fromBoundsClip.bottom,
+                fromPos.view.bottom,
+                fromPos.visible.bottom,
+                toPos.view.top);
 
         isFromUpdated = true;
 
@@ -758,7 +787,10 @@ public class ViewPositionAnimator {
         }
     }
 
-    private float compareAndSetClipBound(float origBound, int viewPos, int visiblePos, int offset) {
+    private float compareAndSetClipBound(float origBound,
+                                         int viewPos,
+                                         int visiblePos,
+                                         int offset) {
         // Comparing allowing slack of 1 pixel
         if (-1 <= viewPos - visiblePos && viewPos - visiblePos <= 1) {
             return origBound; // View is fully visible in this direction, no extra bounds
@@ -793,10 +825,10 @@ public class ViewPositionAnimator {
 
     public interface PositionUpdateListener {
         /**
-         * @param position Position within range {@code [0, 1]}, where {@code 0} is for
-         * initial (from) position and {@code 1} is for final (to) position.
+         * @param position  Position within range {@code [0, 1]}, where {@code 0} is for
+         *                  initial (from) position and {@code 1} is for final (to) position.
          * @param isLeaving {@code false} if transitioning from initial to final position
-         * (entering) or {@code true} for reverse transition.
+         *                  (entering) or {@code true} for reverse transition.
          */
         void onPositionUpdate(float position, boolean isLeaving);
     }

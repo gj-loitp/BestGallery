@@ -49,7 +49,9 @@ public class CircleGestureImageView extends GestureImageView {
             @Override
             public void onPositionUpdate(float position, boolean isLeaving) {
                 float interpolatedPosition = position / getPositionAnimator().getToPosition();
-                cornersState = MathUtils.restrict(interpolatedPosition, 0f, 1f);
+                cornersState = MathUtils.restrict(interpolatedPosition,
+                        0f,
+                        1f);
             }
         });
     }

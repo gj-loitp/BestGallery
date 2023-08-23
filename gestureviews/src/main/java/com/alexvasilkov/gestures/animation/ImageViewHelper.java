@@ -9,21 +9,23 @@ class ImageViewHelper {
     private static final RectF tmpSrc = new RectF();
     private static final RectF tmpDst = new RectF();
 
-    private ImageViewHelper() {}
+    private ImageViewHelper() {
+    }
 
     /**
      * Helper method to calculate drawing matrix. Based on ImageView source code.
      */
     static void applyScaleType(ImageView.ScaleType type,
-            int dwidth, int dheight,
-            int vwidth, int vheight,
-            Matrix imageMatrix,
-            Matrix outMatrix) {
+                               int dwidth,
+                               int dheight,
+                               int vwidth,
+                               int vheight,
+                               Matrix imageMatrix,
+                               Matrix outMatrix) {
 
         if (ImageView.ScaleType.CENTER == type) {
             // Center bitmap in view, no scaling.
-            outMatrix.setTranslate((vwidth - dwidth) * 0.5f,
-                    (vheight - dheight) * 0.5f);
+            outMatrix.setTranslate((vwidth - dwidth) * 0.5f, (vheight - dheight) * 0.5f);
         } else if (ImageView.ScaleType.CENTER_CROP == type) {
             float scale;
             float dx = 0;
@@ -47,8 +49,7 @@ class ImageViewHelper {
             if (dwidth <= vwidth && dheight <= vheight) {
                 scale = 1.0f;
             } else {
-                scale = Math.min((float) vwidth / (float) dwidth,
-                        (float) vheight / (float) dheight);
+                scale = Math.min((float) vwidth / (float) dwidth, (float) vheight / (float) dheight);
             }
 
             dx = (vwidth - dwidth * scale) * 0.5f;

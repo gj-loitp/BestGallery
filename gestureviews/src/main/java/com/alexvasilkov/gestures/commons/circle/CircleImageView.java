@@ -54,8 +54,10 @@ public class CircleImageView extends ImageView {
     @Override
     protected boolean setFrame(int left, int top, int right, int bottom) {
         boolean changed = super.setFrame(left, top, right, bottom);
-        rect.set(getPaddingLeft(), getPaddingTop(),
-                getWidth() - getPaddingRight(), getHeight() - getPaddingBottom());
+        rect.set(getPaddingLeft(),
+                getPaddingTop(),
+                getWidth() - getPaddingRight(),
+                getHeight() - getPaddingBottom());
         setup();
         return changed;
     }

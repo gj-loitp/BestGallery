@@ -144,7 +144,7 @@ public class CropAreaView extends View {
      * Sets number of horizontal and vertical rules. No rules by default.
      *
      * @param horizontalRules Number of horizontal rules
-     * @param verticalRules Number of vertical rules
+     * @param verticalRules   Number of vertical rules
      */
     public void setRulesCount(int horizontalRules, int verticalRules) {
         this.horizontalRules = horizontalRules;
@@ -264,7 +264,10 @@ public class CropAreaView extends View {
     }
 
     @Override
-    protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
+    protected void onSizeChanged(int width,
+                                 int height,
+                                 int oldWidth,
+                                 int oldHeight) {
         update(false);
         if (imageView != null) {
             imageView.getController().resetState();
@@ -313,19 +316,31 @@ public class CropAreaView extends View {
         paint.setColor(backColor);
 
         // Top part
-        tmpRectF.set(0f, 0f, canvas.getWidth(), areaRect.top);
+        tmpRectF.set(0f,
+                0f,
+                canvas.getWidth(),
+                areaRect.top);
         canvas.drawRect(tmpRectF, paint);
 
         // Bottom part
-        tmpRectF.set(0f, areaRect.bottom, canvas.getWidth(), canvas.getHeight());
+        tmpRectF.set(0f,
+                areaRect.bottom,
+                canvas.getWidth(),
+                canvas.getHeight());
         canvas.drawRect(tmpRectF, paint);
 
         // Left part
-        tmpRectF.set(0f, areaRect.top, areaRect.left, areaRect.bottom);
+        tmpRectF.set(0f,
+                areaRect.top,
+                areaRect.left,
+                areaRect.bottom);
         canvas.drawRect(tmpRectF, paint);
 
         // Right part
-        tmpRectF.set(areaRect.right, areaRect.top, canvas.getWidth(), areaRect.bottom);
+        tmpRectF.set(areaRect.right,
+                areaRect.top,
+                canvas.getWidth(),
+                areaRect.bottom);
         canvas.drawRect(tmpRectF, paint);
     }
 
@@ -337,9 +352,18 @@ public class CropAreaView extends View {
 
         // Punching hole in background color requires offscreen drawing
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            canvas.saveLayer(0, 0, canvas.getWidth(), canvas.getHeight(), null);
+            canvas.saveLayer(0,
+                    0,
+                    canvas.getWidth(),
+                    canvas.getHeight(),
+                    null);
         } else {
-            canvas.saveLayer(0, 0, canvas.getWidth(), canvas.getHeight(), null, 0);
+            canvas.saveLayer(0,
+                    0,
+                    canvas.getWidth(),
+                    canvas.getHeight(),
+                    null,
+                    0);
         }
 
         canvas.drawPaint(paint);
