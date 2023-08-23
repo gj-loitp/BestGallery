@@ -18,8 +18,8 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.alexvasilkov.gestures.GestureController
-import com.alexvasilkov.gestures.State
+import com.roy.gestures.GestureController
+import com.roy.gestures.State
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.DecodeFormat

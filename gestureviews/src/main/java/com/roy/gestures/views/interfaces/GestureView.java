@@ -1,6 +1,6 @@
-package com.alexvasilkov.gestures.views.interfaces;
+package com.roy.gestures.views.interfaces;
 
-import com.alexvasilkov.gestures.GestureController;
+import com.roy.gestures.GestureController;
 
 /**
  * Common interface for all Gesture* views.

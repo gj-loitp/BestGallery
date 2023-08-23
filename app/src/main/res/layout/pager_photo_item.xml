@@ -18,12 +18,12 @@
         android:background="#11000000"
         android:visibility="visible" />
 
-    <com.alexvasilkov.gestures.views.GestureImageView
+    <com.roy.gestures.views.GestureImageView
         android:id="@+id/gestures_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.alexvasilkov.gestures.views.GestureFrameLayout
+    <com.roy.gestures.views.GestureFrameLayout
         android:id="@+id/gif_view_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:scaleType="fitCenter"/>
 
-    </com.alexvasilkov.gestures.views.GestureFrameLayout>
+    </com.roy.gestures.views.GestureFrameLayout>
 
     <com.roy.labs.subscaleview.SubsamplingScaleImageView
         android:id="@+id/subsampling_view"
