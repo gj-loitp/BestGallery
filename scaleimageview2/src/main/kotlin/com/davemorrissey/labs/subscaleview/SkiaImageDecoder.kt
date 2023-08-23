@@ -18,16 +18,22 @@ class SkiaImageDecoder : ImageDecoder {
                 val assetName = uriString.substring(ASSET_PREFIX.length)
                 bitmap = BitmapFactory.decodeStream(context.assets.open(assetName), null, options)
             }
+
             else -> {
                 var inputStream: InputStream? = null
                 try {
                     val contentResolver = context.contentResolver
                     inputStream = contentResolver.openInputStream(uri)
-                    bitmap = BitmapFactory.decodeStream(inputStream, null, options)
+                    bitmap = BitmapFactory.decodeStream(
+                        /* is = */ inputStream,
+                        /* outPadding = */ null,
+                        /* opts = */ options
+                    )
                 } finally {
                     try {
                         inputStream?.close()
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
             }
