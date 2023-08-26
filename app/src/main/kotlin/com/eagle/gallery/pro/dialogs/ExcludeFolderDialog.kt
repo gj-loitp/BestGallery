@@ -25,7 +25,7 @@ class ExcludeFolderDialog(val activity: BaseSimpleActivity, val selectedPaths: L
         }
 
         alternativePaths.forEachIndexed { index, value ->
-            val radioButton = (activity.layoutInflater.inflate(R.layout.radio_button, null) as RadioButton).apply {
+            val radioButton = (activity.layoutInflater.inflate(R.layout.v_radio_button, null) as RadioButton).apply {
                 text = alternativePaths[index]
                 isChecked = index == 0
                 id = index

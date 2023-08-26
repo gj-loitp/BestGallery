@@ -25,10 +25,10 @@ class FingerprintTab(context: Context, attrs: AttributeSet) : RelativeLayout(con
     override fun onFinishInflate() {
         super.onFinishInflate()
         val textColor = context.baseConfig.textColor
-        context.updateTextColors(fingerprint_lock_holder)
-        fingerprint_image.applyColorFilter(textColor)
+        context.updateTextColors(fingerprintLockHolder)
+        fingerprintImage.applyColorFilter(textColor)
 
-        fingerprint_settings.setOnClickListener {
+        fingerprintSettings.setOnClickListener {
             context.startActivity(Intent(Settings.ACTION_SETTINGS))
         }
     }
@@ -47,8 +47,8 @@ class FingerprintTab(context: Context, attrs: AttributeSet) : RelativeLayout(con
 
     private fun checkRegisteredFingerprints() {
         val hasFingerprints = Reprint.hasFingerprintRegistered()
-        fingerprint_settings.beGoneIf(hasFingerprints)
-        fingerprint_label.text = context.getString(if (hasFingerprints) R.string.place_finger else R.string.no_fingerprints_registered)
+        fingerprintSettings.beGoneIf(hasFingerprints)
+        fingerprintLabel.text = context.getString(if (hasFingerprints) R.string.place_finger else R.string.no_fingerprints_registered)
 
         Reprint.authenticate(object : AuthenticationListener {
             override fun onSuccess(moduleTag: Int) {

@@ -15,7 +15,7 @@ import com.eagle.commons.helpers.sumByInt
 import com.eagle.commons.helpers.sumByLong
 import com.eagle.commons.models.FileDirItem
 import kotlinx.android.synthetic.main.dialog_properties.view.*
-import kotlinx.android.synthetic.main.property_item.view.*
+import kotlinx.android.synthetic.main.v_property_item.view.*
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
@@ -52,10 +52,10 @@ class PropertiesDialog() {
             val fileCount = fileDirItem.getProperFileCount(countHiddenItems)
             val size = fileDirItem.getProperSize(countHiddenItems).formatSize()
             activity.runOnUiThread {
-                view.findViewById<TextView>(R.id.properties_size).property_value.text = size
+                view.findViewById<TextView>(R.id.properties_size).propertyValue.text = size
 
                 if (fileDirItem.isDirectory) {
-                    view.findViewById<TextView>(R.id.properties_file_count).property_value.text = fileCount.toString()
+                    view.findViewById<TextView>(R.id.properties_file_count).propertyValue.text = fileCount.toString()
                 }
             }
 
@@ -119,7 +119,7 @@ class PropertiesDialog() {
 
     private fun updateLastModified(activity: Activity, view: View, timestamp: Long) {
         activity.runOnUiThread {
-            view.findViewById<TextView>(R.id.properties_last_modified).property_value.text = timestamp.formatDate(activity)
+            view.findViewById<TextView>(R.id.properties_last_modified).propertyValue.text = timestamp.formatDate(activity)
         }
     }
 
@@ -156,8 +156,8 @@ class PropertiesDialog() {
             val fileCount = fileDirItems.sumByInt { it.getProperFileCount(countHiddenItems) }
             val size = fileDirItems.sumByLong { it.getProperSize(countHiddenItems) }.formatSize()
             activity.runOnUiThread {
-                view.findViewById<TextView>(R.id.properties_size).property_value.text = size
-                view.findViewById<TextView>(R.id.properties_file_count).property_value.text = fileCount.toString()
+                view.findViewById<TextView>(R.id.properties_size).propertyValue.text = size
+                view.findViewById<TextView>(R.id.properties_file_count).propertyValue.text = fileCount.toString()
             }
         }.start()
 
@@ -203,9 +203,9 @@ class PropertiesDialog() {
         if (value == null)
             return
 
-        mInflater.inflate(R.layout.property_item, mPropertyView, false).apply {
-            property_label.text = mResources.getString(labelId)
-            property_value.text = value
+        mInflater.inflate(R.layout.v_property_item, mPropertyView, false).apply {
+            propertyLabel.text = mResources.getString(labelId)
+            propertyValue.text = value
             mPropertyView.properties_holder.addView(this)
 
             if (viewId != 0) {

@@ -23,7 +23,7 @@ class RadioGroupDialog(val activity: Activity, val items: ArrayList<RadioItem>, 
         val view = activity.layoutInflater.inflate(R.layout.dialog_radio_group, null)
         view.dialog_radio_group.apply {
             for (i in 0 until items.size) {
-                val radioButton = (activity.layoutInflater.inflate(R.layout.radio_button, null) as RadioButton).apply {
+                val radioButton = (activity.layoutInflater.inflate(R.layout.v_radio_button, null) as RadioButton).apply {
                     text = items[i].title
                     isChecked = items[i].id == checkedItemId
                     id = i
