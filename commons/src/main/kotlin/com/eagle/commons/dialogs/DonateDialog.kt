@@ -7,13 +7,13 @@ import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.extensions.launchViewIntent
 import com.eagle.commons.extensions.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_textview.view.*
+import kotlinx.android.synthetic.main.dlg_textview.view.*
 
 class DonateDialog(val activity: Activity) {
     init {
-        val view = activity.layoutInflater.inflate(R.layout.dialog_textview, null).apply {
-            text_view.text = Html.fromHtml(activity.getString(R.string.donate_please))
-            text_view.movementMethod = LinkMovementMethod.getInstance()
+        val view = activity.layoutInflater.inflate(R.layout.dlg_textview, null).apply {
+            textView.text = Html.fromHtml(activity.getString(R.string.donate_please))
+            textView.movementMethod = LinkMovementMethod.getInstance()
         }
 
         AlertDialog.Builder(activity)

@@ -8,17 +8,17 @@ import com.eagle.commons.R
 import com.eagle.commons.extensions.baseConfig
 import com.eagle.commons.extensions.launchViewIntent
 import com.eagle.commons.extensions.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_textview.view.*
+import kotlinx.android.synthetic.main.dlg_textview.view.*
 
 class AppSideloadedDialog(val activity: Activity, val callback: () -> Unit) {
     var dialog: AlertDialog
     val url = "https://play.google.com/store/apps/details?id=${activity.baseConfig.appId.removeSuffix(".debug")}"
 
     init {
-        val view = activity.layoutInflater.inflate(R.layout.dialog_textview, null).apply {
+        val view = activity.layoutInflater.inflate(R.layout.dlg_textview, null).apply {
             val text = String.format(activity.getString(R.string.sideloaded_app), url)
-            text_view.text = Html.fromHtml(text)
-            text_view.movementMethod = LinkMovementMethod.getInstance()
+            textView.text = Html.fromHtml(text)
+            textView.movementMethod = LinkMovementMethod.getInstance()
         }
 
         dialog = AlertDialog.Builder(activity)

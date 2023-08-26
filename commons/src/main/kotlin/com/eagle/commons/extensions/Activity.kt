@@ -28,7 +28,7 @@ import com.eagle.commons.dialogs.*
 import com.eagle.commons.helpers.*
 import com.eagle.commons.models.*
 import com.eagle.commons.views.MyTextView
-import kotlinx.android.synthetic.main.dialog_title.view.*
+import kotlinx.android.synthetic.main.dlg_title.view.*
 import java.io.*
 import java.util.*
 
@@ -889,8 +889,8 @@ fun Activity.setupDialogStuff(
 
     var title: TextView? = null
     if (titleId != 0 || titleText.isNotEmpty()) {
-        title = layoutInflater.inflate(R.layout.dialog_title, null) as TextView
-        title.dialog_title_textview.apply {
+        title = layoutInflater.inflate(R.layout.dlg_title, null) as TextView
+        title.dialogTitleTextView.apply {
             if (titleText.isNotEmpty()) {
                 text = titleText
             } else {

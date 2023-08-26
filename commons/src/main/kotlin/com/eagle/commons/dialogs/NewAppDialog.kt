@@ -6,14 +6,14 @@ import android.text.method.LinkMovementMethod
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.extensions.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_textview.view.*
+import kotlinx.android.synthetic.main.dlg_textview.view.*
 
 class NewAppDialog(val activity: Activity, val packageName: String, val title: String) {
     init {
-        val view = activity.layoutInflater.inflate(R.layout.dialog_textview, null).apply {
+        val view = activity.layoutInflater.inflate(R.layout.dlg_textview, null).apply {
             val text = String.format(activity.getString(R.string.new_app), "https://play.google.com/store/apps/details?id=$packageName", title)
-            text_view.text = Html.fromHtml(text)
-            text_view.movementMethod = LinkMovementMethod.getInstance()
+            textView.text = Html.fromHtml(text)
+            textView.movementMethod = LinkMovementMethod.getInstance()
         }
 
         AlertDialog.Builder(activity)

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogSelectAlarmScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/dialogSelectAlarmHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dialogSelectAlarmYourLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/bigger_margin"
+            android:paddingTop="@dimen/bigger_margin"
+            android:text="@string/your_sounds" />
+
+        <RadioGroup
+            android:id="@+id/dialogSelectAlarmYourRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingTop="@dimen/medium_margin"
+            android:paddingRight="@dimen/activity_margin" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dialogSelectAlarmSystemLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/bigger_margin"
+            android:paddingTop="@dimen/medium_margin"
+            android:text="@string/system_sounds" />
+
+        <RadioGroup
+            android:id="@+id/dialogSelectAlarmSystemRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingTop="@dimen/medium_margin"
+            android:paddingRight="@dimen/activity_margin" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

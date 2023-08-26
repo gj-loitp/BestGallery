@@ -6,13 +6,13 @@ import com.eagle.commons.R
 import com.eagle.commons.extensions.launchUpgradeToProIntent
 import com.eagle.commons.extensions.launchViewIntent
 import com.eagle.commons.extensions.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_upgrade_to_pro.view.*
+import kotlinx.android.synthetic.main.dlg_upgrade_to_pro.view.*
 
 class UpgradeToProDialog(val activity: Activity) {
 
     init {
-        val view = activity.layoutInflater.inflate(R.layout.dialog_upgrade_to_pro, null).apply {
-            upgrade_to_pro.text = activity.getString(R.string.upgrade_to_pro_long)
+        val view = activity.layoutInflater.inflate(R.layout.dlg_upgrade_to_pro, null).apply {
+            upgradeToPro.text = activity.getString(R.string.upgrade_to_pro_long)
         }
 
         AlertDialog.Builder(activity)
