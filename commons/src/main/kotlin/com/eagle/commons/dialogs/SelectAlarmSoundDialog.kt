@@ -68,7 +68,7 @@ class SelectAlarmSoundDialog(val activity: BaseSimpleActivity, val currentUri: S
     }
 
     private fun addAlarmSound(alarmSound: AlarmSound, holder: ViewGroup) {
-        val radioButton = (activity.layoutInflater.inflate(R.layout.item_select_alarm_sound, null) as MyCompatRadioButton).apply {
+        val radioButton = (activity.layoutInflater.inflate(R.layout.v_item_select_alarm_sound, null) as MyCompatRadioButton).apply {
             text = alarmSound.title
             isChecked = alarmSound.uri == currentUri
             id = alarmSound.id

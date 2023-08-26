@@ -14,7 +14,7 @@ import com.eagle.commons.extensions.*
 import com.eagle.commons.helpers.PROTECTION_FINGERPRINT
 import com.eagle.commons.interfaces.HashListener
 import com.eagle.commons.interfaces.SecurityTab
-import kotlinx.android.synthetic.main.tab_fingerprint.view.*
+import kotlinx.android.synthetic.main.v_tab_fingerprint.view.*
 
 class FingerprintTab(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs), SecurityTab {
     private val RECHECK_PERIOD = 3000L

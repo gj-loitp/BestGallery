@@ -14,7 +14,7 @@ import com.eagle.commons.extensions.getColoredDrawableWithColor
 import com.eagle.commons.extensions.hasOTGConnected
 import com.eagle.commons.models.FileDirItem
 import com.eagle.commons.views.MyRecyclerView
-import kotlinx.android.synthetic.main.filepicker_list_item.view.*
+import kotlinx.android.synthetic.main.v_filepicker_list_item.view.*
 
 class FilepickerItemsAdapter(activity: BaseSimpleActivity, val fileDirItems: List<FileDirItem>, recyclerView: MyRecyclerView,
                              itemClick: (Any) -> Unit) : MyRecyclerViewAdapter(activity, recyclerView, null, itemClick) {
@@ -30,7 +30,7 @@ class FilepickerItemsAdapter(activity: BaseSimpleActivity, val fileDirItems: Lis
 
     override fun getActionMenuId() = 0
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = createViewHolder(R.layout.filepicker_list_item, parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = createViewHolder(R.layout.v_filepicker_list_item, parent)
 
     override fun onBindViewHolder(holder: MyRecyclerViewAdapter.ViewHolder, position: Int) {
         val fileDirItem = fileDirItems[position]
@@ -57,21 +57,21 @@ class FilepickerItemsAdapter(activity: BaseSimpleActivity, val fileDirItems: Lis
     override fun onViewRecycled(holder: MyRecyclerViewAdapter.ViewHolder) {
         super.onViewRecycled(holder)
         if (!activity.isDestroyed && !activity.isFinishing) {
-            Glide.with(activity).clear(holder.itemView.list_item_icon!!)
+            Glide.with(activity).clear(holder.itemView.listItemIcon!!)
         }
     }
 
     private fun setupView(view: View, fileDirItem: FileDirItem) {
         view.apply {
-            list_item_name.text = fileDirItem.name
-            list_item_name.setTextColor(textColor)
-            list_item_details.setTextColor(textColor)
+            listItemName.text = fileDirItem.name
+            listItemName.setTextColor(textColor)
+            listItemDetails.setTextColor(textColor)
 
             if (fileDirItem.isDirectory) {
-                list_item_icon.setImageDrawable(folderDrawable)
-                list_item_details.text = getChildrenCnt(fileDirItem)
+                listItemIcon.setImageDrawable(folderDrawable)
+                listItemDetails.text = getChildrenCnt(fileDirItem)
             } else {
-                list_item_details.text = fileDirItem.size.formatSize()
+                listItemDetails.text = fileDirItem.size.formatSize()
                 val path = fileDirItem.path
                 val options = RequestOptions()
                         .centerCrop()
@@ -92,7 +92,7 @@ class FilepickerItemsAdapter(activity: BaseSimpleActivity, val fileDirItems: Lis
                 }
 
                 if (!activity.isDestroyed && !activity.isFinishing) {
-                    Glide.with(activity).load(itemToLoad).transition(withCrossFade()).apply(options).into(list_item_icon)
+                    Glide.with(activity).load(itemToLoad).transition(withCrossFade()).apply(options).into(listItemIcon)
                 }
             }
         }

@@ -7,7 +7,7 @@ import com.eagle.commons.extensions.*
 import com.eagle.commons.helpers.*
 import com.eagle.commons.models.License
 import kotlinx.android.synthetic.main.activity_license.*
-import kotlinx.android.synthetic.main.license_faq_item.view.*
+import kotlinx.android.synthetic.main.v_license_faq_item.view.*
 import java.util.*
 
 class LicenseActivity : BaseSimpleActivity() {
@@ -28,8 +28,8 @@ class LicenseActivity : BaseSimpleActivity() {
         val licenseMask = intent.getIntExtra(APP_LICENSES, 0) or LICENSE_KOTLIN
         licenses.filter { licenseMask and it.id != 0 }.forEach {
             val license = it
-            inflater.inflate(R.layout.license_faq_item, null).apply {
-                license_faq_title.apply {
+            inflater.inflate(R.layout.v_license_faq_item, null).apply {
+                licenseFaqTitle.apply {
                     text = getString(license.titleId)
                     underlineText()
                     setTextColor(linkColor)
@@ -38,8 +38,8 @@ class LicenseActivity : BaseSimpleActivity() {
                     }
                 }
 
-                license_faq_text.text = getString(license.textId)
-                license_faq_text.setTextColor(textColor)
+                licenseFaqText.text = getString(license.textId)
+                licenseFaqText.setTextColor(textColor)
                 licenses_holder.addView(this)
             }
         }

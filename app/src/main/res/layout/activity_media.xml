@@ -53,7 +53,7 @@
             android:paddingLeft="@dimen/normal_margin"
             android:visibility="gone">
 
-            <include layout="@layout/fastscroller_handle_vertical"/>
+            <include layout="@layout/v_fastscroller_handle_vertical"/>
 
         </com.eagle.commons.views.FastScroller>
 
@@ -67,7 +67,7 @@
             android:paddingTop="@dimen/normal_margin"
             android:visibility="gone">
 
-            <include layout="@layout/fastscroller_handle_horizontal"/>
+            <include layout="@layout/v_fastscroller_handle_horizontal"/>
 
         </com.eagle.commons.views.FastScroller>
 

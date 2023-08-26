@@ -31,7 +31,7 @@
             android:paddingStart="@dimen/normal_margin"
             android:paddingLeft="@dimen/normal_margin">
 
-            <include layout="@layout/fastscroller_handle_vertical"/>
+            <include layout="@layout/v_fastscroller_handle_vertical"/>
 
         </com.eagle.commons.views.FastScroller>
 
@@ -44,7 +44,7 @@
             android:layout_alignParentBottom="true"
             android:paddingTop="@dimen/normal_margin">
 
-            <include layout="@layout/fastscroller_handle_horizontal"/>
+            <include layout="@layout/v_fastscroller_handle_horizontal"/>
 
         </com.eagle.commons.views.FastScroller>
     </RelativeLayout>
