@@ -6,12 +6,12 @@ import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.extensions.setupDialogStuff
 import com.eagle.commons.models.Release
-import kotlinx.android.synthetic.main.dialog_whats_new.view.*
+import kotlinx.android.synthetic.main.dlg_whats_new.view.*
 
 class WhatsNewDialog(val activity: Activity, val releases: List<Release>) {
     init {
-        val view = LayoutInflater.from(activity).inflate(R.layout.dialog_whats_new, null)
-        view.whats_new_content.text = getNewReleases()
+        val view = LayoutInflater.from(activity).inflate(R.layout.dlg_whats_new, null)
+        view.whatsNewContent.text = getNewReleases()
 
         AlertDialog.Builder(activity)
                 .setPositiveButton(R.string.ok, null)

@@ -74,7 +74,7 @@ class LineColorPicker(context: Context, attrs: AttributeSet) : LinearLayout(cont
         removeAllViews()
         val inflater = LayoutInflater.from(context)
         colors.forEach {
-            inflater.inflate(R.layout.empty_image_view, this, false).apply {
+            inflater.inflate(R.layout.v_empty_image_view, this, false).apply {
                 setBackgroundColor(it)
                 addView(this)
             }

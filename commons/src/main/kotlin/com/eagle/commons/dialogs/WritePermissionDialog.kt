@@ -7,23 +7,23 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.extensions.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_write_permission.view.*
-import kotlinx.android.synthetic.main.dialog_write_permission_otg.view.*
+import kotlinx.android.synthetic.main.dlg_write_permission.view.*
+import kotlinx.android.synthetic.main.dlg_write_permission_otg.view.*
 
 class WritePermissionDialog(activity: Activity, val isOTG: Boolean, val callback: () -> Unit) {
     var dialog: AlertDialog
 
     init {
-        val layout = if (isOTG) R.layout.dialog_write_permission_otg else R.layout.dialog_write_permission
+        val layout = if (isOTG) R.layout.dlg_write_permission_otg else R.layout.dlg_write_permission
         val view = activity.layoutInflater.inflate(layout, null)
 
         val glide = Glide.with(activity)
         val crossFade = DrawableTransitionOptions.withCrossFade()
         if (isOTG) {
-            glide.load(R.drawable.img_write_storage_otg).transition(crossFade).into(view.write_permissions_dialog_otg_image)
+            glide.load(R.drawable.img_write_storage_otg).transition(crossFade).into(view.writePermissionsDialogOtgImage)
         } else {
-            glide.load(R.drawable.img_write_storage).transition(crossFade).into(view.write_permissions_dialog_image)
-            glide.load(R.drawable.img_write_storage_sd).transition(crossFade).into(view.write_permissions_dialog_image_sd)
+            glide.load(R.drawable.img_write_storage).transition(crossFade).into(view.writePermissionsDialogImage)
+            glide.load(R.drawable.img_write_storage_sd).transition(crossFade).into(view.writePermissionsDialogImageSd)
         }
 
         dialog = AlertDialog.Builder(activity)

@@ -40,7 +40,7 @@
 
         <include
             android:id="@+id/group_direct_subfolders_divider"
-            layout="@layout/divider"/>
+            layout="@layout/v_divider"/>
 
         <com.eagle.commons.views.MyAppCompatCheckbox
             android:id="@+id/change_view_type_dialog_group_direct_subfolders"

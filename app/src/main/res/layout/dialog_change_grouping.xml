@@ -71,7 +71,7 @@
         </RadioGroup>
 
         <include
-            layout="@layout/divider"/>
+            layout="@layout/v_divider"/>
 
         <RadioGroup
             android:id="@+id/grouping_dialog_radio_order"
@@ -99,7 +99,7 @@
 
         <include
             android:id="@+id/use_for_this_folder_divider"
-            layout="@layout/divider"/>
+            layout="@layout/v_divider"/>
 
         <com.eagle.commons.views.MyAppCompatCheckbox
             android:id="@+id/grouping_dialog_use_for_this_folder"
