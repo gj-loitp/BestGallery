@@ -17,9 +17,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.util.Pair
 import com.eagle.commons.R
 import com.eagle.commons.asynctasks.CopyMoveTask
-import com.eagle.commons.dialogs.ConfirmationDialog
-import com.eagle.commons.dialogs.ExportSettingsDialog
-import com.eagle.commons.dialogs.FileConflictDialog
+import com.eagle.commons.dlg.ConfirmationDialog
+import com.eagle.commons.dlg.ExportSettingsDialog
+import com.eagle.commons.dlg.FileConflictDialog
 import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.*
 import com.eagle.commons.itf.CopyMoveListener

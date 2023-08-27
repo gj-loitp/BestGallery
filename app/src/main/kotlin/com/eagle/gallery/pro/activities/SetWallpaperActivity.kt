@@ -9,7 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.eagle.commons.dialogs.RadioGroupDialog
+import com.eagle.commons.dlg.RadioGroupDialog
 import com.eagle.commons.ext.toast
 import com.eagle.commons.helpers.isNougatPlus
 import com.eagle.commons.models.RadioItem

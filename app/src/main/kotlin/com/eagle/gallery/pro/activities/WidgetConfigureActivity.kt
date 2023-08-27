@@ -8,7 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.RelativeLayout
 import android.widget.RemoteViews
-import com.eagle.commons.dialogs.ColorPickerDialog
+import com.eagle.commons.dlg.ColorPickerDialog
 import com.eagle.commons.ext.*
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.dialogs.PickDirectoryDialog

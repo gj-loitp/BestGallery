@@ -1,4 +1,4 @@
-package com.eagle.commons.dialogs
+package com.eagle.commons.dlg
 
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R

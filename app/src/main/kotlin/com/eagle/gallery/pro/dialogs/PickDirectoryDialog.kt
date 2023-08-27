@@ -4,7 +4,7 @@ import android.view.KeyEvent
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.dialogs.FilePickerDialog
+import com.eagle.commons.dlg.FilePickerDialog
 import com.eagle.commons.ext.*
 import com.eagle.commons.views.MyGridLayoutManager
 import com.eagle.gallery.pro.R

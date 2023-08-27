@@ -20,9 +20,9 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.eagle.commons.dialogs.ConfirmationDialog
-import com.eagle.commons.dialogs.CreateNewFolderDialog
-import com.eagle.commons.dialogs.FilePickerDialog
+import com.eagle.commons.dlg.ConfirmationDialog
+import com.eagle.commons.dlg.CreateNewFolderDialog
+import com.eagle.commons.dlg.FilePickerDialog
 import com.eagle.commons.ext.appLaunched
 import com.eagle.commons.ext.beGone
 import com.eagle.commons.ext.beGoneIf

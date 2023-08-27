@@ -15,7 +15,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.dialogs.ConfirmationDialog
+import com.eagle.commons.dlg.ConfirmationDialog
 import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.*
 import com.eagle.commons.models.FAQItem

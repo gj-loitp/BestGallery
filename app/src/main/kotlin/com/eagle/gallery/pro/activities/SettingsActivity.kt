@@ -3,7 +3,7 @@ package com.eagle.gallery.pro.activities
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import com.eagle.commons.dialogs.*
+import com.eagle.commons.dlg.*
 import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.*
 import com.eagle.commons.models.RadioItem

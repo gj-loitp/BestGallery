@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.eagle.commons.dialogs.PropertiesDialog
+import com.eagle.commons.dlg.PropertiesDialog
 import com.eagle.commons.ext.beGone
 import com.eagle.commons.ext.beVisible
 import com.eagle.commons.ext.beVisibleIf

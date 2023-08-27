@@ -21,8 +21,8 @@ import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
-import com.eagle.commons.dialogs.PropertiesDialog
-import com.eagle.commons.dialogs.RenameItemDialog
+import com.eagle.commons.dlg.PropertiesDialog
+import com.eagle.commons.dlg.RenameItemDialog
 import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.*
 import com.eagle.commons.models.FileDirItem

@@ -22,7 +22,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
-import com.eagle.commons.dialogs.ConfirmationDialog
+import com.eagle.commons.dlg.ConfirmationDialog
 import com.eagle.commons.ext.beGoneIf
 import com.eagle.commons.ext.beVisibleIf
 import com.eagle.commons.ext.deleteFiles

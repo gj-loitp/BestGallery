@@ -1,4 +1,4 @@
-package com.eagle.commons.dialogs
+package com.eagle.commons.dlg
 
 import android.view.View
 import android.view.WindowManager

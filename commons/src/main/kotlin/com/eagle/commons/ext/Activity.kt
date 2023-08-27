@@ -24,7 +24,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.documentfile.provider.DocumentFile
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.dialogs.*
+import com.eagle.commons.dlg.*
 import com.eagle.commons.helpers.*
 import com.eagle.commons.models.*
 import com.eagle.commons.views.MyTextView
