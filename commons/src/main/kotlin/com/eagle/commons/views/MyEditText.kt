@@ -6,12 +6,16 @@ import android.widget.EditText
 import com.eagle.commons.extensions.adjustAlpha
 import com.eagle.commons.extensions.applyColorFilter
 
-class MyEditText : EditText {
+class MyEditText : androidx.appcompat.widget.AppCompatEditText {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle)
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    )
 
     fun setColors(textColor: Int, accentColor: Int, backgroundColor: Int) {
         background?.mutate()?.applyColorFilter(accentColor)

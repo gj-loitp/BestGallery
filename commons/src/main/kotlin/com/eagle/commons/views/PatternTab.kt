@@ -1,7 +1,9 @@
 package com.eagle.commons.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.RelativeLayout
@@ -19,18 +21,20 @@ import kotlinx.android.synthetic.main.v_tab_pattern.view.patternLockHolder
 import kotlinx.android.synthetic.main.v_tab_pattern.view.patternLockTitle
 import kotlinx.android.synthetic.main.v_tab_pattern.view.patternLockView
 
-class PatternTab(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs), SecurityTab {
+class PatternTab(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs),
+    SecurityTab {
     private var hash = ""
     private var requiredHash = ""
     private var scrollView: MyScrollView? = null
-    lateinit var hashListener: HashListener
+    private lateinit var hashListener: HashListener
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onFinishInflate() {
         super.onFinishInflate()
         val textColor = context.baseConfig.textColor
         context.updateTextColors(patternLockHolder)
 
-        patternLockView.setOnTouchListener { v, event ->
+        patternLockView.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> scrollView?.isScrollable = false
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> scrollView?.isScrollable = true
@@ -67,16 +71,18 @@ class PatternTab(context: Context, attrs: AttributeSet) : RelativeLayout(context
                 patternLockView.clearPattern()
                 patternLockTitle.setText(R.string.repeat_pattern)
             }
+
             hash == newHash -> {
                 patternLockView.setViewMode(PatternLockView.PatternViewMode.CORRECT)
-                Handler().postDelayed({
-                    hashListener.receivedHash(hash, PROTECTION_PATTERN)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    hashListener.receivedHash(hash = hash, type = PROTECTION_PATTERN)
                 }, 300)
             }
+
             else -> {
                 patternLockView.setViewMode(PatternLockView.PatternViewMode.WRONG)
                 context.toast(R.string.wrong_pattern)
-                Handler().postDelayed({
+                Handler(Looper.getMainLooper()).postDelayed({
                     patternLockView.clearPattern()
                     if (requiredHash.isEmpty()) {
                         hash = ""

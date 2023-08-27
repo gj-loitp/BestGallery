@@ -17,7 +17,7 @@ class SlideshowDialog(val activity: BaseSimpleActivity, val callback: () -> Unit
         view = activity.layoutInflater.inflate(R.layout.dialog_slideshow, null).apply {
             interval_value.setOnClickListener {
                 val text = interval_value.text
-                if (text.isNotEmpty()) {
+                if (text?.isNotEmpty() == true) {
                     text.replace(0, 1, text.subSequence(0, 1), 0, 1)
                     interval_value.selectAll()
                 }
@@ -61,18 +61,18 @@ class SlideshowDialog(val activity: BaseSimpleActivity, val callback: () -> Unit
         setupValues()
 
         AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.ok, null)
-                .setNegativeButton(R.string.cancel, null)
-                .create().apply {
-                    activity.setupDialogStuff(view, this) {
-                        hideKeyboard()
-                        getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                            storeValues()
-                            callback()
-                            dismiss()
-                        }
+            .setPositiveButton(R.string.ok, null)
+            .setNegativeButton(R.string.cancel, null)
+            .create().apply {
+                activity.setupDialogStuff(view, this) {
+                    hideKeyboard()
+                    getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                        storeValues()
+                        callback()
+                        dismiss()
                     }
                 }
+            }
     }
 
     private fun setupValues() {
