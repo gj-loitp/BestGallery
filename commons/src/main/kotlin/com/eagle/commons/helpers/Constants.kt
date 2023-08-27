@@ -3,6 +3,7 @@ package com.eagle.commons.helpers
 import android.graphics.Color
 import android.os.Build
 import android.os.Looper
+import androidx.annotation.ChecksSdkIntAtLeast
 import java.util.*
 
 const val APP_NAME = "app_name"
@@ -193,7 +194,8 @@ const val THURSDAY_BIT = 8
 const val FRIDAY_BIT = 16
 const val SATURDAY_BIT = 32
 const val SUNDAY_BIT = 64
-const val EVERY_DAY_BIT = MONDAY_BIT or TUESDAY_BIT or WEDNESDAY_BIT or THURSDAY_BIT or FRIDAY_BIT or SATURDAY_BIT or SUNDAY_BIT
+const val EVERY_DAY_BIT =
+    MONDAY_BIT or TUESDAY_BIT or WEDNESDAY_BIT or THURSDAY_BIT or FRIDAY_BIT or SATURDAY_BIT or SUNDAY_BIT
 const val WEEK_DAYS_BIT = MONDAY_BIT or TUESDAY_BIT or WEDNESDAY_BIT or THURSDAY_BIT or FRIDAY_BIT
 const val WEEKENDS_BIT = SATURDAY_BIT or SUNDAY_BIT
 
@@ -202,8 +204,28 @@ const val SIDELOADING_TRUE = 1
 const val SIDELOADING_FALSE = 2
 
 val photoExtensions: Array<String> get() = arrayOf(".jpg", ".png", ".jpeg", ".bmp", ".webp")
-val videoExtensions: Array<String> get() = arrayOf(".mp4", ".mkv", ".webm", ".avi", ".3gp", ".mov", ".m4v", ".3gpp")
-val audioExtensions: Array<String> get() = arrayOf(".mp3", ".wav", ".wma", ".ogg", ".m4a", ".opus", ".flac", ".aac")
+val videoExtensions: Array<String>
+    get() = arrayOf(
+        ".mp4",
+        ".mkv",
+        ".webm",
+        ".avi",
+        ".3gp",
+        ".mov",
+        ".m4v",
+        ".3gpp"
+    )
+val audioExtensions: Array<String>
+    get() = arrayOf(
+        ".mp3",
+        ".wav",
+        ".wma",
+        ".ogg",
+        ".m4a",
+        ".opus",
+        ".flac",
+        ".aac"
+    )
 val rawExtensions: Array<String> get() = arrayOf(".dng", ".orf", ".nef", ".arw")
 
 const val DATE_FORMAT_ONE = "dd.MM.yyyy"
@@ -215,48 +237,53 @@ const val TIME_FORMAT_12 = "hh:mm a"
 const val TIME_FORMAT_24 = "HH:mm"
 
 val appIconColorStrings = arrayListOf(
-        ".Red",
-        ".Pink",
-        ".Purple",
-        ".Deep_purple",
-        ".Indigo",
-        ".Blue",
-        ".Light_blue",
-        ".Cyan",
-        ".Teal",
-        ".Green",
-        ".Light_green",
-        ".Lime",
-        ".Yellow",
-        ".Amber",
-        ".Orange",
-        ".Deep_orange",
-        ".Brown",
-        ".Blue_grey",
-        ".Grey_black"
+    ".Red",
+    ".Pink",
+    ".Purple",
+    ".Deep_purple",
+    ".Indigo",
+    ".Blue",
+    ".Light_blue",
+    ".Cyan",
+    ".Teal",
+    ".Green",
+    ".Light_green",
+    ".Lime",
+    ".Yellow",
+    ".Amber",
+    ".Orange",
+    ".Deep_orange",
+    ".Brown",
+    ".Blue_grey",
+    ".Grey_black"
 )
 
 fun isOnMainThread() = Looper.myLooper() == Looper.getMainLooper()
 
+@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.M)
 fun isMarshmallowPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.N)
 fun isNougatPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
+@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.N_MR1)
 fun isNougatMR1Plus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1
+@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.O)
 fun isOreoPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.P)
 fun isPiePlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
 
 fun getDateFormats() = arrayListOf(
-        "yyyy-MM-dd",
-        "yyyyMMdd",
-        "yyyy.MM.dd",
-        "yy-MM-dd",
-        "yyMMdd",
-        "yy.MM.dd",
-        "yy/MM/dd",
-        "MM-dd",
-        "--MM-dd",
-        "MMdd",
-        "MM/dd",
-        "MM.dd"
+    "yyyy-MM-dd",
+    "yyyyMMdd",
+    "yyyy.MM.dd",
+    "yy-MM-dd",
+    "yyMMdd",
+    "yy.MM.dd",
+    "yy/MM/dd",
+    "MM-dd",
+    "--MM-dd",
+    "MMdd",
+    "MM/dd",
+    "MM.dd"
 )
 
 val normalizeRegex = "\\p{InCombiningDiacriticalMarks}+".toRegex()
