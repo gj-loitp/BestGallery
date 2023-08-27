@@ -14,7 +14,7 @@ import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.extensions.*
 import com.eagle.commons.helpers.*
-import com.eagle.commons.interfaces.CopyMoveListener
+import com.eagle.commons.itf.CopyMoveListener
 import com.eagle.commons.models.FileDirItem
 import java.io.File
 import java.io.InputStream

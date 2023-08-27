@@ -9,7 +9,7 @@ import android.view.ScaleGestureDetector
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eagle.commons.R
-import com.eagle.commons.interfaces.RecyclerScrollCallback
+import com.eagle.commons.itf.RecyclerScrollCallback
 
 // drag selection is based on https://github.com/afollestad/drag-select-recyclerview
 open class MyRecyclerView : RecyclerView {

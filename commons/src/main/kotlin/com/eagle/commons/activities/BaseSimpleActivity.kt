@@ -22,7 +22,7 @@ import com.eagle.commons.dialogs.ExportSettingsDialog
 import com.eagle.commons.dialogs.FileConflictDialog
 import com.eagle.commons.extensions.*
 import com.eagle.commons.helpers.*
-import com.eagle.commons.interfaces.CopyMoveListener
+import com.eagle.commons.itf.CopyMoveListener
 import com.eagle.commons.models.FAQItem
 import com.eagle.commons.models.FileDirItem
 import java.io.File

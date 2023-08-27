@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import com.eagle.commons.R
 import com.eagle.commons.extensions.isRTLLayout
 import com.eagle.commons.extensions.onGlobalLayout
-import com.eagle.commons.interfaces.LineColorPickerListener
+import com.eagle.commons.itf.LineColorPickerListener
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min

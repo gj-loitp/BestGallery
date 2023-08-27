@@ -6,8 +6,8 @@ import android.widget.RelativeLayout
 import com.eagle.commons.R
 import com.eagle.commons.extensions.*
 import com.eagle.commons.helpers.PROTECTION_PIN
-import com.eagle.commons.interfaces.HashListener
-import com.eagle.commons.interfaces.SecurityTab
+import com.eagle.commons.itf.HashListener
+import com.eagle.commons.itf.SecurityTab
 import kotlinx.android.synthetic.main.v_tab_pin.view.pin0
 import kotlinx.android.synthetic.main.v_tab_pin.view.pin1
 import kotlinx.android.synthetic.main.v_tab_pin.view.pin2

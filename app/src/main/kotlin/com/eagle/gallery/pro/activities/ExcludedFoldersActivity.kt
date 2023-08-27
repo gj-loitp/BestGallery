@@ -5,9 +5,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.eagle.commons.dialogs.FilePickerDialog
 import com.eagle.commons.extensions.beVisibleIf
-import com.eagle.commons.interfaces.RefreshRecyclerViewListener
+import com.eagle.commons.itf.RefreshRecyclerViewListener
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.adapters.ManageFoldersAdapter
 import com.eagle.gallery.pro.extensions.config
 import kotlinx.android.synthetic.main.activity_manage_folders.*
 

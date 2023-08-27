@@ -10,7 +10,7 @@ import com.eagle.commons.helpers.PROTECTION_FINGERPRINT
 import com.eagle.commons.helpers.PROTECTION_PATTERN
 import com.eagle.commons.helpers.PROTECTION_PIN
 import com.eagle.commons.helpers.SHOW_ALL_TABS
-import com.eagle.commons.interfaces.HashListener
+import com.eagle.commons.itf.HashListener
 import com.eagle.commons.views.MyDialogViewPager
 import kotlinx.android.synthetic.main.dlg_security.view.*
 

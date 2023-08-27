@@ -15,8 +15,8 @@ import com.eagle.commons.extensions.baseConfig
 import com.eagle.commons.extensions.toast
 import com.eagle.commons.extensions.updateTextColors
 import com.eagle.commons.helpers.PROTECTION_PATTERN
-import com.eagle.commons.interfaces.HashListener
-import com.eagle.commons.interfaces.SecurityTab
+import com.eagle.commons.itf.HashListener
+import com.eagle.commons.itf.SecurityTab
 import kotlinx.android.synthetic.main.v_tab_pattern.view.patternLockHolder
 import kotlinx.android.synthetic.main.v_tab_pattern.view.patternLockTitle
 import kotlinx.android.synthetic.main.v_tab_pattern.view.patternLockView

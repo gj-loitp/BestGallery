@@ -1,4 +1,4 @@
-package com.eagle.commons.interfaces
+package com.eagle.commons.itf
 
 import com.eagle.commons.views.MyScrollView
 

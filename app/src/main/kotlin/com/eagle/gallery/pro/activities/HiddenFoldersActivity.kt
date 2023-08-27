@@ -5,9 +5,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.eagle.commons.dialogs.FilePickerDialog
 import com.eagle.commons.extensions.beVisibleIf
-import com.eagle.commons.interfaces.RefreshRecyclerViewListener
+import com.eagle.commons.itf.RefreshRecyclerViewListener
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.adapters.ManageHiddenFoldersAdapter
 import com.eagle.gallery.pro.extensions.addNoMedia
 import com.eagle.gallery.pro.extensions.config
 import com.eagle.gallery.pro.extensions.getNoMediaFolders

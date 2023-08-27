@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import com.eagle.commons.R
 import com.eagle.commons.extensions.isFingerPrintSensorAvailable
-import com.eagle.commons.interfaces.HashListener
-import com.eagle.commons.interfaces.SecurityTab
+import com.eagle.commons.itf.HashListener
+import com.eagle.commons.itf.SecurityTab
 import com.eagle.commons.views.MyScrollView
 
 class PasswordTypesAdapter(val context: Context, val requiredHash: String, val hashListener: HashListener, val scrollView: MyScrollView) : PagerAdapter() {

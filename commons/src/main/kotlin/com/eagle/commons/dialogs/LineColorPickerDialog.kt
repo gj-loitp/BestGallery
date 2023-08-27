@@ -6,7 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.extensions.*
-import com.eagle.commons.interfaces.LineColorPickerListener
+import com.eagle.commons.itf.LineColorPickerListener
 import kotlinx.android.synthetic.main.dlg_line_color_picker.view.*
 import java.util.*
 
