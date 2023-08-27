@@ -6,7 +6,7 @@ import com.eagle.commons.R
 import com.eagle.commons.extensions.*
 import com.eagle.commons.helpers.*
 import com.eagle.commons.models.License
-import kotlinx.android.synthetic.main.activity_license.*
+import kotlinx.android.synthetic.main.a_license.*
 import kotlinx.android.synthetic.main.v_license_faq_item.view.*
 import java.util.*
 
@@ -17,11 +17,11 @@ class LicenseActivity : BaseSimpleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_license)
+        setContentView(R.layout.a_license)
 
         val linkColor = getAdjustedPrimaryColor()
         val textColor = baseConfig.textColor
-        updateTextColors(licenses_holder)
+        updateTextColors(licensesHolder)
 
         val inflater = LayoutInflater.from(this)
         val licenses = initLicenses()
@@ -40,7 +40,7 @@ class LicenseActivity : BaseSimpleActivity() {
 
                 licenseFaqText.text = getString(license.textId)
                 licenseFaqText.setTextColor(textColor)
-                licenses_holder.addView(this)
+                licensesHolder.addView(this)
             }
         }
     }

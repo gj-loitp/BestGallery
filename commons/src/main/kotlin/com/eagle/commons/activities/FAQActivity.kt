@@ -10,7 +10,7 @@ import com.eagle.commons.helpers.APP_FAQ
 import com.eagle.commons.helpers.APP_ICON_IDS
 import com.eagle.commons.helpers.APP_LAUNCHER_NAME
 import com.eagle.commons.models.FAQItem
-import kotlinx.android.synthetic.main.activity_faq.*
+import kotlinx.android.synthetic.main.a_faq.*
 import kotlinx.android.synthetic.main.v_license_faq_item.view.*
 import java.util.*
 
@@ -21,7 +21,7 @@ class FAQActivity : BaseSimpleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_faq)
+        setContentView(R.layout.a_faq)
 
         val titleColor = getAdjustedPrimaryColor()
         val textColor = baseConfig.textColor
@@ -41,7 +41,7 @@ class FAQActivity : BaseSimpleActivity() {
                     text = if (faqItem.text is Int) getString(faqItem.text) else faqItem.text as String
                     setTextColor(textColor)
                 }
-                faq_holder.addView(this)
+                faqHolder.addView(this)
             }
         }
     }

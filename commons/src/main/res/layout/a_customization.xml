@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/customization_scrollview"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customizationScrollView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/customization_holder"
+        android:id="@+id/customizationHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:id="@+id/customization_theme_holder"
+            android:id="@+id/customizationThemeHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
@@ -21,162 +22,156 @@
             android:paddingBottom="@dimen/bigger_margin">
 
             <com.eagle.commons.views.MyTextView
-                android:id="@+id/customization_theme_label"
+                android:id="@+id/customizationThemeLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/customization_theme"
-                android:layout_toLeftOf="@+id/customization_theme"
+                android:layout_toStartOf="@+id/customizationTheme"
                 android:paddingLeft="@dimen/medium_margin"
                 android:paddingRight="@dimen/medium_margin"
                 android:text="@string/theme" />
 
             <com.eagle.commons.views.MyTextView
-                android:id="@+id/customization_theme"
+                android:id="@+id/customizationTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginEnd="@dimen/small_margin"
-                android:layout_marginRight="@dimen/small_margin"
                 android:background="@null"
                 android:clickable="false" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/customization_text_color_holder"
+            android:id="@+id/customizationTextColorHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/customization_theme_holder"
+            android:layout_below="@+id/customizationThemeHolder"
             android:layout_marginTop="@dimen/medium_margin"
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/activity_margin">
 
             <com.eagle.commons.views.MyTextView
-                android:id="@+id/customization_text_color_label"
+                android:id="@+id/customizationTextColorLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/medium_margin"
                 android:paddingRight="@dimen/medium_margin"
-                android:text="@string/text_color" />
+                android:text="@string/text_color"
+                tools:ignore="RelativeOverlap" />
 
-            <ImageView
-                android:id="@+id/customization_text_color"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/customizationTextColor"
                 android:layout_width="@dimen/color_sample_size"
                 android:layout_height="@dimen/color_sample_size"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginEnd="@dimen/medium_margin"
-                android:layout_marginRight="@dimen/medium_margin"
                 android:clickable="false" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/customization_background_color_holder"
+            android:id="@+id/customizationBackgroundColorHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/customization_text_color_holder"
+            android:layout_below="@+id/customizationTextColorHolder"
             android:layout_marginTop="@dimen/medium_margin"
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/activity_margin">
 
             <com.eagle.commons.views.MyTextView
-                android:id="@+id/customization_background_color_label"
+                android:id="@+id/customizationBackgroundColorLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/medium_margin"
                 android:paddingRight="@dimen/medium_margin"
-                android:text="@string/background_color" />
+                android:text="@string/background_color"
+                tools:ignore="RelativeOverlap" />
 
-            <ImageView
-                android:id="@+id/customization_background_color"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/customizationBackgroundColor"
                 android:layout_width="@dimen/color_sample_size"
                 android:layout_height="@dimen/color_sample_size"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginEnd="@dimen/medium_margin"
-                android:layout_marginRight="@dimen/medium_margin"
                 android:clickable="false" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/customization_primary_color_holder"
+            android:id="@+id/customizationPrimaryColorHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/customization_background_color_holder"
+            android:layout_below="@+id/customizationBackgroundColorHolder"
             android:layout_marginTop="@dimen/medium_margin"
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/activity_margin">
 
             <com.eagle.commons.views.MyTextView
-                android:id="@+id/customization_primary_color_label"
+                android:id="@+id/customizationPrimaryColorLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/medium_margin"
                 android:paddingRight="@dimen/medium_margin"
-                android:text="@string/primary_color" />
+                android:text="@string/primary_color"
+                tools:ignore="RelativeOverlap" />
 
-            <ImageView
-                android:id="@+id/customization_primary_color"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/customizationPrimaryColor"
                 android:layout_width="@dimen/color_sample_size"
                 android:layout_height="@dimen/color_sample_size"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginEnd="@dimen/medium_margin"
-                android:layout_marginRight="@dimen/medium_margin"
                 android:clickable="false" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/customization_app_icon_color_holder"
+            android:id="@+id/customizationAppIconColorHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/customization_primary_color_holder"
+            android:layout_below="@+id/customizationPrimaryColorHolder"
             android:layout_marginTop="@dimen/medium_margin"
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/activity_margin"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <com.eagle.commons.views.MyTextView
-                android:id="@+id/customization_app_icon_color_label"
+                android:id="@+id/customizationAppIconColorLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/medium_margin"
                 android:paddingRight="@dimen/medium_margin"
-                android:text="@string/app_icon_color" />
+                android:text="@string/app_icon_color"
+                tools:ignore="RelativeOverlap" />
 
-            <ImageView
-                android:id="@+id/customization_app_icon_color"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/customizationAppIconColor"
                 android:layout_width="@dimen/color_sample_size"
                 android:layout_height="@dimen/color_sample_size"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginEnd="@dimen/medium_margin"
-                android:layout_marginRight="@dimen/medium_margin"
                 android:clickable="false" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/apply_to_all_holder"
+            android:id="@+id/applyToAllHolder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/customization_app_icon_color_holder"
+            android:layout_below="@+id/customizationAppIconColorHolder"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/activity_margin"
             android:background="?attr/selectableItemBackground"
             android:visibility="gone">
 
             <com.eagle.commons.views.MyTextView
-                android:id="@+id/apply_to_all"
+                android:id="@+id/applyToAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_background"

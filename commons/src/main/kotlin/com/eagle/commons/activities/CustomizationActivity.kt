@@ -13,7 +13,7 @@ import com.eagle.commons.helpers.MyContentProvider
 import com.eagle.commons.models.MyTheme
 import com.eagle.commons.models.RadioItem
 import com.eagle.commons.models.SharedTheme
-import kotlinx.android.synthetic.main.activity_customization.*
+import kotlinx.android.synthetic.main.a_customization.*
 import java.util.*
 
 class CustomizationActivity : BaseSimpleActivity() {
@@ -42,7 +42,7 @@ class CustomizationActivity : BaseSimpleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_customization)
+        setContentView(R.layout.a_customization)
 
         initColorVariables()
         setupColorsPickers()
@@ -60,7 +60,7 @@ class CustomizationActivity : BaseSimpleActivity() {
 
                     runOnUiThread {
                         setupThemes()
-                        apply_to_all_holder.beVisibleIf(storedSharedTheme == null)
+                        applyToAllHolder.beVisibleIf(storedSharedTheme == null)
                     }
                 } catch (e: Exception) {
                     toast(R.string.update_thank_you)
@@ -73,7 +73,7 @@ class CustomizationActivity : BaseSimpleActivity() {
         }
 
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_cross)
-        updateTextColors(customization_holder)
+        updateTextColors(customizationHolder)
         originalAppIconColor = baseConfig.appIconColor
     }
 
@@ -129,8 +129,8 @@ class CustomizationActivity : BaseSimpleActivity() {
 
     private fun setupThemePicker() {
         curSelectedThemeId = getCurrentThemeId()
-        customization_theme.text = getThemeText()
-        customization_theme_holder.setOnClickListener {
+        customizationTheme.text = getThemeText()
+        customizationThemeHolder.setOnClickListener {
             if (baseConfig.wasAppIconCustomizationWarningShown) {
                 themePickerClicked()
             } else {
@@ -164,7 +164,7 @@ class CustomizationActivity : BaseSimpleActivity() {
 
     private fun updateColorTheme(themeId: Int, useStored: Boolean = false) {
         curSelectedThemeId = themeId
-        customization_theme.text = getThemeText()
+        customizationTheme.text = getThemeText()
 
         resources.apply {
             if (curSelectedThemeId == THEME_CUSTOM) {
@@ -205,7 +205,7 @@ class CustomizationActivity : BaseSimpleActivity() {
 
         hasUnsavedChanges = true
         invalidateOptionsMenu()
-        updateTextColors(customization_holder, curTextColor)
+        updateTextColors(customizationHolder, curTextColor)
         updateBackgroundColor(curBackgroundColor)
         updateActionbarColor(curPrimaryColor)
     }
@@ -290,7 +290,7 @@ class CustomizationActivity : BaseSimpleActivity() {
         updateBackgroundColor()
         updateActionbarColor()
         invalidateOptionsMenu()
-        updateTextColors(customization_holder)
+        updateTextColors(customizationHolder)
     }
 
     private fun initColorVariables() {
@@ -301,16 +301,16 @@ class CustomizationActivity : BaseSimpleActivity() {
     }
 
     private fun setupColorsPickers() {
-        customization_text_color.setFillWithStroke(curTextColor, curBackgroundColor)
-        customization_primary_color.setFillWithStroke(curPrimaryColor, curBackgroundColor)
-        customization_background_color.setFillWithStroke(curBackgroundColor, curBackgroundColor)
-        customization_app_icon_color.setFillWithStroke(curAppIconColor, curBackgroundColor)
+        customizationTextColor.setFillWithStroke(curTextColor, curBackgroundColor)
+        customizationPrimaryColor.setFillWithStroke(curPrimaryColor, curBackgroundColor)
+        customizationBackgroundColor.setFillWithStroke(curBackgroundColor, curBackgroundColor)
+        customizationAppIconColor.setFillWithStroke(curAppIconColor, curBackgroundColor)
 
-        customization_text_color_holder.setOnClickListener { pickTextColor() }
-        customization_background_color_holder.setOnClickListener { pickBackgroundColor() }
-        customization_primary_color_holder.setOnClickListener { pickPrimaryColor() }
-        apply_to_all_holder.setOnClickListener { /*applyToAll()*/ }
-        customization_app_icon_color_holder.setOnClickListener {
+        customizationTextColorHolder.setOnClickListener { pickTextColor() }
+        customizationBackgroundColorHolder.setOnClickListener { pickBackgroundColor() }
+        customizationPrimaryColorHolder.setOnClickListener { pickPrimaryColor() }
+        applyToAllHolder.setOnClickListener { /*applyToAll()*/ }
+        customizationAppIconColorHolder.setOnClickListener {
             if (baseConfig.wasAppIconCustomizationWarningShown) {
                 pickAppIconColor()
             } else {
@@ -332,7 +332,7 @@ class CustomizationActivity : BaseSimpleActivity() {
 
     private fun setCurrentTextColor(color: Int) {
         curTextColor = color
-        updateTextColors(customization_holder, color)
+        updateTextColors(customizationHolder, color)
     }
 
     private fun setCurrentBackgroundColor(color: Int) {
@@ -412,7 +412,7 @@ class CustomizationActivity : BaseSimpleActivity() {
                     predefinedThemes[THEME_SHARED] = MyTheme(R.string.shared, 0, 0, 0, 0)
                 }
                 baseConfig.wasSharedThemeEverActivated = true
-                apply_to_all_holder.beGone()
+                applyToAllHolder.beGone()
                 updateColorTheme(THEME_SHARED)
                 saveChanges(false)
             }
