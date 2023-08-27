@@ -7,12 +7,12 @@
         android:title="@string/change_orientation"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/menu_share"
+        android:id="@+id/menuShare"
         android:icon="@drawable/ic_share"
         android:title="@string/share"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/menu_open_with"
+        android:id="@+id/menuOpenWith"
         android:title="@string/open_with"
         app:showAsAction="never"/>
 </menu>

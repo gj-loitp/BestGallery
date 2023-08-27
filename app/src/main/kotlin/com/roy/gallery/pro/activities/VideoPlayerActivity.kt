@@ -129,8 +129,8 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_change_orientation -> changeOrientation()
-            R.id.menu_open_with -> openPath(mUri!!.toString(), true)
-            R.id.menu_share -> shareMediumPath(mUri!!.toString())
+            R.id.menuOpenWith -> openPath(mUri!!.toString(), true)
+            R.id.menuShare -> shareMediumPath(mUri!!.toString())
             else -> return super.onOptionsItemSelected(item)
         }
         return true

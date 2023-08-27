@@ -42,7 +42,7 @@
     <string name="raw_images">RAW images</string>
     <string name="svgs">SVGs</string>
     <string name="no_media_with_filters">لم يتم العثور على ملفات وسائط مع الفلاتر المحددة</string>
-    <string name="change_filters_underlined"><u >تغيير الفلاتر</u></string>
+    <string name="change_filters_underlined"><u>تغيير الفلاتر</u></string>
 
     <!-- Hide / Exclude -->
     <string name="hide_folder_description">هذه الميزة تخفي المجلد عن طريق إضافة ملف \'.nomedia\' بداخله، فإنه سيتم إخفاء كافة المجلدات الفرعية أيضا. يمكنك رؤيتها عن طريق تبديل الخيار \"إظهار العناصر المخفية\" في الإعدادات. استمر؟</string>

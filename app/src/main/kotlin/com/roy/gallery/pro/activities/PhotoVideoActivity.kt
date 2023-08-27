@@ -293,17 +293,17 @@ open class PhotoVideoActivity : SimpleActivity(),
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.photo_video_menu, menu)
+        menuInflater.inflate(R.menu.menu_photo_video, menu)
         val visibleBottomActions = if (config.bottomActions) config.visibleBottomActions else 0
 
         menu.apply {
-            findItem(R.id.menu_set_as).isVisible =
+            findItem(R.id.menuSetAs).isVisible =
                 mMedium?.isImage() == true && visibleBottomActions and BOTTOM_ACTION_SET_AS == 0
-            findItem(R.id.menu_edit).isVisible =
+            findItem(R.id.menuEdit).isVisible =
                 mMedium?.isImage() == true && mUri?.scheme == "file" && visibleBottomActions and BOTTOM_ACTION_EDIT == 0
-            findItem(R.id.menu_properties).isVisible =
+            findItem(R.id.menuProperties).isVisible =
                 mUri?.scheme == "file" && visibleBottomActions and BOTTOM_ACTION_PROPERTIES == 0
-            findItem(R.id.menu_share).isVisible = visibleBottomActions and BOTTOM_ACTION_SHARE == 0
+            findItem(R.id.menuShare).isVisible = visibleBottomActions and BOTTOM_ACTION_SHARE == 0
         }
 
         return true
@@ -315,11 +315,11 @@ open class PhotoVideoActivity : SimpleActivity(),
         }
 
         when (item.itemId) {
-            R.id.menu_set_as -> setAs(mUri!!.toString())
-            R.id.menu_open_with -> openPath(mUri!!.toString(), true)
-            R.id.menu_share -> sharePath(mUri!!.toString())
-            R.id.menu_edit -> openEditor(mUri!!.toString())
-            R.id.menu_properties -> showProperties()
+            R.id.menuSetAs -> setAs(mUri!!.toString())
+            R.id.menuOpenWith -> openPath(mUri!!.toString(), true)
+            R.id.menuShare -> sharePath(mUri!!.toString())
+            R.id.menuEdit -> openEditor(mUri!!.toString())
+            R.id.menuProperties -> showProperties()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
