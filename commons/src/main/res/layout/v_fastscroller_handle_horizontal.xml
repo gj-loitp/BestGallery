@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:alpha="0"
-        android:background="@drawable/fastscroller_handle_horizontal" />
+        android:background="@drawable/shape_fastscroller_handle_horizontal" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fastScrollerBubble"
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/fastscroll_height"
         android:alpha="0"
-        android:background="@drawable/fastscroller_bubble"
+        android:background="@drawable/shape_fastscroller_bubble"
         android:ellipsize="end"
         android:lines="1"
         android:padding="@dimen/medium_margin"

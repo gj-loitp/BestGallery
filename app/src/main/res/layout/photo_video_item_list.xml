@@ -23,7 +23,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/small_margin"
-        android:background="@drawable/circle_background"
+        android:background="@drawable/shape_circle_background"
         android:padding="@dimen/tiny_margin"
         android:src="@drawable/ic_check"
         android:visibility="gone"/>
@@ -75,6 +75,6 @@
         android:layout_alignBottom="@+id/medium_thumbnail"
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/medium_thumbnail"
-        android:background="@drawable/divider"/>
+        android:background="@drawable/shape_divider"/>
 
 </RelativeLayout>

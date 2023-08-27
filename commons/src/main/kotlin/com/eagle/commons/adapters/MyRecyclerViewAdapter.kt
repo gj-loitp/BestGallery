@@ -242,7 +242,7 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
 
         if (add) {
             DividerItemDecoration(activity, DividerItemDecoration.VERTICAL).apply {
-                setDrawable(resources.getDrawable(R.drawable.divider))
+                setDrawable(resources.getDrawable(R.drawable.shape_divider))
                 recyclerView.addItemDecoration(this)
             }
         }

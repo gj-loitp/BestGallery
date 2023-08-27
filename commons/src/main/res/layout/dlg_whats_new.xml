@@ -23,7 +23,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/divider"
+            android:background="@drawable/shape_divider"
             android:paddingTop="@dimen/activity_margin" />
 
         <com.eagle.commons.views.MyTextView

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/bigger_margin"
         android:alpha="0"
-        android:background="@drawable/fastscroller_bubble"
+        android:background="@drawable/shape_fastscroller_bubble"
         android:ellipsize="end"
         android:lines="1"
         android:padding="@dimen/medium_margin"

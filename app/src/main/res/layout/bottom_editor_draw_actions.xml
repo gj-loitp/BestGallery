@@ -37,7 +37,7 @@
         android:layout_marginRight="@dimen/small_margin"
         android:clickable="false"
         android:padding="@dimen/small_margin"
-        android:src="@drawable/circle_background"
+        android:src="@drawable/shape_circle_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/bottom_draw_undo"
         app:layout_constraintTop_toTopOf="parent"/>

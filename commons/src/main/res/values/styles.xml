@@ -39,8 +39,8 @@
 
     <style name="MyTransparentButton" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@android:color/white</item>
-        <item name="background">@drawable/transparent_button</item>
-        <item name="android:background">@drawable/transparent_button</item>
+        <item name="background">@drawable/selector_transparent_button</item>
+        <item name="android:background">@drawable/selector_transparent_button</item>
     </style>
 
     <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog">
