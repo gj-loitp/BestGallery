@@ -98,7 +98,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
         intent.removeExtra(PATH)
 
         video_curr_time.setOnClickListener { skip(false) }
-        video_duration.setOnClickListener { skip(true) }
+        videoDuration.setOnClickListener { skip(true) }
 
         try {
             val options = VrVideoView.Options()
@@ -169,7 +169,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
     private fun setupDuration(duration: Long) {
         mDuration = (duration / 1000).toInt()
         video_seekbar.max = mDuration
-        video_duration.text = mDuration.getFormattedDuration()
+        videoDuration.text = mDuration.getFormattedDuration()
         setVideoProgress(0)
     }
 
@@ -273,7 +273,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
             it.animate().alpha(newAlpha)
         }
 
-        arrayOf(cardboard, explore, video_toggle_play_pause, video_curr_time, video_duration).forEach {
+        arrayOf(cardboard, explore, video_toggle_play_pause, video_curr_time, videoDuration).forEach {
             it.isClickable = !mIsFullscreen
         }
 

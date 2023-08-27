@@ -89,8 +89,8 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
     }
 
     private fun saveConfig() {
-        val views = RemoteViews(packageName, R.layout.widget)
-        views.setBackgroundColor(R.id.widget_holder, mBgColor)
+        val views = RemoteViews(packageName, R.layout.v_widget)
+        views.setBackgroundColor(R.id.widgetHolder, mBgColor)
         AppWidgetManager.getInstance(this).updateAppWidget(mWidgetId, views)
         config.showWidgetFolderName = folder_picker_show_folder_name.isChecked
         val widget = Widget(null, mWidgetId, mFolderPath)

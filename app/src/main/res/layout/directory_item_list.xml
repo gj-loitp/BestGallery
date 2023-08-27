@@ -93,7 +93,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/dir_list_divider"
+        android:id="@+id/dirListDivider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignBottom="@+id/dir_thumbnail"

@@ -91,7 +91,7 @@ class VideoFragment : ViewPagerFragment(), TextureView.SurfaceTextureListener, S
             instant_prev_item.setOnClickListener { listener?.goToPrevItem() }
             instant_next_item.setOnClickListener { listener?.goToNextItem() }
             video_curr_time.setOnClickListener { skip(false) }
-            video_duration.setOnClickListener { skip(true) }
+            videoDuration.setOnClickListener { skip(true) }
             video_holder.setOnClickListener { toggleFullscreen() }
             video_preview.setOnClickListener { toggleFullscreen() }
             panorama_outline.setOnClickListener { openPanorama() }
@@ -313,7 +313,7 @@ class VideoFragment : ViewPagerFragment(), TextureView.SurfaceTextureListener, S
 
     private fun setupTimeHolder() {
         mSeekBar.max = mDuration
-        mView.video_duration.text = mDuration.getFormattedDuration()
+        mView.videoDuration.text = mDuration.getFormattedDuration()
         setupTimer()
     }
 
@@ -468,7 +468,7 @@ class VideoFragment : ViewPagerFragment(), TextureView.SurfaceTextureListener, S
         }
 
         mSeekBar.setOnSeekBarChangeListener(if (mIsFullscreen) null else this)
-        arrayOf(mView.video_curr_time, mView.video_duration).forEach {
+        arrayOf(mView.video_curr_time, mView.videoDuration).forEach {
             it.isClickable = !mIsFullscreen
         }
 

@@ -32,11 +32,11 @@ class MyWidgetProvider : AppWidgetProvider() {
         Thread {
             val config = context.config
             context.widgetsDB.getWidgets().filter { appWidgetIds.contains(it.widgetId) }.forEach {
-                val views = RemoteViews(context.packageName, R.layout.widget).apply {
-                    setBackgroundColor(R.id.widget_holder, config.widgetBgColor)
-                    setVisibleIf(R.id.widget_folder_name, config.showWidgetFolderName)
-                    setTextColor(R.id.widget_folder_name, config.widgetTextColor)
-                    setText(R.id.widget_folder_name, context.getFolderNameFromPath(it.folderPath))
+                val views = RemoteViews(context.packageName, R.layout.v_widget).apply {
+                    setBackgroundColor(R.id.widgetHolder, config.widgetBgColor)
+                    setVisibleIf(R.id.widgetFolderName, config.showWidgetFolderName)
+                    setTextColor(R.id.widgetFolderName, config.widgetTextColor)
+                    setText(R.id.widgetFolderName, context.getFolderNameFromPath(it.folderPath))
                 }
 
                 val path = context.directoryDB.getDirectoryThumbnail(it.folderPath) ?: return@forEach
@@ -58,11 +58,11 @@ class MyWidgetProvider : AppWidgetProvider() {
                             .apply(options)
                             .submit(widgetSize, widgetSize)
                             .get()
-                    views.setImageViewBitmap(R.id.widget_imageview, image)
+                    views.setImageViewBitmap(R.id.widgetImageView, image)
                 } catch (e: Exception) {
                 }
 
-                setupAppOpenIntent(context, views, R.id.widget_holder, it)
+                setupAppOpenIntent(context, views, R.id.widgetHolder, it)
                 appWidgetManager.updateAppWidget(it.widgetId, views)
             }
         }.start()

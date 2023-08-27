@@ -33,8 +33,8 @@ import com.roy.commons.ext.toast
 import com.roy.commons.models.FileDirItem
 import com.roy.commons.views.FastScroller
 import com.roy.commons.views.MyRecyclerView
-import kotlinx.android.synthetic.main.photo_video_item_grid.view.*
-import kotlinx.android.synthetic.main.thumbnail_section.view.*
+import kotlinx.android.synthetic.main.v_photo_video_item_grid.view.*
+import kotlinx.android.synthetic.main.v_thumbnail_section.view.*
 import java.util.*
 
 class MediaAdapter(activity: BaseSimpleActivity, var media: MutableList<ThumbnailItem>, val listener: MediaOperationsListener?, val isAGetIntent: Boolean,
@@ -70,12 +70,12 @@ class MediaAdapter(activity: BaseSimpleActivity, var media: MutableList<Thumbnai
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutType = if (viewType == ITEM_SECTION) {
-            R.layout.thumbnail_section
+            R.layout.v_thumbnail_section
         } else {
             if (isListViewType) {
-                R.layout.photo_video_item_list
+                R.layout.v_photo_video_item_list
             } else {
-                R.layout.photo_video_item_grid
+                R.layout.v_photo_video_item_grid
             }
         }
         return createViewHolder(layoutType, parent)
@@ -169,8 +169,8 @@ class MediaAdapter(activity: BaseSimpleActivity, var media: MutableList<Thumbnai
         super.onViewRecycled(holder)
         if (!activity.isDestroyed) {
             val itemView = holder.itemView
-            visibleItemPaths.remove(itemView.medium_name?.tag)
-            val tmb = itemView.medium_thumbnail
+            visibleItemPaths.remove(itemView.mediumName?.tag)
+            val tmb = itemView.mediumThumbnail
             if (tmb != null) {
                 Glide.with(activity).clear(tmb)
             }
@@ -447,47 +447,47 @@ class MediaAdapter(activity: BaseSimpleActivity, var media: MutableList<Thumbnai
     private fun setupThumbnail(view: View, medium: Medium) {
         val isSelected = selectedKeys.contains(medium.path.hashCode())
         view.apply {
-            play_outline.beVisibleIf(medium.isVideo())
-            medium_name.beVisibleIf(displayFilenames || isListViewType)
-            medium_name.text = medium.name
-            medium_name.tag = medium.path
+            playOutline.beVisibleIf(medium.isVideo())
+            mediumName.beVisibleIf(displayFilenames || isListViewType)
+            mediumName.text = medium.name
+            mediumName.tag = medium.path
 
             val showVideoDuration = medium.isVideo() && config.showThumbnailVideoDuration
             if (showVideoDuration) {
-                video_duration.text = medium.videoDuration.getFormattedDuration()
+                videoDuration.text = medium.videoDuration.getFormattedDuration()
             }
-            video_duration.beVisibleIf(showVideoDuration)
+            videoDuration.beVisibleIf(showVideoDuration)
 
-            medium_check?.beVisibleIf(isSelected)
+            mediumCheck?.beVisibleIf(isSelected)
             if (isSelected) {
-                medium_check?.background?.applyColorFilter(primaryColor)
+                mediumCheck?.background?.applyColorFilter(primaryColor)
             }
 
             val path = medium.path
             if (loadImageInstantly) {
-                activity.loadImage(medium.type, path, medium_thumbnail, scrollHorizontally, animateGifs, cropThumbnails, rotatedImagePaths)
+                activity.loadImage(medium.type, path, mediumThumbnail, scrollHorizontally, animateGifs, cropThumbnails, rotatedImagePaths)
             } else {
-                medium_thumbnail.setImageDrawable(null)
-                medium_thumbnail.isHorizontalScrolling = scrollHorizontally
+                mediumThumbnail.setImageDrawable(null)
+                mediumThumbnail.isHorizontalScrolling = scrollHorizontally
                 delayHandler.postDelayed({
                     val isVisible = visibleItemPaths.contains(medium.path)
                     if (isVisible) {
-                        activity.loadImage(medium.type, path, medium_thumbnail, scrollHorizontally, animateGifs, cropThumbnails, rotatedImagePaths)
+                        activity.loadImage(medium.type, path, mediumThumbnail, scrollHorizontally, animateGifs, cropThumbnails, rotatedImagePaths)
                     }
                 }, IMAGE_LOAD_DELAY)
             }
 
             if (isListViewType) {
-                medium_name.setTextColor(textColor)
-                play_outline.applyColorFilter(textColor)
+                mediumName.setTextColor(textColor)
+                playOutline.applyColorFilter(textColor)
             }
         }
     }
 
     private fun setupSection(view: View, section: ThumbnailSection) {
         view.apply {
-            thumbnail_section.text = section.title
-            thumbnail_section.setTextColor(textColor)
+            thumbnailSection.text = section.title
+            thumbnailSection.setTextColor(textColor)
         }
     }
 }
