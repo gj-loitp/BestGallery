@@ -8,7 +8,9 @@ import com.eagle.commons.helpers.videoExtensions
 import com.eagle.commons.models.FileDirItem
 import java.io.File
 
-fun File.isMediaFile() = absolutePath.isImageFast() || absolutePath.isVideoFast() || absolutePath.isGif() || absolutePath.isRawFast() || absolutePath.isSvg()
+fun File.isMediaFile() =
+    absolutePath.isImageFast() || absolutePath.isVideoFast() || absolutePath.isGif() || absolutePath.isRawFast() || absolutePath.isSvg()
+
 fun File.isGif() = absolutePath.endsWith(".gif", true)
 fun File.isVideoFast() = videoExtensions.any { absolutePath.endsWith(it, true) }
 fun File.isImageFast() = photoExtensions.any { absolutePath.endsWith(it, true) }
@@ -74,6 +76,14 @@ private fun getDirectoryFileCount(dir: File, countHiddenItems: Boolean): Int {
     return count
 }
 
-fun File.getDirectChildrenCount(countHiddenItems: Boolean) = listFiles()?.filter { if (countHiddenItems) true else !it.isHidden }?.size ?: 0
+fun File.getDirectChildrenCount(countHiddenItems: Boolean) =
+    listFiles()?.filter { if (countHiddenItems) true else !it.isHidden }?.size ?: 0
 
-fun File.toFileDirItem(context: Context) = FileDirItem(absolutePath, name, File(absolutePath).isDirectory, 0, length())
+fun File.toFileDirItem(context: Context) =
+    FileDirItem(
+        path = absolutePath,
+        name = name,
+        isDirectory = File(absolutePath).isDirectory,
+        children = 0,
+        size = length()
+    )

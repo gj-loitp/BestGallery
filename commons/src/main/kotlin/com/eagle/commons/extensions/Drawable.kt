@@ -22,7 +22,12 @@ fun Drawable.convertToBitmap(): Bitmap {
     }
 
     val canvas = Canvas(bitmap!!)
-    setBounds(0, 0, canvas.width, canvas.height)
+    setBounds(
+        /* left = */ 0,
+        /* top = */ 0,
+        /* right = */ canvas.width,
+        /* bottom = */ canvas.height
+    )
     draw(canvas)
     return bitmap
 }

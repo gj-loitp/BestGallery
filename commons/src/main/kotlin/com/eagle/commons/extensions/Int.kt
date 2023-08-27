@@ -3,6 +3,7 @@ package com.eagle.commons.extensions
 import android.graphics.Color
 import android.media.ExifInterface
 import java.util.*
+import kotlin.math.roundToInt
 
 fun Int.getContrastColor(): Int {
     val DARK_GREY = -13421773
@@ -10,10 +11,10 @@ fun Int.getContrastColor(): Int {
     return if (y >= 149) DARK_GREY else Color.WHITE
 }
 
-fun Int.toHex() = String.format("#%06X", 0xFFFFFF and this).toUpperCase()
+fun Int.toHex() = String.format("#%06X", 0xFFFFFF and this).uppercase(Locale.getDefault())
 
 fun Int.adjustAlpha(factor: Float): Int {
-    val alpha = Math.round(Color.alpha(this) * factor)
+    val alpha = (Color.alpha(this) * factor).roundToInt()
     val red = Color.red(this)
     val green = Color.green(this)
     val blue = Color.blue(this)
@@ -36,11 +37,11 @@ fun Int.getFormattedDuration(): String {
 }
 
 fun Int.addBitIf(add: Boolean, bit: Int) =
-        if (add) {
-            addBit(bit)
-        } else {
-            removeBit(bit)
-        }
+    if (add) {
+        addBit(bit)
+    } else {
+        removeBit(bit)
+    }
 
 // TODO: how to do "bits & ~bit" in kotlin?
 fun Int.removeBit(bit: Int) = addBit(bit) - bit

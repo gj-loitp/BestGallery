@@ -62,7 +62,7 @@ fun String.isImageSlow() = isImageFast() || getMimeType().startsWith("image")
 fun String.isVideoSlow() = isVideoFast() || getMimeType().startsWith("video")
 fun String.isAudioSlow() = isAudioFast() || getMimeType().startsWith("audio")
 
-fun String.getCompressionFormat() = when (getFilenameExtension().toLowerCase()) {
+fun String.getCompressionFormat() = when (getFilenameExtension().lowercase(Locale.getDefault())) {
     "png" -> Bitmap.CompressFormat.PNG
     "webp" -> Bitmap.CompressFormat.WEBP
     else -> Bitmap.CompressFormat.JPEG
@@ -71,7 +71,7 @@ fun String.getCompressionFormat() = when (getFilenameExtension().toLowerCase()) 
 fun String.areDigitsOnly() = matches(Regex("[0-9]+"))
 
 @TargetApi(Build.VERSION_CODES.N)
-fun String.getExifProperties(exif: ExifInterface): String {
+fun getExifProperties(exif: ExifInterface): String {
     var exifString = ""
     exif.getAttribute(ExifInterface.TAG_F_NUMBER).let {
         if (it?.isNotEmpty() == true) {
@@ -109,7 +109,7 @@ fun String.getExifProperties(exif: ExifInterface): String {
 }
 
 @TargetApi(Build.VERSION_CODES.N)
-fun String.getExifDateTaken(exif: ExifInterface, context: Context): String {
+fun getExifDateTaken(exif: ExifInterface, context: Context): String {
     val dateTime = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL) ?: exif.getAttribute(
         ExifInterface.TAG_DATETIME
     )
@@ -125,7 +125,7 @@ fun String.getExifDateTaken(exif: ExifInterface, context: Context): String {
     return ""
 }
 
-fun String.getExifCameraModel(exif: ExifInterface): String {
+fun getExifCameraModel(exif: ExifInterface): String {
     exif.getAttribute(ExifInterface.TAG_MAKE).let {
         if (it?.isNotEmpty() == true) {
             val model = exif.getAttribute(ExifInterface.TAG_MODEL)
@@ -152,8 +152,8 @@ fun String.getFileDurationSeconds(): Int? {
         val retriever = MediaMetadataRetriever()
         retriever.setDataSource(this)
         val time = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
-        val timeInMs = java.lang.Long.parseLong(time)
-        (timeInMs / 1000).toInt()
+        val timeInMs = time?.let { java.lang.Long.parseLong(it) }
+        (timeInMs?.div(1000))?.toInt()
     } catch (e: Exception) {
         null
     }
@@ -903,5 +903,5 @@ fun String.getMimeType(): String {
         put("z", "application/x-compress")
         put("zip", "application/zip")
     }
-    return typesMap[getFilenameExtension().toLowerCase()] ?: ""
+    return typesMap[getFilenameExtension().lowercase(Locale.getDefault())] ?: ""
 }

@@ -1,5 +1,6 @@
 package com.eagle.commons.extensions
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.Drawable
@@ -16,7 +17,8 @@ fun Resources.getColoredBitmap(resourceId: Int, newColor: Int): Bitmap {
     return bmp
 }
 
-fun Resources.getColoredDrawable(drawableId: Int, colorId: Int, alpha: Int = 255) = getColoredDrawableWithColor(drawableId, getColor(colorId), alpha)
+fun Resources.getColoredDrawable(drawableId: Int, colorId: Int, alpha: Int = 255) =
+    getColoredDrawableWithColor(drawableId, getColor(colorId), alpha)
 
 fun Resources.getColoredDrawableWithColor(drawableId: Int, color: Int, alpha: Int = 255): Drawable {
     val drawable = getDrawable(drawableId)
@@ -25,11 +27,13 @@ fun Resources.getColoredDrawableWithColor(drawableId: Int, color: Int, alpha: In
     return drawable
 }
 
+@SuppressLint("DiscouragedApi")
 fun Resources.hasNavBar(): Boolean {
     val id = getIdentifier("config_showNavigationBar", "bool", "android")
     return id > 0 && getBoolean(id)
 }
 
+@SuppressLint("InternalInsetResource")
 fun Resources.getNavBarHeight(): Int {
     val id = getIdentifier("navigation_bar_height", "dimen", "android")
     return if (id > 0 && hasNavBar()) {
