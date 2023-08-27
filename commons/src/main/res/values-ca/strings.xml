@@ -136,7 +136,7 @@
     <string name="share_colors_success">Colors actualitzats satisfactoriament. S’ha afegit un nou tema anomenat \'Shared\'. Fes -lo servidr per actualitzar els colors de les aplicacions en el futur.</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            Sius plau compra la aplicació <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> per desblocar aquesta fucnió i ajudar al desenvolupament. Gràcies!
+            Sius plau compra la aplicació <a>Simple Thank You</a> per desblocar aquesta fucnió i ajudar al desenvolupament. Gràcies!
         ]]>
     </string>
 
@@ -402,7 +402,7 @@
     <string name="donate_please">
         <![CDATA[
             Hola,<br><br>
-            Esperem que gaudiu de l\'aplicació. No conté cap anunci, així que si us plau, ajudeu el seu desenvolupament comprant la aplicació <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a>, també evitarà que aquest diàleg es torni a mostrar.<br><br>
+            Esperem que gaudiu de l\'aplicació. No conté cap anunci, així que si us plau, ajudeu el seu desenvolupament comprant la aplicació <a>Simple Thank You</a>, també evitarà que aquest diàleg es torni a mostrar.<br><br>
             Gràcies!
         ]]>
     </string>

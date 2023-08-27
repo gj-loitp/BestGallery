@@ -133,7 +133,7 @@
     <string name="share_colors_success">Warna berhasil diperbarui. Tema baru bernama \'Dibagikan\' telah ditambahkan, gunakan untuk memperbarui semua warna aplikasi kedepannya.</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            Harap beli <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> untuk membuka fungsi ini dan mendukung pengembangan. Terima kasih!
+            Harap beli <a>Simple Thank You</a> untuk membuka fungsi ini dan mendukung pengembangan. Terima kasih!
         ]]>
     </string>
 
@@ -379,7 +379,7 @@
     <string name="donate_please">
         <![CDATA[
             Halo,<br><br>
-            semoga Anda menyukai aplikasi ini. Aplikasi ini tidak berisi iklan, harap dukung pengembangan dengan membeli aplikasi <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a>, juga untuk mencegah dialog ini muncul kembali.<br><br>
+            semoga Anda menyukai aplikasi ini. Aplikasi ini tidak berisi iklan, harap dukung pengembangan dengan membeli aplikasi <a>Simple Thank You</a>, juga untuk mencegah dialog ini muncul kembali.<br><br>
             Terima kasih!
         ]]>
     </string>

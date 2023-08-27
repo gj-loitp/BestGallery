@@ -133,7 +133,7 @@
     <string name="share_colors_success">顏色更新成功。新增了一個名為 \'Shared\' 的新主題，以後請使用那個來更新全部應用程式顏色。</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            請購買 <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> 來解鎖此功能及支持開發者。謝謝!
+            請購買 <a>Simple Thank You</a> 來解鎖此功能及支持開發者。謝謝!
         ]]>
     </string>
 
@@ -379,7 +379,7 @@
     <string name="donate_please">
         <![CDATA[
             哈囉 <br><br>
-            希望您喜愛這應用程式。 它不含廣告，所以請購買應用程式 <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> 來支持開發者，這對話框也不會再出現。<br><br>
+            希望您喜愛這應用程式。 它不含廣告，所以請購買應用程式 <a>Simple Thank You</a> 來支持開發者，這對話框也不會再出現。<br><br>
             感謝!
         ]]>
     </string>

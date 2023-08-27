@@ -136,7 +136,7 @@
     <string name="share_colors_success">Spalvos atnaujintos sėkmingai. Nauja tema pavdinimu \'Bendra\' buvo įtraukta, prašome naudoti tai ateityje visų programėlių spalvų atnaujinimui.</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            Please purchase <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Paprastas ačiū</a>atrakinti šią funkciją ir palaikyti vystymą. Ačiū!
+            Please purchase <a>Paprastas ačiū</a>atrakinti šią funkciją ir palaikyti vystymą. Ačiū!
         ]]>
     </string>
 
@@ -416,7 +416,7 @@
     <string name="donate_please">
         <![CDATA[
             Hello,<br><br>
-            hope you are enjoying the app. It contains no ads, please support its development by purchasing the <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> app, it will also prevent this dialog from showing up again.<br><br>
+            hope you are enjoying the app. It contains no ads, please support its development by purchasing the <a>Simple Thank You</a> app, it will also prevent this dialog from showing up again.<br><br>
             Thank you!
         ]]>
     </string>

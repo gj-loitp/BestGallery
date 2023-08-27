@@ -136,7 +136,7 @@
     <string name="share_colors_success">"Renkler başarıyla güncellendi. 'Paylaşılan' adlı yeni bir Tema eklendi, lütfen gelecekte tüm uygulama renklerini güncellemek için kullanınız."</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            Bu işlevin kilidini açmak ve geliştirmeyi desteklemek için lütfen <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Basit Teşekkürler</a>\'i satın alın. Teşekkürler!
+            Bu işlevin kilidini açmak ve geliştirmeyi desteklemek için lütfen <a>Basit Teşekkürler</a>\'i satın alın. Teşekkürler!
         ]]>
     </string>
 
@@ -402,7 +402,7 @@
     <string name="donate_please">
         <![CDATA[
             Merhaba,<br><br>
-            umarım uygulamadan memnunsunuzdur. Hiçbir reklam içermiyor, bu yüzden lütfen <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Basit Teşekkürler</a> uygulamasını satın alarak geliştirmeyi destekleyip, bu pencerenin tekrar görünmesini de önleyin.<br><br>
+            umarım uygulamadan memnunsunuzdur. Hiçbir reklam içermiyor, bu yüzden lütfen <a>Basit Teşekkürler</a> uygulamasını satın alarak geliştirmeyi destekleyip, bu pencerenin tekrar görünmesini de önleyin.<br><br>
             Teşekkürler!
         ]]>
     </string>

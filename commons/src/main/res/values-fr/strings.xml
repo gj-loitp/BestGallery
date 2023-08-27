@@ -136,7 +136,7 @@
     <string name="share_colors_success">Couleurs actualisées. Un nouveau thème nommé \"Partagé\" a été ajouté. Veuillez utiliser ce thème pour actualiser les couleurs de toutes les applications à partir de maintenant.</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            Veuillez acheter <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Un petit Merci</a> pour déverrouiller cette fonctionnalité et soutenir le développeur. Merci !
+            Veuillez acheter <a>Un petit Merci</a> pour déverrouiller cette fonctionnalité et soutenir le développeur. Merci !
         ]]>
     </string>
 
@@ -404,7 +404,7 @@
     <string name="donate_please">
         <![CDATA[
             Bonjour,<br><br>
-            Nous espérons que vous appréciez cette application. Elle ne contient aucune publicité, mais vous pouvez soutenir son développement en achetant l\'application <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a>. Cela nous permettra également de ne plus vous afficher cette boite de dialogue.<br><br>
+            Nous espérons que vous appréciez cette application. Elle ne contient aucune publicité, mais vous pouvez soutenir son développement en achetant l\'application <a>Simple Thank You</a>. Cela nous permettra également de ne plus vous afficher cette boite de dialogue.<br><br>
             Merci !
         ]]>
     </string>

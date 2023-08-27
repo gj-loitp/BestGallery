@@ -136,7 +136,7 @@
     <string name="share_colors_success">Cores atualizadas com sucesso. Foi criado o novo tema \'Partilhado\', que pode utilizar para atualizar as cores de todas as aplicações Simple.</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            Por favor compre a aplicação <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> para desbloquear esta funcionalidade e ajudar no desenvolvimento. Obrigado!
+            Por favor compre a aplicação <a>Simple Thank You</a> para desbloquear esta funcionalidade e ajudar no desenvolvimento. Obrigado!
         ]]>
     </string>
 
@@ -402,7 +402,7 @@
     <string name="donate_please">
         <![CDATA[
             Olá,<br><br>
-            espero que esteja a gostar desta aplicação. Não possui anúncios e é open source. Se quiser ajudar no desenvolvimento, pode comprar a aplicação <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> que também impedirá que este diálogo seja novamente mostrado.<br><br>
+            espero que esteja a gostar desta aplicação. Não possui anúncios e é open source. Se quiser ajudar no desenvolvimento, pode comprar a aplicação <a>Simple Thank You</a> que também impedirá que este diálogo seja novamente mostrado.<br><br>
             Obrigado!
         ]]>
     </string>

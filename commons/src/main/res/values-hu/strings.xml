@@ -135,7 +135,7 @@
     <string name="share_colors_success">A színek sikeresen frissültek. Hozzáadott egy új témát, amelynek neve \'Megosztott\'. Kérjük, a jövőben ezt használja az összes alkalmazás színeinek frissítéséhez.</string>
     <string name="purchase_thank_you">
 		<![CDATA[
-            Kérjük vásárolja meg a <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> alkalmazást a funkció feloldásához és a fejlesztés támogatásához. Köszönöm!
+            Kérjük vásárolja meg a <a>Simple Thank You</a> alkalmazást a funkció feloldásához és a fejlesztés támogatásához. Köszönöm!
         ]]>
 	</string>
 
@@ -401,7 +401,7 @@
     <string name="donate_please">
 		<![CDATA[
             Hello,<br><br>
-            remélem tetszett az alkalmazás. Nem tartalmaz hirdetéseket. Kérem támogasd a fejlesztést a <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> megvásárlásával. Utána ez a párbeszédablak sem látszik újra.<br><br>
+            remélem tetszett az alkalmazás. Nem tartalmaz hirdetéseket. Kérem támogasd a fejlesztést a <a>Simple Thank You</a> megvásárlásával. Utána ez a párbeszédablak sem látszik újra.<br><br>
             Köszönöm!
         ]]>
 	</string>

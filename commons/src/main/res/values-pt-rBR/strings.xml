@@ -136,7 +136,7 @@
     <string name="share_colors_success">Cores atualizadas com sucesso. Um novo tema chamado \'Compartilhado\' foi adicionado, use-o para atualizar as cores de todos os apps no futuro.</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            Por favor compre o <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Agradecimento Simple</a> para desbloquear esta função e apoiar o desenvolvimento. Obrigado!
+            Por favor compre o <a>Agradecimento Simple</a> para desbloquear esta função e apoiar o desenvolvimento. Obrigado!
         ]]>
     </string>
 
@@ -402,7 +402,7 @@
     <string name="donate_please">
         <![CDATA[
             Olá,<br><br>
-            Esperamos que esteja gostando do app. Ele não contém anúncios, então apoie o desenvolvimento adquirindo o <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Agradecimento ao Simple</a>, ele também bloqueia este diálogo de aparecer.<br><br>
+            Esperamos que esteja gostando do app. Ele não contém anúncios, então apoie o desenvolvimento adquirindo o <a>Agradecimento ao Simple</a>, ele também bloqueia este diálogo de aparecer.<br><br>
             Obrigado!
         ]]>
     </string>

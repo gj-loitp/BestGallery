@@ -136,7 +136,7 @@
     <string name="share_colors_success">Rənglər uğurla yeniləndi. \'Paylanmış\' adlı yeni tema əlavə edildi, xahiş olunur gələcəkdə bütün tətbiqlərin yeniləmələri üçün bundan istifadə edin.</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            Lütfən bağış edin <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Bu funksiyanı açdığınız və təkmilləşdirməni dəstəklədiyiniz üçün Sadə Təşəkkür</a>. Çox Sağolun!
+            Lütfən bağış edin <a>Bu funksiyanı açdığınız və təkmilləşdirməni dəstəklədiyiniz üçün Sadə Təşəkkür</a>. Çox Sağolun!
         ]]>
     </string>
 
@@ -402,7 +402,7 @@
     <string name="donate_please">
         <![CDATA[
             Salam,<br><br>
-            arzu edirəm tətbiqdən zövq alırsan. Reklam ehtiva etmir, please support its development by purchasing the <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> app, it will also prevent this dialog from showing up again.<br><br>
+            arzu edirəm tətbiqdən zövq alırsan. Reklam ehtiva etmir, please support its development by purchasing the <a>Simple Thank You</a> app, it will also prevent this dialog from showing up again.<br><br>
             Thank you!
         ]]>
     </string>

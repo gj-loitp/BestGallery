@@ -346,8 +346,8 @@ fun Activity.openPathIntent(
             setDataAndType(newUri, mimeType)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
 
-            if (applicationId == "com.eagle.gallery.photos.videos.album.hd.gallery.editor"
-                || applicationId == "com.eagle.gallery.photos.videos.album.hd.gallery.editor.debug"
+            if (applicationId == "com.roy.gallery.photos.videos.album.hd.gallery.editor"
+                || applicationId == "com.roy.gallery.photos.videos.album.hd.gallery.editor.debug"
             ) {
                 putExtra(IS_FROM_GALLERY, true)
             }

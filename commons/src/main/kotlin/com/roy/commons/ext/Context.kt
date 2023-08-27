@@ -300,7 +300,6 @@ fun Context.getPermissionString(id: Int) = when (id) {
 
 fun Context.getFilePublicUri(file: File, applicationId: String): Uri {
     // for images/videos/gifs try getting a media content uri first, like content://media/external/images/media/438
-    // if media content uri is null, get our custom uri like content://com.eagle.gallery.provider/external_files/emulated/0/DCIM/IMG_20171104_233915.jpg
     var uri = if (file.isMediaFile()) {
         getMediaContentUri(file.absolutePath)
     } else {
@@ -478,10 +477,10 @@ fun Context.getUriMimeType(path: String, newUri: Uri): String {
     return mimeType
 }
 
-fun Context.isThankYouInstalled() = isPackageInstalled("com.eagle.thankyou")
+fun Context.isThankYouInstalled() = isPackageInstalled("com.roy.thankyou")
 
 fun Context.isAProApp() =
-    packageName.startsWith("com.eagle.") && packageName.removeSuffix(".debug").endsWith(".pro")
+    packageName.startsWith("com.roy.") && packageName.removeSuffix(".debug").endsWith(".pro")
 
 fun Context.isPackageInstalled(pkgName: String): Boolean {
     return try {
@@ -725,7 +724,7 @@ fun Context.getAppIconColors() =
 fun Context.getLaunchIntent() = packageManager.getLaunchIntentForPackage(baseConfig.appId)
 
 fun Context.getCanAppBeUpgraded() =
-    proPackages.contains(baseConfig.appId.removeSuffix(".debug").removePrefix("com.eagle."))
+    proPackages.contains(baseConfig.appId.removeSuffix(".debug").removePrefix("com.roy."))
 
 fun Context.getProUrl() =
     "https://play.google.com/store/apps/details?id=${baseConfig.appId.removeSuffix(".debug")}.pro"

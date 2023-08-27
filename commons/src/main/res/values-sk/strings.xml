@@ -139,7 +139,7 @@
     <string name="share_colors_success">Farby boli úspešne aktualizované. Bola pridaná nová \'Zdieľaná\' téma, prosím použite ju pri ďalšej úprave farieb.</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            Prosím zakúpte si <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Jednoduché ďakujem</a> na odomknutie tejto funkcie a podporu vývoja. Vďaka!
+            Prosím zakúpte si <a>Jednoduché ďakujem</a> na odomknutie tejto funkcie a podporu vývoja. Vďaka!
         ]]>
     </string>
 
@@ -425,7 +425,7 @@
     <string name="donate_please">
         <![CDATA[
             Zdravím,<br><br>
-            dúfam, že sa vám moja apka páči. Neobsahuje žiadne reklamy, podporte prosím jej vývoj zakúpením aplikácie <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Jednoduché ďakujem</a>. Zaručí to aj to, že tento dialóg už neuvidíte.<br><br>
+            dúfam, že sa vám moja apka páči. Neobsahuje žiadne reklamy, podporte prosím jej vývoj zakúpením aplikácie <a href="https://play.google.com/store/apps/details?id=com.roy.thankyou">Jednoduché ďakujem</a>. Zaručí to aj to, že tento dialóg už neuvidíte.<br><br>
             Ďakujem!
         ]]>
     </string>

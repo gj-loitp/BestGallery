@@ -136,7 +136,7 @@
     <string name="share_colors_success">Kleuren gewijzigd. Gebruik het nieuwe thema \'Gedeeld\' om de kleuren voor al onze apps aan te passen.</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            Om deze functie te gebruiken en om verdere ontwikkeling te ondersteunen kunt u <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> aanschaffen. Alvast bedankt!
+            Om deze functie te gebruiken en om verdere ontwikkeling te ondersteunen kunt u <a>Simple Thank You</a> aanschaffen. Alvast bedankt!
         ]]>
     </string>
 
@@ -402,7 +402,7 @@
     <string name="donate_please">
         <![CDATA[
             Hallo,<br><br>
-            Hopelijk vindt u dit een fijne app. Het bevat geen advertenties, maar u kunt de verdere ontwikkeling wel ondersteunen door de app <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> aan te schaffen. Dit zal ook voorkomen dat dit venster nog eens verschijnt.<br><br>
+            Hopelijk vindt u dit een fijne app. Het bevat geen advertenties, maar u kunt de verdere ontwikkeling wel ondersteunen door de app <a>Simple Thank You</a> aan te schaffen. Dit zal ook voorkomen dat dit venster nog eens verschijnt.<br><br>
             Dank u wel!
         ]]>
     </string>

@@ -136,7 +136,7 @@
     <string name="share_colors_success">Farverne er ændret. Et nyt udseende kaldet \"Tilpasset\" er tilføjet, brug det ved opdatering af alle app-farver fremover.</string>
     <string name="purchase_thank_you">
         <![CDATA[
-            Køb <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a> for at låse denne funktion op og understøtte appens udvikling. Tak!
+            Køb <a>Simple Thank You</a> for at låse denne funktion op og understøtte appens udvikling. Tak!
         ]]>
     </string>
 
@@ -402,7 +402,7 @@
     <string name="donate_please">
         <![CDATA[
             Hej<br><br>
-            Håber du kan lide denne app. Den indeholder ingen reklamer, så vær sød at købe appen <a href="https://play.google.com/store/apps/details?id=com.eagle.thankyou">Simple Thank You</a>, som også vil forhindre at denne besked vises igen.<br><br>
+            Håber du kan lide denne app. Den indeholder ingen reklamer, så vær sød at købe appen <a>Simple Thank You</a>, som også vil forhindre at denne besked vises igen.<br><br>
             På forhånd tak!
         ]]>
     </string>

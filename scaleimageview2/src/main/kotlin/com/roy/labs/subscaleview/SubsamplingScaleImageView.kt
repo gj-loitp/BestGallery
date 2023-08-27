@@ -1251,7 +1251,7 @@ open class SubsamplingScaleImageView @JvmOverloads constructor(
             power *= 2
         }
 
-        if (!context.packageName.startsWith("com.eagle") && !context.packageName.startsWith("com.lisheng")) {
+        if (!context.packageName.startsWith("com.roy") && !context.packageName.startsWith("com.lisheng")) {
             power *= 4
         }
 
