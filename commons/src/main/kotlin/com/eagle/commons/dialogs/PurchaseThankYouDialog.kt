@@ -7,13 +7,13 @@ import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.extensions.launchPurchaseThankYouIntent
 import com.eagle.commons.extensions.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_purchase_thank_you.view.*
+import kotlinx.android.synthetic.main.dlg_purchase_thank_you.view.*
 
 class PurchaseThankYouDialog(val activity: Activity) {
     init {
-        val view = activity.layoutInflater.inflate(R.layout.dialog_purchase_thank_you, null).apply {
-            purchase_thank_you.text = Html.fromHtml(activity.getString(R.string.purchase_thank_you))
-            purchase_thank_you.movementMethod = LinkMovementMethod.getInstance()
+        val view = activity.layoutInflater.inflate(R.layout.dlg_purchase_thank_you, null).apply {
+            purchaseThankYou.text = Html.fromHtml(activity.getString(R.string.purchase_thank_you))
+            purchaseThankYou.movementMethod = LinkMovementMethod.getInstance()
         }
 
         AlertDialog.Builder(activity)

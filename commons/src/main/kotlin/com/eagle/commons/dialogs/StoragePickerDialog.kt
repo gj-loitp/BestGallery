@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.extensions.*
-import kotlinx.android.synthetic.main.dialog_radio_group.view.*
+import kotlinx.android.synthetic.main.dlg_radio_group.view.*
 
 /**
  * A dialog for choosing between internal, root, SD card (optional) storage
@@ -32,8 +32,8 @@ class StoragePickerDialog(val activity: BaseSimpleActivity, currPath: String, va
         val inflater = LayoutInflater.from(activity)
         val resources = activity.resources
         val layoutParams = RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        val view = inflater.inflate(R.layout.dialog_radio_group, null)
-        radioGroup = view.dialog_radio_group
+        val view = inflater.inflate(R.layout.dlg_radio_group, null)
+        radioGroup = view.dialogRadioGroup
         val basePath = currPath.getBasePath(activity)
 
         val internalButton = inflater.inflate(R.layout.v_radio_button, null) as RadioButton

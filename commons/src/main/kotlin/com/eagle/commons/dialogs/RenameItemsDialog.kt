@@ -4,25 +4,25 @@ import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.extensions.*
-import kotlinx.android.synthetic.main.dialog_rename_items.*
-import kotlinx.android.synthetic.main.dialog_rename_items.view.*
+import kotlinx.android.synthetic.main.dlg_rename_items.*
+import kotlinx.android.synthetic.main.dlg_rename_items.view.*
 import java.io.File
 import java.util.*
 
 class RenameItemsDialog(val activity: BaseSimpleActivity, val paths: ArrayList<String>, val callback: () -> Unit) {
     init {
 
-        val view = activity.layoutInflater.inflate(R.layout.dialog_rename_items, null)
+        val view = activity.layoutInflater.inflate(R.layout.dlg_rename_items, null)
 
         AlertDialog.Builder(activity)
                 .setPositiveButton(R.string.ok, null)
                 .setNegativeButton(R.string.cancel, null)
                 .create().apply {
                     activity.setupDialogStuff(view, this, R.string.rename) {
-                        showKeyboard(view.rename_items_value)
+                        showKeyboard(view.renameItemsValue)
                         getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                            val valueToAdd = view.rename_items_value.value
-                            val append = view.rename_items_radio_group.checkedRadioButtonId == rename_items_radio_append.id
+                            val valueToAdd = view.renameItemsValue.value
+                            val append = view.renameItemsRadioGroup.checkedRadioButtonId == renameItemsRadioAppend.id
 
                             if (valueToAdd.isEmpty()) {
                                 callback()

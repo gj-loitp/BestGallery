@@ -12,23 +12,23 @@ import com.eagle.commons.helpers.PROTECTION_PIN
 import com.eagle.commons.helpers.SHOW_ALL_TABS
 import com.eagle.commons.interfaces.HashListener
 import com.eagle.commons.views.MyDialogViewPager
-import kotlinx.android.synthetic.main.dialog_security.view.*
+import kotlinx.android.synthetic.main.dlg_security.view.*
 
 class SecurityDialog(val activity: Activity, val requiredHash: String, val showTabIndex: Int, val callback: (hash: String, type: Int, success: Boolean) -> Unit)
     : HashListener {
     var dialog: AlertDialog? = null
-    val view = LayoutInflater.from(activity).inflate(R.layout.dialog_security, null)
+    val view = LayoutInflater.from(activity).inflate(R.layout.dlg_security, null)
     lateinit var tabsAdapter: PasswordTypesAdapter
     lateinit var viewPager: MyDialogViewPager
 
     init {
         view.apply {
-            viewPager = findViewById(R.id.dialog_tab_view_pager)
+            viewPager = findViewById(R.id.dialogTabViewPager)
             viewPager.offscreenPageLimit = 2
-            tabsAdapter = PasswordTypesAdapter(context, requiredHash, this@SecurityDialog, dialog_scrollview)
+            tabsAdapter = PasswordTypesAdapter(context, requiredHash, this@SecurityDialog, dialogScrollView)
             viewPager.adapter = tabsAdapter
             viewPager.onPageChangeListener {
-                dialog_tab_layout.getTabAt(it)!!.select()
+                dialogTabLayout.getTabAt(it)!!.select()
             }
 
             viewPager.onGlobalLayout {
@@ -39,11 +39,11 @@ class SecurityDialog(val activity: Activity, val requiredHash: String, val showT
                 val textColor = context.baseConfig.textColor
 
                 if (!activity.isFingerPrintSensorAvailable())
-                    dialog_tab_layout.removeTabAt(PROTECTION_FINGERPRINT)
+                    dialogTabLayout.removeTabAt(PROTECTION_FINGERPRINT)
 
-                dialog_tab_layout.setTabTextColors(textColor, textColor)
-                dialog_tab_layout.setSelectedTabIndicatorColor(context.baseConfig.primaryColor)
-                dialog_tab_layout.onTabSelectionChanged(tabSelectedAction = {
+                dialogTabLayout.setTabTextColors(textColor, textColor)
+                dialogTabLayout.setSelectedTabIndicatorColor(context.baseConfig.primaryColor)
+                dialogTabLayout.onTabSelectionChanged(tabSelectedAction = {
                     viewPager.currentItem = when {
                         it.text.toString().equals(resources.getString(R.string.pattern), true) -> PROTECTION_PATTERN
                         it.text.toString().equals(resources.getString(R.string.pin), true) -> PROTECTION_PIN
@@ -52,7 +52,7 @@ class SecurityDialog(val activity: Activity, val requiredHash: String, val showT
                     updateTabVisibility()
                 })
             } else {
-                dialog_tab_layout.beGone()
+                dialogTabLayout.beGone()
                 viewPager.currentItem = showTabIndex
                 viewPager.allowSwiping = false
             }

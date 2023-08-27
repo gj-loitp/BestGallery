@@ -4,7 +4,7 @@ import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.extensions.*
-import kotlinx.android.synthetic.main.dialog_rename_item.view.*
+import kotlinx.android.synthetic.main.dlg_rename_item.view.*
 import java.io.File
 import java.util.*
 
@@ -14,18 +14,18 @@ class RenameItemDialog(val activity: BaseSimpleActivity, val path: String, val c
         val dotAt = fullName.lastIndexOf(".")
         var name = fullName
 
-        val view = activity.layoutInflater.inflate(R.layout.dialog_rename_item, null).apply {
+        val view = activity.layoutInflater.inflate(R.layout.dlg_rename_item, null).apply {
             if (dotAt > 0 && !File(path).isDirectory) {
                 name = fullName.substring(0, dotAt)
                 val extension = fullName.substring(dotAt + 1)
-                rename_item_extension.setText(extension)
+                renameItemExtension.setText(extension)
             } else {
-                rename_item_extension_label.beGone()
-                rename_item_extension.beGone()
+                renameItemExtensionLabel.beGone()
+                renameItemExtension.beGone()
             }
 
-            rename_item_name.setText(name)
-            rename_item_path.text = activity.humanizePath(path.getParentPath())
+            renameItemName.setText(name)
+            renameItemPath.text = activity.humanizePath(path.getParentPath())
         }
 
         AlertDialog.Builder(activity)
@@ -33,10 +33,10 @@ class RenameItemDialog(val activity: BaseSimpleActivity, val path: String, val c
                 .setNegativeButton(R.string.cancel, null)
                 .create().apply {
                     activity.setupDialogStuff(view, this, R.string.rename) {
-                        showKeyboard(view.rename_item_name)
+                        showKeyboard(view.renameItemName)
                         getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                            var newName = view.rename_item_name.value
-                            val newExtension = view.rename_item_extension.value
+                            var newName = view.renameItemName.value
+                            val newExtension = view.renameItemExtension.value
 
                             if (newName.isEmpty()) {
                                 activity.toast(R.string.empty_name)

@@ -14,7 +14,7 @@ import com.eagle.commons.extensions.*
 import com.eagle.commons.helpers.sumByInt
 import com.eagle.commons.helpers.sumByLong
 import com.eagle.commons.models.FileDirItem
-import kotlinx.android.synthetic.main.dialog_properties.view.*
+import kotlinx.android.synthetic.main.dlg_properties.view.*
 import kotlinx.android.synthetic.main.v_property_item.view.*
 import java.io.File
 import java.io.FileNotFoundException
@@ -40,8 +40,8 @@ class PropertiesDialog() {
 
         mInflater = LayoutInflater.from(activity)
         mResources = activity.resources
-        val view = mInflater.inflate(R.layout.dialog_properties, null)
-        mPropertyView = view.properties_holder
+        val view = mInflater.inflate(R.layout.dlg_properties, null)
+        mPropertyView = view.propertiesHolder
 
         val fileDirItem = FileDirItem(path, path.getFilenameFromPath(), File(path).isDirectory)
         addProperty(R.string.name, fileDirItem.name)
@@ -133,8 +133,8 @@ class PropertiesDialog() {
     constructor(activity: Activity, paths: List<String>, countHiddenItems: Boolean = false) : this() {
         mInflater = LayoutInflater.from(activity)
         mResources = activity.resources
-        val view = mInflater.inflate(R.layout.dialog_properties, null)
-        mPropertyView = view.properties_holder
+        val view = mInflater.inflate(R.layout.dlg_properties, null)
+        mPropertyView = view.propertiesHolder
 
         val fileDirItems = ArrayList<FileDirItem>(paths.size)
         paths.forEach {
@@ -206,7 +206,7 @@ class PropertiesDialog() {
         mInflater.inflate(R.layout.v_property_item, mPropertyView, false).apply {
             propertyLabel.text = mResources.getString(labelId)
             propertyValue.text = value
-            mPropertyView.properties_holder.addView(this)
+            mPropertyView.propertiesHolder.addView(this)
 
             if (viewId != 0) {
                 id = viewId

@@ -10,7 +10,7 @@ import com.eagle.commons.R
 import com.eagle.commons.extensions.onGlobalLayout
 import com.eagle.commons.extensions.setupDialogStuff
 import com.eagle.commons.models.RadioItem
-import kotlinx.android.synthetic.main.dialog_radio_group.view.*
+import kotlinx.android.synthetic.main.dlg_radio_group.view.*
 import java.util.*
 
 class RadioGroupDialog(val activity: Activity, val items: ArrayList<RadioItem>, val checkedItemId: Int = -1, val titleId: Int = 0,
@@ -20,8 +20,8 @@ class RadioGroupDialog(val activity: Activity, val items: ArrayList<RadioItem>, 
     private var selectedItemId = -1
 
     init {
-        val view = activity.layoutInflater.inflate(R.layout.dialog_radio_group, null)
-        view.dialog_radio_group.apply {
+        val view = activity.layoutInflater.inflate(R.layout.dlg_radio_group, null)
+        view.dialogRadioGroup.apply {
             for (i in 0 until items.size) {
                 val radioButton = (activity.layoutInflater.inflate(R.layout.v_radio_button, null) as RadioButton).apply {
                     text = items[i].title
@@ -50,9 +50,9 @@ class RadioGroupDialog(val activity: Activity, val items: ArrayList<RadioItem>, 
         }
 
         if (selectedItemId != -1) {
-            view.dialog_radio_holder.apply {
+            view.dialogRadioHolder.apply {
                 onGlobalLayout {
-                    scrollY = view.dialog_radio_group.findViewById<View>(selectedItemId).bottom - height
+                    scrollY = view.dialogRadioGroup.findViewById<View>(selectedItemId).bottom - height
                 }
             }
         }

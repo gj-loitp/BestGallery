@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.eagle.commons.views.MyScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dialog_scrollview"
+<com.eagle.commons.views.MyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogScrollView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -11,35 +10,35 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/dialog_tab_layout"
+            android:id="@+id/dialogTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/dialog_tab_pattern"
+                android:id="@+id/dialogTabPattern"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/pattern"/>
+                android:text="@string/pattern" />
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/dialog_tab_pin"
+                android:id="@+id/dialogTabPin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/pin"/>
+                android:text="@string/pin" />
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/dialog_tab_fingerprint"
+                android:id="@+id/dialogTabFingerPrint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/fingerprint"/>
+                android:text="@string/fingerprint" />
 
         </com.google.android.material.tabs.TabLayout>
 
         <com.eagle.commons.views.MyDialogViewPager
-            android:id="@+id/dialog_tab_view_pager"
+            android:id="@+id/dialogTabViewPager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/dialog_tab_layout"/>
+            android:layout_below="@+id/dialogTabLayout" />
 
     </RelativeLayout>
 </com.eagle.commons.views.MyScrollView>
