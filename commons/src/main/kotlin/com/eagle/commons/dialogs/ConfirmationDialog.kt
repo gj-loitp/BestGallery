@@ -1,5 +1,6 @@
 package com.eagle.commons.dialogs
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
@@ -16,16 +17,24 @@ import kotlinx.android.synthetic.main.dlg_message.view.*
  * @param negative negative buttons text ID (optional)
  * @param callback an anonymous function
  */
-class ConfirmationDialog(activity: Activity, message: String = "", messageId: Int = R.string.proceed_with_deletion, positive: Int = R.string.yes,
-                         negative: Int = R.string.no, val callback: () -> Unit) {
+@SuppressLint("InflateParams")
+class ConfirmationDialog(
+    activity: Activity,
+    message: String = "",
+    messageId: Int = R.string.proceed_with_deletion,
+    positive: Int = R.string.yes,
+    negative: Int = R.string.no,
+    val callback: () -> Unit,
+) {
     var dialog: AlertDialog
 
     init {
         val view = activity.layoutInflater.inflate(R.layout.dlg_message, null)
-        view.message.text = if (message.isEmpty()) activity.resources.getString(messageId) else message
+        view.message.text =
+            message.ifEmpty { activity.resources.getString(messageId) }
 
         val builder = AlertDialog.Builder(activity)
-                .setPositiveButton(positive) { dialog, which -> dialogConfirmed() }
+            .setPositiveButton(positive) { _, _ -> dialogConfirmed() }
 
         if (negative != 0)
             builder.setNegativeButton(negative, null)

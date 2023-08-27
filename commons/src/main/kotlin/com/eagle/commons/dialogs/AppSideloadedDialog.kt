@@ -1,5 +1,6 @@
 package com.eagle.commons.dialogs
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.text.Html
 import android.text.method.LinkMovementMethod
@@ -10,9 +11,11 @@ import com.eagle.commons.ext.launchViewIntent
 import com.eagle.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_textview.view.*
 
+@SuppressLint("InflateParams")
 class AppSideloadedDialog(val activity: Activity, val callback: () -> Unit) {
     var dialog: AlertDialog
-    val url = "https://play.google.com/store/apps/details?id=${activity.baseConfig.appId.removeSuffix(".debug")}"
+    val url =
+        "https://play.google.com/store/apps/details?id=${activity.baseConfig.appId.removeSuffix(".debug")}"
 
     init {
         val view = activity.layoutInflater.inflate(R.layout.dlg_textview, null).apply {
@@ -22,15 +25,15 @@ class AppSideloadedDialog(val activity: Activity, val callback: () -> Unit) {
         }
 
         dialog = AlertDialog.Builder(activity)
-                .setNegativeButton(R.string.cancel) { dialog, which -> negativePressed() }
-                .setPositiveButton(R.string.download, null)
-                .setOnDismissListener { negativePressed() }
-                .create().apply {
-                    activity.setupDialogStuff(view, this)
-                    getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                        downloadApp()
-                    }
+            .setNegativeButton(R.string.cancel) { _, _ -> negativePressed() }
+            .setPositiveButton(R.string.download, null)
+            .setOnDismissListener { negativePressed() }
+            .create().apply {
+                activity.setupDialogStuff(view, this)
+                getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                    downloadApp()
                 }
+            }
     }
 
     private fun downloadApp() {

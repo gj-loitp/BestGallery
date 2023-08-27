@@ -1,5 +1,6 @@
 package com.eagle.commons.dialogs
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
 import android.view.MotionEvent
@@ -16,15 +17,21 @@ import com.eagle.commons.views.ColorPickerSquare
 import kotlinx.android.synthetic.main.dlg_color_picker.view.*
 
 // forked from https://github.com/yukuku/ambilwarna
-class ColorPickerDialog(val activity: Activity, color: Int, val removeDimmedBackground: Boolean = false,
-                        val currentColorCallback: ((color: Int) -> Unit)? = null, val callback: (wasPositivePressed: Boolean, color: Int) -> Unit) {
-    lateinit var viewHue: View
-    lateinit var viewSatVal: ColorPickerSquare
-    lateinit var viewCursor: ImageView
-    lateinit var viewNewColor: ImageView
-    lateinit var viewTarget: ImageView
-    lateinit var newHexField: EditText
-    lateinit var viewContainer: ViewGroup
+@SuppressLint("ClickableViewAccessibility", "SetTextI18n", "InflateParams")
+class ColorPickerDialog(
+    val activity: Activity,
+    color: Int,
+    private val removeDimmedBackground: Boolean = false,
+    private val currentColorCallback: ((color: Int) -> Unit)? = null,
+    val callback: (wasPositivePressed: Boolean, color: Int) -> Unit,
+) {
+    private var viewHue: View
+    private var viewSatVal: ColorPickerSquare
+    private var viewCursor: ImageView
+    private var viewNewColor: ImageView
+    private var viewTarget: ImageView
+    private var newHexField: EditText
+    private var viewContainer: ViewGroup
     private val currentColorHsv = FloatArray(3)
     private val backgroundColor = activity.baseConfig.backgroundColor
     private var isHueBeingDragged = false
@@ -53,7 +60,7 @@ class ColorPickerDialog(val activity: Activity, color: Int, val removeDimmedBack
             newHexField.setText(hexCode)
         }
 
-        viewHue.setOnTouchListener(OnTouchListener { v, event ->
+        viewHue.setOnTouchListener(OnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 isHueBeingDragged = true
             }
@@ -64,7 +71,8 @@ class ColorPickerDialog(val activity: Activity, color: Int, val removeDimmedBack
                     y = 0f
 
                 if (y > viewHue.measuredHeight) {
-                    y = viewHue.measuredHeight - 0.001f // to avoid jumping the cursor from bottom to top.
+                    y =
+                        viewHue.measuredHeight - 0.001f // to avoid jumping the cursor from bottom to top.
                 }
                 var hue = 360f - 360f / viewHue.measuredHeight * y
                 if (hue == 360f)
@@ -82,7 +90,7 @@ class ColorPickerDialog(val activity: Activity, color: Int, val removeDimmedBack
             false
         })
 
-        viewSatVal.setOnTouchListener(OnTouchListener { v, event ->
+        viewSatVal.setOnTouchListener(OnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_MOVE || event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_UP) {
                 var x = event.x
                 var y = event.y
@@ -121,16 +129,16 @@ class ColorPickerDialog(val activity: Activity, color: Int, val removeDimmedBack
 
         val textColor = activity.baseConfig.textColor
         dialog = AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.ok) { dialog, which -> confirmNewColor() }
-                .setNegativeButton(R.string.cancel) { dialog, which -> dialogDismissed() }
-                .setOnCancelListener { dialogDismissed() }
-                .create().apply {
-                    activity.setupDialogStuff(view, this) {
-                        view.colorPickerArrow.applyColorFilter(textColor)
-                        view.colorPickerHexArrow.applyColorFilter(textColor)
-                        viewCursor.applyColorFilter(textColor)
-                    }
+            .setPositiveButton(R.string.ok) { _, _ -> confirmNewColor() }
+            .setNegativeButton(R.string.cancel) { _, _ -> dialogDismissed() }
+            .setOnCancelListener { dialogDismissed() }
+            .create().apply {
+                activity.setupDialogStuff(view, this) {
+                    view.colorPickerArrow.applyColorFilter(textColor)
+                    view.colorPickerHexArrow.applyColorFilter(textColor)
+                    viewCursor.applyColorFilter(textColor)
                 }
+            }
 
         view.onGlobalLayout {
             moveHuePicker()
