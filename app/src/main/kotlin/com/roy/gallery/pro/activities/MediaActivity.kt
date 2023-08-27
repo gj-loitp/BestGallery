@@ -274,25 +274,25 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
         menu.apply {
             findItem(R.id.group).isVisible = !config.scrollHorizontally
 
-            findItem(R.id.hide_folder).isVisible = !isFolderHidden && !mShowAll && mPath != FAVORITES && mPath != RECYCLE_BIN
-            findItem(R.id.unhide_folder).isVisible = isFolderHidden && !mShowAll && mPath != FAVORITES && mPath != RECYCLE_BIN
-            findItem(R.id.exclude_folder).isVisible = !mShowAll && mPath != FAVORITES && mPath != RECYCLE_BIN
+            findItem(R.id.hideFolder).isVisible = !isFolderHidden && !mShowAll && mPath != FAVORITES && mPath != RECYCLE_BIN
+            findItem(R.id.unhideFolder).isVisible = isFolderHidden && !mShowAll && mPath != FAVORITES && mPath != RECYCLE_BIN
+            findItem(R.id.excludeFolder).isVisible = !mShowAll && mPath != FAVORITES && mPath != RECYCLE_BIN
 
-            findItem(R.id.empty_recycle_bin).isVisible = mPath == RECYCLE_BIN
-            findItem(R.id.empty_disable_recycle_bin).isVisible = mPath == RECYCLE_BIN
-            findItem(R.id.restore_all_files).isVisible = mPath == RECYCLE_BIN
+            findItem(R.id.emptyRecycleBin).isVisible = mPath == RECYCLE_BIN
+            findItem(R.id.emptyDisableRecycleBin).isVisible = mPath == RECYCLE_BIN
+            findItem(R.id.restoreAllFiles).isVisible = mPath == RECYCLE_BIN
 
-            findItem(R.id.folder_view).isVisible = mShowAll
-            findItem(R.id.open_camera).isVisible = mShowAll
+            findItem(R.id.folderView).isVisible = mShowAll
+            findItem(R.id.openCamera).isVisible = mShowAll
             findItem(R.id.about).isVisible = false
 
-            findItem(R.id.temporarily_show_hidden).isVisible = !config.shouldShowHidden
-            findItem(R.id.stop_showing_hidden).isVisible = config.temporarilyShowHidden
+            findItem(R.id.temporarilyShowHidden).isVisible = !config.shouldShowHidden
+            findItem(R.id.stopShowingHidden).isVisible = config.temporarilyShowHidden
 
             val viewType = config.getFolderViewType(if (mShowAll) SHOW_ALL else mPath)
-            findItem(R.id.increase_column_count).isVisible = viewType == VIEW_TYPE_GRID && config.mediaColumnCnt < MAX_COLUMN_COUNT
-            findItem(R.id.reduce_column_count).isVisible = viewType == VIEW_TYPE_GRID && config.mediaColumnCnt > 1
-            findItem(R.id.toggle_filename).isVisible = viewType == VIEW_TYPE_GRID
+            findItem(R.id.increaseColumnCount).isVisible = viewType == VIEW_TYPE_GRID && config.mediaColumnCnt < MAX_COLUMN_COUNT
+            findItem(R.id.reduceColumnCount).isVisible = viewType == VIEW_TYPE_GRID && config.mediaColumnCnt > 1
+            findItem(R.id.toggleFilename).isVisible = viewType == VIEW_TYPE_GRID
         }
 
         setupSearch(menu)
@@ -303,21 +303,21 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
         when (item.itemId) {
             R.id.sort -> showSortingDialog()
             R.id.filter -> showFilterMediaDialog()
-            R.id.empty_recycle_bin -> emptyRecycleBin()
-            R.id.empty_disable_recycle_bin -> emptyAndDisableRecycleBin()
-            R.id.restore_all_files -> restoreAllFiles()
-            R.id.toggle_filename -> toggleFilenameVisibility()
-            R.id.open_camera -> launchCamera()
-            R.id.folder_view -> switchToFolderView()
-            R.id.change_view_type -> changeViewType()
+            R.id.emptyRecycleBin -> emptyRecycleBin()
+            R.id.emptyDisableRecycleBin -> emptyAndDisableRecycleBin()
+            R.id.restoreAllFiles -> restoreAllFiles()
+            R.id.toggleFilename -> toggleFilenameVisibility()
+            R.id.openCamera -> launchCamera()
+            R.id.folderView -> switchToFolderView()
+            R.id.changeViewType -> changeViewType()
             R.id.group -> showGroupByDialog()
-            R.id.hide_folder -> tryHideFolder()
-            R.id.unhide_folder -> unhideFolder()
-            R.id.exclude_folder -> tryExcludeFolder()
-            R.id.temporarily_show_hidden -> tryToggleTemporarilyShowHidden()
-            R.id.stop_showing_hidden -> tryToggleTemporarilyShowHidden()
-            R.id.increase_column_count -> increaseColumnCount()
-            R.id.reduce_column_count -> reduceColumnCount()
+            R.id.hideFolder -> tryHideFolder()
+            R.id.unhideFolder -> unhideFolder()
+            R.id.excludeFolder -> tryExcludeFolder()
+            R.id.temporarilyShowHidden -> tryToggleTemporarilyShowHidden()
+            R.id.stopShowingHidden -> tryToggleTemporarilyShowHidden()
+            R.id.increaseColumnCount -> increaseColumnCount()
+            R.id.reduceColumnCount -> reduceColumnCount()
             R.id.slideshow -> startSlideshow()
             R.id.settings -> launchSettings()
             R.id.about -> launchAbout()

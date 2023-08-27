@@ -43,7 +43,7 @@ class HiddenFoldersActivity : SimpleActivity(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.add_folder -> addFolder()
+            R.id.addFolder -> addFolder()
             else -> return super.onOptionsItemSelected(item)
         }
         return true

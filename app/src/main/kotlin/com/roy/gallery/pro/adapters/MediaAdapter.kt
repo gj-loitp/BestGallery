@@ -118,10 +118,10 @@ class MediaAdapter(activity: BaseSimpleActivity, var media: MutableList<Thumbnai
         val isOneItemSelected = isOneItemSelected()
         val selectedPaths = selectedItems.map { it.path } as ArrayList<String>
         menu.apply {
-            findItem(R.id.cab_rename).isVisible = selectedItems.firstOrNull()?.getIsInRecycleBin() == false
-            findItem(R.id.cab_open_with).isVisible = isOneItemSelected
-            findItem(R.id.cab_confirm_selection).isVisible = isAGetIntent && allowMultiplePicks && selectedKeys.isNotEmpty()
-            findItem(R.id.cab_restore_recycle_bin_files).isVisible = selectedPaths.all { it.startsWith(activity.recycleBinPath) }
+            findItem(R.id.cabRename).isVisible = selectedItems.firstOrNull()?.getIsInRecycleBin() == false
+            findItem(R.id.cabOpenWith).isVisible = isOneItemSelected
+            findItem(R.id.cabConfirmSelection).isVisible = isAGetIntent && allowMultiplePicks && selectedKeys.isNotEmpty()
+            findItem(R.id.cabRestoreRecycleBinFiles).isVisible = selectedPaths.all { it.startsWith(activity.recycleBinPath) }
 
             checkHideBtnVisibility(this, selectedItems)
             checkFavoriteBtnVisibility(this, selectedItems)
@@ -134,26 +134,26 @@ class MediaAdapter(activity: BaseSimpleActivity, var media: MutableList<Thumbnai
         }
 
         when (id) {
-            R.id.cab_confirm_selection -> confirmSelection()
-            R.id.cab_properties -> showProperties()
-            R.id.cab_rename -> renameFile()
-            R.id.cab_edit -> editFile()
-            R.id.cab_hide -> toggleFileVisibility(true)
-            R.id.cab_unhide -> toggleFileVisibility(false)
-            R.id.cab_add_to_favorites -> toggleFavorites(true)
-            R.id.cab_remove_from_favorites -> toggleFavorites(false)
-            R.id.cab_restore_recycle_bin_files -> restoreFiles()
-            R.id.cab_share -> shareMedia()
-            R.id.cab_rotate_right -> rotateSelection(90)
-            R.id.cab_rotate_left -> rotateSelection(270)
-            R.id.cab_rotate_one_eighty -> rotateSelection(180)
-            R.id.cab_copy_to -> copyMoveTo(true)
-            R.id.cab_move_to -> moveFilesTo()
-            R.id.cab_select_all -> selectAll()
-            R.id.cab_open_with -> openPath()
-            R.id.cab_fix_date_taken -> fixDateTaken()
-            R.id.cab_set_as -> setAs()
-            R.id.cab_delete -> checkDeleteConfirmation()
+            R.id.cabConfirmSelection -> confirmSelection()
+            R.id.cabProperties -> showProperties()
+            R.id.cabRename -> renameFile()
+            R.id.cabEdit -> editFile()
+            R.id.cabHide -> toggleFileVisibility(true)
+            R.id.cabUnhide -> toggleFileVisibility(false)
+            R.id.cabAddToFavorites -> toggleFavorites(true)
+            R.id.cabRemoveFromFavorites -> toggleFavorites(false)
+            R.id.cabRestoreRecycleBinFiles -> restoreFiles()
+            R.id.cabShare -> shareMedia()
+            R.id.cabRotateRight -> rotateSelection(90)
+            R.id.cabRotateLeft -> rotateSelection(270)
+            R.id.cabRotateOneEighty -> rotateSelection(180)
+            R.id.cabCopyTo -> copyMoveTo(true)
+            R.id.cabMoveTo -> moveFilesTo()
+            R.id.cabSelectAll -> selectAll()
+            R.id.cabOpenWith -> openPath()
+            R.id.cabFixDateTaken -> fixDateTaken()
+            R.id.cabSetAs -> setAs()
+            R.id.cabDelete -> checkDeleteConfirmation()
         }
     }
 
@@ -181,13 +181,13 @@ class MediaAdapter(activity: BaseSimpleActivity, var media: MutableList<Thumbnai
 
     private fun checkHideBtnVisibility(menu: Menu, selectedItems: ArrayList<Medium>) {
         val isInRecycleBin = selectedItems.firstOrNull()?.getIsInRecycleBin() == true
-        menu.findItem(R.id.cab_hide).isVisible = !isInRecycleBin && selectedItems.any { !it.isHidden() }
-        menu.findItem(R.id.cab_unhide).isVisible = !isInRecycleBin && selectedItems.any { it.isHidden() }
+        menu.findItem(R.id.cabHide).isVisible = !isInRecycleBin && selectedItems.any { !it.isHidden() }
+        menu.findItem(R.id.cabUnhide).isVisible = !isInRecycleBin && selectedItems.any { it.isHidden() }
     }
 
     private fun checkFavoriteBtnVisibility(menu: Menu, selectedItems: ArrayList<Medium>) {
-        menu.findItem(R.id.cab_add_to_favorites).isVisible = selectedItems.any { !it.isFavorite }
-        menu.findItem(R.id.cab_remove_from_favorites).isVisible = selectedItems.any { it.isFavorite }
+        menu.findItem(R.id.cabAddToFavorites).isVisible = selectedItems.any { !it.isFavorite }
+        menu.findItem(R.id.cabRemoveFromFavorites).isVisible = selectedItems.any { it.isFavorite }
     }
 
     private fun confirmSelection() {

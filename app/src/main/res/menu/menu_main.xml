@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/search"
         android:icon="@drawable/ic_search"
         android:title="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="collapseActionView|ifRoom"/>
+        app:showAsAction="collapseActionView|ifRoom" />
     <item
-        android:id="@+id/open_camera"
+        android:id="@+id/openCamera"
         android:icon="@drawable/ic_camera"
         android:title="@string/open_camera"
         app:showAsAction="ifRoom" />
@@ -22,50 +22,50 @@
         android:id="@+id/filter"
         android:icon="@drawable/ic_filter"
         android:title="@string/filter_media"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/change_view_type"
+        android:id="@+id/changeViewType"
         android:title="@string/change_view_type"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
-        android:id="@+id/show_all"
+        android:id="@+id/showAll"
         android:title="@string/show_all"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
-        android:id="@+id/temporarily_show_hidden"
+        android:id="@+id/temporarilyShowHidden"
         android:title="@string/temporarily_show_hidden"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
-        android:id="@+id/stop_showing_hidden"
+        android:id="@+id/stopShowingHidden"
         android:title="@string/stop_showing_hidden"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
-        android:id="@+id/show_the_recycle_bin"
+        android:id="@+id/showTheRecycleBin"
         android:title="@string/show_the_recycle_bin"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
-        android:id="@+id/hide_the_recycle_bin"
+        android:id="@+id/hideTheRecycleBin"
         android:title="@string/hide_the_recycle_bin"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
-        android:id="@+id/create_new_folder"
+        android:id="@+id/createNewFolder"
         android:title="@string/create_new_folder"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
-        android:id="@+id/increase_column_count"
+        android:id="@+id/increaseColumnCount"
         android:title="@string/increase_column_count"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
-        android:id="@+id/reduce_column_count"
+        android:id="@+id/reduceColumnCount"
         android:title="@string/reduce_column_count"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
         android:id="@+id/settings"
         android:title="@string/settings"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
         android:id="@+id/about"
         android:title="@string/about"
         android:visible="false"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 </menu>

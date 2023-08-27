@@ -90,13 +90,13 @@ class DirectoryAdapter(
 
         val isOneItemSelected = isOneItemSelected()
         menu.apply {
-            findItem(R.id.cab_rename).isVisible =
+            findItem(R.id.cabRename).isVisible =
                 !selectedPaths.contains(FAVORITES) && !selectedPaths.contains(RECYCLE_BIN)
-            findItem(R.id.cab_change_cover_image).isVisible = isOneItemSelected
+            findItem(R.id.cabChangeCoverImage).isVisible = isOneItemSelected
 
-            findItem(R.id.cab_empty_recycle_bin).isVisible =
+            findItem(R.id.cabEmptyRecycleBin).isVisible =
                 isOneItemSelected && selectedPaths.first() == RECYCLE_BIN
-            findItem(R.id.cab_empty_disable_recycle_bin).isVisible =
+            findItem(R.id.cabEmptyDisableRecycleBin).isVisible =
                 isOneItemSelected && selectedPaths.first() == RECYCLE_BIN
 
             checkHideBtnVisibility(this, selectedPaths)
@@ -110,21 +110,21 @@ class DirectoryAdapter(
         }
 
         when (id) {
-            R.id.cab_properties -> showProperties()
-            R.id.cab_rename -> renameDir()
-            R.id.cab_pin -> pinFolders(true)
-            R.id.cab_unpin -> pinFolders(false)
-            R.id.cab_empty_recycle_bin -> tryEmptyRecycleBin(true)
-            R.id.cab_empty_disable_recycle_bin -> emptyAndDisableRecycleBin()
-            R.id.cab_hide -> toggleFoldersVisibility(true)
-            R.id.cab_unhide -> toggleFoldersVisibility(false)
-            R.id.cab_exclude -> tryExcludeFolder()
-            R.id.cab_copy_to -> copyMoveTo(true)
-            R.id.cab_move_to -> moveFilesTo()
-            R.id.cab_select_all -> selectAll()
-            R.id.cab_delete -> askConfirmDelete()
-            R.id.cab_select_photo -> changeAlbumCover(false)
-            R.id.cab_use_default -> changeAlbumCover(true)
+            R.id.cabProperties -> showProperties()
+            R.id.cabRename -> renameDir()
+            R.id.cabPin -> pinFolders(true)
+            R.id.cabUnpin -> pinFolders(false)
+            R.id.cabEmptyRecycleBin -> tryEmptyRecycleBin(true)
+            R.id.cabEmptyDisableRecycleBin -> emptyAndDisableRecycleBin()
+            R.id.cabHide -> toggleFoldersVisibility(true)
+            R.id.cabUnhide -> toggleFoldersVisibility(false)
+            R.id.cabExclude -> tryExcludeFolder()
+            R.id.cabCopyTo -> copyMoveTo(true)
+            R.id.cabMoveTo -> moveFilesTo()
+            R.id.cabSelectAll -> selectAll()
+            R.id.cabDelete -> askConfirmDelete()
+            R.id.cabSelectPhoto -> changeAlbumCover(false)
+            R.id.cabUseDefault -> changeAlbumCover(true)
         }
     }
 
@@ -144,16 +144,16 @@ class DirectoryAdapter(
     }
 
     private fun checkHideBtnVisibility(menu: Menu, selectedPaths: ArrayList<String>) {
-        menu.findItem(R.id.cab_hide).isVisible =
+        menu.findItem(R.id.cabHide).isVisible =
             selectedPaths.any { !File(it).doesThisOrParentHaveNoMedia() }
-        menu.findItem(R.id.cab_unhide).isVisible =
+        menu.findItem(R.id.cabUnhide).isVisible =
             selectedPaths.any { File(it).doesThisOrParentHaveNoMedia() }
     }
 
     private fun checkPinBtnVisibility(menu: Menu, selectedPaths: ArrayList<String>) {
         val pinnedFolders = config.pinnedFolders
-        menu.findItem(R.id.cab_pin).isVisible = selectedPaths.any { !pinnedFolders.contains(it) }
-        menu.findItem(R.id.cab_unpin).isVisible = selectedPaths.any { pinnedFolders.contains(it) }
+        menu.findItem(R.id.cabPin).isVisible = selectedPaths.any { !pinnedFolders.contains(it) }
+        menu.findItem(R.id.cabUnpin).isVisible = selectedPaths.any { pinnedFolders.contains(it) }
     }
 
     private fun showProperties() {

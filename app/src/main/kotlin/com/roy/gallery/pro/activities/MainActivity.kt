@@ -387,20 +387,20 @@ class MainActivity : SimpleActivity(),
             menuInflater.inflate(R.menu.menu_main, menu)
             val useBin = config.useRecycleBin
             menu.apply {
-                findItem(R.id.increase_column_count).isVisible =
+                findItem(R.id.increaseColumnCount).isVisible =
                     config.viewTypeFolders == VIEW_TYPE_GRID && config.dirColumnCnt < MAX_COLUMN_COUNT
-                findItem(R.id.reduce_column_count).isVisible =
+                findItem(R.id.reduceColumnCount).isVisible =
                     config.viewTypeFolders == VIEW_TYPE_GRID && config.dirColumnCnt > 1
-                findItem(R.id.hide_the_recycle_bin).isVisible =
+                findItem(R.id.hideTheRecycleBin).isVisible =
                     useBin && config.showRecycleBinAtFolders
-                findItem(R.id.show_the_recycle_bin).isVisible =
+                findItem(R.id.showTheRecycleBin).isVisible =
                     useBin && !config.showRecycleBinAtFolders
                 setupSearch(this)
             }
         }
 
-        menu.findItem(R.id.temporarily_show_hidden).isVisible = !config.shouldShowHidden
-        menu.findItem(R.id.stop_showing_hidden).isVisible = config.temporarilyShowHidden
+        menu.findItem(R.id.temporarilyShowHidden).isVisible = !config.shouldShowHidden
+        menu.findItem(R.id.stopShowingHidden).isVisible = config.temporarilyShowHidden
 
         return true
     }
@@ -409,16 +409,16 @@ class MainActivity : SimpleActivity(),
         when (item.itemId) {
             R.id.sort -> showSortingDialog()
             R.id.filter -> showFilterMediaDialog()
-            R.id.open_camera -> launchCamera()
-            R.id.show_all -> showAllMedia()
-            R.id.change_view_type -> changeViewType()
-            R.id.temporarily_show_hidden -> tryToggleTemporarilyShowHidden()
-            R.id.stop_showing_hidden -> tryToggleTemporarilyShowHidden()
-            R.id.create_new_folder -> createNewFolder()
-            R.id.show_the_recycle_bin -> toggleRecycleBin(true)
-            R.id.hide_the_recycle_bin -> toggleRecycleBin(false)
-            R.id.increase_column_count -> increaseColumnCount()
-            R.id.reduce_column_count -> reduceColumnCount()
+            R.id.openCamera -> launchCamera()
+            R.id.showAll -> showAllMedia()
+            R.id.changeViewType -> changeViewType()
+            R.id.temporarilyShowHidden -> tryToggleTemporarilyShowHidden()
+            R.id.stopShowingHidden -> tryToggleTemporarilyShowHidden()
+            R.id.createNewFolder -> createNewFolder()
+            R.id.showTheRecycleBin -> toggleRecycleBin(true)
+            R.id.hideTheRecycleBin -> toggleRecycleBin(false)
+            R.id.increaseColumnCount -> increaseColumnCount()
+            R.id.reduceColumnCount -> reduceColumnCount()
             R.id.settings -> launchSettings()
             R.id.about -> launchAbout()
             else -> return super.onOptionsItemSelected(item)
