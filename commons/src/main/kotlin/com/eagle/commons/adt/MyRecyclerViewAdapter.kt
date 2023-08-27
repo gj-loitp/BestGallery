@@ -1,5 +1,6 @@
 package com.eagle.commons.adt
 
+import android.annotation.SuppressLint
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.view.ActionMode
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.eagle.commons.R
@@ -16,9 +18,15 @@ import com.eagle.commons.itf.MyActionModeCallback
 import com.eagle.commons.views.FastScroller
 import com.eagle.commons.views.MyRecyclerView
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
-abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyclerView: MyRecyclerView, val fastScroller: FastScroller? = null,
-                                     val itemClick: (Any) -> Unit) : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>() {
+abstract class MyRecyclerViewAdapter(
+    val activity: BaseSimpleActivity,
+    private val recyclerView: MyRecyclerView,
+    private val fastScroller: FastScroller? = null,
+    val itemClick: (Any) -> Unit,
+) : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>() {
     protected val baseConfig = activity.baseConfig
     protected val resources = activity.resources!!
     protected val layoutInflater = activity.layoutInflater
@@ -58,13 +66,18 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
                 return true
             }
 
+            @SuppressLint("InflateParams")
             override fun onCreateActionMode(actionMode: ActionMode, menu: Menu?): Boolean {
                 isSelectable = true
                 actMode = actionMode
-                actBarTextView = layoutInflater.inflate(R.layout.v_actionbar_title, null) as TextView
-                actBarTextView!!.layoutParams = ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
-                actMode!!.customView = actBarTextView
-                actBarTextView!!.setOnClickListener {
+                actBarTextView =
+                    layoutInflater.inflate(R.layout.v_actionbar_title, null) as TextView
+                actBarTextView?.layoutParams = ActionBar.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+                actMode?.customView = actBarTextView
+                actBarTextView?.setOnClickListener {
                     if (getSelectableItemCount() == selectedKeys.size) {
                         finishActMode()
                     } else {
@@ -85,7 +98,7 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
                 (selectedKeys.clone() as HashSet<Int>).forEach {
                     val position = getItemKeyPosition(it)
                     if (position != -1) {
-                        toggleItemSelection(false, position, false)
+                        toggleItemSelection(select = false, pos = position, updateTitle = false)
                     }
                 }
                 updateTitle()
@@ -126,7 +139,7 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
 
     private fun updateTitle() {
         val selectableItemCount = getSelectableItemCount()
-        val selectedCount = Math.min(selectedKeys.size, selectableItemCount)
+        val selectedCount = min(selectedKeys.size, selectableItemCount)
         val oldTitle = actBarTextView?.text
         val newTitle = "$selectedCount / $selectableItemCount"
         if (oldTitle != newTitle) {
@@ -140,10 +153,10 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
         lastLongPressedItem = if (lastLongPressedItem == -1) {
             position
         } else {
-            val min = Math.min(lastLongPressedItem, position)
-            val max = Math.max(lastLongPressedItem, position)
+            val min = min(lastLongPressedItem, position)
+            val max = max(lastLongPressedItem, position)
             for (i in min..max) {
-                toggleItemSelection(true, i, false)
+                toggleItemSelection(select = true, pos = i, updateTitle = false)
             }
             updateTitle()
             position
@@ -169,7 +182,7 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
     protected fun selectAll() {
         val cnt = itemCount - positionOffset
         for (i in 0 until cnt) {
-            toggleItemSelection(true, i, false)
+            toggleItemSelection(select = true, pos = i, updateTitle = false)
         }
         lastLongPressedItem = -1
         updateTitle()
@@ -182,8 +195,18 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
                     toggleItemSelection(true, position, true)
                 }
 
-                override fun selectRange(initialSelection: Int, lastDraggedIndex: Int, minReached: Int, maxReached: Int) {
-                    selectItemRange(initialSelection, Math.max(0, lastDraggedIndex - positionOffset), Math.max(0, minReached - positionOffset), maxReached - positionOffset)
+                override fun selectRange(
+                    initialSelection: Int,
+                    lastDraggedIndex: Int,
+                    minReached: Int,
+                    maxReached: Int,
+                ) {
+                    selectItemRange(
+                        from = initialSelection,
+                        to = max(0, lastDraggedIndex - positionOffset),
+                        min = max(0, minReached - positionOffset),
+                        max = maxReached - positionOffset
+                    )
                     if (minReached != maxReached) {
                         lastLongPressedItem = -1
                     }
@@ -202,30 +225,37 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
 
         if (to < from) {
             for (i in to..from) {
-                toggleItemSelection(true, i, true)
+                toggleItemSelection(select = true, pos = i, updateTitle = true)
             }
 
             if (min > -1 && min < to) {
-                (min until to).filter { it != from }.forEach { toggleItemSelection(false, it, true) }
+                (min until to).filter { it != from }
+                    .forEach { toggleItemSelection(select = false, pos = it, updateTitle = true) }
             }
 
             if (max > -1) {
                 for (i in from + 1..max) {
-                    toggleItemSelection(false, i, true)
+                    toggleItemSelection(select = false, pos = i, updateTitle = true)
                 }
             }
         } else {
             for (i in from..to) {
-                toggleItemSelection(true, i, true)
+                toggleItemSelection(select = true, pos = i, updateTitle = true)
             }
 
             if (max > -1 && max > to) {
-                (to + 1..max).filter { it != from }.forEach { toggleItemSelection(false, it, true) }
+                (to + 1..max).filter { it != from }.forEach {
+                    toggleItemSelection(
+                        select = false,
+                        pos = it,
+                        updateTitle = true
+                    )
+                }
             }
 
             if (min > -1) {
                 for (i in min until from) {
-                    toggleItemSelection(false, i, true)
+                    toggleItemSelection(select = false, pos = i, updateTitle = true)
                 }
             }
         }
@@ -242,7 +272,9 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
 
         if (add) {
             DividerItemDecoration(activity, DividerItemDecoration.VERTICAL).apply {
-                setDrawable(resources.getDrawable(R.drawable.shape_divider))
+                ContextCompat.getDrawable(activity, R.drawable.shape_divider)?.let {
+                    setDrawable(it)
+                }
                 recyclerView.addItemDecoration(this)
             }
         }
@@ -252,6 +284,7 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
         actMode?.finish()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateTextColor(textColor: Int) {
         this.textColor = textColor
         notifyDataSetChanged()
@@ -283,13 +316,22 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
     }
 
     open inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bindView(any: Any, allowSingleClick: Boolean, allowLongClick: Boolean, callback: (itemView: View, adapterPosition: Int) -> Unit): View {
+        fun bindView(
+            any: Any,
+            allowSingleClick: Boolean,
+            allowLongClick: Boolean,
+            callback: (itemView: View, adapterPosition: Int) -> Unit,
+        ): View {
             return itemView.apply {
                 callback(this, adapterPosition)
 
                 if (allowSingleClick) {
                     setOnClickListener { viewClicked(any) }
-                    setOnLongClickListener { if (allowLongClick) viewLongClicked() else viewClicked(any); true }
+                    setOnLongClickListener {
+                        if (allowLongClick) viewLongClicked() else viewClicked(
+                            any
+                        ); true
+                    }
                 } else {
                     setOnClickListener(null)
                     setOnLongClickListener(null)

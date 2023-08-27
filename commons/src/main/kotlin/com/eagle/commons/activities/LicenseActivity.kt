@@ -1,5 +1,6 @@
 package com.eagle.commons.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.eagle.commons.R
@@ -15,6 +16,7 @@ class LicenseActivity : BaseSimpleActivity() {
 
     override fun getAppLauncherName() = intent.getStringExtra(APP_LAUNCHER_NAME) ?: ""
 
+    @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.a_license)
@@ -46,29 +48,149 @@ class LicenseActivity : BaseSimpleActivity() {
     }
 
     private fun initLicenses() = arrayOf(
-            License(LICENSE_KOTLIN, R.string.kotlin_title, R.string.kotlin_text, R.string.kotlin_url),
-            License(LICENSE_SUBSAMPLING, R.string.subsampling_title, R.string.subsampling_text, R.string.subsampling_url),
-            License(LICENSE_GLIDE, R.string.glide_title, R.string.glide_text, R.string.glide_url),
-            License(LICENSE_CROPPER, R.string.cropper_title, R.string.cropper_text, R.string.cropper_url),
-            License(LICENSE_RTL, R.string.rtl_viewpager_title, R.string.rtl_viewpager_text, R.string.rtl_viewpager_url),
-            License(LICENSE_JODA, R.string.joda_title, R.string.joda_text, R.string.joda_url),
-            License(LICENSE_STETHO, R.string.stetho_title, R.string.stetho_text, R.string.stetho_url),
-            License(LICENSE_OTTO, R.string.otto_title, R.string.otto_text, R.string.otto_url),
-            License(LICENSE_PHOTOVIEW, R.string.photoview_title, R.string.photoview_text, R.string.photoview_url),
-            License(LICENSE_PICASSO, R.string.picasso_title, R.string.picasso_text, R.string.picasso_url),
-            License(LICENSE_PATTERN, R.string.pattern_title, R.string.pattern_text, R.string.pattern_url),
-            License(LICENSE_REPRINT, R.string.reprint_title, R.string.reprint_text, R.string.reprint_url),
-            License(LICENSE_GIF_DRAWABLE, R.string.gif_drawable_title, R.string.gif_drawable_text, R.string.gif_drawable_url),
-            License(LICENSE_AUTOFITTEXTVIEW, R.string.autofittextview_title, R.string.autofittextview_text, R.string.autofittextview_url),
-            License(LICENSE_ROBOLECTRIC, R.string.robolectric_title, R.string.robolectric_text, R.string.robolectric_url),
-            License(LICENSE_ESPRESSO, R.string.espresso_title, R.string.espresso_text, R.string.espresso_url),
-            License(LICENSE_GSON, R.string.gson_title, R.string.gson_text, R.string.gson_url),
-            License(LICENSE_LEAK_CANARY, R.string.leak_canary_title, R.string.leakcanary_text, R.string.leakcanary_url),
-            License(LICENSE_NUMBER_PICKER, R.string.number_picker_title, R.string.number_picker_text, R.string.number_picker_url),
-            License(LICENSE_EXOPLAYER, R.string.exoplayer_title, R.string.exoplayer_text, R.string.exoplayer_url),
-            License(LICENSE_PANORAMA_VIEW, R.string.panorama_view_title, R.string.panorama_view_text, R.string.panorama_view_url),
-            License(LICENSE_SANSELAN, R.string.sanselan_title, R.string.sanselan_text, R.string.sanselan_url),
-            License(LICENSE_FILTERS, R.string.filters_title, R.string.filters_text, R.string.filters_url),
-            License(LICENSE_GESTURE_VIEWS, R.string.gesture_views_title, R.string.gesture_views_text, R.string.gesture_views_url)
+        License(
+            id = LICENSE_KOTLIN,
+            titleId = R.string.kotlin_title,
+            textId = R.string.kotlin_text,
+            urlId = R.string.kotlin_url
+        ),
+        License(
+            id = LICENSE_SUBSAMPLING,
+            titleId = R.string.subsampling_title,
+            textId = R.string.subsampling_text,
+            urlId = R.string.subsampling_url
+        ),
+        License(
+            id = LICENSE_GLIDE,
+            titleId = R.string.glide_title,
+            textId = R.string.glide_text,
+            urlId = R.string.glide_url
+        ),
+        License(
+            id = LICENSE_CROPPER,
+            titleId = R.string.cropper_title,
+            textId = R.string.cropper_text,
+            urlId = R.string.cropper_url
+        ),
+        License(
+            id = LICENSE_RTL,
+            titleId = R.string.rtl_viewpager_title,
+            textId = R.string.rtl_viewpager_text,
+            urlId = R.string.rtl_viewpager_url
+        ),
+        License(
+            id = LICENSE_JODA,
+            titleId = R.string.joda_title,
+            textId = R.string.joda_text,
+            urlId = R.string.joda_url
+        ),
+        License(
+            id = LICENSE_STETHO,
+            titleId = R.string.stetho_title,
+            textId = R.string.stetho_text,
+            urlId = R.string.stetho_url
+        ),
+        License(
+            id = LICENSE_OTTO,
+            titleId = R.string.otto_title,
+            textId = R.string.otto_text,
+            urlId = R.string.otto_url
+        ),
+        License(
+            id = LICENSE_PHOTOVIEW,
+            titleId = R.string.photoview_title,
+            textId = R.string.photoview_text,
+            urlId = R.string.photoview_url
+        ),
+        License(
+            id = LICENSE_PICASSO,
+            titleId = R.string.picasso_title,
+            textId = R.string.picasso_text,
+            urlId = R.string.picasso_url
+        ),
+        License(
+            id = LICENSE_PATTERN,
+            titleId = R.string.pattern_title,
+            textId = R.string.pattern_text,
+            urlId = R.string.pattern_url
+        ),
+        License(
+            id = LICENSE_REPRINT,
+            titleId = R.string.reprint_title,
+            textId = R.string.reprint_text,
+            urlId = R.string.reprint_url
+        ),
+        License(
+            id = LICENSE_GIF_DRAWABLE,
+            titleId = R.string.gif_drawable_title,
+            textId = R.string.gif_drawable_text,
+            urlId = R.string.gif_drawable_url
+        ),
+        License(
+            id = LICENSE_AUTOFITTEXTVIEW,
+            titleId = R.string.autofittextview_title,
+            textId = R.string.autofittextview_text,
+            urlId = R.string.autofittextview_url
+        ),
+        License(
+            id = LICENSE_ROBOLECTRIC,
+            titleId = R.string.robolectric_title,
+            textId = R.string.robolectric_text,
+            urlId = R.string.robolectric_url
+        ),
+        License(
+            id = LICENSE_ESPRESSO,
+            titleId = R.string.espresso_title,
+            textId = R.string.espresso_text,
+            urlId = R.string.espresso_url
+        ),
+        License(
+            id = LICENSE_GSON,
+            titleId = R.string.gson_title,
+            textId = R.string.gson_text,
+            urlId = R.string.gson_url
+        ),
+        License(
+            id = LICENSE_LEAK_CANARY,
+            titleId = R.string.leak_canary_title,
+            textId = R.string.leakcanary_text,
+            urlId = R.string.leakcanary_url
+        ),
+        License(
+            id = LICENSE_NUMBER_PICKER,
+            titleId = R.string.number_picker_title,
+            textId = R.string.number_picker_text,
+            urlId = R.string.number_picker_url
+        ),
+        License(
+            id = LICENSE_EXOPLAYER,
+            titleId = R.string.exoplayer_title,
+            textId = R.string.exoplayer_text,
+            urlId = R.string.exoplayer_url
+        ),
+        License(
+            id = LICENSE_PANORAMA_VIEW,
+            titleId = R.string.panorama_view_title,
+            textId = R.string.panorama_view_text,
+            urlId = R.string.panorama_view_url
+        ),
+        License(
+            id = LICENSE_SANSELAN,
+            titleId = R.string.sanselan_title,
+            textId = R.string.sanselan_text,
+            urlId = R.string.sanselan_url
+        ),
+        License(
+            id = LICENSE_FILTERS,
+            titleId = R.string.filters_title,
+            textId = R.string.filters_text,
+            urlId = R.string.filters_url
+        ),
+        License(
+            id = LICENSE_GESTURE_VIEWS,
+            titleId = R.string.gesture_views_title,
+            textId = R.string.gesture_views_text,
+            urlId = R.string.gesture_views_url
+        )
     )
 }

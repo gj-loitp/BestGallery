@@ -103,6 +103,7 @@ class CustomizationActivity : BaseSimpleActivity() {
         return true
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (hasUnsavedChanges) {
             promptSaveDiscard()
@@ -113,15 +114,67 @@ class CustomizationActivity : BaseSimpleActivity() {
 
     private fun setupThemes() {
         predefinedThemes.apply {
-            put(THEME_LIGHT, MyTheme(R.string.light_theme, R.color.theme_light_text_color, R.color.theme_light_background_color, R.color.color_primary, R.color.color_primary))
-            put(THEME_DARK, MyTheme(R.string.dark_theme, R.color.theme_dark_text_color, R.color.theme_dark_background_color, R.color.color_primary, R.color.color_primary))
+            put(
+                key = THEME_LIGHT,
+                value = MyTheme(
+                    nameId = R.string.light_theme,
+                    textColorId = R.color.theme_light_text_color,
+                    backgroundColorId = R.color.theme_light_background_color,
+                    primaryColorId = R.color.color_primary,
+                    appIconColorId = R.color.color_primary
+                )
+            )
+            put(
+                key = THEME_DARK,
+                value = MyTheme(
+                    nameId = R.string.dark_theme,
+                    textColorId = R.color.theme_dark_text_color,
+                    backgroundColorId = R.color.theme_dark_background_color,
+                    primaryColorId = R.color.color_primary,
+                    appIconColorId = R.color.color_primary
+                )
+            )
             //put(THEME_SOLARIZED, MyTheme(R.string.solarized, R.color.theme_solarized_text_color, R.color.theme_solarized_background_color, R.color.theme_solarized_primary_color))
-            put(THEME_DARK_RED, MyTheme(R.string.dark_red, R.color.theme_dark_text_color, R.color.theme_dark_background_color, R.color.theme_dark_red_primary_color, R.color.md_red_700))
-            put(THEME_BLACK_WHITE, MyTheme(R.string.black_white, android.R.color.white, android.R.color.black, android.R.color.black, R.color.md_grey_black))
-            put(THEME_CUSTOM, MyTheme(R.string.custom, 0, 0, 0, 0))
+            put(
+                key = THEME_DARK_RED,
+                value = MyTheme(
+                    nameId = R.string.dark_red,
+                    textColorId = R.color.theme_dark_text_color,
+                    backgroundColorId = R.color.theme_dark_background_color,
+                    primaryColorId = R.color.theme_dark_red_primary_color,
+                    appIconColorId = R.color.md_red_700
+                )
+            )
+            put(
+                key = THEME_BLACK_WHITE,
+                value = MyTheme(
+                    nameId = R.string.black_white,
+                    textColorId = android.R.color.white,
+                    backgroundColorId = android.R.color.black,
+                    primaryColorId = android.R.color.black,
+                    appIconColorId = R.color.md_grey_black
+                )
+            )
+            put(
+                key = THEME_CUSTOM, value = MyTheme(
+                    nameId = R.string.custom,
+                    textColorId = 0,
+                    backgroundColorId = 0,
+                    primaryColorId = 0,
+                    appIconColorId = 0
+                )
+            )
 
             if (storedSharedTheme != null) {
-                put(THEME_SHARED, MyTheme(R.string.shared, 0, 0, 0, 0))
+                put(
+                    key = THEME_SHARED, value = MyTheme(
+                        nameId = R.string.shared,
+                        textColorId = 0,
+                        backgroundColorId = 0,
+                        primaryColorId = 0,
+                        appIconColorId = 0
+                    )
+                )
             }
         }
         setupThemePicker()
@@ -134,7 +187,13 @@ class CustomizationActivity : BaseSimpleActivity() {
             if (baseConfig.wasAppIconCustomizationWarningShown) {
                 themePickerClicked()
             } else {
-                ConfirmationDialog(this, "", R.string.app_icon_color_warning, R.string.ok, 0) {
+                ConfirmationDialog(
+                    activity = this,
+                    message = "",
+                    messageId = R.string.app_icon_color_warning,
+                    positive = R.string.ok,
+                    negative = 0
+                ) {
                     baseConfig.wasAppIconCustomizationWarningShown = true
                     themePickerClicked()
                 }
@@ -148,7 +207,11 @@ class CustomizationActivity : BaseSimpleActivity() {
             items.add(RadioItem(key, getString(value.nameId)))
         }
 
-        RadioGroupDialog(this@CustomizationActivity, items, curSelectedThemeId) {
+        RadioGroupDialog(
+            activity = this@CustomizationActivity,
+            items = items,
+            checkedItemId = curSelectedThemeId
+        ) {
             /*if (it == THEME_SHARED && !isThankYouInstalled()) {
                 PurchaseThankYouDialog(this)
                 return@RadioGroupDialog
@@ -219,9 +282,9 @@ class CustomizationActivity : BaseSimpleActivity() {
         resources.apply {
             for ((key, value) in predefinedThemes.filter { it.key != THEME_CUSTOM && it.key != THEME_SHARED }) {
                 if (curTextColor == getColor(value.textColorId) &&
-                        curBackgroundColor == getColor(value.backgroundColorId) &&
-                        curPrimaryColor == getColor(value.primaryColorId) &&
-                        curAppIconColor == getColor(value.appIconColorId)
+                    curBackgroundColor == getColor(value.backgroundColorId) &&
+                    curPrimaryColor == getColor(value.primaryColorId) &&
+                    curAppIconColor == getColor(value.appIconColorId)
                 ) {
                     themeId = key
                 }
@@ -241,7 +304,13 @@ class CustomizationActivity : BaseSimpleActivity() {
     }
 
     private fun promptSaveDiscard() {
-        ConfirmationAdvancedDialog(this, "", R.string.save_before_closing, R.string.save, R.string.discard) {
+        ConfirmationAdvancedDialog(
+            activity = this,
+            message = "",
+            messageId = R.string.save_before_closing,
+            positive = R.string.save,
+            negative = R.string.discard
+        ) {
             if (it) {
                 saveChanges(true)
             } else {
@@ -265,7 +334,12 @@ class CustomizationActivity : BaseSimpleActivity() {
         }
 
         if (curSelectedThemeId == THEME_SHARED) {
-            val newSharedTheme = SharedTheme(curTextColor, curBackgroundColor, curPrimaryColor, curAppIconColor)
+            val newSharedTheme = SharedTheme(
+                textColor = curTextColor,
+                backgroundColor = curBackgroundColor,
+                primaryColor = curPrimaryColor,
+                appIconColor = curAppIconColor
+            )
             updateSharedTheme(newSharedTheme)
             Intent().apply {
                 action = MyContentProvider.SHARED_THEME_UPDATED
@@ -314,7 +388,13 @@ class CustomizationActivity : BaseSimpleActivity() {
             if (baseConfig.wasAppIconCustomizationWarningShown) {
                 pickAppIconColor()
             } else {
-                ConfirmationDialog(this, "", R.string.app_icon_color_warning, R.string.ok, 0) {
+                ConfirmationDialog(
+                    activity = this,
+                    message = "",
+                    messageId = R.string.app_icon_color_warning,
+                    positive = R.string.ok,
+                    negative = 0
+                ) {
                     baseConfig.wasAppIconCustomizationWarningShown = true
                     pickAppIconColor()
                 }
@@ -370,24 +450,35 @@ class CustomizationActivity : BaseSimpleActivity() {
     }
 
     private fun pickPrimaryColor() {
-        curPrimaryLineColorPicker = LineColorPickerDialog(this, curPrimaryColor, true) { wasPositivePressed, color ->
-            curPrimaryLineColorPicker = null
-            if (wasPositivePressed) {
-                if (hasColorChanged(curPrimaryColor, color)) {
-                    setCurrentPrimaryColor(color)
-                    colorChanged()
-                    updateColorTheme(getUpdatedTheme())
-                    setTheme(getThemeId(color))
+        curPrimaryLineColorPicker =
+            LineColorPickerDialog(
+                activity = this,
+                color = curPrimaryColor,
+                isPrimaryColorPicker = true
+            ) { wasPositivePressed, color ->
+                curPrimaryLineColorPicker = null
+                if (wasPositivePressed) {
+                    if (hasColorChanged(curPrimaryColor, color)) {
+                        setCurrentPrimaryColor(color)
+                        colorChanged()
+                        updateColorTheme(getUpdatedTheme())
+                        setTheme(getThemeId(color))
+                    }
+                } else {
+                    updateActionbarColor(curPrimaryColor)
+                    setTheme(getThemeId(curPrimaryColor))
                 }
-            } else {
-                updateActionbarColor(curPrimaryColor)
-                setTheme(getThemeId(curPrimaryColor))
             }
-        }
     }
 
     private fun pickAppIconColor() {
-        LineColorPickerDialog(this, curAppIconColor, false, R.array.md_app_icon_colors, getAppIconIDs()) { wasPositivePressed, color ->
+        LineColorPickerDialog(
+            activity = this,
+            color = curAppIconColor,
+            isPrimaryColorPicker = false,
+            primaryColors = R.array.md_app_icon_colors,
+            appIconIDs = getAppIconIDs()
+        ) { wasPositivePressed, color ->
             if (wasPositivePressed) {
                 if (hasColorChanged(curAppIconColor, color)) {
                     curAppIconColor = color
@@ -398,18 +489,31 @@ class CustomizationActivity : BaseSimpleActivity() {
         }
     }
 
-    private fun getUpdatedTheme() = if (curSelectedThemeId == THEME_SHARED) THEME_SHARED else THEME_CUSTOM
+    private fun getUpdatedTheme() =
+        if (curSelectedThemeId == THEME_SHARED) THEME_SHARED else THEME_CUSTOM
 
     private fun applyToAll() {
         if (isThankYouInstalled()) {
-            ConfirmationDialog(this, "", R.string.share_colors_success, R.string.ok, 0) {
+            ConfirmationDialog(
+                activity = this,
+                message = "",
+                messageId = R.string.share_colors_success,
+                positive = R.string.ok,
+                negative = 0
+            ) {
                 Intent().apply {
                     action = MyContentProvider.SHARED_THEME_ACTIVATED
                     sendBroadcast(this)
                 }
 
                 if (!predefinedThemes.containsKey(THEME_SHARED)) {
-                    predefinedThemes[THEME_SHARED] = MyTheme(R.string.shared, 0, 0, 0, 0)
+                    predefinedThemes[THEME_SHARED] = MyTheme(
+                        nameId = R.string.shared,
+                        textColorId = 0,
+                        backgroundColorId = 0,
+                        primaryColorId = 0,
+                        appIconColorId = 0
+                    )
                 }
                 baseConfig.wasSharedThemeEverActivated = true
                 applyToAllHolder.beGone()

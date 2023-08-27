@@ -16,12 +16,18 @@ import com.eagle.commons.models.FileDirItem
 import com.eagle.commons.views.MyRecyclerView
 import kotlinx.android.synthetic.main.v_filepicker_list_item.view.*
 
-class FilepickerItemsAdapter(activity: BaseSimpleActivity, val fileDirItems: List<FileDirItem>, recyclerView: MyRecyclerView,
-                             itemClick: (Any) -> Unit) : MyRecyclerViewAdapter(activity, recyclerView, null, itemClick) {
+class FilepickerItemsAdapter(
+    activity: BaseSimpleActivity,
+    val fileDirItems: List<FileDirItem>,
+    recyclerView: MyRecyclerView,
+    itemClick: (Any) -> Unit,
+) : MyRecyclerViewAdapter(activity, recyclerView, null, itemClick) {
 
-    private val folderDrawable = activity.resources.getColoredDrawableWithColor(R.drawable.ic_folder, textColor)
-    private val fileDrawable = activity.resources.getColoredDrawableWithColor(R.drawable.ic_file, textColor)
-    private val hasOTGConnected = activity.hasOTGConnected()
+    private val folderDrawable =
+        activity.resources.getColoredDrawableWithColor(R.drawable.ic_folder, textColor)
+    private val fileDrawable =
+        activity.resources.getColoredDrawableWithColor(R.drawable.ic_file, textColor)
+//    private val hasOTGConnected = activity.hasOTGConnected()
 
     init {
         folderDrawable.alpha = 180
@@ -30,12 +36,17 @@ class FilepickerItemsAdapter(activity: BaseSimpleActivity, val fileDirItems: Lis
 
     override fun getActionMenuId() = 0
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = createViewHolder(R.layout.v_filepicker_list_item, parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        createViewHolder(R.layout.v_filepicker_list_item, parent)
 
     override fun onBindViewHolder(holder: MyRecyclerViewAdapter.ViewHolder, position: Int) {
         val fileDirItem = fileDirItems[position]
-        holder.bindView(fileDirItem, true, false) { itemView, adapterPosition ->
-            setupView(itemView, fileDirItem)
+        holder.bindView(
+            any = fileDirItem,
+            allowSingleClick = true,
+            allowLongClick = false
+        ) { itemView, _ ->
+            setupView(view = itemView, fileDirItem = fileDirItem)
         }
         bindViewHolder(holder)
     }
@@ -50,7 +61,8 @@ class FilepickerItemsAdapter(activity: BaseSimpleActivity, val fileDirItems: Lis
 
     override fun getIsItemSelectable(position: Int) = false
 
-    override fun getItemKeyPosition(key: Int) = fileDirItems.indexOfFirst { it.path.hashCode() == key }
+    override fun getItemKeyPosition(key: Int) =
+        fileDirItems.indexOfFirst { it.path.hashCode() == key }
 
     override fun getItemSelectionKey(position: Int) = fileDirItems[position].path.hashCode()
 
@@ -74,11 +86,14 @@ class FilepickerItemsAdapter(activity: BaseSimpleActivity, val fileDirItems: Lis
                 listItemDetails.text = fileDirItem.size.formatSize()
                 val path = fileDirItem.path
                 val options = RequestOptions()
-                        .centerCrop()
-                        .error(fileDrawable)
+                    .centerCrop()
+                    .error(fileDrawable)
 
-                var itemToLoad = if (fileDirItem.name.endsWith(".apk", true)) {
-                    val packageInfo = context.packageManager.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES)
+                val itemToLoad = if (fileDirItem.name.endsWith(".apk", true)) {
+                    val packageInfo = context.packageManager.getPackageArchiveInfo(
+                        path,
+                        PackageManager.GET_ACTIVITIES
+                    )
                     if (packageInfo != null) {
                         val appInfo = packageInfo.applicationInfo
                         appInfo.sourceDir = path
@@ -92,7 +107,8 @@ class FilepickerItemsAdapter(activity: BaseSimpleActivity, val fileDirItems: Lis
                 }
 
                 if (!activity.isDestroyed && !activity.isFinishing) {
-                    Glide.with(activity).load(itemToLoad).transition(withCrossFade()).apply(options).into(listItemIcon)
+                    Glide.with(activity).load(itemToLoad).transition(withCrossFade()).apply(options)
+                        .into(listItemIcon)
                 }
             }
         }

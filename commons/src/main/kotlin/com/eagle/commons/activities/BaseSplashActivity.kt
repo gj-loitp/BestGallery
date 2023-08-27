@@ -2,6 +2,7 @@ package com.eagle.commons.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.eagle.commons.R
 import com.eagle.commons.ext.baseConfig
 import com.eagle.commons.ext.getSharedTheme
@@ -21,7 +22,8 @@ abstract class BaseSplashActivity : AppCompatActivity() {
 
         if (baseConfig.appSideloadingStatus == SIDELOADING_UNCHECKED) {
             val isSideloaded = isAppSideloaded()
-            baseConfig.appSideloadingStatus = if (isSideloaded) SIDELOADING_TRUE else SIDELOADING_FALSE
+            baseConfig.appSideloadingStatus =
+                if (isSideloaded) SIDELOADING_TRUE else SIDELOADING_FALSE
             if (isSideloaded) {
                 baseConfig.appId = getAppPackageName()
                 showSideloadingDialog()
@@ -55,7 +57,8 @@ abstract class BaseSplashActivity : AppCompatActivity() {
 
     private fun isAppSideloaded(): Boolean {
         return try {
-            getDrawable(R.drawable.ic_camera)
+//            getDrawable(R.drawable.ic_camera)
+            ContextCompat.getDrawable(this, R.drawable.ic_camera)
             false
         } catch (e: Exception) {
             true

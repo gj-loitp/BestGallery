@@ -32,13 +32,15 @@ class FAQActivity : BaseSimpleActivity() {
             val faqItem = it
             inflater.inflate(R.layout.v_license_faq_item, null).apply {
                 licenseFaqTitle.apply {
-                    text = if (faqItem.title is Int) getString(faqItem.title) else faqItem.title as String
+                    text =
+                        if (faqItem.title is Int) getString(faqItem.title) else faqItem.title as String
                     underlineText()
                     setTextColor(titleColor)
                 }
 
                 licenseFaqText.apply {
-                    text = if (faqItem.text is Int) getString(faqItem.text) else faqItem.text as String
+                    text =
+                        if (faqItem.text is Int) getString(faqItem.text) else faqItem.text as String
                     setTextColor(textColor)
                 }
                 faqHolder.addView(this)
