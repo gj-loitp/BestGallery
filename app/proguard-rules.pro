@@ -1,6 +1,6 @@
--keep class com.eagle.** { *; }
+-keep class com.roy.** { *; }
 -dontwarn android.graphics.Canvas
--dontwarn com.eagle.**
+-dontwarn com.roy.**
 -dontwarn org.apache.**
 
 # Picasso

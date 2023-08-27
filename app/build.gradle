@@ -8,7 +8,7 @@ android {
     ndkVersion "25.2.9519653"
 
     defaultConfig {
-        applicationId "com.eagle.gallery.photos.videos.album.hd.gallery.editor"
+        applicationId "com.roy.gallery.photos.videos.album.hd.gallery.editor"
         minSdkVersion 21
         versionCode 20010009
         versionName "2.0.9"
@@ -58,7 +58,7 @@ android {
             dirs 'libs'
         }
     }
-    namespace 'com.eagle.gallery.pro'
+    namespace 'com.roy.gallery.pro'
 }
 
 dependencies {

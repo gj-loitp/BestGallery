@@ -16,7 +16,7 @@
         android:required="false" />
 
     <application
-        android:name="com.eagle.gallery.pro.App"
+        android:name="com.roy.gallery.pro.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_launcher_name"
@@ -42,7 +42,7 @@
 <!--            tools:replace="android:theme" />-->
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.MainActivity"
+            android:name="com.roy.gallery.pro.activities.MainActivity"
             android:resizeableActivity="true"
             android:theme="@style/common_start_style">
             <intent-filter>
@@ -83,8 +83,8 @@
         </activity>
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.MediaActivity"
-            android:parentActivityName="com.eagle.gallery.pro.activities.MainActivity">
+            android:name="com.roy.gallery.pro.activities.MediaActivity"
+            android:parentActivityName="com.roy.gallery.pro.activities.MainActivity">
 
             <meta-data
                 android:name="android.app.default_searchable"
@@ -97,9 +97,9 @@
         </activity>
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.ViewPagerActivity"
+            android:name="com.roy.gallery.pro.activities.ViewPagerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="com.eagle.gallery.pro.activities.MediaActivity">
+            android:parentActivityName="com.roy.gallery.pro.activities.MediaActivity">
 
             <intent-filter>
                 <action android:name="com.android.camera.action.REVIEW" />
@@ -114,61 +114,61 @@
 
 
         <activity
-            android:name="com.eagle.commons.activities.LicenseActivity"
+            android:name="com.roy.commons.activities.LicenseActivity"
             android:label="@string/third_party_licences"
             android:parentActivityName="com.roy.commons.activities.AboutActivity" />
 
         <activity
-            android:name="com.eagle.commons.activities.CustomizationActivity"
+            android:name="com.roy.commons.activities.CustomizationActivity"
             android:label="@string/customize_colors"
-            android:parentActivityName="com.eagle.gallery.pro.activities.SettingsActivity" />
+            android:parentActivityName="com.roy.gallery.pro.activities.SettingsActivity" />
 
         <activity
-            android:name="com.eagle.commons.activities.FAQActivity"
+            android:name="com.roy.commons.activities.FAQActivity"
             android:label="@string/frequently_asked_questions"
             android:parentActivityName="com.roy.commons.activities.AboutActivity" />
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.SettingsActivity"
+            android:name="com.roy.gallery.pro.activities.SettingsActivity"
             android:label="@string/settings"
-            android:parentActivityName="com.eagle.gallery.pro.activities.MainActivity" />
+            android:parentActivityName="com.roy.gallery.pro.activities.MainActivity" />
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.PhotoVideoActivity"
+            android:name="com.roy.gallery.pro.activities.PhotoVideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.VideoPlayerActivity"
+            android:name="com.roy.gallery.pro.activities.VideoPlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="com.eagle.gallery.pro.activities.MediaActivity" />
+            android:parentActivityName="com.roy.gallery.pro.activities.MediaActivity" />
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.PanoramaPhotoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/FullScreenTheme" />
-
-        <activity
-            android:name="com.eagle.gallery.pro.activities.PanoramaVideoActivity"
+            android:name="com.roy.gallery.pro.activities.PanoramaPhotoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullScreenTheme" />
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.IncludedFoldersActivity"
+            android:name="com.roy.gallery.pro.activities.PanoramaVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name="com.roy.gallery.pro.activities.IncludedFoldersActivity"
             android:label="@string/include_folders"
-            android:parentActivityName="com.eagle.gallery.pro.activities.SettingsActivity" />
+            android:parentActivityName="com.roy.gallery.pro.activities.SettingsActivity" />
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.ExcludedFoldersActivity"
+            android:name="com.roy.gallery.pro.activities.ExcludedFoldersActivity"
             android:label="@string/excluded_folders"
-            android:parentActivityName="com.eagle.gallery.pro.activities.SettingsActivity" />
+            android:parentActivityName="com.roy.gallery.pro.activities.SettingsActivity" />
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.HiddenFoldersActivity"
+            android:name="com.roy.gallery.pro.activities.HiddenFoldersActivity"
             android:label="@string/hidden_folders"
-            android:parentActivityName="com.eagle.gallery.pro.activities.SettingsActivity" />
+            android:parentActivityName="com.roy.gallery.pro.activities.SettingsActivity" />
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.PhotoActivity"
+            android:name="com.roy.gallery.pro.activities.PhotoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -181,7 +181,7 @@
         </activity>
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.VideoActivity"
+            android:name="com.roy.gallery.pro.activities.VideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -194,7 +194,7 @@
         </activity>
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.EditActivity"
+            android:name="com.roy.gallery.pro.activities.EditActivity"
             android:label="@string/editor">
             <intent-filter>
                 <action android:name="android.intent.action.EDIT" />
@@ -218,7 +218,7 @@
         </activity>
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.SetWallpaperActivity"
+            android:name="com.roy.gallery.pro.activities.SetWallpaperActivity"
             android:label="@string/simple_wallpaper">
             <intent-filter>
                 <action android:name="android.intent.action.ATTACH_DATA" />
@@ -236,7 +236,7 @@
         </activity>
 
         <activity
-            android:name="com.eagle.gallery.pro.activities.WidgetConfigureActivity"
+            android:name="com.roy.gallery.pro.activities.WidgetConfigureActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyWidgetConfigTheme">
             <intent-filter>

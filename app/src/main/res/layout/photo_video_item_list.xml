@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/small_margin"
     android:paddingTop="@dimen/small_margin">
 
-    <com.eagle.gallery.pro.views.MySquareImageView
+    <com.roy.gallery.pro.views.MySquareImageView
         android:id="@+id/medium_thumbnail"
         android:layout_width="@dimen/list_view_folder_thumbnail_size"
         android:layout_height="@dimen/list_view_folder_thumbnail_size"/>
