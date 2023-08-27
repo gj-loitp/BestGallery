@@ -30,7 +30,7 @@ import java.util.*
 
 abstract class BaseSimpleActivity : AppCompatActivity() {
     var copyMoveCallback: ((destinationPath: String) -> Unit)? = null
-    var actionOnPermission: ((granted: Boolean) -> Unit)? = null
+    private var actionOnPermission: ((granted: Boolean) -> Unit)? = null
     var isAskingPermissions = false
     var useDynamicTheme = true
 
@@ -82,7 +82,12 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context) {
         if (newBase.baseConfig.useEnglish) {
-            super.attachBaseContext(MyContextWrapper(newBase).wrap(newBase, "en"))
+            super.attachBaseContext(
+                MyContextWrapper(newBase).wrap(
+                    context = newBase,
+                    language = "en"
+                )
+            )
         } else {
             super.attachBaseContext(newBase)
         }
@@ -97,7 +102,13 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
         updateActionBarTitle(supportActionBar?.title.toString(), color)
         updateStatusbarColor(color)
         try {
-            setTaskDescription(ActivityManager.TaskDescription(null, null, color))
+            setTaskDescription(
+                ActivityManager.TaskDescription(
+                    /* label = */ null,
+                    /* icon = */null,
+                    /* colorPrimary = */color
+                )
+            )
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -105,15 +116,13 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
 
     fun updateStatusbarColor(color: Int) {
         try {
-            if (Build.VERSION.SDK_INT >= 21) {
-                window.statusBarColor = color.darkenColor()
-            }
+            window.statusBarColor = color.darkenColor()
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    fun updateRecentsAppIcon() {
+    private fun updateRecentsAppIcon() {
         if (baseConfig.isUsingModifiedAppIcon) {
             val appIconIDs = getAppIconIDs()
             val currentAppIconColorIndex = getCurrentAppIconColorIndex()
@@ -126,7 +135,11 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
             val title = getAppLauncherName()
             val color = baseConfig.primaryColor
 
-            val description = ActivityManager.TaskDescription(title, recentsIcon, color)
+            val description = ActivityManager.TaskDescription(
+                /* label = */ title,
+                /* icon = */ recentsIcon,
+                /* colorPrimary = */ color
+            )
             setTaskDescription(description)
         }
     }
@@ -148,6 +161,7 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
         )
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
         super.onActivityResult(requestCode, resultCode, resultData)
         if (requestCode == OPEN_DOCUMENT_TREE && resultCode == Activity.RESULT_OK && resultData != null) {
@@ -183,8 +197,8 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
                 val takeFlags =
                     Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                 applicationContext.contentResolver.takePersistableUriPermission(
-                    data,
-                    takeFlags
+                    /* uri = */ data,
+                    /* modeFlags = */ takeFlags
                 )
 
                 funAfterSAFPermission?.invoke(true)
@@ -277,11 +291,11 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
             var fileCountToCopy = fileDirItems.size
             if (isCopyOperation) {
                 startCopyMove(
-                    fileDirItems,
-                    destination,
-                    isCopyOperation,
-                    copyPhotoVideoOnly,
-                    copyHidden
+                    files = fileDirItems,
+                    destinationPath = destination,
+                    isCopyOperation = isCopyOperation,
+                    copyPhotoVideoOnly = copyPhotoVideoOnly,
+                    copyHidden = copyHidden
                 )
             } else {
                 if (isPathOnOTG(source) || isPathOnOTG(destination) || isPathOnSD(source) || isPathOnSD(
@@ -290,31 +304,38 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
                 ) {
                     handleSAFDialog(source) {
                         startCopyMove(
-                            fileDirItems,
-                            destination,
-                            isCopyOperation,
-                            copyPhotoVideoOnly,
-                            copyHidden
+                            files = fileDirItems,
+                            destinationPath = destination,
+                            isCopyOperation = isCopyOperation,
+                            copyPhotoVideoOnly = copyPhotoVideoOnly,
+                            copyHidden = copyHidden
                         )
                     }
                 } else {
                     try {
-                        checkConflicts(fileDirItems, destination, 0, LinkedHashMap()) {
+                        checkConflicts(
+                            files = fileDirItems,
+                            destinationPath = destination,
+                            index = 0,
+                            conflictResolutions = LinkedHashMap()
+                        ) {
                             toast(R.string.moving)
                             val updatedPaths = ArrayList<String>(fileDirItems.size)
                             val destinationFolder = File(destination)
                             for (oldFileDirItem in fileDirItems) {
-                                var newFile = File(destinationFolder, oldFileDirItem.name)
+                                var newFile = File(/* parent = */ destinationFolder, /* child = */
+                                    oldFileDirItem.name
+                                )
                                 if (newFile.exists()) {
                                     when {
                                         getConflictResolution(
-                                            it,
-                                            newFile.absolutePath
+                                            resolutions = it,
+                                            path = newFile.absolutePath
                                         ) == CONFLICT_SKIP -> fileCountToCopy--
 
                                         getConflictResolution(
-                                            it,
-                                            newFile.absolutePath
+                                            resolutions = it,
+                                            path = newFile.absolutePath
                                         ) == CONFLICT_KEEP_BOTH -> newFile =
                                             getAlternativeFile(newFile)
 
@@ -335,17 +356,17 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
 
                             if (updatedPaths.isEmpty()) {
                                 copyMoveListener.copySucceeded(
-                                    false,
-                                    fileCountToCopy == 0,
-                                    destination
+                                    copyOnly = false,
+                                    copiedAll = fileCountToCopy == 0,
+                                    destinationPath = destination
                                 )
                             } else {
                                 rescanPaths(updatedPaths) {
                                     runOnUiThread {
                                         copyMoveListener.copySucceeded(
-                                            false,
-                                            fileCountToCopy <= updatedPaths.size,
-                                            destination
+                                            copyOnly = false,
+                                            copiedAll = fileCountToCopy <= updatedPaths.size,
+                                            destinationPath = destination
                                         )
                                     }
                                 }
@@ -378,21 +399,26 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
         copyPhotoVideoOnly: Boolean,
         copyHidden: Boolean,
     ) {
-        checkConflicts(files, destinationPath, 0, LinkedHashMap()) {
+        checkConflicts(
+            files = files,
+            destinationPath = destinationPath,
+            index = 0,
+            conflictResolutions = LinkedHashMap()
+        ) {
             toast(if (isCopyOperation) R.string.copying else R.string.moving)
             val pair = Pair(files, destinationPath)
             CopyMoveTask(
-                this,
-                isCopyOperation,
-                copyPhotoVideoOnly,
-                it,
-                copyMoveListener,
-                copyHidden
+                activity = this,
+                copyOnly = isCopyOperation,
+                copyMediaOnly = copyPhotoVideoOnly,
+                conflictResolutions = it,
+                listener = copyMoveListener,
+                copyHidden = copyHidden
             ).execute(pair)
         }
     }
 
-    fun checkConflicts(
+    private fun checkConflicts(
         files: ArrayList<FileDirItem>,
         destinationPath: String,
         index: Int,
@@ -413,19 +439,31 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
                     conflictResolutions.clear()
                     conflictResolutions[""] = resolution
                     checkConflicts(
-                        files,
-                        destinationPath,
-                        files.size,
-                        conflictResolutions,
-                        callback
+                        files = files,
+                        destinationPath = destinationPath,
+                        index = files.size,
+                        conflictResolutions = conflictResolutions,
+                        callback = callback
                     )
                 } else {
                     conflictResolutions[newFileDirItem.path] = resolution
-                    checkConflicts(files, destinationPath, index + 1, conflictResolutions, callback)
+                    checkConflicts(
+                        files = files,
+                        destinationPath = destinationPath,
+                        index = index + 1,
+                        conflictResolutions = conflictResolutions,
+                        callback = callback
+                    )
                 }
             }
         } else {
-            checkConflicts(files, destinationPath, index + 1, conflictResolutions, callback)
+            checkConflicts(
+                files = files,
+                destinationPath = destinationPath,
+                index = index + 1,
+                conflictResolutions = conflictResolutions,
+                callback = callback
+            )
         }
     }
 
@@ -437,9 +475,9 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
             isAskingPermissions = true
             actionOnPermission = callback
             ActivityCompat.requestPermissions(
-                this,
-                arrayOf(getPermissionString(permissionId)),
-                GENERIC_PERM_HANDLER
+                /* activity = */ this,
+                /* permissions = */ arrayOf(getPermissionString(permissionId)),
+                /* requestCode = */ GENERIC_PERM_HANDLER
             )
         }
     }
@@ -456,7 +494,7 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
         }
     }
 
-    val copyMoveListener = object : CopyMoveListener {
+    private val copyMoveListener = object : CopyMoveListener {
         override fun copySucceeded(copyOnly: Boolean, copiedAll: Boolean, destinationPath: String) {
             if (copyOnly) {
                 toast(if (copiedAll) R.string.copying_success else R.string.copying_success_partial)
@@ -487,7 +525,7 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
                 ExportSettingsDialog(this, defaultFilename) {
                     val file = File(it)
                     val fileDirItem = FileDirItem(file.absolutePath, file.name)
-                    getFileOutputStream(fileDirItem, true) {
+                    getFileOutputStream(fileDirItem = fileDirItem, allowCreatingNewFile = true) {
                         if (it == null) {
                             toast(R.string.unknown_error_occurred)
                             return@getFileOutputStream

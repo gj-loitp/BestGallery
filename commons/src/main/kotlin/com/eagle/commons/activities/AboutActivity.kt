@@ -49,7 +49,11 @@ class AboutActivity : BaseSimpleActivity() {
     }
 
     private fun setupWebsite() {
-        val websiteText = String.format(getString(R.string.two_string_placeholder), getString(R.string.website_label), getString(R.string.my_website))
+        val websiteText = String.format(
+            format = getString(/* resId = */ R.string.two_string_placeholder),
+            getString(R.string.website_label),
+            getString(R.string.my_website)
+        )
         aboutWebsite.text = websiteText
     }
 
@@ -57,7 +61,8 @@ class AboutActivity : BaseSimpleActivity() {
         val label = getString(R.string.email_label)
         val email = getString(R.string.my_email)
 
-        val appVersion = String.format(getString(R.string.app_version, intent.getStringExtra(APP_VERSION_NAME)))
+        val appVersion =
+            String.format(getString(R.string.app_version, intent.getStringExtra(APP_VERSION_NAME)))
         val deviceOS = String.format(getString(R.string.device_os), Build.VERSION.RELEASE)
         val newline = "%0D%0A"
         val separator = "------------------------------"
@@ -65,12 +70,22 @@ class AboutActivity : BaseSimpleActivity() {
         val href = "$label<br><a href=\"mailto:$email?subject=$appName&body=$body\">$email</a>"
         aboutEmail.text = Html.fromHtml(href)
 
-        if (intent.getBooleanExtra(SHOW_FAQ_BEFORE_MAIL, false) && !baseConfig.wasBeforeAskingShown) {
+        if (intent.getBooleanExtra(
+                SHOW_FAQ_BEFORE_MAIL,
+                false
+            ) && !baseConfig.wasBeforeAskingShown
+        ) {
             aboutEmail.setOnClickListener {
                 baseConfig.wasBeforeAskingShown = true
                 aboutEmail.movementMethod = LinkMovementMethod.getInstance()
                 aboutEmail.setOnClickListener(null)
-                ConfirmationDialog(this, "", R.string.before_asking_question_read_faq, R.string.read_it, R.string.skip) {
+                ConfirmationDialog(
+                    activity = this,
+                    message = "",
+                    messageId = R.string.before_asking_question_read_faq,
+                    positive = R.string.read_it,
+                    negative = R.string.skip
+                ) {
                     aboutFaqLabel.performClick()
                 }
             }
@@ -80,7 +95,8 @@ class AboutActivity : BaseSimpleActivity() {
     }
 
     private fun setupFAQ() {
-        var faqItems = /*intent.getSerializableExtra(APP_FAQ) as ArrayList<FAQItem>*/ ArrayList<FAQItem>()
+        var faqItems = /*intent.getSerializableExtra(APP_FAQ) as ArrayList<FAQItem>*/
+            ArrayList<FAQItem>()
         aboutFaqLabel.beVisibleIf(faqItems.isNotEmpty())
         aboutFaqLabel.setOnClickListener {
             openFAQ(faqItems)
@@ -116,7 +132,7 @@ class AboutActivity : BaseSimpleActivity() {
 
     private fun setupMoreApps() {
         aboutMoreApps.setOnClickListener {
-            launchViewIntent("https://play.google.com/store/apps/dev?id=9070296388022589266")
+            launchViewIntent("https://play.google.com/store/apps/dev?id=9198084038765766736")
         }
         aboutMoreApps.setTextColor(linkColor)
     }
@@ -169,6 +185,7 @@ class AboutActivity : BaseSimpleActivity() {
                 packageManager.getPackageInfo("com.facebook.katana", 0)
                 link = "fb://page/150270895341774"
             } catch (ignored: Exception) {
+                ignored.printStackTrace()
             }
 
             launchViewIntent(link)
@@ -187,5 +204,6 @@ class AboutActivity : BaseSimpleActivity() {
         aboutCopyright.text = String.format(getString(R.string.copyright), versionName, year)
     }
 
-    private fun getStoreUrl() = "https://play.google.com/store/apps/details?id=${packageName.removeSuffix(".debug")}"
+    private fun getStoreUrl() =
+        "https://play.google.com/store/apps/details?id=${packageName.removeSuffix(".debug")}"
 }
