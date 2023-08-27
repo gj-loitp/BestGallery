@@ -3,7 +3,6 @@ package com.roy.commons.dlg
 import android.annotation.SuppressLint
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import com.google.android.material.internal.ViewUtils.showKeyboard
 import com.roy.commons.R
 import com.roy.commons.activities.BaseSimpleActivity
 import com.roy.commons.ext.getDocumentFile
@@ -14,6 +13,7 @@ import com.roy.commons.ext.isAValidFilename
 import com.roy.commons.ext.needsStupidWritePermissions
 import com.roy.commons.ext.setupDialogStuff
 import com.roy.commons.ext.showErrorToast
+import com.roy.commons.ext.showKeyboard
 import com.roy.commons.ext.toast
 import com.roy.commons.ext.value
 import kotlinx.android.synthetic.main.dlg_create_new_folder.view.*

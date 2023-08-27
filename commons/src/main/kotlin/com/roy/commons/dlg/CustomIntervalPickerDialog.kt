@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import com.google.android.material.internal.ViewUtils.showKeyboard
 import com.roy.commons.R
 import com.roy.commons.ext.beVisibleIf
 import com.roy.commons.ext.hideKeyboard
 import com.roy.commons.ext.setupDialogStuff
+import com.roy.commons.ext.showKeyboard
 import com.roy.commons.ext.value
 import com.roy.commons.helpers.DAY_SECONDS
 import com.roy.commons.helpers.HOUR_SECONDS

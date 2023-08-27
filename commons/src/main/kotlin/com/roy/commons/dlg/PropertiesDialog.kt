@@ -172,10 +172,9 @@ class PropertiesDialog() {
      * A File Properties dialog constructor with an optional parameter, usable at multiple items selected
      *
      * @param activity request activity to avoid some Theme.AppCompat issues
-     * @param path the file path
      * @param countHiddenItems toggle determining if we will count hidden files themselves and their sizes
      */
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "InflateParams")
     constructor(
         activity: Activity,
         paths: List<String>,

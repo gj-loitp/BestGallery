@@ -1,5 +1,6 @@
 package com.roy.commons.dlg
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.RadioButton
@@ -26,6 +27,7 @@ import kotlinx.android.synthetic.main.dlg_radio_group.view.*
  * @param callback an anonymous function
  *
  */
+@SuppressLint("InflateParams")
 class StoragePickerDialog(
     val activity: BaseSimpleActivity,
     currPath: String,

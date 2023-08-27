@@ -10,7 +10,11 @@ import com.roy.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_write_permission.view.*
 import kotlinx.android.synthetic.main.dlg_write_permission_otg.view.*
 
-class WritePermissionDialog(activity: Activity, private val isOTG: Boolean, val callback: () -> Unit) {
+class WritePermissionDialog(
+    activity: Activity,
+    isOTG: Boolean,
+    val callback: () -> Unit,
+) {
     var dialog: AlertDialog
 
     init {

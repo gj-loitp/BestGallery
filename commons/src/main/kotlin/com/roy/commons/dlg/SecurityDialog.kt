@@ -1,5 +1,6 @@
 package com.roy.commons.dlg
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,7 @@ class SecurityDialog(
     val callback: (hash: String, type: Int, success: Boolean) -> Unit,
 ) : HashListener {
     var dialog: AlertDialog? = null
+    @SuppressLint("InflateParams")
     val view: View = LayoutInflater.from(activity).inflate(R.layout.dlg_security, null)
     private var tabsAdapter: PasswordTypesAdapter
     private var viewPager: MyDialogViewPager

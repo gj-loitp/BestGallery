@@ -1,7 +1,7 @@
 package com.roy.commons.dlg
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AlertDialog
-import com.google.android.material.internal.ViewUtils.showKeyboard
 import com.roy.commons.R
 import com.roy.commons.activities.BaseSimpleActivity
 import com.roy.commons.ext.getFilenameExtension
@@ -11,6 +11,7 @@ import com.roy.commons.ext.isAValidFilename
 import com.roy.commons.ext.isPathOnSD
 import com.roy.commons.ext.renameFile
 import com.roy.commons.ext.setupDialogStuff
+import com.roy.commons.ext.showKeyboard
 import com.roy.commons.ext.toast
 import com.roy.commons.ext.value
 import kotlinx.android.synthetic.main.dlg_rename_items.*
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.dlg_rename_items.view.*
 import java.io.File
 import java.util.*
 
+@SuppressLint("InflateParams")
 class RenameItemsDialog(
     val activity: BaseSimpleActivity,
     val paths: ArrayList<String>,

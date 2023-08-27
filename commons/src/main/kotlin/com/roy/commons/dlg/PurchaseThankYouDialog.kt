@@ -1,5 +1,6 @@
 package com.roy.commons.dlg
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.text.Html
 import android.text.method.LinkMovementMethod
@@ -9,6 +10,7 @@ import com.roy.commons.ext.launchPurchaseThankYouIntent
 import com.roy.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_purchase_thank_you.view.*
 
+@SuppressLint("InflateParams")
 class PurchaseThankYouDialog(val activity: Activity) {
     init {
         val view = activity.layoutInflater.inflate(R.layout.dlg_purchase_thank_you, null).apply {

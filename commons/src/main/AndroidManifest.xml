@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature
         android:name="android.hardware.faketouch"
-        android:required="false"/>
+        android:required="false" />
 
     <uses-feature
         android:name="android.hardware.screen.portrait"
-        android:required="false"/>
+        android:required="false" />
 
     <application>
         <receiver
             android:name=".receivers.SharedThemeReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.eagle.commons.SHARED_THEME_ACTIVATED"/>
-                <action android:name="com.eagle.commons.SHARED_THEME_UPDATED"/>
+                <action android:name="com.roy.commons.SHARED_THEME_ACTIVATED" />
+                <action android:name="com.roy.commons.SHARED_THEME_UPDATED" />
             </intent-filter>
         </receiver>
     </application>

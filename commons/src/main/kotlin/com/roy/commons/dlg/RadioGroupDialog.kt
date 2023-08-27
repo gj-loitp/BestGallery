@@ -1,5 +1,6 @@
 package com.roy.commons.dlg
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.roy.commons.models.RadioItem
 import kotlinx.android.synthetic.main.dlg_radio_group.view.*
 import java.util.*
 
+@SuppressLint("InflateParams")
 class RadioGroupDialog(
     val activity: Activity,
     val items: ArrayList<RadioItem>,
@@ -58,7 +60,7 @@ class RadioGroupDialog(
             .setOnCancelListener { cancelCallback?.invoke() }
 
         if (selectedItemId != -1 && showOKButton) {
-            builder.setPositiveButton(R.string.ok) { dialog, which -> itemSelected(selectedItemId) }
+            builder.setPositiveButton(R.string.ok) { _, _ -> itemSelected(selectedItemId) }
         }
 
         dialog = builder.create().apply {

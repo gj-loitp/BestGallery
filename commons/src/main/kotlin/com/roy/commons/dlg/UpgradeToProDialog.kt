@@ -1,5 +1,6 @@
 package com.roy.commons.dlg
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.appcompat.app.AlertDialog
 import com.roy.commons.R
@@ -8,6 +9,7 @@ import com.roy.commons.ext.launchViewIntent
 import com.roy.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_upgrade_to_pro.view.*
 
+@SuppressLint("InflateParams")
 class UpgradeToProDialog(val activity: Activity) {
 
     init {

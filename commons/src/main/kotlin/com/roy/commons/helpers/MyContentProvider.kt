@@ -6,9 +6,9 @@ import com.roy.commons.models.SharedTheme
 
 class MyContentProvider {
     companion object {
-        private const val AUTHORITY = "com.eagle.commons.provider"
-        const val SHARED_THEME_ACTIVATED = "com.eagle.commons.SHARED_THEME_ACTIVATED"
-        const val SHARED_THEME_UPDATED = "com.eagle.commons.SHARED_THEME_UPDATED"
+        private const val AUTHORITY = "com.roy.commons.provider"
+        const val SHARED_THEME_ACTIVATED = "com.roy.commons.SHARED_THEME_ACTIVATED"
+        const val SHARED_THEME_UPDATED = "com.roy.commons.SHARED_THEME_UPDATED"
         val MY_CONTENT_URI: Uri = Uri.parse("content://$AUTHORITY/themes")
 
 //        const val COL_ID = "_id"    // used in Simple Thank You
