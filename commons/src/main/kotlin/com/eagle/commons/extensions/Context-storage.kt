@@ -33,7 +33,8 @@ fun Context.getSDCardPath(): String {
 
     val fullSDpattern = Pattern.compile("^/storage/[A-Za-z0-9]{4}-[A-Za-z0-9]{4}$")
     var sdCardPath = directories.firstOrNull { fullSDpattern.matcher(it).matches() }
-        ?: directories.firstOrNull { !physicalPaths.contains(it.toLowerCase()) } ?: ""
+        ?: directories.firstOrNull { !physicalPaths.contains(it.lowercase(Locale.getDefault())) }
+        ?: ""
 
     // on some devices no method retrieved any SD card path, so test if its not sdcard1 by any chance. It happened on an Android 5.1
     if (sdCardPath.trimEnd('/').isEmpty()) {
@@ -54,6 +55,7 @@ fun Context.getSDCardPath(): String {
                 }
             }
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -130,8 +132,7 @@ fun Context.getHumanReadablePath(path: String): String {
 
 fun Context.humanizePath(path: String): String {
     val trimmedPath = path.trimEnd('/')
-    val basePath = path.getBasePath(this)
-    return when (basePath) {
+    return when (val basePath = path.getBasePath(this)) {
         "/" -> "${getHumanReadablePath(basePath)}$trimmedPath"
         else -> trimmedPath.replaceFirst(basePath, getHumanReadablePath(basePath))
     }
@@ -162,14 +163,18 @@ fun Context.hasProperStoredTreeUri(isOTG: Boolean): Boolean {
 fun Context.isAStorageRootFolder(path: String): Boolean {
     val trimmed = path.trimEnd('/')
     return trimmed.isEmpty() || trimmed.equals(internalStoragePath, true) || trimmed.equals(
-        sdCardPath,
-        true
+        other = sdCardPath,
+        ignoreCase = true
     ) || trimmed.equals(otgPath, true)
 }
 
 fun Context.getMyFileUri(file: File): Uri {
     return if (isNougatPlus()) {
-        FileProvider.getUriForFile(this, "$packageName.provider", file)
+        FileProvider.getUriForFile(
+            /* context = */ this,
+            /* authority = */ "$packageName.provider",
+            /* file = */ file
+        )
     } else {
         Uri.fromFile(file)
     }
@@ -306,7 +311,7 @@ fun getPaths(file: File): ArrayList<String> {
     return paths
 }
 
-fun Context.getFileUri(path: String) = when {
+fun Context.getFileUri(path: String): Uri = when {
     path.isImageSlow() -> MediaStore.Images.Media.EXTERNAL_CONTENT_URI
     path.isVideoSlow() -> MediaStore.Video.Media.EXTERNAL_CONTENT_URI
     else -> MediaStore.Files.getContentUri("external")
@@ -341,6 +346,7 @@ fun Context.updateInMediaStore(oldPath: String, newPath: String) {
         try {
             contentResolver.update(uri, values, selection, selectionArgs)
         } catch (ignored: Exception) {
+            ignored.printStackTrace()
         }
     }.start()
 }
@@ -367,8 +373,8 @@ fun Context.getOTGItems(
     callback: (ArrayList<FileDirItem>) -> Unit,
 ) {
     val items = ArrayList<FileDirItem>()
-    val OTGTreeUri = baseConfig.OTGTreeUri
-    var rootUri = DocumentFile.fromTreeUri(applicationContext, Uri.parse(OTGTreeUri))
+    val otgTreeUri = baseConfig.OTGTreeUri
+    var rootUri = DocumentFile.fromTreeUri(applicationContext, Uri.parse(otgTreeUri))
     if (rootUri == null) {
         callback(items)
         return
@@ -414,7 +420,13 @@ fun Context.getOTGItems(
             0
         }
 
-        val fileDirItem = FileDirItem(decodedPath, name!!, isDirectory, childrenCount, fileSize)
+        val fileDirItem = FileDirItem(
+            path = decodedPath,
+            name = name!!,
+            isDirectory = isDirectory,
+            children = childrenCount,
+            size = fileSize
+        )
         items.add(fileDirItem)
     }
 
@@ -445,8 +457,13 @@ fun Context.rescanDeletedPath(path: String, callback: (() -> Unit)? = null) {
         MediaScannerConnection.scanFile(applicationContext, arrayOf(path), null) { path, uri ->
             scanFileHandler.removeCallbacksAndMessages(null)
             try {
-                applicationContext.contentResolver.delete(uri, null, null)
+                applicationContext.contentResolver.delete(
+                    /* url = */ uri,
+                    /* where = */ null,
+                    /* selectionArgs = */ null
+                )
             } catch (e: Exception) {
+                e.printStackTrace()
             }
             callback?.invoke()
         }

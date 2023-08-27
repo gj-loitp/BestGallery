@@ -57,15 +57,15 @@ fun Activity.appLaunched(appId: String) {
         val primaryColor = resources.getColor(R.color.color_primary)
         if (baseConfig.appIconColor != primaryColor) {
             getAppIconColors().forEachIndexed { index, color ->
-                toggleAppIconColor(appId, index, color, false)
+                toggleAppIconColor(appId = appId, colorIndex = index, color = color, enable = false)
             }
 
             val defaultClassName =
                 "${baseConfig.appId.removeSuffix(".debug")}.activities.SplashActivity"
             packageManager.setComponentEnabledSetting(
                 ComponentName(
-                    baseConfig.appId,
-                    defaultClassName
+                    /* pkg = */ baseConfig.appId,
+                    /* cls = */ defaultClassName
                 ), PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, PackageManager.DONT_KILL_APP
             )
 
@@ -73,8 +73,8 @@ fun Activity.appLaunched(appId: String) {
                 "${baseConfig.appId.removeSuffix(".debug")}.activities.SplashActivity.Orange"
             packageManager.setComponentEnabledSetting(
                 ComponentName(
-                    baseConfig.appId,
-                    orangeClassName
+                    /* pkg = */ baseConfig.appId,
+                    /* cls = */ orangeClassName
                 ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
             )
 
@@ -275,8 +275,8 @@ fun Activity.openEditorIntent(path: String, forceChooser: Boolean, applicationId
             val newFilePath = File(parent, "$newFilename.$extension")
 
             val outputUri = if (isPathOnOTG(path)) newUri else getFinalUriFromPath(
-                "$newFilePath",
-                applicationId
+                path = "$newFilePath",
+                applicationId = applicationId
             )
             val resInfoList =
                 packageManager.queryIntentActivities(this, PackageManager.MATCH_DEFAULT_ONLY)
@@ -286,8 +286,10 @@ fun Activity.openEditorIntent(path: String, forceChooser: Boolean, applicationId
                     setPackage(applicationId)
                 }
                 grantUriPermission(
-                    packageName,
+                    /* toPackage = */ packageName,
+                    /* uri = */
                     outputUri,
+                    /* modeFlags = */
                     Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
                 )
             }
@@ -318,7 +320,7 @@ fun Activity.openPathIntent(
     Thread {
         val newUri = getFinalUriFromPath(path, applicationId) ?: return@Thread
         val mimeType =
-            if (forceMimeType.isNotEmpty()) forceMimeType else getUriMimeType(path, newUri)
+            forceMimeType.ifEmpty { getUriMimeType(path, newUri) }
         Intent().apply {
             action = Intent.ACTION_VIEW
             setDataAndType(newUri, mimeType)
@@ -402,10 +404,14 @@ fun BaseSimpleActivity.deleteFolders(
 ) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
         Thread {
-            deleteFoldersBg(folders, deleteMediaOnly, callback)
+            deleteFoldersBg(
+                folders = folders,
+                deleteMediaOnly = deleteMediaOnly,
+                callback = callback
+            )
         }.start()
     } else {
-        deleteFoldersBg(folders, deleteMediaOnly, callback)
+        deleteFoldersBg(folders = folders, deleteMediaOnly = deleteMediaOnly, callback = callback)
     }
 }
 
@@ -446,10 +452,14 @@ fun BaseSimpleActivity.deleteFolder(
 ) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
         Thread {
-            deleteFolderBg(folder, deleteMediaOnly, callback)
+            deleteFolderBg(
+                fileDirItem = folder,
+                deleteMediaOnly = deleteMediaOnly,
+                callback = callback
+            )
         }.start()
     } else {
-        deleteFolderBg(folder, deleteMediaOnly, callback)
+        deleteFolderBg(fileDirItem = folder, deleteMediaOnly = deleteMediaOnly, callback = callback)
     }
 }
 
@@ -474,7 +484,7 @@ fun BaseSimpleActivity.deleteFolderBg(
         }
 
         if (folder.listFiles()?.isEmpty() == true) {
-            deleteFileBg(fileDirItem, true) { }
+            deleteFileBg(fileDirItem = fileDirItem, allowDeleteFolder = true) { }
         }
     }
     runOnUiThread {
@@ -489,10 +499,10 @@ fun BaseSimpleActivity.deleteFiles(
 ) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
         Thread {
-            deleteFilesBg(files, allowDeleteFolder, callback)
+            deleteFilesBg(files = files, allowDeleteFolder = allowDeleteFolder, callback = callback)
         }.start()
     } else {
-        deleteFilesBg(files, allowDeleteFolder, callback)
+        deleteFilesBg(files = files, allowDeleteFolder = allowDeleteFolder, callback = callback)
     }
 }
 
@@ -533,10 +543,18 @@ fun BaseSimpleActivity.deleteFile(
 ) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
         Thread {
-            deleteFileBg(fileDirItem, allowDeleteFolder, callback)
+            deleteFileBg(
+                fileDirItem = fileDirItem,
+                allowDeleteFolder = allowDeleteFolder,
+                callback = callback
+            )
         }.start()
     } else {
-        deleteFileBg(fileDirItem, allowDeleteFolder, callback)
+        deleteFileBg(
+            fileDirItem = fileDirItem,
+            allowDeleteFolder = allowDeleteFolder,
+            callback = callback
+        )
     }
 }
 
@@ -567,7 +585,11 @@ fun BaseSimpleActivity.deleteFileBg(
         if (!fileDeleted) {
             if (needsStupidWritePermissions(path)) {
                 handleSAFDialog(path) {
-                    trySAFFileDelete(fileDirItem, allowDeleteFolder, callback)
+                    trySAFFileDelete(
+                        fileDirItem = fileDirItem,
+                        allowDeleteFolder = allowDeleteFolder,
+                        callback = callback
+                    )
                 }
             }
         }
@@ -622,9 +644,9 @@ fun BaseSimpleActivity.renameFile(
 
             try {
                 val uri = DocumentsContract.renameDocument(
-                    applicationContext.contentResolver,
-                    document.uri,
-                    newPath.getFilenameFromPath()
+                    /* content = */ applicationContext.contentResolver,
+                    /* documentUri = */ document.uri,
+                    /* displayName = */ newPath.getFilenameFromPath()
                 )
                 if (document.uri != uri) {
                     updateInMediaStore(oldPath, newPath)
@@ -679,7 +701,7 @@ fun BaseSimpleActivity.renameFile(
 fun Activity.hideKeyboard() {
     val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow((currentFocus ?: View(this)).windowToken, 0)
-    window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     currentFocus?.clearFocus()
 }
 
@@ -792,10 +814,10 @@ fun BaseSimpleActivity.getFileInputStreamSync(path: String) = FileInputStream(Fi
 fun Activity.handleHiddenFolderPasswordProtection(callback: () -> Unit) {
     if (baseConfig.isHiddenPasswordProtectionOn) {
         SecurityDialog(
-            this,
-            baseConfig.hiddenPasswordHash,
-            baseConfig.hiddenProtectionType
-        ) { hash, type, success ->
+            activity = this,
+            requiredHash = baseConfig.hiddenPasswordHash,
+            showTabIndex = baseConfig.hiddenProtectionType
+        ) { _, _, success ->
             if (success) {
                 callback()
             }
@@ -808,10 +830,10 @@ fun Activity.handleHiddenFolderPasswordProtection(callback: () -> Unit) {
 fun Activity.handleAppPasswordProtection(callback: (success: Boolean) -> Unit) {
     if (baseConfig.isAppPasswordProtectionOn) {
         SecurityDialog(
-            this,
-            baseConfig.appPasswordHash,
-            baseConfig.appProtectionType
-        ) { hash, type, success ->
+            activity = this,
+            requiredHash = baseConfig.appPasswordHash,
+            showTabIndex = baseConfig.appProtectionType
+        ) { _, _, success ->
             callback(success)
         }
     } else {
@@ -822,10 +844,10 @@ fun Activity.handleAppPasswordProtection(callback: (success: Boolean) -> Unit) {
 fun Activity.handleDeletePasswordProtection(callback: () -> Unit) {
     if (baseConfig.isDeletePasswordProtectionOn) {
         SecurityDialog(
-            this,
-            baseConfig.deletePasswordHash,
-            baseConfig.deleteProtectionType
-        ) { hash, type, success ->
+            activity = this,
+            requiredHash = baseConfig.deletePasswordHash,
+            showTabIndex = baseConfig.deleteProtectionType
+        ) { _, _, success ->
             if (success) {
                 callback()
             }
@@ -853,10 +875,10 @@ fun Activity.updateSharedTheme(sharedTheme: SharedTheme) {
     try {
         val contentValues = MyContentProvider.fillThemeContentValues(sharedTheme)
         applicationContext.contentResolver.update(
-            MyContentProvider.MY_CONTENT_URI,
-            contentValues,
-            null,
-            null
+            /* uri = */ MyContentProvider.MY_CONTENT_URI,
+            /* values = */ contentValues,
+            /* where = */ null,
+            /* selectionArgs = */ null
         )
     } catch (e: Exception) {
         showErrorToast(e)
@@ -915,22 +937,28 @@ fun Activity.setupDialogStuff(
 }
 
 fun Activity.showPickSecondsDialogHelper(
-    curMinutes: Int, isSnoozePicker: Boolean = false, showSecondsAtCustomDialog: Boolean = false,
-    cancelCallback: (() -> Unit)? = null, callback: (seconds: Int) -> Unit,
+    curMinutes: Int,
+    isSnoozePicker: Boolean = false,
+    showSecondsAtCustomDialog: Boolean = false,
+    cancelCallback: (() -> Unit)? = null,
+    callback: (seconds: Int) -> Unit,
 ) {
     val seconds = if (curMinutes > 0) curMinutes * 60 else curMinutes
     showPickSecondsDialog(
-        seconds,
-        isSnoozePicker,
-        showSecondsAtCustomDialog,
-        cancelCallback,
-        callback
+        curSeconds = seconds,
+        isSnoozePicker = isSnoozePicker,
+        showSecondsAtCustomDialog = showSecondsAtCustomDialog,
+        cancelCallback = cancelCallback,
+        callback = callback
     )
 }
 
 fun Activity.showPickSecondsDialog(
-    curSeconds: Int, isSnoozePicker: Boolean = false, showSecondsAtCustomDialog: Boolean = false,
-    cancelCallback: (() -> Unit)? = null, callback: (seconds: Int) -> Unit,
+    curSeconds: Int,
+    isSnoozePicker: Boolean = false,
+    showSecondsAtCustomDialog: Boolean = false,
+    cancelCallback: (() -> Unit)? = null,
+    callback: (seconds: Int) -> Unit,
 ) {
     hideKeyboard()
     val seconds = TreeSet<Int>()
@@ -962,9 +990,9 @@ fun Activity.showPickSecondsDialog(
     items.add(RadioItem(-2, getString(R.string.custom)))
 
     RadioGroupDialog(
-        this,
-        items,
-        selectedIndex,
+        activity = this,
+        items = items,
+        checkedItemId = selectedIndex,
         showOKButton = isSnoozePicker,
         cancelCallback = cancelCallback
     ) {

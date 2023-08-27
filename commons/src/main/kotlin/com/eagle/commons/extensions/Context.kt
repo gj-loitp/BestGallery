@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Color
@@ -26,9 +27,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.loader.content.CursorLoader
-import com.github.ajalt.reprint.core.Reprint
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.eagle.commons.R
 import com.eagle.commons.helpers.*
 import com.eagle.commons.helpers.MyContentProvider.Companion.COL_APP_ICON_COLOR
@@ -39,12 +37,14 @@ import com.eagle.commons.helpers.MyContentProvider.Companion.COL_TEXT_COLOR
 import com.eagle.commons.models.AlarmSound
 import com.eagle.commons.models.SharedTheme
 import com.eagle.commons.views.*
+import com.github.ajalt.reprint.core.Reprint
 import me.drakeet.support.toast.ToastCompat
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun Context.getSharedPrefs() = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
+fun Context.getSharedPrefs(): SharedPreferences =
+    getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
 
 val Context.isRTLLayout: Boolean get() = resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL
 
@@ -107,6 +107,7 @@ fun Context.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
             }
         }
     } catch (e: Exception) {
+        e.printStackTrace()
     }
 }
 
@@ -218,6 +219,7 @@ fun Context.getDataColumn(
             return cursor.getStringValue(MediaStore.Files.FileColumns.DATA)
         }
     } catch (e: Exception) {
+        e.printStackTrace()
     } finally {
         cursor?.close()
     }
@@ -263,7 +265,11 @@ fun Context.getFilePublicUri(file: File, applicationId: String): Uri {
     }
 
     if (uri == null) {
-        uri = FileProvider.getUriForFile(this, "$applicationId.provider", file)
+        uri = FileProvider.getUriForFile(
+            /* context = */ this,
+            /* authority = */ "$applicationId.provider",
+            /* file = */ file
+        )
     }
 
     return uri!!
@@ -291,6 +297,7 @@ fun Context.getMediaContent(path: String, uri: Uri): Uri? {
             return Uri.withAppendedPath(uri, id)
         }
     } catch (e: Exception) {
+        e.printStackTrace()
     } finally {
         cursor?.close()
     }
@@ -354,6 +361,7 @@ fun Context.getFilenameFromContentUri(uri: Uri): String? {
             return cursor.getStringValue(OpenableColumns.DISPLAY_NAME)
         }
     } catch (e: Exception) {
+        e.printStackTrace()
     } finally {
         cursor?.close()
     }
@@ -392,8 +400,14 @@ fun Context.getSharedThemeSync(cursorLoader: CursorLoader): SharedTheme? {
     return null
 }
 
-fun Context.getMyContentProviderCursorLoader() =
-    CursorLoader(this, MyContentProvider.MY_CONTENT_URI, null, null, null, null)
+fun Context.getMyContentProviderCursorLoader() = CursorLoader(
+    /* context = */ this,
+    /* uri = */ MyContentProvider.MY_CONTENT_URI,
+    /* projection = */ null,
+    /* selection = */ null,
+    /* selectionArgs = */ null,
+    /* sortOrder = */ null
+)
 
 fun Context.getDialogTheme() =
     if (baseConfig.backgroundColor.getContrastColor() == Color.WHITE) R.style.MyDialogTheme_Dark else R.style.MyDialogTheme
@@ -550,7 +564,7 @@ fun Context.getFormattedSeconds(seconds: Int, showBefore: Boolean = true) = when
     }
 }
 
-fun Context.getDefaultAlarmUri(type: Int) =
+fun Context.getDefaultAlarmUri(type: Int): Uri =
     RingtoneManager.getDefaultUri(if (type == ALARM_SOUND_TYPE_NOTIFICATION) RingtoneManager.TYPE_NOTIFICATION else RingtoneManager.TYPE_ALARM)
 
 fun Context.getDefaultAlarmTitle(type: Int): String {
@@ -569,9 +583,9 @@ fun Context.grantReadUriPermission(uriString: String) {
     try {
         // ensure custom reminder sounds play well
         grantUriPermission(
-            "com.android.systemui",
-            Uri.parse(uriString),
-            Intent.FLAG_GRANT_READ_URI_PERMISSION
+            /* p0 = */ "com.android.systemui",
+            /* p1 = */ Uri.parse(uriString),
+            /* p2 = */ Intent.FLAG_GRANT_READ_URI_PERMISSION
         )
     } catch (ignored: Exception) {
     }
@@ -632,12 +646,12 @@ fun Context.checkAppIconColor() {
     val appId = baseConfig.appId
     if (appId.isNotEmpty() && baseConfig.lastIconColor != baseConfig.appIconColor) {
         getAppIconColors().forEachIndexed { index, color ->
-            toggleAppIconColor(appId, index, color, false)
+            toggleAppIconColor(appId = appId, colorIndex = index, color = color, enable = false)
         }
 
         getAppIconColors().forEachIndexed { index, color ->
             if (baseConfig.appIconColor == color) {
-                toggleAppIconColor(appId, index, color, true)
+                toggleAppIconColor(appId = appId, colorIndex = index, color = color, enable = true)
             }
         }
     }
@@ -658,6 +672,7 @@ fun Context.toggleAppIconColor(appId: String, colorIndex: Int, color: Int, enabl
             baseConfig.lastIconColor = color
         }
     } catch (e: Exception) {
+        e.printStackTrace()
     }
 }
 
