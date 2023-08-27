@@ -280,7 +280,7 @@ abstract class BaseSimpleActivity : AppCompatActivity() {
     }
 
     fun handleSAFDialog(path: String, callback: (success: Boolean) -> Unit): Boolean {
-        return if (!packageName.startsWith("com.eagle")) {
+        return if (!packageName.startsWith("com.roy")) {
             callback(true)
             false
         } else if (isShowingSAFDialog(path) || isShowingOTGDialog(path)) {

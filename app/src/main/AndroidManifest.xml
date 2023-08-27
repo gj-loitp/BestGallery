@@ -263,7 +263,7 @@
             android:name=".receivers.RefreshMediaReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.eagle.REFRESH_MEDIA" />
+                <action android:name="com.roy.REFRESH_MEDIA" />
             </intent-filter>
         </receiver>
 

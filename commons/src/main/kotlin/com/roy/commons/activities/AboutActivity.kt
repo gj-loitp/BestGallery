@@ -193,10 +193,10 @@ class AboutActivity : BaseSimpleActivity() {
 
     private fun setupFacebook() {
         aboutFacebook.setOnClickListener {
-            var link = "https://www.facebook.com/eagle"
+            var link = "https://www.facebook.com/loitp93/"
             try {
                 packageManager.getPackageInfo("com.facebook.katana", 0)
-                link = "fb://page/150270895341774"
+                link = "https://www.facebook.com/hoidammedocsach"
             } catch (ignored: Exception) {
                 ignored.printStackTrace()
             }
@@ -206,9 +206,10 @@ class AboutActivity : BaseSimpleActivity() {
     }
 
     private fun setupReddit() {
-        aboutReddit.setOnClickListener {
-            launchViewIntent("https://www.reddit.com/r/eagle")
-        }
+        //TODO roy remove
+//        aboutReddit.setOnClickListener {
+//            launchViewIntent("https://www.reddit.com/r/roy")
+//        }
     }
 
     private fun setupCopyright() {
