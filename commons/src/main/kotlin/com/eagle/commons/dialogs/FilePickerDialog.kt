@@ -13,7 +13,7 @@ import com.eagle.commons.extensions.*
 import com.eagle.commons.helpers.SORT_BY_SIZE
 import com.eagle.commons.models.FileDirItem
 import com.eagle.commons.views.Breadcrumbs
-import kotlinx.android.synthetic.main.dialog_filepicker.view.*
+import kotlinx.android.synthetic.main.dlg_filepicker.view.*
 import java.io.File
 import java.util.*
 
@@ -40,7 +40,7 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
     private var mScrollStates = HashMap<String, Parcelable>()
 
     private lateinit var mDialog: AlertDialog
-    private var mDialogView = activity.layoutInflater.inflate(R.layout.dialog_filepicker, null)
+    private var mDialogView = activity.layoutInflater.inflate(R.layout.dlg_filepicker, null)
 
     init {
         if (!File(currPath).exists()) {
@@ -56,14 +56,14 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
             currPath = activity.internalStoragePath
         }
 
-        mDialogView.filepicker_breadcrumbs.listener = this
+        mDialogView.filePickerBreadcrumbs.listener = this
         tryUpdateItems()
 
         val builder = AlertDialog.Builder(activity)
                 .setNegativeButton(R.string.cancel, null)
                 .setOnKeyListener { dialogInterface, i, keyEvent ->
                     if (keyEvent.action == KeyEvent.ACTION_UP && i == KeyEvent.KEYCODE_BACK) {
-                        val breadcrumbs = mDialogView.filepicker_breadcrumbs
+                        val breadcrumbs = mDialogView.filePickerBreadcrumbs
                         if (breadcrumbs.childCount > 1) {
                             breadcrumbs.removeBreadcrumb()
                             currPath = breadcrumbs.getLastItem().path.trimEnd('/')
@@ -79,14 +79,14 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
             builder.setPositiveButton(R.string.ok, null)
 
         if (showFAB) {
-            mDialogView.filepicker_fab.apply {
+            mDialogView.filePickerFab.apply {
                 beVisible()
                 setOnClickListener { createNewFolder() }
             }
         }
 
         val secondaryFabBottomMargin = activity.resources.getDimension(if (showFAB) R.dimen.secondary_fab_bottom_margin else R.dimen.activity_margin).toInt()
-        mDialogView.filepicker_fab_show_hidden.apply {
+        mDialogView.filePickerFabShowHidden.apply {
             beVisibleIf(!showHidden && canAddShowHiddenButton)
             (layoutParams as CoordinatorLayout.LayoutParams).bottomMargin = secondaryFabBottomMargin
             setOnClickListener {
@@ -136,7 +136,7 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
 
         val sortedItems = items.sortedWith(compareBy({ !it.isDirectory }, { it.name.toLowerCase() }))
 
-        val adapter = FilepickerItemsAdapter(activity, sortedItems, mDialogView.filepicker_list) {
+        val adapter = FilepickerItemsAdapter(activity, sortedItems, mDialogView.filePickerList) {
             if ((it as FileDirItem).isDirectory) {
                 currPath = it.path
                 tryUpdateItems()
@@ -147,20 +147,20 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
         }
         adapter.addVerticalDividers(true)
 
-        val layoutManager = mDialogView.filepicker_list.layoutManager as LinearLayoutManager
+        val layoutManager = mDialogView.filePickerList.layoutManager as LinearLayoutManager
         mScrollStates[mPrevPath.trimEnd('/')] = layoutManager.onSaveInstanceState()!!
 
         mDialogView.apply {
-            filepicker_list.adapter = adapter
-            filepicker_breadcrumbs.setBreadcrumb(currPath)
-            filepicker_fastscroller.allowBubbleDisplay = context.baseConfig.showInfoBubble
-            filepicker_fastscroller.setViews(filepicker_list) {
-                filepicker_fastscroller.updateBubbleText(sortedItems.getOrNull(it)?.getBubbleText(context) ?: "")
+            filePickerList.adapter = adapter
+            filePickerBreadcrumbs.setBreadcrumb(currPath)
+            filePickerFastscroller.allowBubbleDisplay = context.baseConfig.showInfoBubble
+            filePickerFastscroller.setViews(filePickerList) {
+                filePickerFastscroller.updateBubbleText(sortedItems.getOrNull(it)?.getBubbleText(context) ?: "")
             }
 
             layoutManager.onRestoreInstanceState(mScrollStates[currPath.trimEnd('/')])
-            filepicker_list.onGlobalLayout {
-                filepicker_fastscroller.setScrollToY(filepicker_list.computeVerticalScrollOffset())
+            filePickerList.onGlobalLayout {
+                filePickerFastscroller.setScrollToY(filePickerList.computeVerticalScrollOffset())
             }
         }
 
@@ -216,7 +216,7 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
                 tryUpdateItems()
             }
         } else {
-            val item = mDialogView.filepicker_breadcrumbs.getChildAt(id).tag as FileDirItem
+            val item = mDialogView.filePickerBreadcrumbs.getChildAt(id).tag as FileDirItem
             if (currPath != item.path.trimEnd('/')) {
                 currPath = item.path
                 tryUpdateItems()

@@ -4,7 +4,7 @@ import android.app.Activity
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.extensions.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_message.view.*
+import kotlinx.android.synthetic.main.dlg_message.view.*
 
 /**
  * A simple dialog without any view, just a messageId, a positive button and optionally a negative button
@@ -21,7 +21,7 @@ class ConfirmationDialog(activity: Activity, message: String = "", messageId: In
     var dialog: AlertDialog
 
     init {
-        val view = activity.layoutInflater.inflate(R.layout.dialog_message, null)
+        val view = activity.layoutInflater.inflate(R.layout.dlg_message, null)
         view.message.text = if (message.isEmpty()) activity.resources.getString(messageId) else message
 
         val builder = AlertDialog.Builder(activity)
