@@ -14,20 +14,20 @@
         android:layout_marginBottom="@dimen/medium_margin"
         android:visibility="gone" />
 
-    <com.eagle.commons.views.LineColorPicker
+    <com.roy.commons.views.LineColorPicker
         android:id="@+id/primaryLineColorPicker"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_color_picker_height"
         android:layout_below="@+id/lineColorPickerIcon" />
 
-    <com.eagle.commons.views.LineColorPicker
+    <com.roy.commons.views.LineColorPicker
         android:id="@+id/secondaryLineColorPicker"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_color_picker_height"
         android:layout_below="@+id/primaryLineColorPicker"
         android:layout_marginTop="@dimen/big_margin" />
 
-    <com.eagle.commons.views.MyTextView
+    <com.roy.commons.views.MyTextView
         android:id="@+id/hexCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

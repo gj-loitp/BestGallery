@@ -3,8 +3,8 @@ package com.eagle.gallery.pro
 import android.content.Context
 import androidx.multidex.MultiDexApplication
 import com.github.ajalt.reprint.core.Reprint
-import com.eagle.commons.ext.checkUseEnglish
 import com.eagle.gallery.pro.activities.ActivityLifeCallbacks
+import com.roy.commons.ext.checkUseEnglish
 
 class App : MultiDexApplication() {
 

@@ -3,14 +3,19 @@ package com.eagle.gallery.pro.dialogs
 import android.view.KeyEvent
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.dlg.FilePickerDialog
-import com.eagle.commons.ext.*
-import com.eagle.commons.views.MyGridLayoutManager
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.*
 import com.eagle.gallery.pro.helpers.VIEW_TYPE_GRID
 import com.eagle.gallery.pro.models.Directory
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.dlg.FilePickerDialog
+import com.roy.commons.ext.beGone
+import com.roy.commons.ext.beGoneIf
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.handleHiddenFolderPasswordProtection
+import com.roy.commons.ext.setupDialogStuff
+import com.roy.commons.ext.toast
+import com.roy.commons.views.MyGridLayoutManager
 import kotlinx.android.synthetic.main.dialog_directory_picker.view.*
 
 class PickDirectoryDialog(val activity: BaseSimpleActivity, val sourcePath: String, showOtherFolderButton: Boolean, val callback: (path: String) -> Unit) {

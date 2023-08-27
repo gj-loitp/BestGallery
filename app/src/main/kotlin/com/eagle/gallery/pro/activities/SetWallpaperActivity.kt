@@ -9,17 +9,17 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.eagle.commons.dlg.RadioGroupDialog
-import com.eagle.commons.ext.toast
-import com.eagle.commons.helpers.isNougatPlus
-import com.eagle.commons.models.RadioItem
 import com.eagle.gallery.pro.App
 import com.eagle.gallery.pro.R
+import com.roy.commons.dlg.RadioGroupDialog
+import com.roy.commons.ext.toast
+import com.roy.commons.helpers.isNougatPlus
+import com.roy.commons.models.RadioItem
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_set_wallpaper.*
 import kotlinx.android.synthetic.main.bottom_set_wallpaper_actions.*
 
-class SetWallpaperActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
+class SetWallpaperActivity : SimpleActivity(),
     CropImageView.OnCropImageCompleteListener {
     private val PICK_IMAGE = 1
     private var isLandscapeRatio = true
@@ -35,7 +35,7 @@ class SetWallpaperActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
         if (intent.data == null) {
             val pickIntent = Intent(
                 applicationContext,
-                com.eagle.gallery.pro.activities.MainActivity::class.java
+                MainActivity::class.java
             )
             pickIntent.action = Intent.ACTION_PICK
             pickIntent.type = "image/*"

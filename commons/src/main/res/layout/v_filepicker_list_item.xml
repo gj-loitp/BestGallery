@@ -25,7 +25,7 @@
         android:layout_toEndOf="@+id/listItemIcon"
         android:padding="@dimen/small_margin">
 
-        <com.eagle.commons.views.MyTextView
+        <com.roy.commons.views.MyTextView
             android:id="@+id/listItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:maxLines="1"
             tools:text="Directory" />
 
-        <com.eagle.commons.views.MyTextView
+        <com.roy.commons.views.MyTextView
             android:id="@+id/listItemDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

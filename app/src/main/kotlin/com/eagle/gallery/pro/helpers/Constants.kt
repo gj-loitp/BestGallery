@@ -1,6 +1,6 @@
 package com.eagle.gallery.pro.helpers
 
-import com.eagle.commons.helpers.MONTH_SECONDS
+import com.roy.commons.helpers.MONTH_SECONDS
 
 // shared preferences
 const val DIRECTORY_SORT_ORDER = "directory_sort_order"

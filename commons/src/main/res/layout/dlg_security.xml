@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.eagle.commons.views.MyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.roy.commons.views.MyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dialogScrollView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -34,11 +34,11 @@
 
         </com.google.android.material.tabs.TabLayout>
 
-        <com.eagle.commons.views.MyDialogViewPager
+        <com.roy.commons.views.MyDialogViewPager
             android:id="@+id/dialogTabViewPager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dialogTabLayout" />
 
     </RelativeLayout>
-</com.eagle.commons.views.MyScrollView>
+</com.roy.commons.views.MyScrollView>

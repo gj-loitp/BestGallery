@@ -1,6 +1,6 @@
 package com.eagle.gallery.pro.interfaces
 
-import com.eagle.commons.models.FileDirItem
+import com.roy.commons.models.FileDirItem
 
 interface MediaOperationsListener {
     fun refreshItems()

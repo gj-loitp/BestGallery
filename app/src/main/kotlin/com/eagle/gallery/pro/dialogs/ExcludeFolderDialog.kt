@@ -4,12 +4,12 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AlertDialog
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.ext.beVisibleIf
-import com.eagle.commons.ext.getBasePath
-import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.getBasePath
+import com.roy.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dialog_exclude_folder.view.*
 
 class ExcludeFolderDialog(val activity: BaseSimpleActivity, val selectedPaths: List<String>, val callback: () -> Unit) {

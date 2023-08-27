@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_margin"
     android:paddingRight="@dimen/activity_margin">
 
-    <com.eagle.commons.views.MyAppCompatCheckbox
+    <com.roy.commons.views.MyAppCompatCheckbox
         android:id="@+id/filter_media_images"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:paddingBottom="@dimen/activity_margin"
         android:text="@string/images"/>
 
-    <com.eagle.commons.views.MyAppCompatCheckbox
+    <com.roy.commons.views.MyAppCompatCheckbox
         android:id="@+id/filter_media_videos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:paddingBottom="@dimen/activity_margin"
         android:text="@string/videos"/>
 
-    <com.eagle.commons.views.MyAppCompatCheckbox
+    <com.roy.commons.views.MyAppCompatCheckbox
         android:id="@+id/filter_media_gifs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         android:paddingBottom="@dimen/activity_margin"
         android:text="@string/gifs"/>
 
-    <com.eagle.commons.views.MyAppCompatCheckbox
+    <com.roy.commons.views.MyAppCompatCheckbox
         android:id="@+id/filter_media_raws"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:paddingBottom="@dimen/activity_margin"
         android:text="@string/raw_images"/>
 
-    <com.eagle.commons.views.MyAppCompatCheckbox
+    <com.roy.commons.views.MyAppCompatCheckbox
         android:id="@+id/filter_media_svgs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

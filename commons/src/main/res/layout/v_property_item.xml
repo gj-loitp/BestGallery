@@ -5,14 +5,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.eagle.commons.views.MyTextView
+    <com.roy.commons.views.MyTextView
         android:id="@+id/propertyLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_margin"
         android:textSize="@dimen/smaller_text_size" />
 
-    <com.eagle.commons.views.MyTextView
+    <com.roy.commons.views.MyTextView
         android:id="@+id/propertyValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

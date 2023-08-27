@@ -1,11 +1,11 @@
 package com.eagle.gallery.pro.dialogs
 
 import androidx.appcompat.app.AlertDialog
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
 import com.eagle.gallery.pro.helpers.*
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dialog_manage_extended_details.view.*
 
 class ManageExtendedDetailsDialog(val activity: BaseSimpleActivity, val callback: (result: Int) -> Unit) {

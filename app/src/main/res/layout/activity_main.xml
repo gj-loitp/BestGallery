@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.eagle.commons.views.MyTextView
+        <com.roy.commons.views.MyTextView
             android:id="@+id/directories_empty_text_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
             android:textSize="@dimen/bigger_text_size"
             android:visibility="gone" />
 
-        <com.eagle.commons.views.MyTextView
+        <com.roy.commons.views.MyTextView
             android:id="@+id/directories_empty_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,15 +34,15 @@
             android:textSize="@dimen/bigger_text_size"
             android:visibility="gone" />
 
-        <com.eagle.commons.views.MyRecyclerView
+        <com.roy.commons.views.MyRecyclerView
             android:id="@+id/directories_grid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"
-            app:layoutManager="com.eagle.commons.views.MyGridLayoutManager"
+            app:layoutManager="com.roy.commons.views.MyGridLayoutManager"
             app:spanCount="@integer/directory_columns_vertical_scroll" />
 
-        <com.eagle.commons.views.FastScroller
+        <com.roy.commons.views.FastScroller
             android:id="@+id/directories_vertical_fastscroller"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -54,9 +54,9 @@
 
             <include layout="@layout/v_fastscroller_handle_vertical" />
 
-        </com.eagle.commons.views.FastScroller>
+        </com.roy.commons.views.FastScroller>
 
-        <com.eagle.commons.views.FastScroller
+        <com.roy.commons.views.FastScroller
             android:id="@+id/directories_horizontal_fastscroller"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
 
             <include layout="@layout/v_fastscroller_handle_horizontal" />
 
-        </com.eagle.commons.views.FastScroller>
+        </com.roy.commons.views.FastScroller>
 
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/loading"

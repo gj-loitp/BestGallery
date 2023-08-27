@@ -2,11 +2,6 @@ package com.eagle.gallery.pro.dialogs
 
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.ext.beGoneIf
-import com.eagle.commons.ext.beVisibleIf
-import com.eagle.commons.ext.setupDialogStuff
-import com.eagle.commons.views.MyGridLayoutManager
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
 import com.eagle.gallery.pro.extensions.getCachedMedia
@@ -14,6 +9,11 @@ import com.eagle.gallery.pro.helpers.SHOW_ALL
 import com.eagle.gallery.pro.helpers.VIEW_TYPE_GRID
 import com.eagle.gallery.pro.models.Medium
 import com.eagle.gallery.pro.models.ThumbnailItem
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.ext.beGoneIf
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.setupDialogStuff
+import com.roy.commons.views.MyGridLayoutManager
 import kotlinx.android.synthetic.main.dialog_medium_picker.view.*
 
 class PickMediumDialog(val activity: BaseSimpleActivity, val path: String, val callback: (path: String) -> Unit) {

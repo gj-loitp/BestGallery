@@ -3,12 +3,12 @@ package com.eagle.gallery.pro.adapters
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.adt.MyRecyclerViewAdapter
-import com.eagle.commons.itf.RefreshRecyclerViewListener
-import com.eagle.commons.views.MyRecyclerView
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.adt.MyRecyclerViewAdapter
+import com.roy.commons.itf.RefreshRecyclerViewListener
+import com.roy.commons.views.MyRecyclerView
 import kotlinx.android.synthetic.main.item_manage_folder.view.*
 import java.util.*
 

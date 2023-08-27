@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.eagle.commons.views.PatternTab xmlns:android="http://schemas.android.com/apk/res/android"
+<com.roy.commons.views.PatternTab xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/patternLockHolder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.eagle.commons.views.MyTextView
+    <com.roy.commons.views.MyTextView
         android:id="@+id/patternLockTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,4 +18,4 @@
         android:layout_below="@+id/patternLockTitle"
         android:layout_centerInParent="true" />
 
-</com.eagle.commons.views.PatternTab>
+</com.roy.commons.views.PatternTab>

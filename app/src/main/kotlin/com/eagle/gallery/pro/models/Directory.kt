@@ -2,14 +2,14 @@ package com.eagle.gallery.pro.models
 
 import android.content.Context
 import androidx.room.*
-import com.eagle.commons.ext.formatDate
-import com.eagle.commons.ext.formatSize
-import com.eagle.commons.helpers.SORT_BY_DATE_MODIFIED
-import com.eagle.commons.helpers.SORT_BY_NAME
-import com.eagle.commons.helpers.SORT_BY_PATH
-import com.eagle.commons.helpers.SORT_BY_SIZE
 import com.eagle.gallery.pro.helpers.FAVORITES
 import com.eagle.gallery.pro.helpers.RECYCLE_BIN
+import com.roy.commons.ext.formatDate
+import com.roy.commons.ext.formatSize
+import com.roy.commons.helpers.SORT_BY_DATE_MODIFIED
+import com.roy.commons.helpers.SORT_BY_NAME
+import com.roy.commons.helpers.SORT_BY_PATH
+import com.roy.commons.helpers.SORT_BY_SIZE
 
 @Entity(tableName = "directories", indices = [Index(value = ["path"], unique = true)])
 data class Directory(

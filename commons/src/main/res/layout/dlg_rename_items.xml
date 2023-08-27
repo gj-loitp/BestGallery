@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="@dimen/activity_margin">
 
-    <com.eagle.commons.views.MyEditText
+    <com.roy.commons.views.MyEditText
         android:id="@+id/renameItemsValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.eagle.commons.views.MyCompatRadioButton
+        <com.roy.commons.views.MyCompatRadioButton
             android:id="@+id/renameItemsRadioAppend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             android:paddingBottom="@dimen/normal_margin"
             android:text="@string/append_filenames" />
 
-        <com.eagle.commons.views.MyCompatRadioButton
+        <com.roy.commons.views.MyCompatRadioButton
             android:id="@+id/renameItemsRadioPrepend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

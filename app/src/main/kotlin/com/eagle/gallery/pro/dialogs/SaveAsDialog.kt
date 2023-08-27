@@ -1,11 +1,18 @@
 package com.eagle.gallery.pro.dialogs
 
 import androidx.appcompat.app.AlertDialog
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.dlg.ConfirmationDialog
-import com.eagle.commons.dlg.FilePickerDialog
-import com.eagle.commons.ext.*
 import com.eagle.gallery.pro.R
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.dlg.ConfirmationDialog
+import com.roy.commons.dlg.FilePickerDialog
+import com.roy.commons.ext.getFilenameFromPath
+import com.roy.commons.ext.getParentPath
+import com.roy.commons.ext.humanizePath
+import com.roy.commons.ext.isAValidFilename
+import com.roy.commons.ext.setupDialogStuff
+import com.roy.commons.ext.showKeyboard
+import com.roy.commons.ext.toast
+import com.roy.commons.ext.value
 import kotlinx.android.synthetic.main.dialog_save_as.view.*
 import java.io.File
 

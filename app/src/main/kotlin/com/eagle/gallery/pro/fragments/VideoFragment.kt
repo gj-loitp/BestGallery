@@ -23,7 +23,6 @@ import com.google.android.exoplayer2.upstream.ContentDataSource
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DataSpec
 import com.google.android.exoplayer2.upstream.FileDataSource
-import com.eagle.commons.ext.*
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.*
 import com.eagle.gallery.pro.helpers.Config
@@ -32,6 +31,19 @@ import com.eagle.gallery.pro.helpers.MIN_SKIP_LENGTH
 import com.eagle.gallery.pro.helpers.PATH
 import com.eagle.gallery.pro.models.Medium
 import com.eagle.gallery.pro.views.MediaSideScroll
+import com.roy.commons.ext.beGone
+import com.roy.commons.ext.beGoneIf
+import com.roy.commons.ext.beInvisible
+import com.roy.commons.ext.beInvisibleIf
+import com.roy.commons.ext.beVisible
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.getFormattedDuration
+import com.roy.commons.ext.getVideoResolution
+import com.roy.commons.ext.isGone
+import com.roy.commons.ext.isVisible
+import com.roy.commons.ext.onGlobalLayout
+import com.roy.commons.ext.showErrorToast
+import com.roy.commons.ext.updateTextColors
 import kotlinx.android.synthetic.main.bottom_video_time_holder.view.*
 import kotlinx.android.synthetic.main.pager_video_item.view.*
 import java.io.File

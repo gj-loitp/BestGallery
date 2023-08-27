@@ -3,10 +3,17 @@ package com.eagle.gallery.pro.fragments
 import android.provider.MediaStore
 import android.view.MotionEvent
 import androidx.fragment.app.Fragment
-import com.eagle.commons.ext.*
 import com.eagle.gallery.pro.extensions.config
 import com.eagle.gallery.pro.helpers.*
 import com.eagle.gallery.pro.models.Medium
+import com.roy.commons.ext.formatAsResolution
+import com.roy.commons.ext.formatDate
+import com.roy.commons.ext.formatSize
+import com.roy.commons.ext.getExifCameraModel
+import com.roy.commons.ext.getExifDateTaken
+import com.roy.commons.ext.getExifProperties
+import com.roy.commons.ext.getLongValue
+import com.roy.commons.ext.getResolution
 import java.io.File
 
 abstract class ViewPagerFragment : Fragment() {
@@ -41,7 +48,7 @@ abstract class ViewPagerFragment : Fragment() {
         val path = "${file.parent.trimEnd('/')}/"
         val exif = android.media.ExifInterface(medium.path)
         val details = StringBuilder()
-        val detailsFlag = context!!.config.extendedDetails
+        val detailsFlag = requireContext().config.extendedDetails
         if (detailsFlag and EXT_NAME != 0) {
             medium.name.let { if (it.isNotEmpty()) details.appendln(it) }
         }
@@ -63,7 +70,7 @@ abstract class ViewPagerFragment : Fragment() {
         }
 
         if (detailsFlag and EXT_DATE_TAKEN != 0) {
-            getExifDateTaken(exif, context!!).let { if (it.isNotEmpty()) details.appendln(it) }
+            getExifDateTaken(exif, requireContext()).let { if (it.isNotEmpty()) details.appendln(it) }
         }
 
         if (detailsFlag and EXT_CAMERA_MODEL != 0) {
@@ -81,13 +88,13 @@ abstract class ViewPagerFragment : Fragment() {
         val uri = MediaStore.Files.getContentUri("external")
         val selection = "${MediaStore.MediaColumns.DATA} = ?"
         val selectionArgs = arrayOf(file.absolutePath)
-        val cursor = context!!.contentResolver.query(uri, projection, selection, selectionArgs, null)
+        val cursor = requireContext().contentResolver.query(uri, projection, selection, selectionArgs, null)
         cursor?.use {
             return if (cursor.moveToFirst()) {
                 val dateModified = cursor.getLongValue(MediaStore.Images.Media.DATE_MODIFIED) * 1000L
-                dateModified.formatDate(context!!)
+                dateModified.formatDate(requireContext())
             } else {
-                file.lastModified().formatDate(context!!)
+                file.lastModified().formatDate(requireContext())
             }
         }
         return ""

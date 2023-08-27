@@ -8,14 +8,19 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.RelativeLayout
 import android.widget.RemoteViews
-import com.eagle.commons.dlg.ColorPickerDialog
-import com.eagle.commons.ext.*
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.dialogs.PickDirectoryDialog
 import com.eagle.gallery.pro.extensions.*
 import com.eagle.gallery.pro.helpers.MyWidgetProvider
 import com.eagle.gallery.pro.models.Directory
 import com.eagle.gallery.pro.models.Widget
+import com.roy.commons.dlg.ColorPickerDialog
+import com.roy.commons.ext.adjustAlpha
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.onSeekBarChangeListener
+import com.roy.commons.ext.setBackgroundColor
+import com.roy.commons.ext.setFillWithStroke
+import com.roy.commons.ext.updateTextColors
 import kotlinx.android.synthetic.main.activity_widget_config.*
 
 class WidgetConfigureActivity : com.eagle.gallery.pro.activities.SimpleActivity() {

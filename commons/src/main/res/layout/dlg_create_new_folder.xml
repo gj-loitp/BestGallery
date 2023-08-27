@@ -8,12 +8,12 @@
     android:paddingTop="@dimen/activity_margin"
     android:paddingRight="@dimen/activity_margin">
 
-    <com.eagle.commons.views.MyTextView
+    <com.roy.commons.views.MyTextView
         android:id="@+id/folderPath"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.eagle.commons.views.MyEditText
+    <com.roy.commons.views.MyEditText
         android:id="@+id/folderName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

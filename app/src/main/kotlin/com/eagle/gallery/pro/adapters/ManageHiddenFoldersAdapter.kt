@@ -3,19 +3,24 @@ package com.eagle.gallery.pro.adapters
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.adt.MyRecyclerViewAdapter
-import com.eagle.commons.ext.isPathOnSD
-import com.eagle.commons.itf.RefreshRecyclerViewListener
-import com.eagle.commons.views.MyRecyclerView
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
 import com.eagle.gallery.pro.extensions.removeNoMedia
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.adt.MyRecyclerViewAdapter
+import com.roy.commons.ext.isPathOnSD
+import com.roy.commons.itf.RefreshRecyclerViewListener
+import com.roy.commons.views.MyRecyclerView
 import kotlinx.android.synthetic.main.item_manage_folder.view.*
 import java.util.*
 
-class ManageHiddenFoldersAdapter(activity: BaseSimpleActivity, var folders: ArrayList<String>, val listener: RefreshRecyclerViewListener?,
-                                 recyclerView: MyRecyclerView, itemClick: (Any) -> Unit) : MyRecyclerViewAdapter(activity, recyclerView, null, itemClick) {
+class ManageHiddenFoldersAdapter(
+    activity: BaseSimpleActivity,
+    var folders: ArrayList<String>,
+    val listener: RefreshRecyclerViewListener?,
+    recyclerView: MyRecyclerView,
+    itemClick: (Any) -> Unit,
+) : MyRecyclerViewAdapter(activity, recyclerView, null, itemClick) {
 
     private val config = activity.config
 
@@ -41,7 +46,8 @@ class ManageHiddenFoldersAdapter(activity: BaseSimpleActivity, var folders: Arra
 
     override fun getItemKeyPosition(key: Int) = folders.indexOfFirst { it.hashCode() == key }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = createViewHolder(R.layout.item_manage_folder, parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        createViewHolder(R.layout.item_manage_folder, parent)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val folder = folders[position]
@@ -53,7 +59,8 @@ class ManageHiddenFoldersAdapter(activity: BaseSimpleActivity, var folders: Arra
 
     override fun getItemCount() = folders.size
 
-    private fun getSelectedItems() = folders.filter { selectedKeys.contains(it.hashCode()) } as ArrayList<String>
+    private fun getSelectedItems() =
+        folders.filter { selectedKeys.contains(it.hashCode()) } as ArrayList<String>
 
     private fun setupView(view: View, folder: String) {
         view.apply {

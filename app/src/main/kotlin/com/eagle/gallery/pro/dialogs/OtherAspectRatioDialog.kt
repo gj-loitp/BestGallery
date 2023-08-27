@@ -1,9 +1,9 @@
 package com.eagle.gallery.pro.dialogs
 
 import androidx.appcompat.app.AlertDialog
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.gallery.pro.R
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dialog_other_aspect_ratio.view.*
 
 class OtherAspectRatioDialog(val activity: BaseSimpleActivity, val lastOtherAspectRatio: Pair<Int, Int>?, val callback: (aspectRatio: Pair<Int, Int>) -> Unit) {

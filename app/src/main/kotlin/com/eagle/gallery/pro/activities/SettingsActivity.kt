@@ -3,10 +3,6 @@ package com.eagle.gallery.pro.activities
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import com.eagle.commons.dlg.*
-import com.eagle.commons.ext.*
-import com.eagle.commons.helpers.*
-import com.eagle.commons.models.RadioItem
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.dialogs.ManageBottomActionsDialog
 import com.eagle.gallery.pro.dialogs.ManageExtendedDetailsDialog
@@ -15,6 +11,47 @@ import com.eagle.gallery.pro.extensions.emptyTheRecycleBin
 import com.eagle.gallery.pro.extensions.galleryDB
 import com.eagle.gallery.pro.extensions.showRecycleBinEmptyingDialog
 import com.eagle.gallery.pro.helpers.*
+import com.roy.commons.dlg.ChangeDateTimeFormatDialog
+import com.roy.commons.dlg.ConfirmationDialog
+import com.roy.commons.dlg.FilePickerDialog
+import com.roy.commons.dlg.RadioGroupDialog
+import com.roy.commons.dlg.SecurityDialog
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.checkAppIconColor
+import com.roy.commons.ext.formatSize
+import com.roy.commons.ext.getAdjustedPrimaryColor
+import com.roy.commons.ext.getAppIconColors
+import com.roy.commons.ext.handleHiddenFolderPasswordProtection
+import com.roy.commons.ext.showErrorToast
+import com.roy.commons.ext.toBoolean
+import com.roy.commons.ext.toInt
+import com.roy.commons.ext.toStringSet
+import com.roy.commons.ext.toast
+import com.roy.commons.ext.updateTextColors
+import com.roy.commons.helpers.APP_ICON_COLOR
+import com.roy.commons.helpers.BACKGROUND_COLOR
+import com.roy.commons.helpers.DATE_FORMAT
+import com.roy.commons.helpers.ENABLE_PULL_TO_REFRESH
+import com.roy.commons.helpers.IS_USING_SHARED_THEME
+import com.roy.commons.helpers.KEEP_LAST_MODIFIED
+import com.roy.commons.helpers.LAST_CONFLICT_APPLY_TO_ALL
+import com.roy.commons.helpers.LAST_CONFLICT_RESOLUTION
+import com.roy.commons.helpers.PRIMARY_COLOR
+import com.roy.commons.helpers.PROTECTION_FINGERPRINT
+import com.roy.commons.helpers.SCROLL_HORIZONTALLY
+import com.roy.commons.helpers.SHOW_ALL_TABS
+import com.roy.commons.helpers.SHOW_INFO_BUBBLE
+import com.roy.commons.helpers.SKIP_DELETE_CONFIRMATION
+import com.roy.commons.helpers.SORT_ORDER
+import com.roy.commons.helpers.TEXT_COLOR
+import com.roy.commons.helpers.USE_24_HOUR_FORMAT
+import com.roy.commons.helpers.USE_ENGLISH
+import com.roy.commons.helpers.WAS_USE_ENGLISH_TOGGLED
+import com.roy.commons.helpers.WIDGET_BG_COLOR
+import com.roy.commons.helpers.WIDGET_TEXT_COLOR
+import com.roy.commons.helpers.isPiePlus
+import com.roy.commons.helpers.sumByLong
+import com.roy.commons.models.RadioItem
 import kotlinx.android.synthetic.main.activity_settings.*
 import java.io.File
 import java.util.*
@@ -123,7 +160,8 @@ class SettingsActivity : com.eagle.gallery.pro.activities.SimpleActivity() {
             val items = arrayListOf(
                     RadioItem(PRIORITY_SPEED, getString(R.string.speed)),
                     RadioItem(PRIORITY_COMPROMISE, getString(R.string.compromise)),
-                    RadioItem(PRIORITY_VALIDITY, getString(R.string.avoid_showing_invalid_files)))
+                    RadioItem(PRIORITY_VALIDITY, getString(R.string.avoid_showing_invalid_files))
+            )
 
             RadioGroupDialog(this@SettingsActivity, items, config.fileLoadingPriority) {
                 config.fileLoadingPriority = it as Int
@@ -500,7 +538,8 @@ class SettingsActivity : com.eagle.gallery.pro.activities.SimpleActivity() {
             val items = arrayListOf(
                     RadioItem(ROTATE_BY_SYSTEM_SETTING, getString(R.string.screen_rotation_system_setting)),
                     RadioItem(ROTATE_BY_DEVICE_ROTATION, getString(R.string.screen_rotation_device_rotation)),
-                    RadioItem(ROTATE_BY_ASPECT_RATIO, getString(R.string.screen_rotation_aspect_ratio)))
+                    RadioItem(ROTATE_BY_ASPECT_RATIO, getString(R.string.screen_rotation_aspect_ratio))
+            )
 
             RadioGroupDialog(this@SettingsActivity, items, config.screenRotation) {
                 config.screenRotation = it as Int

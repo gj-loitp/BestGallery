@@ -2,14 +2,14 @@ package com.eagle.gallery.pro.dialogs
 
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.ext.beVisibleIf
-import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
 import com.eagle.gallery.pro.helpers.SHOW_ALL
 import com.eagle.gallery.pro.helpers.VIEW_TYPE_GRID
 import com.eagle.gallery.pro.helpers.VIEW_TYPE_LIST
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dialog_change_view_type.view.*
 
 class ChangeViewTypeDialog(val activity: BaseSimpleActivity, val fromFoldersView: Boolean, val path: String = "", val callback: () -> Unit) {

@@ -9,28 +9,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.eagle.commons.dlg.PropertiesDialog
-import com.eagle.commons.ext.beGone
-import com.eagle.commons.ext.beVisible
-import com.eagle.commons.ext.beVisibleIf
-import com.eagle.commons.ext.getFilenameFromPath
-import com.eagle.commons.ext.getFilenameFromUri
-import com.eagle.commons.ext.getFinalUriFromPath
-import com.eagle.commons.ext.getParentPath
-import com.eagle.commons.ext.getRealPathFromURI
-import com.eagle.commons.ext.getUriMimeType
-import com.eagle.commons.ext.isGif
-import com.eagle.commons.ext.isGone
-import com.eagle.commons.ext.isRawFast
-import com.eagle.commons.ext.isSvg
-import com.eagle.commons.ext.isVideoFast
-import com.eagle.commons.ext.scanPathRecursively
-import com.eagle.commons.ext.showSideloadingDialog
-import com.eagle.commons.ext.toast
-import com.eagle.commons.helpers.IS_FROM_GALLERY
-import com.eagle.commons.helpers.PERMISSION_WRITE_STORAGE
-import com.eagle.commons.helpers.REAL_FILE_PATH
-import com.eagle.commons.helpers.SIDELOADING_TRUE
 import com.eagle.gallery.pro.BuildConfig
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
@@ -58,6 +36,28 @@ import com.eagle.gallery.pro.helpers.TYPE_RAWS
 import com.eagle.gallery.pro.helpers.TYPE_SVGS
 import com.eagle.gallery.pro.helpers.TYPE_VIDEOS
 import com.eagle.gallery.pro.models.Medium
+import com.roy.commons.dlg.PropertiesDialog
+import com.roy.commons.ext.beGone
+import com.roy.commons.ext.beVisible
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.getFilenameFromPath
+import com.roy.commons.ext.getFilenameFromUri
+import com.roy.commons.ext.getFinalUriFromPath
+import com.roy.commons.ext.getParentPath
+import com.roy.commons.ext.getRealPathFromURI
+import com.roy.commons.ext.getUriMimeType
+import com.roy.commons.ext.isGif
+import com.roy.commons.ext.isGone
+import com.roy.commons.ext.isRawFast
+import com.roy.commons.ext.isSvg
+import com.roy.commons.ext.isVideoFast
+import com.roy.commons.ext.scanPathRecursively
+import com.roy.commons.ext.showSideloadingDialog
+import com.roy.commons.ext.toast
+import com.roy.commons.helpers.IS_FROM_GALLERY
+import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
+import com.roy.commons.helpers.REAL_FILE_PATH
+import com.roy.commons.helpers.SIDELOADING_TRUE
 import kotlinx.android.synthetic.main.bottom_actions.bottom_change_orientation
 import kotlinx.android.synthetic.main.bottom_actions.bottom_copy
 import kotlinx.android.synthetic.main.bottom_actions.bottom_delete
@@ -78,7 +78,7 @@ import kotlinx.android.synthetic.main.fragment_holder.top_shadow
 import java.io.File
 import java.io.FileInputStream
 
-open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
+open class PhotoVideoActivity : SimpleActivity(),
     ViewPagerFragment.FragmentListener {
     private var mMedium: Medium? = null
     private var mIsFullScreen = false
@@ -255,7 +255,7 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
         if (isPanorama) {
             Intent(
                 applicationContext,
-                com.eagle.gallery.pro.activities.PanoramaVideoActivity::class.java
+                PanoramaVideoActivity::class.java
             ).apply {
                 putExtra(PATH, realPath)
                 startActivity(this)
@@ -264,7 +264,7 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
             val mimeType = getUriMimeType(mUri.toString(), newUri)
             Intent(
                 applicationContext,
-                com.eagle.gallery.pro.activities.VideoPlayerActivity::class.java
+                VideoPlayerActivity::class.java
             ).apply {
                 setDataAndType(newUri, mimeType)
                 addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
@@ -284,7 +284,7 @@ open class PhotoVideoActivity : com.eagle.gallery.pro.activities.SimpleActivity(
     }
 
     private fun sendViewPagerIntent(path: String) {
-        Intent(this, com.eagle.gallery.pro.activities.ViewPagerActivity::class.java).apply {
+        Intent(this, ViewPagerActivity::class.java).apply {
             putExtra(IS_VIEW_INTENT, true)
             putExtra(IS_FROM_GALLERY, mIsFromGallery)
             putExtra(PATH, path)

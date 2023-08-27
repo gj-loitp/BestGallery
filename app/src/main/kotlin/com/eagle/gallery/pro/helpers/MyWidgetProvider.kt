@@ -10,12 +10,12 @@ import android.widget.RemoteViews
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.eagle.commons.ext.setBackgroundColor
-import com.eagle.commons.ext.setText
-import com.eagle.commons.ext.setVisibleIf
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.*
 import com.eagle.gallery.pro.models.Widget
+import com.roy.commons.ext.setBackgroundColor
+import com.roy.commons.ext.setText
+import com.roy.commons.ext.setVisibleIf
 
 class MyWidgetProvider : AppWidgetProvider() {
     private fun setupAppOpenIntent(context: Context, views: RemoteViews, id: Int, widget: Widget) {

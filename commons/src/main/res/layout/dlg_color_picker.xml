@@ -18,7 +18,7 @@
             android:layout_height="@dimen/colorpicker_size_with_padding"
             android:gravity="center_horizontal">
 
-            <com.eagle.commons.views.ColorPickerSquare
+            <com.roy.commons.views.ColorPickerSquare
                 android:id="@+id/colorPickerSquare"
                 android:layout_width="@dimen/colorpicker_size"
                 android:layout_height="@dimen/colorpicker_size"
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/colorPickerTopHolder">
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/colorPickerOldHex"
                 android:layout_width="@dimen/colorpicker_color_width"
                 android:layout_height="match_parent"
@@ -77,7 +77,7 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_arrow_right" />
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/colorPickerNewHexLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/colorpicker_items_height"
@@ -88,7 +88,7 @@
                 android:text="#"
                 android:textSize="@dimen/normal_text_size" />
 
-            <com.eagle.commons.views.MyEditText
+            <com.roy.commons.views.MyEditText
                 android:id="@+id/colorPickerNewHex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

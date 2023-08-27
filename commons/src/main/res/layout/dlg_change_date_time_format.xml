@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/medium_margin">
 
-        <com.eagle.commons.views.MyCompatRadioButton
+        <com.roy.commons.views.MyCompatRadioButton
             android:id="@+id/changeDateTimeDialogRadioOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:textAllCaps="true"
             tools:text="dd.MM.yyyy" />
 
-        <com.eagle.commons.views.MyCompatRadioButton
+        <com.roy.commons.views.MyCompatRadioButton
             android:id="@+id/changeDateTimeDialogRadioTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             android:textAllCaps="true"
             tools:text="dd/MM/yyyy" />
 
-        <com.eagle.commons.views.MyCompatRadioButton
+        <com.roy.commons.views.MyCompatRadioButton
             android:id="@+id/changeDateTimeDialogRadioThree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:textAllCaps="true"
             tools:text="MM/dd/yyyy" />
 
-        <com.eagle.commons.views.MyCompatRadioButton
+        <com.roy.commons.views.MyCompatRadioButton
             android:id="@+id/changeDateTimeDialogRadioFour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
 
     </RadioGroup>
 
-    <com.eagle.commons.views.MyAppCompatCheckbox
+    <com.roy.commons.views.MyAppCompatCheckbox
         android:id="@+id/changeDateTimeDialog24Hour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

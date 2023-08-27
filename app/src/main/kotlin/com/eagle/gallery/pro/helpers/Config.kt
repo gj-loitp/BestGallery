@@ -3,13 +3,13 @@ package com.eagle.gallery.pro.helpers
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Environment
-import com.eagle.commons.helpers.BaseConfig
-import com.eagle.commons.helpers.SORT_BY_DATE_MODIFIED
-import com.eagle.commons.helpers.SORT_DESCENDING
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.models.AlbumCover
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.roy.commons.helpers.BaseConfig
+import com.roy.commons.helpers.SORT_BY_DATE_MODIFIED
+import com.roy.commons.helpers.SORT_DESCENDING
 import java.util.Arrays
 
 class Config(context: Context) : BaseConfig(context) {

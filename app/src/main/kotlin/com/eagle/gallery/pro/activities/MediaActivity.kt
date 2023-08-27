@@ -22,29 +22,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
-import com.eagle.commons.dlg.ConfirmationDialog
-import com.eagle.commons.ext.beGoneIf
-import com.eagle.commons.ext.beVisibleIf
-import com.eagle.commons.ext.deleteFiles
-import com.eagle.commons.ext.getAdjustedPrimaryColor
-import com.eagle.commons.ext.getFilenameFromPath
-import com.eagle.commons.ext.getLatestMediaByDateId
-import com.eagle.commons.ext.getLatestMediaId
-import com.eagle.commons.ext.handleHiddenFolderPasswordProtection
-import com.eagle.commons.ext.isGone
-import com.eagle.commons.ext.isMediaFile
-import com.eagle.commons.ext.isVideoFast
-import com.eagle.commons.ext.isVisible
-import com.eagle.commons.ext.onGlobalLayout
-import com.eagle.commons.ext.showErrorToast
-import com.eagle.commons.ext.toast
-import com.eagle.commons.ext.updateActionBarTitle
-import com.eagle.commons.helpers.PERMISSION_WRITE_STORAGE
-import com.eagle.commons.helpers.REQUEST_EDIT_IMAGE
-import com.eagle.commons.helpers.SORT_BY_RANDOM
-import com.eagle.commons.models.FileDirItem
-import com.eagle.commons.views.MyGridLayoutManager
-import com.eagle.commons.views.MyRecyclerView
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.databases.GalleryDatabase
 import com.eagle.gallery.pro.dialogs.ChangeGroupingDialog
@@ -97,6 +74,29 @@ import com.eagle.gallery.pro.interfaces.MediumDao
 import com.eagle.gallery.pro.models.Medium
 import com.eagle.gallery.pro.models.ThumbnailItem
 import com.eagle.gallery.pro.models.ThumbnailSection
+import com.roy.commons.dlg.ConfirmationDialog
+import com.roy.commons.ext.beGoneIf
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.deleteFiles
+import com.roy.commons.ext.getAdjustedPrimaryColor
+import com.roy.commons.ext.getFilenameFromPath
+import com.roy.commons.ext.getLatestMediaByDateId
+import com.roy.commons.ext.getLatestMediaId
+import com.roy.commons.ext.handleHiddenFolderPasswordProtection
+import com.roy.commons.ext.isGone
+import com.roy.commons.ext.isMediaFile
+import com.roy.commons.ext.isVideoFast
+import com.roy.commons.ext.isVisible
+import com.roy.commons.ext.onGlobalLayout
+import com.roy.commons.ext.showErrorToast
+import com.roy.commons.ext.toast
+import com.roy.commons.ext.updateActionBarTitle
+import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
+import com.roy.commons.helpers.REQUEST_EDIT_IMAGE
+import com.roy.commons.helpers.SORT_BY_RANDOM
+import com.roy.commons.models.FileDirItem
+import com.roy.commons.views.MyGridLayoutManager
+import com.roy.commons.views.MyRecyclerView
 import com.wang.avi.AVLoadingIndicatorView
 import kotlinx.android.synthetic.main.activity_media.media_empty_text
 import kotlinx.android.synthetic.main.activity_media.media_empty_text_label
@@ -108,7 +108,7 @@ import kotlinx.android.synthetic.main.activity_media.viewStub
 import java.io.File
 import java.io.IOException
 
-class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOperationsListener {
+class MediaActivity : SimpleActivity(), MediaOperationsListener {
     private val LAST_MEDIA_CHECK_PERIOD = 3000L
 
     private var mPath = ""
@@ -223,7 +223,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
         media_empty_text_label.setTextColor(config.textColor)
         media_empty_text.setTextColor(getAdjustedPrimaryColor())
 
-        if (com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.isEmpty() || config.getFileSorting(mPath) and SORT_BY_RANDOM == 0) {
+        if (mMedia.isEmpty() || config.getFileSorting(mPath) and SORT_BY_RANDOM == 0) {
             tryLoadGallery()
         }
     }
@@ -235,7 +235,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
         storeStateVariables()
         mLastMediaHandler.removeCallbacksAndMessages(null)
 
-        if (!com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.isEmpty()) {
+        if (!mMedia.isEmpty()) {
             mCurrAsyncTask?.stopFetching()
         }
     }
@@ -264,7 +264,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
         }
 
         mTempShowHiddenHandler.removeCallbacksAndMessages(null)
-        com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.clear()
+        mMedia.clear()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -327,9 +327,9 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
     }
 
     private fun startSlideshow() {
-        if (com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.isNotEmpty()) {
-            Intent(this, com.eagle.gallery.pro.activities.ViewPagerActivity::class.java).apply {
-                val item = com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.firstOrNull { it is Medium } as? Medium
+        if (mMedia.isNotEmpty()) {
+            Intent(this, ViewPagerActivity::class.java).apply {
+                val item = mMedia.firstOrNull { it is Medium } as? Medium
                         ?: return
                 putExtra(PATH, item.path)
                 putExtra(SHOW_ALL, mShowAll)
@@ -391,7 +391,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
     private fun searchQueryChanged(text: String) {
         Thread {
             try {
-                val filtered = com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.filter { it is Medium && it.name.contains(text, true) } as ArrayList
+                val filtered = mMedia.filter { it is Medium && it.name.contains(text, true) } as ArrayList
                 filtered.sortBy { it is Medium && !it.name.startsWith(text, true) }
                 val grouped = MediaFetcher(applicationContext).groupMedia(filtered as ArrayList<Medium>, mPath)
                 runOnUiThread {
@@ -433,7 +433,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
         if (currAdapter == null) {
             initZoomListener()
             val fastscroller = if (config.scrollHorizontally) media_horizontal_fastscroller else media_vertical_fastscroller
-            com.eagle.gallery.pro.adapters.MediaAdapter(this, com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.clone() as ArrayList<ThumbnailItem>, this, mIsGetImageIntent || mIsGetVideoIntent || mIsGetAnyIntent,
+            com.eagle.gallery.pro.adapters.MediaAdapter(this, mMedia.clone() as ArrayList<ThumbnailItem>, this, mIsGetImageIntent || mIsGetVideoIntent || mIsGetAnyIntent,
                     mAllowPickingMultiple, mPath, media_grid, fastscroller) {
                 if (it is Medium) {
                     itemClicked(it.path)
@@ -444,10 +444,10 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
             }
             setupLayoutManager()
         } else {
-            (currAdapter as com.eagle.gallery.pro.adapters.MediaAdapter).updateMedia(com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia)
+            (currAdapter as com.eagle.gallery.pro.adapters.MediaAdapter).updateMedia(mMedia)
         }
 
-        measureRecyclerViewContent(com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia)
+        measureRecyclerViewContent(mMedia)
         setupScrollDirection()
     }
 
@@ -540,7 +540,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
     }
 
     private fun restoreAllFiles() {
-        val paths = com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.filter { it is Medium }.map { (it as Medium).path } as ArrayList<String>
+        val paths = mMedia.filter { it is Medium }.map { (it as Medium).path } as ArrayList<String>
         restoreRecycleBinPaths(paths, mMediumDao) {
             Thread {
                 mDirectoryDao.deleteDirPath(RECYCLE_BIN)
@@ -556,7 +556,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
 
     private fun switchToFolderView() {
         config.showAll = false
-        startActivity(Intent(this, com.eagle.gallery.pro.activities.MainActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 
@@ -626,7 +626,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
             return
         }
 
-        if (MediaActivity.mMedia.size > 0) {
+        if (mMedia.size > 0) {
             loadingMedia?.hide()
         } else {
             loadingMedia?.show()
@@ -655,7 +655,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
         mCurrAsyncTask?.stopFetching()
         mCurrAsyncTask = com.eagle.gallery.pro.asynctasks.GetMediaAsynctask(applicationContext, mPath, mIsGetImageIntent, mIsGetVideoIntent, mShowAll) {
             Thread {
-                val oldMedia = com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.clone() as ArrayList<ThumbnailItem>
+                val oldMedia = mMedia.clone() as ArrayList<ThumbnailItem>
                 val newMedia = it
                 gotMedia(newMedia, false)
                 try {
@@ -676,7 +676,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
     }
 
     private fun isDirEmpty(): Boolean {
-        return if (com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.size <= 0 && config.filterMedia > 0) {
+        return if (mMedia.size <= 0 && config.filterMedia > 0) {
             if (mPath != FAVORITES && mPath != RECYCLE_BIN) {
                 deleteDirectoryIfEmpty()
                 deleteDBDirectory()
@@ -840,7 +840,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
     private fun columnCountChanged() {
         invalidateOptionsMenu()
         media_grid.adapter?.notifyDataSetChanged()
-        measureRecyclerViewContent(com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia)
+        measureRecyclerViewContent(mMedia)
     }
 
     private fun isSetWallpaperIntent() = intent.getBooleanExtra(SET_WALLPAPER_INTENT, false)
@@ -848,7 +848,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
     override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
         if (requestCode == REQUEST_EDIT_IMAGE) {
             if (resultCode == Activity.RESULT_OK && resultData != null) {
-                com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.clear()
+                mMedia.clear()
                 refreshItems()
             }
         }
@@ -893,7 +893,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
             if (isVideo) {
                 openPath(path, false)
             } else {
-                Intent(this, com.eagle.gallery.pro.activities.ViewPagerActivity::class.java).apply {
+                Intent(this, ViewPagerActivity::class.java).apply {
                     putExtra(PATH, path)
                     putExtra(SHOW_ALL, mShowAll)
                     putExtra(SHOW_FAVORITES, mPath == FAVORITES)
@@ -907,7 +907,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
     private fun gotMedia(media: ArrayList<ThumbnailItem>, isFromCache: Boolean) {
         mIsGettingMedia = false
         checkLastMediaChanged()
-        com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia = media
+        mMedia = media
 
         runOnUiThread {
             if (media != null && media.size > 0) {
@@ -929,7 +929,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
         mLatestMediaId = getLatestMediaId()
         mLatestMediaDateId = getLatestMediaByDateId()
         if (!isFromCache) {
-            val mediaToInsert = (com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia).filter { it is Medium && it.deletedTS == 0L }.map { it as Medium }
+            val mediaToInsert = (mMedia).filter { it is Medium && it.deletedTS == 0L }.map { it as Medium }
             try {
                 mMediumDao.insertAll(mediaToInsert)
             } catch (e: Exception) {
@@ -968,7 +968,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
                 return@deleteFiles
             }
 
-            com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.removeAll { filtered.map { it.path }.contains((it as? Medium)?.path) }
+            mMedia.removeAll { filtered.map { it.path }.contains((it as? Medium)?.path) }
 
             Thread {
                 val useRecycleBin = config.useRecycleBin
@@ -979,7 +979,7 @@ class MediaActivity : com.eagle.gallery.pro.activities.SimpleActivity(), MediaOp
                 }
             }.start()
 
-            if (com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.isEmpty()) {
+            if (mMedia.isEmpty()) {
                 deleteDirectoryIfEmpty()
                 deleteDBDirectory()
                 finish()

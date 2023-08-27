@@ -14,18 +14,56 @@ import android.util.DisplayMetrics
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.dlg.ConfirmationDialog
-import com.eagle.commons.ext.*
-import com.eagle.commons.helpers.*
-import com.eagle.commons.models.FAQItem
-import com.eagle.commons.models.FileDirItem
 import com.eagle.gallery.pro.BuildConfig
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.dialogs.PickDirectoryDialog
 import com.eagle.gallery.pro.helpers.NOMEDIA
 import com.eagle.gallery.pro.helpers.RECYCLE_BIN
 import com.eagle.gallery.pro.interfaces.MediumDao
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.dlg.ConfirmationDialog
+import com.roy.commons.ext.deleteFile
+import com.roy.commons.ext.getCompressionFormat
+import com.roy.commons.ext.getDocumentFile
+import com.roy.commons.ext.getFileInputStreamSync
+import com.roy.commons.ext.getFileOutputStream
+import com.roy.commons.ext.getFileOutputStreamSync
+import com.roy.commons.ext.getFileUri
+import com.roy.commons.ext.getFilenameFromPath
+import com.roy.commons.ext.getMimeType
+import com.roy.commons.ext.getParentPath
+import com.roy.commons.ext.isJpg
+import com.roy.commons.ext.needsStupidWritePermissions
+import com.roy.commons.ext.openEditorIntent
+import com.roy.commons.ext.openPathIntent
+import com.roy.commons.ext.renameFile
+import com.roy.commons.ext.rescanPaths
+import com.roy.commons.ext.saveExifRotation
+import com.roy.commons.ext.saveImageRotation
+import com.roy.commons.ext.scanFileRecursively
+import com.roy.commons.ext.scanPathRecursively
+import com.roy.commons.ext.setAsIntent
+import com.roy.commons.ext.sharePathIntent
+import com.roy.commons.ext.sharePathsIntent
+import com.roy.commons.ext.showErrorToast
+import com.roy.commons.ext.toFileDirItem
+import com.roy.commons.ext.toast
+import com.roy.commons.ext.updateLastModified
+import com.roy.commons.helpers.LICENSE_CROPPER
+import com.roy.commons.helpers.LICENSE_EXOPLAYER
+import com.roy.commons.helpers.LICENSE_FILTERS
+import com.roy.commons.helpers.LICENSE_GESTURE_VIEWS
+import com.roy.commons.helpers.LICENSE_GIF_DRAWABLE
+import com.roy.commons.helpers.LICENSE_GLIDE
+import com.roy.commons.helpers.LICENSE_PANORAMA_VIEW
+import com.roy.commons.helpers.LICENSE_PATTERN
+import com.roy.commons.helpers.LICENSE_PICASSO
+import com.roy.commons.helpers.LICENSE_REPRINT
+import com.roy.commons.helpers.LICENSE_RTL
+import com.roy.commons.helpers.LICENSE_SANSELAN
+import com.roy.commons.helpers.LICENSE_SUBSAMPLING
+import com.roy.commons.models.FAQItem
+import com.roy.commons.models.FileDirItem
 import com.squareup.picasso.Picasso
 import java.io.File
 import java.io.FileOutputStream
@@ -73,26 +111,28 @@ fun Activity.launchCamera() {
 }
 
 fun com.eagle.gallery.pro.activities.SimpleActivity.launchAbout() {
-    val licenses = LICENSE_GLIDE or LICENSE_CROPPER or LICENSE_RTL or LICENSE_SUBSAMPLING or LICENSE_PATTERN or LICENSE_REPRINT or LICENSE_GIF_DRAWABLE or
-            LICENSE_PICASSO or LICENSE_EXOPLAYER or LICENSE_PANORAMA_VIEW or LICENSE_SANSELAN or LICENSE_FILTERS or LICENSE_GESTURE_VIEWS
+    val licenses =
+        LICENSE_GLIDE or LICENSE_CROPPER or LICENSE_RTL or LICENSE_SUBSAMPLING or LICENSE_PATTERN or LICENSE_REPRINT or LICENSE_GIF_DRAWABLE or
+                LICENSE_PICASSO or LICENSE_EXOPLAYER or LICENSE_PANORAMA_VIEW or LICENSE_SANSELAN or LICENSE_FILTERS or LICENSE_GESTURE_VIEWS
 
     val faqItems = arrayListOf(
-            FAQItem(R.string.faq_5_title_commons, R.string.faq_5_text_commons),
-            FAQItem(R.string.faq_1_title, R.string.faq_1_text),
-            FAQItem(R.string.faq_2_title, R.string.faq_2_text),
-            FAQItem(R.string.faq_3_title, R.string.faq_3_text),
-            FAQItem(R.string.faq_4_title, R.string.faq_4_text),
-            FAQItem(R.string.faq_5_title, R.string.faq_5_text),
-            FAQItem(R.string.faq_6_title, R.string.faq_6_text),
-            FAQItem(R.string.faq_7_title, R.string.faq_7_text),
-            FAQItem(R.string.faq_8_title, R.string.faq_8_text),
-            FAQItem(R.string.faq_10_title, R.string.faq_10_text),
-            FAQItem(R.string.faq_11_title, R.string.faq_11_text),
-            FAQItem(R.string.faq_12_title, R.string.faq_12_text),
-            FAQItem(R.string.faq_13_title, R.string.faq_13_text),
-            FAQItem(R.string.faq_14_title, R.string.faq_14_text),
-            FAQItem(R.string.faq_2_title_commons, R.string.faq_2_text_commons),
-            FAQItem(R.string.faq_6_title_commons, R.string.faq_6_text_commons))
+        FAQItem(R.string.faq_5_title_commons, R.string.faq_5_text_commons),
+        FAQItem(R.string.faq_1_title, R.string.faq_1_text),
+        FAQItem(R.string.faq_2_title, R.string.faq_2_text),
+        FAQItem(R.string.faq_3_title, R.string.faq_3_text),
+        FAQItem(R.string.faq_4_title, R.string.faq_4_text),
+        FAQItem(R.string.faq_5_title, R.string.faq_5_text),
+        FAQItem(R.string.faq_6_title, R.string.faq_6_text),
+        FAQItem(R.string.faq_7_title, R.string.faq_7_text),
+        FAQItem(R.string.faq_8_title, R.string.faq_8_text),
+        FAQItem(R.string.faq_10_title, R.string.faq_10_text),
+        FAQItem(R.string.faq_11_title, R.string.faq_11_text),
+        FAQItem(R.string.faq_12_title, R.string.faq_12_text),
+        FAQItem(R.string.faq_13_title, R.string.faq_13_text),
+        FAQItem(R.string.faq_14_title, R.string.faq_14_text),
+        FAQItem(R.string.faq_2_title_commons, R.string.faq_2_text_commons),
+        FAQItem(R.string.faq_6_title_commons, R.string.faq_6_text_commons)
+    )
 
     startAboutActivity(R.string.app_name, licenses, BuildConfig.VERSION_NAME, faqItems, true)
 }
@@ -167,7 +207,11 @@ fun BaseSimpleActivity.removeNoMedia(path: String, callback: (() -> Unit)? = nul
     }
 }
 
-fun BaseSimpleActivity.toggleFileVisibility(oldPath: String, hide: Boolean, callback: ((newPath: String) -> Unit)? = null) {
+fun BaseSimpleActivity.toggleFileVisibility(
+    oldPath: String,
+    hide: Boolean,
+    callback: ((newPath: String) -> Unit)? = null,
+) {
     val path = oldPath.getParentPath()
     var filename = oldPath.getFilenameFromPath()
     if ((hide && filename.startsWith('.')) || (!hide && !filename.startsWith('.'))) {
@@ -190,7 +234,11 @@ fun BaseSimpleActivity.toggleFileVisibility(oldPath: String, hide: Boolean, call
     }
 }
 
-fun BaseSimpleActivity.tryCopyMoveFilesTo(fileDirItems: ArrayList<FileDirItem>, isCopyOperation: Boolean, callback: (destinationPath: String) -> Unit) {
+fun BaseSimpleActivity.tryCopyMoveFilesTo(
+    fileDirItems: ArrayList<FileDirItem>,
+    isCopyOperation: Boolean,
+    callback: (destinationPath: String) -> Unit,
+) {
     if (fileDirItems.isEmpty()) {
         toast(R.string.unknown_error_occurred)
         return
@@ -198,12 +246,22 @@ fun BaseSimpleActivity.tryCopyMoveFilesTo(fileDirItems: ArrayList<FileDirItem>, 
 
     val source = fileDirItems[0].getParentPath()
     PickDirectoryDialog(this, source, true) {
-        copyMoveFilesTo(fileDirItems, source.trimEnd('/'), it, isCopyOperation, true, config.shouldShowHidden, callback)
+        copyMoveFilesTo(
+            fileDirItems,
+            source.trimEnd('/'),
+            it,
+            isCopyOperation,
+            true,
+            config.shouldShowHidden,
+            callback
+        )
     }
 }
 
-fun BaseSimpleActivity.tryDeleteFileDirItem(fileDirItem: FileDirItem, allowDeleteFolder: Boolean = false, deleteFromDatabase: Boolean,
-                                            callback: ((wasSuccess: Boolean) -> Unit)? = null) {
+fun BaseSimpleActivity.tryDeleteFileDirItem(
+    fileDirItem: FileDirItem, allowDeleteFolder: Boolean = false, deleteFromDatabase: Boolean,
+    callback: ((wasSuccess: Boolean) -> Unit)? = null,
+) {
     deleteFile(fileDirItem, allowDeleteFolder) {
         if (deleteFromDatabase) {
             Thread {
@@ -218,7 +276,11 @@ fun BaseSimpleActivity.tryDeleteFileDirItem(fileDirItem: FileDirItem, allowDelet
     }
 }
 
-fun BaseSimpleActivity.movePathsInRecycleBin(paths: ArrayList<String>, mediumDao: MediumDao = galleryDB.MediumDao(), callback: ((wasSuccess: Boolean) -> Unit)?) {
+fun BaseSimpleActivity.movePathsInRecycleBin(
+    paths: ArrayList<String>,
+    mediumDao: MediumDao = galleryDB.MediumDao(),
+    callback: ((wasSuccess: Boolean) -> Unit)?,
+) {
     Thread {
         var pathsCnt = paths.size
         paths.forEach {
@@ -242,7 +304,11 @@ fun BaseSimpleActivity.restoreRecycleBinPath(path: String, callback: () -> Unit)
     restoreRecycleBinPaths(arrayListOf(path), galleryDB.MediumDao(), callback)
 }
 
-fun BaseSimpleActivity.restoreRecycleBinPaths(paths: ArrayList<String>, mediumDao: MediumDao = galleryDB.MediumDao(), callback: () -> Unit) {
+fun BaseSimpleActivity.restoreRecycleBinPaths(
+    paths: ArrayList<String>,
+    mediumDao: MediumDao = galleryDB.MediumDao(),
+    callback: () -> Unit,
+) {
     Thread {
         val newPaths = ArrayList<String>()
         paths.forEach {
@@ -256,7 +322,11 @@ fun BaseSimpleActivity.restoreRecycleBinPaths(paths: ArrayList<String>, mediumDa
                 inputStream = getFileInputStreamSync(source)!!
                 inputStream.copyTo(out!!)
                 if (File(source).length() == File(destination).length()) {
-                    mediumDao.updateDeleted(destination.removePrefix(recycleBinPath), 0, "$RECYCLE_BIN$destination")
+                    mediumDao.updateDeleted(
+                        destination.removePrefix(recycleBinPath),
+                        0,
+                        "$RECYCLE_BIN$destination"
+                    )
                 }
                 newPaths.add(destination)
             } catch (e: Exception) {
@@ -295,12 +365,21 @@ fun BaseSimpleActivity.emptyAndDisableTheRecycleBin(callback: () -> Unit) {
 }
 
 fun BaseSimpleActivity.showRecycleBinEmptyingDialog(callback: () -> Unit) {
-    ConfirmationDialog(this, "", R.string.empty_recycle_bin_confirmation, R.string.yes, R.string.no) {
+    ConfirmationDialog(
+        this,
+        "",
+        R.string.empty_recycle_bin_confirmation,
+        R.string.yes,
+        R.string.no
+    ) {
         callback()
     }
 }
 
-fun BaseSimpleActivity.updateFavoritePaths(fileDirItems: ArrayList<FileDirItem>, destination: String) {
+fun BaseSimpleActivity.updateFavoritePaths(
+    fileDirItems: ArrayList<FileDirItem>,
+    destination: String,
+) {
     Thread {
         fileDirItems.forEach {
             val newPath = "$destination/${it.name}"
@@ -330,7 +409,7 @@ fun Activity.fixDateTaken(paths: ArrayList<String>, callback: (() -> Unit)? = nu
         val mediumDao = galleryDB.MediumDao()
         for (path in paths) {
             val dateTime = ExifInterface(path).getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL)
-                    ?: ExifInterface(path).getAttribute(ExifInterface.TAG_DATETIME) ?: continue
+                ?: ExifInterface(path).getAttribute(ExifInterface.TAG_DATETIME) ?: continue
 
             // some formats contain a "T" in the middle, some don't
             // sample dates: 2015-07-26T14:55:23, 2018:09:05 15:09:05
@@ -373,7 +452,13 @@ fun Activity.fixDateTaken(paths: ArrayList<String>, callback: (() -> Unit)? = nu
     }
 }
 
-fun BaseSimpleActivity.saveRotatedImageToFile(oldPath: String, newPath: String, degrees: Int, showToasts: Boolean, callback: () -> Unit) {
+fun BaseSimpleActivity.saveRotatedImageToFile(
+    oldPath: String,
+    newPath: String,
+    degrees: Int,
+    showToasts: Boolean,
+    callback: () -> Unit,
+) {
     var newDegrees = degrees
     if (newDegrees < 0) {
         newDegrees += 360
@@ -407,7 +492,11 @@ fun BaseSimpleActivity.saveRotatedImageToFile(oldPath: String, newPath: String, 
             }
 
             if (File(newPath).exists()) {
-                tryDeleteFileDirItem(FileDirItem(newPath, newPath.getFilenameFromPath()), false, true)
+                tryDeleteFileDirItem(
+                    FileDirItem(newPath, newPath.getFilenameFromPath()),
+                    false,
+                    true
+                )
             }
 
             copyFile(tmpPath, newPath)
@@ -432,7 +521,12 @@ fun BaseSimpleActivity.saveRotatedImageToFile(oldPath: String, newPath: String, 
 }
 
 @TargetApi(Build.VERSION_CODES.N)
-fun Activity.tryRotateByExif(path: String, degrees: Int, showToasts: Boolean, callback: () -> Unit): Boolean {
+fun Activity.tryRotateByExif(
+    path: String,
+    degrees: Int,
+    showToasts: Boolean,
+    callback: () -> Unit,
+): Boolean {
     return try {
         val file = File(path)
         val oldLastModified = file.lastModified()

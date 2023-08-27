@@ -2,11 +2,11 @@ package com.eagle.gallery.pro.dialogs
 
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.ext.setupDialogStuff
-import com.eagle.commons.ext.showKeyboard
-import com.eagle.commons.ext.value
 import com.eagle.gallery.pro.R
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.ext.setupDialogStuff
+import com.roy.commons.ext.showKeyboard
+import com.roy.commons.ext.value
 import kotlinx.android.synthetic.main.dialog_custom_aspect_ratio.view.*
 
 class CustomAspectRatioDialog(val activity: BaseSimpleActivity, val defaultCustomAspectRatio: Pair<Int, Int>?, val callback: (aspectRatio: Pair<Int, Int>) -> Unit) {

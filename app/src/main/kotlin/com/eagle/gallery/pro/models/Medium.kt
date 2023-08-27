@@ -5,14 +5,14 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.eagle.commons.ext.formatDate
-import com.eagle.commons.ext.formatSize
-import com.eagle.commons.ext.getFilenameExtension
-import com.eagle.commons.helpers.SORT_BY_DATE_MODIFIED
-import com.eagle.commons.helpers.SORT_BY_NAME
-import com.eagle.commons.helpers.SORT_BY_PATH
-import com.eagle.commons.helpers.SORT_BY_SIZE
 import com.eagle.gallery.pro.helpers.*
+import com.roy.commons.ext.formatDate
+import com.roy.commons.ext.formatSize
+import com.roy.commons.ext.getFilenameExtension
+import com.roy.commons.helpers.SORT_BY_DATE_MODIFIED
+import com.roy.commons.helpers.SORT_BY_NAME
+import com.roy.commons.helpers.SORT_BY_PATH
+import com.roy.commons.helpers.SORT_BY_SIZE
 import java.io.Serializable
 import java.util.*
 

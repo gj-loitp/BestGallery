@@ -21,11 +21,6 @@ import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
-import com.eagle.commons.dlg.PropertiesDialog
-import com.eagle.commons.dlg.RenameItemDialog
-import com.eagle.commons.ext.*
-import com.eagle.commons.helpers.*
-import com.eagle.commons.models.FileDirItem
 import com.eagle.gallery.pro.BuildConfig
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.dialogs.DeleteWithRememberDialog
@@ -38,12 +33,44 @@ import com.eagle.gallery.pro.fragments.ViewPagerFragment
 import com.eagle.gallery.pro.helpers.*
 import com.eagle.gallery.pro.models.Medium
 import com.eagle.gallery.pro.models.ThumbnailItem
+import com.roy.commons.dlg.PropertiesDialog
+import com.roy.commons.dlg.RenameItemDialog
+import com.roy.commons.ext.beGone
+import com.roy.commons.ext.beVisible
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.getFilenameFromPath
+import com.roy.commons.ext.getFinalUriFromPath
+import com.roy.commons.ext.getParentPath
+import com.roy.commons.ext.getResolution
+import com.roy.commons.ext.getStringValue
+import com.roy.commons.ext.getUriMimeType
+import com.roy.commons.ext.handleDeletePasswordProtection
+import com.roy.commons.ext.hasPermission
+import com.roy.commons.ext.isGif
+import com.roy.commons.ext.isMediaFile
+import com.roy.commons.ext.isRawFast
+import com.roy.commons.ext.isSvg
+import com.roy.commons.ext.isVideoFast
+import com.roy.commons.ext.isVisible
+import com.roy.commons.ext.needsStupidWritePermissions
+import com.roy.commons.ext.onGlobalLayout
+import com.roy.commons.ext.scanPathRecursively
+import com.roy.commons.ext.showErrorToast
+import com.roy.commons.ext.toast
+import com.roy.commons.ext.tryGenericMimeType
+import com.roy.commons.helpers.IS_FROM_GALLERY
+import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
+import com.roy.commons.helpers.REAL_FILE_PATH
+import com.roy.commons.helpers.REQUEST_EDIT_IMAGE
+import com.roy.commons.helpers.REQUEST_SET_AS
+import com.roy.commons.helpers.SORT_BY_RANDOM
+import com.roy.commons.models.FileDirItem
 import kotlinx.android.synthetic.main.activity_medium.*
 import kotlinx.android.synthetic.main.bottom_actions.*
 import java.io.File
 import java.util.*
 
-class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
+class ViewPagerActivity : SimpleActivity(),
     ViewPager.OnPageChangeListener, ViewPagerFragment.FragmentListener {
     private val REQUEST_VIEW_VIDEO = 1
 
@@ -72,7 +99,7 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
 
         top_shadow.layoutParams.height = statusBarHeight + actionBarHeight
         checkNotchSupport()
-        (com.eagle.gallery.pro.activities.MediaActivity.Companion.mMedia.clone() as ArrayList<ThumbnailItem>).filter { it is Medium }
+        (MediaActivity.mMedia.clone() as ArrayList<ThumbnailItem>).filter { it is Medium }
             .mapTo(mMediaFiles) { it as Medium }
 
         handlePermission(PERMISSION_WRITE_STORAGE) {
@@ -1045,9 +1072,9 @@ class ViewPagerActivity : com.eagle.gallery.pro.activities.SimpleActivity(),
             var flipSides = false
             try {
                 val pathToLoad = getCurrentPath()
-                val exif = android.media.ExifInterface(pathToLoad)
+                val exif = ExifInterface(pathToLoad)
                 val orientation =
-                    exif.getAttributeInt(android.media.ExifInterface.TAG_ORIENTATION, -1)
+                    exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1)
                 flipSides =
                     orientation == ExifInterface.ORIENTATION_ROTATE_90 || orientation == ExifInterface.ORIENTATION_ROTATE_270
             } catch (e: Exception) {

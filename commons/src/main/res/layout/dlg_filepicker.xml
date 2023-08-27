@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.eagle.commons.views.Breadcrumbs
+        <com.roy.commons.views.Breadcrumbs
             android:id="@+id/filePickerBreadcrumbs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,15 +19,15 @@
             android:paddingRight="@dimen/activity_margin"
             android:paddingBottom="@dimen/medium_margin" />
 
-        <com.eagle.commons.views.MyRecyclerView
+        <com.roy.commons.views.MyRecyclerView
             android:id="@+id/filePickerList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/filePickerBreadcrumbs"
             android:scrollbars="none"
-            app:layoutManager="com.eagle.commons.views.MyLinearLayoutManager" />
+            app:layoutManager="com.roy.commons.views.MyLinearLayoutManager" />
 
-        <com.eagle.commons.views.FastScroller
+        <com.roy.commons.views.FastScroller
             android:id="@+id/filePickerFastscroller"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -39,10 +39,10 @@
 
             <include layout="@layout/v_fastscroller_handle_vertical" />
 
-        </com.eagle.commons.views.FastScroller>
+        </com.roy.commons.views.FastScroller>
     </RelativeLayout>
 
-    <com.eagle.commons.views.MyFloatingActionButton
+    <com.roy.commons.views.MyFloatingActionButton
         android:id="@+id/filePickerFabShowHidden"
         android:layout_width="@dimen/fab_size"
         android:layout_height="@dimen/fab_size"
@@ -51,7 +51,7 @@
         android:layout_marginBottom="@dimen/activity_margin"
         android:src="@drawable/ic_unhide" />
 
-    <com.eagle.commons.views.MyFloatingActionButton
+    <com.roy.commons.views.MyFloatingActionButton
         android:id="@+id/filePickerFab"
         android:layout_width="@dimen/fab_size"
         android:layout_height="@dimen/fab_size"

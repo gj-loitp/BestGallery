@@ -6,15 +6,15 @@
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/activity_margin">
 
-    <com.eagle.commons.views.MyRecyclerView
+    <com.roy.commons.views.MyRecyclerView
         android:id="@+id/media_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        app:layoutManager="com.eagle.commons.views.MyGridLayoutManager"
+        app:layoutManager="com.roy.commons.views.MyGridLayoutManager"
         app:spanCount="@integer/media_columns_vertical_scroll"/>
 
-    <com.eagle.commons.views.FastScroller
+    <com.roy.commons.views.FastScroller
         android:id="@+id/media_vertical_fastscroller"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -25,9 +25,9 @@
 
         <include layout="@layout/v_fastscroller_handle_vertical"/>
 
-    </com.eagle.commons.views.FastScroller>
+    </com.roy.commons.views.FastScroller>
 
-    <com.eagle.commons.views.FastScroller
+    <com.roy.commons.views.FastScroller
         android:id="@+id/media_horizontal_fastscroller"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,5 +38,5 @@
 
         <include layout="@layout/v_fastscroller_handle_horizontal"/>
 
-    </com.eagle.commons.views.FastScroller>
+    </com.roy.commons.views.FastScroller>
 </RelativeLayout>

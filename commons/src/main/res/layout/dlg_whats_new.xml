@@ -13,7 +13,7 @@
         android:paddingTop="@dimen/activity_margin"
         android:paddingRight="@dimen/activity_margin">
 
-        <com.eagle.commons.views.MyTextView
+        <com.roy.commons.views.MyTextView
             android:id="@+id/whatsNewContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             android:background="@drawable/shape_divider"
             android:paddingTop="@dimen/activity_margin" />
 
-        <com.eagle.commons.views.MyTextView
+        <com.roy.commons.views.MyTextView
             android:id="@+id/whatsNewDisclaimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

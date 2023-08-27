@@ -21,7 +21,7 @@
             android:paddingRight="@dimen/activity_margin"
             android:paddingBottom="@dimen/bigger_margin">
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/customizationThemeLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
                 android:paddingRight="@dimen/medium_margin"
                 android:text="@string/theme" />
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/customizationTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/activity_margin">
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/customizationTextColorLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/activity_margin">
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/customizationBackgroundColorLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/activity_margin">
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/customizationPrimaryColorLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
             android:visibility="gone"
             tools:visibility="visible">
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/customizationAppIconColorLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
             android:background="?attr/selectableItemBackground"
             android:visibility="gone">
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/applyToAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

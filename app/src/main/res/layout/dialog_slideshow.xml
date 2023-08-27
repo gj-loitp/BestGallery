@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:padding="@dimen/activity_margin">
 
-        <com.eagle.commons.views.MyTextView
+        <com.roy.commons.views.MyTextView
             android:id="@+id/interval_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
             android:paddingBottom="@dimen/activity_margin"
             android:text="@string/interval"/>
 
-        <com.eagle.commons.views.MyEditText
+        <com.roy.commons.views.MyEditText
             android:id="@+id/interval_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin">
 
-            <com.eagle.commons.views.MySwitchCompat
+            <com.roy.commons.views.MySwitchCompat
                 android:id="@+id/include_videos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin">
 
-            <com.eagle.commons.views.MySwitchCompat
+            <com.roy.commons.views.MySwitchCompat
                 android:id="@+id/include_gifs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin">
 
-            <com.eagle.commons.views.MySwitchCompat
+            <com.roy.commons.views.MySwitchCompat
                 android:id="@+id/random_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
             android:paddingBottom="@dimen/activity_margin"
             android:visibility="gone">
 
-            <com.eagle.commons.views.MySwitchCompat
+            <com.roy.commons.views.MySwitchCompat
                 android:id="@+id/use_fade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin">
 
-            <com.eagle.commons.views.MySwitchCompat
+            <com.roy.commons.views.MySwitchCompat
                 android:id="@+id/move_backwards"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin">
 
-            <com.eagle.commons.views.MySwitchCompat
+            <com.roy.commons.views.MySwitchCompat
                 android:id="@+id/loop_slideshow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

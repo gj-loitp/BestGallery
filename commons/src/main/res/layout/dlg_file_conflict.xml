@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_margin"
     android:paddingRight="@dimen/activity_margin">
 
-    <com.eagle.commons.views.MyTextView
+    <com.roy.commons.views.MyTextView
         android:id="@+id/conflictDialogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/medium_margin">
 
-        <com.eagle.commons.views.MyCompatRadioButton
+        <com.roy.commons.views.MyCompatRadioButton
             android:id="@+id/conflictDialogRadioSkip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             android:paddingBottom="@dimen/normal_margin"
             android:text="@string/skip" />
 
-        <com.eagle.commons.views.MyCompatRadioButton
+        <com.roy.commons.views.MyCompatRadioButton
             android:id="@+id/conflictDialogRadioOverwrite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             android:paddingBottom="@dimen/normal_margin"
             android:text="@string/overwrite" />
 
-        <com.eagle.commons.views.MyCompatRadioButton
+        <com.roy.commons.views.MyCompatRadioButton
             android:id="@+id/conflictDialogRadioMerge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:paddingBottom="@dimen/normal_margin"
             android:text="@string/merge" />
 
-        <com.eagle.commons.views.MyCompatRadioButton
+        <com.roy.commons.views.MyCompatRadioButton
             android:id="@+id/conflictDialogRadioKeepBoth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
 
     </RadioGroup>
 
-    <com.eagle.commons.views.MyAppCompatCheckbox
+    <com.roy.commons.views.MyAppCompatCheckbox
         android:id="@+id/conflictDialogApplyToAll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

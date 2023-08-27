@@ -13,14 +13,14 @@
         android:paddingTop="@dimen/activity_margin"
         android:paddingRight="@dimen/activity_margin">
 
-        <com.eagle.commons.views.MyTextView
+        <com.roy.commons.views.MyTextView
             android:id="@+id/exportSettingsPathLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/path"
             android:textSize="@dimen/smaller_text_size" />
 
-        <com.eagle.commons.views.MyTextView
+        <com.roy.commons.views.MyTextView
             android:id="@+id/exportSettingsPath"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,14 +29,14 @@
             android:paddingEnd="@dimen/small_margin"
             android:paddingBottom="@dimen/activity_margin" />
 
-        <com.eagle.commons.views.MyTextView
+        <com.roy.commons.views.MyTextView
             android:id="@+id/exportSettingsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/filename"
             android:textSize="@dimen/smaller_text_size" />
 
-        <com.eagle.commons.views.MyEditText
+        <com.roy.commons.views.MyEditText
             android:id="@+id/exportSettingsFileName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

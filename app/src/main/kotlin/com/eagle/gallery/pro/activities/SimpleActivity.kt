@@ -5,12 +5,12 @@ import android.database.ContentObserver
 import android.net.Uri
 import android.provider.MediaStore
 import android.view.WindowManager
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.ext.getRealPathFromURI
-import com.eagle.commons.helpers.isPiePlus
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.addPathToDB
 import com.eagle.gallery.pro.extensions.config
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.ext.getRealPathFromURI
+import com.roy.commons.helpers.isPiePlus
 
 open class SimpleActivity : BaseSimpleActivity() {
     val observer = object : ContentObserver(null) {

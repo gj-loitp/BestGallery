@@ -3,15 +3,16 @@ package com.eagle.gallery.pro.activities
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.eagle.commons.dlg.FilePickerDialog
-import com.eagle.commons.ext.beVisibleIf
-import com.eagle.commons.ext.scanPathRecursively
-import com.eagle.commons.itf.RefreshRecyclerViewListener
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
+import com.roy.commons.dlg.FilePickerDialog
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.scanPathRecursively
+import com.roy.commons.itf.RefreshRecyclerViewListener
 import kotlinx.android.synthetic.main.activity_manage_folders.*
 
-class IncludedFoldersActivity : com.eagle.gallery.pro.activities.SimpleActivity(), RefreshRecyclerViewListener {
+class IncludedFoldersActivity : SimpleActivity(),
+    RefreshRecyclerViewListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_folders)

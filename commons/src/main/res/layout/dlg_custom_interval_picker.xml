@@ -14,7 +14,7 @@
         android:paddingRight="@dimen/activity_margin"
         android:paddingTop="@dimen/activity_margin">
 
-        <com.eagle.commons.views.MyEditText
+        <com.roy.commons.views.MyEditText
             android:id="@+id/dlgCustomIntervalValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin">
 
-            <com.eagle.commons.views.MyCompatRadioButton
+            <com.roy.commons.views.MyCompatRadioButton
                 android:id="@+id/dlgRadioSeconds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:paddingTop="@dimen/activity_margin"
                 android:text="@string/seconds_raw"/>
 
-            <com.eagle.commons.views.MyCompatRadioButton
+            <com.roy.commons.views.MyCompatRadioButton
                 android:id="@+id/dlgRadioMinutes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 android:paddingTop="@dimen/activity_margin"
                 android:text="@string/minutes_raw"/>
 
-            <com.eagle.commons.views.MyCompatRadioButton
+            <com.roy.commons.views.MyCompatRadioButton
                 android:id="@+id/dialogRadioHours"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:paddingTop="@dimen/activity_margin"
                 android:text="@string/hours_raw"/>
 
-            <com.eagle.commons.views.MyCompatRadioButton
+            <com.roy.commons.views.MyCompatRadioButton
                 android:id="@+id/dialogRadioDays"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

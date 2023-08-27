@@ -12,8 +12,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.provider.MediaStore
-import com.eagle.commons.ext.getStringValue
 import com.eagle.gallery.pro.extensions.addPathToDB
+import com.roy.commons.ext.getStringValue
 
 // based on https://developer.android.com/reference/android/app/job/JobInfo.Builder.html#addTriggerContentUri(android.app.job.JobInfo.TriggerContentUri)
 @TargetApi(Build.VERSION_CODES.N)

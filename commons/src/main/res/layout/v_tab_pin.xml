@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.eagle.commons.views.PinTab xmlns:android="http://schemas.android.com/apk/res/android"
+<com.roy.commons.views.PinTab xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/pinLockHolder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.eagle.commons.views.MyTextView
+    <com.roy.commons.views.MyTextView
         android:id="@+id/pinLockTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:paddingBottom="@dimen/small_margin"
         android:text="@string/enter_pin" />
 
-    <com.eagle.commons.views.MyTextView
+    <com.roy.commons.views.MyTextView
         android:id="@+id/pinLockCurrentPin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/pin1"
                 style="@style/PinNumberStyle"
                 android:layout_width="0dp"
@@ -48,7 +48,7 @@
                 android:layout_weight="1"
                 android:text="1" />
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/pin2"
                 style="@style/PinNumberStyle"
                 android:layout_width="0dp"
@@ -56,7 +56,7 @@
                 android:layout_weight="1"
                 android:text="2" />
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/pin3"
                 style="@style/PinNumberStyle"
                 android:layout_width="0dp"
@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/pin4"
                 style="@style/PinNumberStyle"
                 android:layout_width="0dp"
@@ -79,7 +79,7 @@
                 android:layout_weight="1"
                 android:text="4" />
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/pin5"
                 style="@style/PinNumberStyle"
                 android:layout_width="0dp"
@@ -87,7 +87,7 @@
                 android:layout_weight="1"
                 android:text="5" />
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/pin6"
                 style="@style/PinNumberStyle"
                 android:layout_width="0dp"
@@ -102,7 +102,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/pin7"
                 style="@style/PinNumberStyle"
                 android:layout_width="0dp"
@@ -110,7 +110,7 @@
                 android:layout_weight="1"
                 android:text="7" />
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/pin8"
                 style="@style/PinNumberStyle"
                 android:layout_width="0dp"
@@ -118,7 +118,7 @@
                 android:layout_weight="1"
                 android:text="8" />
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/pin9"
                 style="@style/PinNumberStyle"
                 android:layout_width="0dp"
@@ -133,7 +133,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/pinC"
                 style="@style/PinNumberStyle"
                 android:layout_width="0dp"
@@ -141,7 +141,7 @@
                 android:layout_weight="1"
                 android:text="C" />
 
-            <com.eagle.commons.views.MyTextView
+            <com.roy.commons.views.MyTextView
                 android:id="@+id/pin0"
                 style="@style/PinNumberStyle"
                 android:layout_width="0dp"
@@ -160,4 +160,4 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
-</com.eagle.commons.views.PinTab>
+</com.roy.commons.views.PinTab>

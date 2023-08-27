@@ -23,11 +23,19 @@ import com.google.android.exoplayer2.upstream.ContentDataSource
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DataSpec
 import com.google.android.exoplayer2.video.VideoListener
-import com.eagle.commons.ext.*
-import com.eagle.commons.helpers.PERMISSION_WRITE_STORAGE
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.*
 import com.eagle.gallery.pro.helpers.*
+import com.roy.commons.ext.beGone
+import com.roy.commons.ext.beVisible
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.getFilenameFromUri
+import com.roy.commons.ext.getFormattedDuration
+import com.roy.commons.ext.onGlobalLayout
+import com.roy.commons.ext.showErrorToast
+import com.roy.commons.ext.toast
+import com.roy.commons.ext.updateTextColors
+import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
 import kotlinx.android.synthetic.main.activity_video_player.*
 import kotlinx.android.synthetic.main.bottom_video_time_holder.*
 

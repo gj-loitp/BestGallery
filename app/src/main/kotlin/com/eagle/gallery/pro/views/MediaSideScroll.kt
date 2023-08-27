@@ -10,12 +10,12 @@ import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.eagle.commons.ext.onGlobalLayout
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.audioManager
 import com.eagle.gallery.pro.helpers.CLICK_MAX_DISTANCE
 import com.eagle.gallery.pro.helpers.CLICK_MAX_DURATION
 import com.eagle.gallery.pro.helpers.DRAG_THRESHOLD
+import com.roy.commons.ext.onGlobalLayout
 
 // allow horizontal swipes through the layout, else it can cause glitches at zoomed in images
 class MediaSideScroll(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {

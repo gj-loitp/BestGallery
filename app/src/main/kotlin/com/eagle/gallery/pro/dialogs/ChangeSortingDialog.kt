@@ -3,13 +3,19 @@ package com.eagle.gallery.pro.dialogs
 import android.content.DialogInterface
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.ext.beVisibleIf
-import com.eagle.commons.ext.setupDialogStuff
-import com.eagle.commons.helpers.*
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
 import com.eagle.gallery.pro.helpers.SHOW_ALL
+import com.roy.commons.activities.BaseSimpleActivity
+import com.roy.commons.ext.beVisibleIf
+import com.roy.commons.ext.setupDialogStuff
+import com.roy.commons.helpers.SORT_BY_DATE_MODIFIED
+import com.roy.commons.helpers.SORT_BY_DATE_TAKEN
+import com.roy.commons.helpers.SORT_BY_NAME
+import com.roy.commons.helpers.SORT_BY_PATH
+import com.roy.commons.helpers.SORT_BY_RANDOM
+import com.roy.commons.helpers.SORT_BY_SIZE
+import com.roy.commons.helpers.SORT_DESCENDING
 import kotlinx.android.synthetic.main.dialog_change_sorting.view.*
 
 class ChangeSortingDialog(val activity: BaseSimpleActivity, val isDirectorySorting: Boolean, showFolderCheckbox: Boolean,
