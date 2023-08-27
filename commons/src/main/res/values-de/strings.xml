@@ -3,7 +3,6 @@
     <string name="cancel">Abbrechen</string>
     <string name="save_as">Speichern unter</string>
     <string name="file_saved">Datei erfolgreich gespeichert</string>
-    <string name="invalid_file_format">Ungültiges Dateiformat</string>
     <string name="out_of_memory_error">Fehler: Zu wenig Speicher</string>
     <string name="an_error_occurred">Es ist ein Fehler aufgetreten: %s</string>
     <string name="open_with">Öffnen mit</string>
@@ -11,55 +10,27 @@
     <string name="no_app_found">Keine passende App gefunden</string>
     <string name="set_as">Festlegen als</string>
     <string name="value_copied_to_clipboard">Wert in Zwischenablage kopiert</string>
-    <string name="unknown">Unbekannt</string>
-    <string name="always">Immer</string>
-    <string name="never">Nie</string>
-    <string name="details">Details</string>
-    <string name="notes">Notizen</string>
     <string name="deleting_folder">Lösche Ordner \'%s\'</string>
     <string name="none">nichts</string>
-    <string name="label">Label</string>
-    <string name="transparent">Transparent</string>
-    <string name="transparent_color">Transparente Farbe</string>
-    <string name="select_a_different_color">Wähle eine andere Farbe aus</string>
     <string name="download">Download</string>
-    <string name="notification">Benachrichtigung</string>
-    <string name="email">E-Mail</string>
 
     <!-- Favorites -->
     <string name="favorites">Favoriten</string>
-    <string name="add_favorites">Favoriten hinzufügen</string>
     <string name="add_to_favorites">Zu Favoriten hinzufügen</string>
     <string name="remove_from_favorites">Aus Favoriten entfernen</string>
 
     <!-- Search -->
     <string name="search">Suchen</string>
-    <string name="type_2_characters">Du musst mindestens 2 Zeichen eingeben, um die Suche zu starten.</string>
 
     <!-- Filters -->
-    <string name="filter">Filter</string>
-    <string name="no_items_found">Keine Elemente gefunden.</string>
-    <string name="change_filter">Filter ändern</string>
 
     <!-- Permissions -->
     <string name="no_storage_permissions">Speicher-Berechtigung wird benötigt</string>
-    <string name="no_contacts_permission">Kontakte-Berechtigung wird benötigt</string>
-    <string name="no_camera_permissions">Kamera-Berechtigung wird benötigt</string>
-    <string name="no_audio_permissions">Audio-Berechtigung wird benötigt</string>
 
     <!-- Renaming -->
-    <string name="rename_file">Datei umbenennen</string>
-    <string name="rename_folder">Ordner umbenennen</string>
-    <string name="rename_file_error">Konnte die Datei nicht umbenennen</string>
-    <string name="rename_folder_error">Konnte den Ordner nicht umbenennen</string>
-    <string name="rename_folder_empty">Ordnername darf nicht leer sein</string>
-    <string name="rename_folder_exists">Ein Ordner mit diesem Namen existiert bereits</string>
     <string name="rename_folder_root">Root-Ordner des Speichers kann nicht umbenannt werden</string>
-    <string name="rename_folder_ok">Ordner erfolgreich umbenannt</string>
-    <string name="renaming_folder">Ordner umbenennen</string>
     <string name="filename_cannot_be_empty">Dateiname darf nicht leer sein</string>
     <string name="filename_invalid_characters">Dateiname enthält ungültige Zeichen</string>
-    <string name="filename_invalid_characters_placeholder">Dateiname \'%s\' anthält ungültige Zeichen</string>
     <string name="extension_cannot_be_empty">Dateiendung darf nicht leer sein</string>
     <string name="source_file_doesnt_exist">Quelldatei %s existiert nicht</string>
     <string name="prepend_filenames">Dateinamen voranstellen</string>
@@ -68,17 +39,11 @@
     <!-- Copy / Move -->
     <string name="copy">Kopieren</string>
     <string name="move">Verschieben</string>
-    <string name="copy_move">Kopieren / Verschieben</string>
     <string name="copy_to">Kopieren nach</string>
     <string name="move_to">Verschieben nach</string>
-    <string name="source">Quelle</string>
-    <string name="destination">Ziel</string>
     <string name="select_destination">Ziel auswählen</string>
-    <string name="click_select_destination">Klicken um Ziel auszuwählen</string>
     <string name="invalid_destination">Konnte nicht auf ausgewähltes Ziel schreiben</string>
-    <string name="please_select_destination">Bitte Ziel auswählen</string>
     <string name="source_and_destination_same">Quell- und Zielpfad sind identisch</string>
-    <string name="copy_failed">Konnte die Datei(en) nicht kopieren</string>
     <string name="copying">Kopiere…</string>
     <string name="copying_success">Datei(en) erfolgreich kopiert</string>
     <string name="copy_move_failed">Es ist ein Fehler aufgetreten</string>
@@ -86,15 +51,11 @@
     <string name="moving_success">Datei(en) erfolgreich verschoben</string>
     <string name="moving_success_partial">Einige Dateien konnten nicht verschoben werden</string>
     <string name="copying_success_partial">Einige Dateien konnten nicht kopiert werden</string>
-    <string name="no_files_selected">Keine Dateien ausgewählt</string>
     <string name="saving">Speichern…</string>
     <string name="could_not_create_folder">Ordner %s konnte nicht erstellt werden</string>
     <string name="could_not_create_file">Datei %s konnte nicht erstellt werden</string>
 
     <!-- Create new -->
-    <string name="create_new">Neuer Ordner</string>
-    <string name="folder">Ordner</string>
-    <string name="file">Datei</string>
     <string name="create_new_folder">Neuen Ordner erstellen</string>
     <string name="name_taken">Ordner oder Datei mit diesem Namen existiert bereits</string>
     <string name="invalid_name">Der Name enthält unerlaubte Zeichen</string>
@@ -109,7 +70,6 @@
     <string name="keep_both">Beide behalten</string>
     <string name="overwrite">Überschreiben</string>
     <string name="skip">Überspringen</string>
-    <string name="append">\'_1\' anhängen</string>
     <string name="apply_to_all">Bei allen Konflikten anwenden</string>
 
     <!-- File picker -->
@@ -156,10 +116,6 @@
     <string name="duration">Dauer</string>
     <string name="artist">Künstler</string>
     <string name="album">Album</string>
-    <string name="focal_length">Brennweite</string>
-    <string name="exposure_time">Belichtungszeit</string>
-    <string name="iso_speed">Filmempfindlichkeit</string>
-    <string name="f_number">Blendenzahl</string>
     <string name="camera">Kamera</string>
     <string name="exif">EXIF</string>
     <string name="song_title">Liedtitel</string>
@@ -168,17 +124,11 @@
     <string name="background_color">Hintergrundfarbe</string>
     <string name="text_color">Schriftfarbe</string>
     <string name="primary_color">Primäre Farbe</string>
-    <string name="foreground_color">Vordergrundfarbe</string>
     <string name="app_icon_color">App-Icon-Farbe</string>
-    <string name="bottom_navigation_bar_color">Farbe der unteren Navigationsleiste</string>
-    <string name="restore_defaults">Standard wiederherstellen</string>
-    <string name="change_color">Farbe ändern</string>
     <string name="theme">Thema</string>
     <string name="changing_color_description">Ändern einer Farbe setzt das Thema auf "Benutzerdefiniert"</string>
     <string name="save">Speichern</string>
     <string name="discard">Verwerfen</string>
-    <string name="undo_changes">Änderungen verwerfen</string>
-    <string name="undo_changes_confirmation">Bist du sicher, dass du die Änderungen verwerfen willst?</string>
     <string name="save_before_closing">Du hast ungespeicherte Änderungen. Speichern vor dem Beenden?</string>
     <string name="apply_to_all_apps">Farben bei allen schlichten Apps anwenden</string>
     <string name="app_icon_color_warning">WARNUNG: Einige Launcher behandeln die Anpassung von App-Icons nicht richtig. Sollte das Icon verschwinden, versuche die App mit Google Play oder einem Widget (wenn verfügbar) zu starten.
@@ -193,7 +143,6 @@
     <!-- Themes -->
     <string name="light_theme">Hell</string>
     <string name="dark_theme">Dunkel</string>
-    <string name="solarized">Solarisiert</string>
     <string name="dark_red">Dunkelrot</string>
     <string name="black_white">Schwarz-Weiß</string>
     <string name="custom">Benutzerdefiniert</string>
@@ -218,9 +167,6 @@
     <string name="stop_showing_hidden">Verstecktes wieder verbergen</string>
     <string name="maximum_share_reached">So viel Inhalt kann nicht auf einmal geteilt werden</string>
     <string name="empty_and_disable_recycle_bin">Papierkorb leeren und deaktivieren</string>
-    <string name="undo">Rückgängig</string>
-    <string name="redo">Wiederholen</string>
-    <string name="print">Drucken</string>
 
     <!-- Sorting -->
     <string name="sort_by">Sortieren nach</string>
@@ -228,11 +174,9 @@
     <string name="size">Größe</string>
     <string name="last_modified">Änderungsdatum</string>
     <string name="date_taken">Aufnahmedatum</string>
-    <string name="title">Titel</string>
     <string name="filename">Dateiname</string>
     <string name="extension">Dateiendung</string>
     <string name="random">Zufällig</string>
-    <string name="sort_randomly">Zufällig sortieren</string>
     <string name="ascending">Aufsteigend</string>
     <string name="descending">Absteigend</string>
     <string name="use_for_this_folder">Nur auf diesen Ordner anwenden</string>
@@ -241,12 +185,9 @@
     <string name="proceed_with_deletion">Willst du mit dem Löschen fortfahren?</string>
     <string name="deletion_confirmation">Sollen %s wirklich gelöscht werden?</string>       <!-- Are you sure you want to delete 5 items? -->
     <string name="move_to_recycle_bin_confirmation">Sollen %s wirklich in den Papierkorb verschoben werden?</string>        <!-- Are you sure you want to move 3 items into the Recycle Bin? -->
-    <string name="are_you_sure_delete">Soll dieses Element wirklich gelöscht werden?</string>
-    <string name="are_you_sure_recycle_bin">Soll dieses Element wirklich in den Papierkorb verschoben werden?</string>
     <string name="do_not_ask_again">Nicht erneut fragen (in dieser Sitzung)</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
-    <string name="maybe">Maybe</string>
 
     <plurals name="delete_warning">
         <item quantity="one">WARNUNG: %d Ordner soll gelöscht werden</item>
@@ -276,7 +217,6 @@
     <!-- Times -->
     <string name="yesterday">Gestern</string>
     <string name="today">Heute</string>
-    <string name="tomorrow">Morgen</string>
     <string name="seconds_raw">Sekunden</string>
     <string name="minutes_raw">Minuten</string>
     <string name="hours_raw">Stunden</string>
@@ -298,48 +238,8 @@
         <item quantity="one">%d Tag</item>
         <item quantity="other">%d Tage</item>
     </plurals>
-    <plurals name="weeks">
-        <item quantity="one">%d Woche</item>
-        <item quantity="other">%d Wochen</item>
-    </plurals>
-    <plurals name="months">
-        <item quantity="one">%d Monat</item>
-        <item quantity="other">%d Monate</item>
-    </plurals>
-    <plurals name="years">
-        <item quantity="one">%d Jahr</item>
-        <item quantity="other">%d Jahre</item>
-    </plurals>
 
     <!-- For example: I will be there in 5 minutes -->
-    <plurals name="in_seconds">
-        <item quantity="one">%d Sekunde</item>
-        <item quantity="other">%d Sekunden</item>
-    </plurals>
-    <plurals name="in_minutes">
-        <item quantity="one">%d Minute</item>
-        <item quantity="other">%d Minuten</item>
-    </plurals>
-    <plurals name="in_hours">
-        <item quantity="one">%d Stunde</item>
-        <item quantity="other">%d Stunden</item>
-    </plurals>
-    <plurals name="in_days">
-        <item quantity="one">%d Tag</item>
-        <item quantity="other">%d Tagen</item>
-    </plurals>
-    <plurals name="in_weeks">
-        <item quantity="one">%d Woche</item>
-        <item quantity="other">%d Wochen</item>
-    </plurals>
-    <plurals name="in_months">
-        <item quantity="one">%d Monat</item>
-        <item quantity="other">%d Monaten</item>
-    </plurals>
-    <plurals name="in_years">
-        <item quantity="one">%d Jahr</item>
-        <item quantity="other">%d Jahren</item>
-    </plurals>
 
     <!-- For example: Event reminder: 3 minutes before -->
     <plurals name="seconds_before">
@@ -402,16 +302,9 @@
     </plurals>
 
     <!-- For example: Time remaining till the alarm goes off: 6 hours, 5 minutes -->
-    <string name="alarm_goes_off_in">Zeit bis Alarm:\n%s</string>
-    <string name="reminder_triggers_in">Verbleibende Zeit bis Alarm ausgelöst wird:\n%s</string>
-    <string name="alarm_warning">Bitte stell sicher, dass der Alarm zuverlässig funktioniert, bevor Du Dich darauf verlässt. Es könnte wegen Systemeinschränkungen (z.B. Stromsparfunktion) fehlschlagen.</string>
-    <string name="reminder_warning">Bitte stell sicher, dass die Erinnerung zuverlässig funktioniert, bevor Du Dich darauf verlässt. Es könnte wegen Systemeinschränkungen (z.B. Stromsparfunktion) fehlschlagen.</string>
-    <string name="notifications_disabled">Benachrichtigungen für diese App sind deaktiviert. Bitte geh in deine Systemeinstellungen und aktiviere sie.</string>
 
     <!-- Alarms -->
     <string name="alarm">Wecker</string>
-    <string name="snooze">Schlummern</string>
-    <string name="dismiss">Abstellen</string>
     <string name="no_reminder">Keine Erinnerung</string>
     <string name="at_start">Zu Beginn</string>
     <string name="system_sounds">Systemtöne</string>
@@ -421,35 +314,20 @@
 
     <!-- Settings -->
     <string name="settings">Einstellungen</string>
-    <string name="purchase_simple_thank_you">\"Simple Thank You\" App kaufen</string>
     <string name="customize_colors">Farben anpassen</string>
-    <string name="customize_widget_colors">Widget Farben anpassen</string>
     <string name="use_english_language">App in Englisch verwenden</string>
     <string name="show_hidden_items">Versteckte Elemente anzeigen</string>
-    <string name="font_size">Schriftgröße</string>
-    <string name="small">Klein</string>
-    <string name="medium">Mittel</string>
-    <string name="large">Groß</string>
-    <string name="extra_large">Sehr groß</string>
     <string name="password_protect_hidden_items">Versteckte Elemente mit Muster/PIN schützen</string>
     <string name="password_protect_whole_app">Gesamte App mit Passwort schützen</string>
     <string name="password_protect_file_deletion">Mit Passwort vor Dateilöschung und -verschiebung schützen</string>
     <string name="keep_last_modified">Altes Änderungsdatum bei Dateioperationen behalten</string>
     <string name="show_info_bubble">Beim Scrollen mit dem Scrollbalken Infofenster anzeigen</string>
-    <string name="prevent_phone_from_sleeping">Verhindere, dass das Handy in den Ruhemodus wechselt, solange die App im Vordergrund läuft</string>
     <string name="skip_delete_confirmation">Verwende keinen Löschen-bestätigen-Dialog</string>
     <string name="enable_pull_to_refresh">Ermögliche \"Auffrischen\" durch Ziehen von der oberen Kante</string>
     <string name="use_24_hour_time_format">Benutze 24-Std.-Zeitformat</string>
     <string name="change_date_and_time_format">Datums- und Zeitformat ändern</string>
-    <string name="sunday_first">Beginne die Woche am Sonntag</string>
-    <string name="widgets">Widgets</string>
-    <string name="use_same_snooze">Immer dasselbe Schlummer-Intervall nutzen</string>
-    <string name="snooze_time">Schlummer-Intervall</string>
-    <string name="vibrate_on_button_press">Bei Tastendruck vibrieren</string>
     <string name="move_items_into_recycle_bin">Elemente in den Papierkorb verschieben statt löschen</string>
-    <string name="recycle_bin_cleaning_interval">Intervall zum Leeren des Papierkorbs</string>
     <string name="empty_recycle_bin">Papierkorb leeren</string>
-    <string name="force_portrait_mode">Porträt-Modus erzwingen</string>
     <string name="export_settings">Einstellungen exportieren</string>
     <string name="import_settings">Einstellungen importieren</string>
     <string name="settings_exported_successfully">Einstellungen erfolgreich exportiert</string>
@@ -461,9 +339,6 @@
     <string name="scrolling">Scrollen</string>
     <string name="file_operations">Dateioperationen</string>
     <string name="recycle_bin">Papierkorb</string>
-    <string name="saving_label">Speichern</string>
-    <string name="startup">Beim Starten</string>
-    <string name="text">Text</string>
     <string name="migrating">Migrieren</string>
 
     <!-- Recycle Bin -->
@@ -471,7 +346,6 @@
     <string name="restore_selected_files">Markierte Dateien wiederherstellen</string>
     <string name="restore_all_files">Alle Dateien wiederherstellen</string>
     <string name="recycle_bin_emptied">Papierkorb erfolgreich geleert</string>
-    <string name="files_restored_successfully">Dateien erfolgreich wiederhergestellt</string>
     <string name="empty_recycle_bin_confirmation">Papierkorb wirklich leeren? Die Dateien sind dann unwiederbringlich gelöscht.</string>
     <string name="recycle_bin_empty">Der Papierkorb ist leer</string>
     <string name="moving_recycle_bin_items_disabled">Papierkorbelemente bewegen ist deaktivert, bitte benutze Wiederherstellen.</string>
@@ -484,16 +358,7 @@
     </plurals>
 
     <!-- Import / Export -->
-    <string name="importing">Importiere…</string>
-    <string name="exporting">Exportiere…</string>
-    <string name="importing_successful">Importieren erfolgreich</string>
-    <string name="exporting_successful">Exportieren erfolgreich</string>
-    <string name="importing_failed">Importieren fehlgeschlagen</string>
-    <string name="exporting_failed">Exportieren fehlgeschlagen</string>
-    <string name="importing_some_entries_failed">Importieren einiger Einträge fehlgeschlagen</string>
-    <string name="exporting_some_entries_failed">Exportieren einiger Einträge fehlgeschlagen</string>
     <string name="no_entries_for_importing">Keine Einträge zum Importieren gefunden</string>
-    <string name="no_entries_for_exporting">Keine Einträge zum Exportieren gefunden</string>
 
     <!-- OTG devices -->
     <string name="usb">USB</string>
@@ -502,48 +367,9 @@
     <string name="wrong_root_selected_usb">Falscher Ordner gewählt, bitte den Basis- (Root-) Ordner des USB-Geräts wählen</string>
 
     <!-- Dates -->
-    <string name="january">Januar</string>
-    <string name="february">Februar</string>
-    <string name="march">März</string>
     <string name="april">April</string>
-    <string name="may">Mai</string>
-    <string name="june">Juni</string>
-    <string name="july">Juli</string>
-    <string name="august">August</string>
-    <string name="september">September</string>
-    <string name="october">Oktober</string>
-    <string name="november">November</string>
-    <string name="december">Dezember</string>
 
     <!-- in January -->
-    <string name="in_january">im Januar</string>
-    <string name="in_february">im Februar</string>
-    <string name="in_march">im März</string>
-    <string name="in_april">im April</string>
-    <string name="in_may">im Mai</string>
-    <string name="in_june">im Juni</string>
-    <string name="in_july">im Juli</string>
-    <string name="in_august">im August</string>
-    <string name="in_september">im September</string>
-    <string name="in_october">im Oktober</string>
-    <string name="in_november">im November</string>
-    <string name="in_december">im Dezember</string>
-
-    <string name="monday">Montag</string>
-    <string name="tuesday">Dienstag</string>
-    <string name="wednesday">Mittwoch</string>
-    <string name="thursday">Donnerstag</string>
-    <string name="friday">Freitag</string>
-    <string name="saturday">Samstag</string>
-    <string name="sunday">Sonntag</string>
-
-    <string name="monday_letter">M</string>
-    <string name="tuesday_letter">D</string>
-    <string name="wednesday_letter">M</string>
-    <string name="thursday_letter">D</string>
-    <string name="friday_letter">F</string>
-    <string name="saturday_letter">S</string>
-    <string name="sunday_letter">S</string>
 
     <string name="monday_short">Mo</string>
     <string name="tuesday_short">Di</string>
@@ -555,10 +381,8 @@
 
     <!-- Pro version -->
     <string name="upgrade_to_pro_long">Diese Version der App wird nicht mehr unterstützt. Upgrade bitte auf die Pro-Version.</string>
-    <string name="it_is_free">Sie ist gratis bis: %s. Wenn Du sie bis dahin herunterlädst, darfst Du sie für immer gratis nutzen.</string>
     <string name="more_info">Mehr Infos</string>
     <string name="upgrade">Upgrade</string>
-    <string name="upgrade_calendar">Um lokal gespeicherte Ereignisse zu migrieren, musst Du sie als .ics-Datei exportieren und anschließend importieren. Die beiden Schaltflächen befinden sich im Hauptmenü.</string>
 
     <!-- About -->
     <string name="about">Über</string>
@@ -571,11 +395,8 @@
     <string name="share_text">Hey, wirf mal einen Blick auf %1$s: %2$s</string>
     <string name="invite_via">Einladen via</string>
     <string name="rate_us_underlined"><u>Bewerte uns im Play Store</u></string>
-    <string name="donate">Spenden</string>
-    <string name="donate_underlined"><u>Spenden</u></string>
     <string name="follow_us">Folge uns</string>
     <string name="copyright">v %1$s\nCopyright © Eagle Tools %2$d</string>
-    <string name="additional_info">Zusätzliche Infos</string>
     <string name="app_version">App-Version: %s</string>
     <string name="device_os">Betriebssystem: %s</string>
     <string name="donate_please">
@@ -610,15 +431,9 @@
     <!-- FAQ -->
     <string name="frequently_asked_questions">Häufig gestellte Fragen</string>
     <string name="before_asking_question">Bevor du eine Frage stellst, bitte lies diese Seite:</string>
-    <string name="faq_1_title_commons">Weshalb sehe ich das Widget dieser App nicht in der Liste der Widgets?</string>
-    <string name="faq_1_text_commons">Wahrscheinlich, weil du die App auf die Speicherkarte verschoben hast. In diesem Fall werden durch eine Einschränkung von Android die Widgets dieser App ausgeblendet. Die einzige Lösung ist die App über die Geräteeinstellungen wieder in den internen Speicher zu verschieben.</string>
     <string name="faq_2_title_commons">Ich will dich unterstützen, aber es ist mir nicht möglich Geld zu spenden. Gibt es eine andere Möglichkeit?</string>
     <string name="faq_2_text_commons">Ja, sicherlich. Du kannst die Apps weiterempfehlen oder gute Rückmeldung und Bewertungen geben. Du kannst ebenso helfen, indem du die Apps in neue Sprachen übersetzt oder vorhandene Übersetzungen aktualisierst.
         Die Anleitung dazu findest du unter https://github.com/EagleTools/General-Discussion oder sende mir eine Nachricht an tietudashi@gmail.com, falls du Hilfe benötigst.</string>
-    <string name="faq_3_title_commons">Ich habe versehentlich einige Dateien gelöscht. Wie kann ich diese wiederherstellen?</string>
-    <string name="faq_3_text_commons">Unglücklicherweise gar nicht. Dateien werden sofort nach dem Bestätigungsdialog gelöscht, sprich ein Papierkorb ist nicht vorhanden.</string>
-    <string name="faq_4_title_commons">Ich mag die Farben des Widgets nicht. Kann ich sie wechseln?</string>
-    <string name="faq_4_text_commons">Ja, wenn du ein Widget auf den Home Screen ziehst, erscheint ein Konfigurationsmenü. In der linken unteren Ecke sind farbige Kästchen, drücke auf sie und wähle eine neue Farbe. Ausserdem kannst du den Regler nutzen, um den Alphaparameter (Transparenz) einzustellen.</string>
     <string name="faq_5_title_commons">Kann ich irgendwie gelöschte Dateien wiederherstellen?</string>
     <string name="faq_5_text_commons">Wenn diese endgültig gelöscht wurden, nein. Aber Du kannst in den App-Eintellungen den Papierkorb aktivieren, statt des direkten Löschens. Das verschiebt zu löschende Dateien nur in den Papierkorb, und löscht diese nicht endgültig.</string>
     <string name="faq_6_title_commons">Das App-Icon im Launcher ist verschwunden. Was kann ich tun?</string>

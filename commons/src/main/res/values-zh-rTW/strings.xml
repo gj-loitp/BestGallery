@@ -3,7 +3,6 @@
     <string name="cancel">取消</string>
     <string name="save_as">儲存</string>
     <string name="file_saved">成功儲存檔案</string>
-    <string name="invalid_file_format">無效的檔案格式</string>
     <string name="out_of_memory_error">記憶體不足</string>
     <string name="an_error_occurred">發生錯誤: %s</string>
     <string name="open_with">以其他應用程式開啟</string>
@@ -11,55 +10,27 @@
     <string name="no_app_found">找不到應用程式</string>
     <string name="set_as">設為</string>
     <string name="value_copied_to_clipboard">數值複製到剪貼簿</string>
-    <string name="unknown">未知的</string>
-    <string name="always">總是</string>
-    <string name="never">從不</string>
-    <string name="details">詳細資訊</string>
-    <string name="notes">筆記</string>
     <string name="deleting_folder">資料夾 \'%s\' 刪除中</string>
     <string name="none">無</string>
-    <string name="label">標籤</string>
-    <string name="transparent">透明</string>
-    <string name="transparent_color">透明顏色</string>
-    <string name="select_a_different_color">選取不同的顏色</string>
     <string name="download">下載</string>
-    <string name="notification">通知</string>
-    <string name="email">電子信箱</string>
 
     <!-- Favorites -->
     <string name="favorites">我的最愛</string>
-    <string name="add_favorites">添加我的最愛</string>
     <string name="add_to_favorites">加入我的最愛</string>
     <string name="remove_from_favorites">移除我的最愛</string>
 
     <!-- Search -->
     <string name="search">搜尋</string>
-    <string name="type_2_characters">輸入兩個字以上來開始搜尋。</string>
 
     <!-- Filters -->
-    <string name="filter">篩選</string>
-    <string name="no_items_found">未發現項目</string>
-    <string name="change_filter">更改篩選條件</string>
 
     <!-- Permissions -->
     <string name="no_storage_permissions">儲存空間權限是必要的</string>
-    <string name="no_contacts_permission">聯絡人權限是必要的</string>
-    <string name="no_camera_permissions">相機權限是必要的</string>
-    <string name="no_audio_permissions">音訊權限是必要的</string>
 
     <!-- Renaming -->
-    <string name="rename_file">重新命名檔案</string>
-    <string name="rename_folder">重新命名資料夾</string>
-    <string name="rename_file_error">無法重新命名檔案</string>
-    <string name="rename_folder_error">無法重新命名資料夾</string>
-    <string name="rename_folder_empty">資料夾名稱不得空白</string>
-    <string name="rename_folder_exists">已經存在這名稱的資料夾</string>
     <string name="rename_folder_root">無法重新命名根目錄</string>
-    <string name="rename_folder_ok">成功重新命名資料夾</string>
-    <string name="renaming_folder">資料夾重新命名中</string>
     <string name="filename_cannot_be_empty">檔名不得空白</string>
     <string name="filename_invalid_characters">檔名包含無效字元</string>
-    <string name="filename_invalid_characters_placeholder">檔名 \'%s\' 包含無效字元</string>
     <string name="extension_cannot_be_empty">副檔名不得空白</string>
     <string name="source_file_doesnt_exist">原始檔案 %s 不存在</string>
     <string name="prepend_filenames">檔名前綴</string>
@@ -68,17 +39,11 @@
     <!-- Copy / Move -->
     <string name="copy">複製</string>
     <string name="move">移動</string>
-    <string name="copy_move">複製 / 移動</string>
     <string name="copy_to">複製</string>
     <string name="move_to">移動</string>
-    <string name="source">來源</string>
-    <string name="destination">目標</string>
     <string name="select_destination">選擇目標</string>
-    <string name="click_select_destination">點此選擇目標</string>
     <string name="invalid_destination">無法寫入選擇的目標</string>
-    <string name="please_select_destination">請選擇目標</string>
     <string name="source_and_destination_same">目標跟來源不能相同</string>
-    <string name="copy_failed">無法複製檔案</string>
     <string name="copying">複製中…</string>
     <string name="copying_success">成功複製檔案</string>
     <string name="copy_move_failed">發生錯誤</string>
@@ -86,15 +51,11 @@
     <string name="moving_success">成功移動檔案</string>
     <string name="moving_success_partial">部分檔案無法被移動</string>
     <string name="copying_success_partial">部分檔案無法被複製</string>
-    <string name="no_files_selected">未選擇檔案</string>
     <string name="saving">儲存中…</string>
     <string name="could_not_create_folder">無法建立資料夾 %s</string>
     <string name="could_not_create_file">無法建立檔案 %s</string>
 
     <!-- Create new -->
-    <string name="create_new">新增</string>
-    <string name="folder">資料夾</string>
-    <string name="file">檔案</string>
     <string name="create_new_folder">新增資料夾</string>
     <string name="name_taken">已經存在相同名稱的檔案或資料夾</string>
     <string name="invalid_name">名稱包含無效的字元</string>
@@ -109,7 +70,6 @@
     <string name="keep_both">雙方皆保留</string>
     <string name="overwrite">覆蓋</string>
     <string name="skip">跳過</string>
-    <string name="append">附加 \'_1\'</string>
     <string name="apply_to_all">添加到全部衝突</string>
 
     <!-- File picker -->
@@ -153,10 +113,6 @@
     <string name="duration">時間長度</string>
     <string name="artist">演唱者</string>
     <string name="album">專輯</string>
-    <string name="focal_length">焦距</string>
-    <string name="exposure_time">曝光時間</string>
-    <string name="iso_speed">ISO速度</string>
-    <string name="f_number">光圈</string>
     <string name="camera">相機</string>
     <string name="exif">EXIF</string>
     <string name="song_title">歌名</string>
@@ -165,17 +121,11 @@
     <string name="background_color">背景顏色</string>
     <string name="text_color">文字顏色</string>
     <string name="primary_color">主體顏色</string>
-    <string name="foreground_color">前景顏色</string>
     <string name="app_icon_color">應用程式圖標顏色</string>
-    <string name="bottom_navigation_bar_color">底部導航列顏色</string>
-    <string name="restore_defaults">恢復預設</string>
-    <string name="change_color">改變顏色</string>
     <string name="theme">主題</string>
     <string name="changing_color_description">改變顏色將切換成[自訂]主題</string>
     <string name="save">儲存</string>
     <string name="discard">丟棄</string>
-    <string name="undo_changes">恢復變更</string>
-    <string name="undo_changes_confirmation">確定要恢復變更嗎?</string>
     <string name="save_before_closing">尚未儲存變更。離開前是否儲存?</string>
     <string name="apply_to_all_apps">將顏色套用於[簡易]系列全部應用程式</string>
     <string name="app_icon_color_warning">警告:部分啟動器無法正確地處理應用程式圖標自訂化。要是圖標消失了，如果可以，試著透過Google Play或某些小工具來啟動應用程式。
@@ -190,7 +140,6 @@
     <!-- Themes -->
     <string name="light_theme">明亮主題</string>
     <string name="dark_theme">灰暗主題</string>
-    <string name="solarized">Solarized</string>
     <string name="dark_red">深紅主題</string>
     <string name="black_white">黑白主題</string>
     <string name="custom">自訂</string>
@@ -215,9 +164,6 @@
     <string name="stop_showing_hidden">停止顯示隱藏的檔案</string>
     <string name="maximum_share_reached">你不能一次分享這麼多內容</string>
     <string name="empty_and_disable_recycle_bin">清空並停用回收桶</string>
-    <string name="undo">復原</string>
-    <string name="redo">取消復原</string>
-    <string name="print">列印</string>
 
     <!-- Sorting -->
     <string name="sort_by">排序</string>
@@ -225,11 +171,9 @@
     <string name="size">大小</string>
     <string name="last_modified">最後修改</string>
     <string name="date_taken">拍照日期</string>
-    <string name="title">標題</string>
     <string name="filename">檔案名稱</string>
     <string name="extension">副檔名</string>
     <string name="random">隨機</string>
-    <string name="sort_randomly">隨機排序</string>
     <string name="ascending">遞增</string>
     <string name="descending">遞減</string>
     <string name="use_for_this_folder">僅套用於此資料夾</string>
@@ -238,12 +182,9 @@
     <string name="proceed_with_deletion">確定要進行刪除嗎?</string>
     <string name="deletion_confirmation">你確定要刪除%s嗎?</string>    <!-- Are you sure you want to delete 5 items? -->
     <string name="move_to_recycle_bin_confirmation">你確定要把%s移到回收桶嗎?</string>    <!-- Are you sure you want to move 3 items into Recycle Bin? -->
-    <string name="are_you_sure_delete">你確定要刪除這個項目嗎?</string>
-    <string name="are_you_sure_recycle_bin">你確定要把這個項目移到回收桶嗎?</string>
     <string name="do_not_ask_again">這情況不再詢問</string>
     <string name="yes">是</string>
     <string name="no">否</string>
-    <string name="maybe">或許</string>
 
     <plurals name="delete_warning">
         <item quantity="other">注意: 你正在刪除%d個資料夾</item>
@@ -272,7 +213,6 @@
     <!-- Times -->
     <string name="yesterday">昨天</string>
     <string name="today">今天</string>
-    <string name="tomorrow">明天</string>
     <string name="seconds_raw">秒鐘</string>
     <string name="minutes_raw">分鐘</string>
     <string name="hours_raw">小時</string>
@@ -290,38 +230,8 @@
     <plurals name="days">
         <item quantity="other">%d天</item>
     </plurals>
-    <plurals name="weeks">
-        <item quantity="other">%d週</item>
-    </plurals>
-    <plurals name="months">
-        <item quantity="other">%d個月</item>
-    </plurals>
-    <plurals name="years">
-        <item quantity="other">%d年</item>
-    </plurals>
 
     <!-- For example: I will be there in 5 minutes -->
-    <plurals name="in_seconds">
-        <item quantity="other">%d秒鐘內</item>
-    </plurals>
-    <plurals name="in_minutes">
-        <item quantity="other">%d分鐘內</item>
-    </plurals>
-    <plurals name="in_hours">
-        <item quantity="other">%d小時內</item>
-    </plurals>
-    <plurals name="in_days">
-        <item quantity="other">%d天內</item>
-    </plurals>
-    <plurals name="in_weeks">
-        <item quantity="other">%d週內</item>
-    </plurals>
-    <plurals name="in_months">
-        <item quantity="other">%d個月內</item>
-    </plurals>
-    <plurals name="in_years">
-        <item quantity="other">%d年內</item>
-    </plurals>
 
     <!-- For example: Event reminder: 3 minutes before -->
     <plurals name="seconds_before">
@@ -370,16 +280,9 @@
     </plurals>
 
     <!-- For example: Time remaining till the alarm goes off: 6 hours, 5 minutes -->
-    <string name="alarm_goes_off_in">鬧鐘響起剩餘時間:\n%s</string>
-    <string name="reminder_triggers_in">提醒觸發剩餘時間:\n%s</string>
-    <string name="alarm_warning">依靠鬧鐘功能之前，請先確認是否正常運作，有可能因為省電相關的系統限制而導致失靈。</string>
-    <string name="reminder_warning">依靠提醒功能之前，請先確認是否正常運作，有可能因為省電相關的系統限制而導致失靈。</string>
-    <string name="notifications_disabled">這應用程式的通知被停用了。請到你的裝置設定中去啟用。</string>
 
     <!-- Alarms -->
     <string name="alarm">鬧鐘</string>
-    <string name="snooze">延遲</string>
-    <string name="dismiss">關閉</string>
     <string name="no_reminder">不提醒</string>
     <string name="at_start">準時</string>
     <string name="system_sounds">系統音效</string>
@@ -389,35 +292,20 @@
 
     <!-- Settings -->
     <string name="settings">設定</string>
-    <string name="purchase_simple_thank_you">購買Simple Thank You</string>
     <string name="customize_colors">自訂顏色</string>
-    <string name="customize_widget_colors">自訂小工具顏色</string>
     <string name="use_english_language">強制使用英語</string>
     <string name="show_hidden_items">顯示隱藏的項目</string>
-    <string name="font_size">字體大小</string>
-    <string name="small">小</string>
-    <string name="medium">中</string>
-    <string name="large">大</string>
-    <string name="extra_large">特大</string>
     <string name="password_protect_hidden_items">用密碼保護隱藏的物件</string>
     <string name="password_protect_whole_app">用密碼保護整個應用程式</string>
     <string name="password_protect_file_deletion">用密碼保護檔案刪除或移動</string>
     <string name="keep_last_modified">當檔案操作時，保留舊的[最後修改]數值</string>
     <string name="show_info_bubble">拖曳滾動條時，顯示訊息氣泡</string>
-    <string name="prevent_phone_from_sleeping">當程式在前景使用時，防止手機進入睡眠</string>
     <string name="skip_delete_confirmation">刪除不再進行確認</string>
     <string name="enable_pull_to_refresh">啟用頂端下拉更新</string>
     <string name="use_24_hour_time_format">使用24小時制</string>
     <string name="change_date_and_time_format">更改日期和時間格式</string>
-    <string name="sunday_first">每周由星期日開始</string>
-    <string name="widgets">小工具</string>
-    <string name="use_same_snooze">總是使用相同延遲間隔</string>
-    <string name="snooze_time">延遲時間</string>
-    <string name="vibrate_on_button_press">按下按鈕時震動</string>
     <string name="move_items_into_recycle_bin">將項目移入回收桶取代刪除</string>
-    <string name="recycle_bin_cleaning_interval">回收桶清理間隔</string>
     <string name="empty_recycle_bin">清空回收桶</string>
-    <string name="force_portrait_mode">強制直向模式</string>
     <string name="export_settings">匯出設定</string>
     <string name="import_settings">匯入設定</string>
     <string name="settings_exported_successfully">設定匯出成功</string>
@@ -429,9 +317,6 @@
     <string name="scrolling">滑動</string>
     <string name="file_operations">檔案操作</string>
     <string name="recycle_bin">回收桶</string>
-    <string name="saving_label">儲存中</string>
-    <string name="startup">啟動</string>
-    <string name="text">文字</string>
     <string name="migrating">搬移</string>
 
     <!-- Recycle Bin -->
@@ -439,7 +324,6 @@
     <string name="restore_selected_files">還原選擇的檔案</string>
     <string name="restore_all_files">還原全部檔案</string>
     <string name="recycle_bin_emptied">回收桶已成功清空</string>
-    <string name="files_restored_successfully">檔案已成功還原</string>
     <string name="empty_recycle_bin_confirmation">你確定要清空回收桶嗎?檔案將會永久消失。</string>
     <string name="recycle_bin_empty">回收桶是空的</string>
     <string name="moving_recycle_bin_items_disabled">移動回收桶項目的功能已停用，請使用復原</string>
@@ -451,16 +335,7 @@
     </plurals>
 
     <!-- Import / Export -->
-    <string name="importing">正在匯入…</string>
-    <string name="exporting">正在匯出…</string>
-    <string name="importing_successful">匯入成功</string>
-    <string name="exporting_successful">匯出成功</string>
-    <string name="importing_failed">匯入成功</string>
-    <string name="exporting_failed">匯出失敗</string>
-    <string name="importing_some_entries_failed">部分項目匯入失敗</string>
-    <string name="exporting_some_entries_failed">部分項目匯出失敗</string>
     <string name="no_entries_for_importing">未發現供匯入的項目</string>
-    <string name="no_entries_for_exporting">未發現供匯出的項目</string>
 
     <!-- OTG devices -->
     <string name="usb">USB</string>
@@ -469,48 +344,9 @@
     <string name="wrong_root_selected_usb">選擇到錯誤資料夾，請選擇你USB裝置的根目錄</string>
 
     <!-- Dates -->
-    <string name="january">一月</string>
-    <string name="february">二月</string>
-    <string name="march">三月</string>
     <string name="april">四月</string>
-    <string name="may">五月</string>
-    <string name="june">六月</string>
-    <string name="july">七月</string>
-    <string name="august">八月</string>
-    <string name="september">九月</string>
-    <string name="october">十月</string>
-    <string name="november">十一月</string>
-    <string name="december">十二月</string>
 
     <!-- in January -->
-    <string name="in_january">在一月</string>
-    <string name="in_february">在二月</string>
-    <string name="in_march">在三月</string>
-    <string name="in_april">在四月</string>
-    <string name="in_may">在五月</string>
-    <string name="in_june">在六月</string>
-    <string name="in_july">在七月</string>
-    <string name="in_august">在八月</string>
-    <string name="in_september">在九月</string>
-    <string name="in_october">在十月</string>
-    <string name="in_november">在十一月</string>
-    <string name="in_december">在十二月</string>
-
-    <string name="monday">星期一</string>
-    <string name="tuesday">星期二</string>
-    <string name="wednesday">星期三</string>
-    <string name="thursday">星期四</string>
-    <string name="friday">星期五</string>
-    <string name="saturday">星期六</string>
-    <string name="sunday">星期日</string>
-
-    <string name="monday_letter">一</string>
-    <string name="tuesday_letter">二</string>
-    <string name="wednesday_letter">三</string>
-    <string name="thursday_letter">四</string>
-    <string name="friday_letter">五</string>
-    <string name="saturday_letter">六</string>
-    <string name="sunday_letter">日</string>
 
     <string name="monday_short">週一</string>
     <string name="tuesday_short">週二</string>
@@ -522,10 +358,8 @@
 
     <!-- Pro version -->
     <string name="upgrade_to_pro_long">此版本的應用程式已不再維護。請升級到專業版。</string>
-    <string name="it_is_free">它在此日期前免費：%s。如果您在到期前下載，將能夠永久免費使用。</string>
     <string name="more_info">更多資訊</string>
     <string name="upgrade">升級</string>
-    <string name="upgrade_calendar">你必須手動搬移儲存在本機端的活動，透過匯出.ics檔案再接著匯入。你可以在主畫面選單中，找到 匯出/匯入 兩個按鈕。</string>
 
     <!-- About -->
     <string name="about">關於</string>
@@ -538,11 +372,8 @@
     <string name="share_text">嘿，來試試看「%1$s」吧！ %2$s</string>
     <string name="invite_via">邀請</string>
     <string name="rate_us_underlined"><u>為我們評分</u></string>
-    <string name="donate">捐贈</string>
-    <string name="donate_underlined"><u>捐贈</u></string>
     <string name="follow_us">追蹤我們</string>
     <string name="copyright">v %1$s\nCopyright © Eagle Tools %2$d</string>
-    <string name="additional_info">進階資訊</string>
     <string name="app_version">應用程式版本: %s</string>
     <string name="device_os">裝置系統: %s</string>
     <string name="donate_please">
@@ -577,16 +408,9 @@
     <!-- FAQ -->
     <string name="frequently_asked_questions">常見問題</string>
     <string name="before_asking_question">在你發問之前，請先閱讀</string>
-    <string name="faq_1_title_commons">為什麼我在小工具列表中沒看到這應用程式的小工具?</string>
-    <string name="faq_1_text_commons">這很可能是因為你把應用程式移動到SD卡。那樣的話，有個隱藏特定程式小工具的Android系統限制存在。
-	    只有一個解決方法，就是經由你的裝置設定，把應用程式移動回內部儲存空間。</string>
     <string name="faq_2_title_commons">我想要支持您，但我無法捐款。還有什麼我能做的嗎?</string>
     <string name="faq_2_text_commons">當然好囉。你可以推廣關於這應用程式，或是給予好的反饋和評分。你也可以幫忙把這應用程式翻譯成新的語言，或者只更新一些現有的翻譯。
 	    你可以在 https://github.com/EagleTools/General-Discussion 找到教學，或者若你需要幫忙，只要發個訊息到 tietudashi@gmail.com。</string>
-    <string name="faq_3_title_commons">我誤刪了一些檔案，如何復原?</string>
-    <string name="faq_3_text_commons">不幸地，沒有辦法。檔案經確認後就立即刪除了，沒有垃圾筒可用。</string>
-    <string name="faq_4_title_commons">我不喜歡小工具的顏色，我能更改嗎?</string>
-    <string name="faq_4_text_commons">可啊，當你在主畫面拖動小工具時，會出現小工具設置畫面。你會在左下角看到顏色方塊，點下去再挑個新顏色就好了。你也能用拉條來調整透明度。</string>
     <string name="faq_5_title_commons">我有辦法恢復被刪除的檔案嗎?</string>
     <string name="faq_5_text_commons">如果它們確實被刪除了，那沒辦法。然而，你可以在程式設定中啟用回收桶來取代刪除。那只會移動檔案而不是刪除它們。</string>
     <string name="faq_6_title_commons">應用程式啟動器上的圖標消失了。我該怎麼辦?</string>

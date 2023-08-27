@@ -16,15 +16,18 @@ class UpgradeToProDialog(val activity: Activity) {
         }
 
         AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.upgrade) { dialog, which -> upgradeApp() }
-                .setNeutralButton(R.string.more_info, null)     // do not dismiss the dialog on pressing More Info
-                .setNegativeButton(R.string.cancel, null)
-                .create().apply {
-                    activity.setupDialogStuff(view, this)
-                    getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener {
-                        moreInfo()
-                    }
+            .setPositiveButton(R.string.upgrade) { _, _ -> upgradeApp() }
+            .setNeutralButton(
+                /* textId = */ R.string.more_info,
+                /* listener = */ null
+            )     // do not dismiss the dialog on pressing More Info
+            .setNegativeButton(R.string.cancel, null)
+            .create().apply {
+                activity.setupDialogStuff(view, this)
+                getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener {
+                    moreInfo()
                 }
+            }
     }
 
     private fun upgradeApp() {

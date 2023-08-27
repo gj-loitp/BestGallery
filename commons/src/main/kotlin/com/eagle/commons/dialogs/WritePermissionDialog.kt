@@ -10,7 +10,7 @@ import com.eagle.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_write_permission.view.*
 import kotlinx.android.synthetic.main.dlg_write_permission_otg.view.*
 
-class WritePermissionDialog(activity: Activity, val isOTG: Boolean, val callback: () -> Unit) {
+class WritePermissionDialog(activity: Activity, private val isOTG: Boolean, val callback: () -> Unit) {
     var dialog: AlertDialog
 
     init {
@@ -20,18 +20,25 @@ class WritePermissionDialog(activity: Activity, val isOTG: Boolean, val callback
         val glide = Glide.with(activity)
         val crossFade = DrawableTransitionOptions.withCrossFade()
         if (isOTG) {
-            glide.load(R.drawable.img_write_storage_otg).transition(crossFade).into(view.writePermissionsDialogOtgImage)
+            glide.load(R.drawable.img_write_storage_otg).transition(crossFade)
+                .into(view.writePermissionsDialogOtgImage)
         } else {
-            glide.load(R.drawable.img_write_storage).transition(crossFade).into(view.writePermissionsDialogImage)
-            glide.load(R.drawable.img_write_storage_sd).transition(crossFade).into(view.writePermissionsDialogImageSd)
+            glide.load(R.drawable.img_write_storage).transition(crossFade)
+                .into(view.writePermissionsDialogImage)
+            glide.load(R.drawable.img_write_storage_sd).transition(crossFade)
+                .into(view.writePermissionsDialogImageSd)
         }
 
         dialog = AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.ok) { dialog, which -> dialogConfirmed() }
-                .setOnCancelListener { BaseSimpleActivity.funAfterSAFPermission = null }
-                .create().apply {
-                    activity.setupDialogStuff(view, this, R.string.confirm_storage_access_title)
-                }
+            .setPositiveButton(R.string.ok) { _, _ -> dialogConfirmed() }
+            .setOnCancelListener { BaseSimpleActivity.funAfterSAFPermission = null }
+            .create().apply {
+                activity.setupDialogStuff(
+                    view = view,
+                    dialog = this,
+                    titleId = R.string.confirm_storage_access_title
+                )
+            }
     }
 
     private fun dialogConfirmed() {

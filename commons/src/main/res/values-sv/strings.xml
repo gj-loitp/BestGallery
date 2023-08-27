@@ -3,7 +3,6 @@
     <string name="cancel">Avbryt</string>
     <string name="save_as">Spara som</string>
     <string name="file_saved">Filen har sparats</string>
-    <string name="invalid_file_format">Ogiltigt filformat</string>
     <string name="out_of_memory_error">Minnet är fullt</string>
     <string name="an_error_occurred">Ett fel har uppstått: %s</string>
     <string name="open_with">Öppna med</string>
@@ -11,55 +10,27 @@
     <string name="no_app_found">Ingen giltig app hittades</string>
     <string name="set_as">Använd som</string>
     <string name="value_copied_to_clipboard">Värdet har kopierats till Urklipp</string>
-    <string name="unknown">Okänd</string>
-    <string name="always">Alltid</string>
-    <string name="never">Aldrig</string>
-    <string name="details">Information</string>
-    <string name="notes">Anteckningar</string>
     <string name="deleting_folder">Tar bort mappen \'%s\'</string>
     <string name="none">Ingen</string>
-    <string name="label">Etikett</string>
-    <string name="transparent">Genomskinlig</string>
-    <string name="transparent_color">Genomskinlig färg</string>
-    <string name="select_a_different_color">Välj en annan färg</string>
     <string name="download">Hämta</string>
-    <string name="notification">Notification</string>
-    <string name="email">Email</string>
 
     <!-- Favorites -->
     <string name="favorites">Favoriter</string>
-    <string name="add_favorites">Lägg till favoriter</string>
     <string name="add_to_favorites">Lägg till i favoriter</string>
     <string name="remove_from_favorites">Ta bort från favoriter</string>
 
     <!-- Search -->
     <string name="search">Sök</string>
-    <string name="type_2_characters">Skriv in minst två tecken för att starta sökningen.</string>
 
     <!-- Filters -->
-    <string name="filter">Filtrera</string>
-    <string name="no_items_found">Inga objekt hittades.</string>
-    <string name="change_filter">Ändra filter</string>
 
     <!-- Permissions -->
     <string name="no_storage_permissions">Lagringsbehörighet krävs</string>
-    <string name="no_contacts_permission">Kontaktbehörighet krävs</string>
-    <string name="no_camera_permissions">Kamerabehörighet krävs</string>
-    <string name="no_audio_permissions">Mikrofonbehörighet krävs</string>
 
     <!-- Renaming -->
-    <string name="rename_file">Byt namn på fil</string>
-    <string name="rename_folder">Byt namn på mapp</string>
-    <string name="rename_file_error">Det gick inte att byta namn på filen</string>
-    <string name="rename_folder_error">Det gick inte att byta namn på mappen</string>
-    <string name="rename_folder_empty">Du måste ange ett mappnamn</string>
-    <string name="rename_folder_exists">Det finns redan en mapp med samma namn</string>
     <string name="rename_folder_root">Det går inte att byta namn på rotmappen på ett lagringsutrymme</string>
-    <string name="rename_folder_ok">Mappen har fått ett nytt namn</string>
-    <string name="renaming_folder">Byter namn på mappen</string>
     <string name="filename_cannot_be_empty">Du måste ange ett filnamn</string>
     <string name="filename_invalid_characters">Filnamnet innehåller ogiltiga tecken</string>
-    <string name="filename_invalid_characters_placeholder">Filnamnet \'%s\' innehåller ogiltiga tecken</string>
     <string name="extension_cannot_be_empty">Filnamnstillägget får inte vara tomt</string>
     <string name="source_file_doesnt_exist">Källfilen %s finns inte</string>
     <string name="prepend_filenames">Lägg till före filnamnen</string>
@@ -68,17 +39,11 @@
     <!-- Copy / Move -->
     <string name="copy">Kopiera</string>
     <string name="move">Flytta</string>
-    <string name="copy_move">Kopiera / Flytta</string>
     <string name="copy_to">Kopiera till</string>
     <string name="move_to">Flytta till</string>
-    <string name="source">Källa</string>
-    <string name="destination">Mål</string>
     <string name="select_destination">Välj mål</string>
-    <string name="click_select_destination">Tryck här för att välja mål</string>
     <string name="invalid_destination">Det gick inte att skriva till målet</string>
-    <string name="please_select_destination">Välj mål</string>
     <string name="source_and_destination_same">Källa och mål kan inte vara samma</string>
-    <string name="copy_failed">Det gick inte att kopiera filerna</string>
     <string name="copying">Kopierar…</string>
     <string name="copying_success">Filerna har kopierats</string>
     <string name="copy_move_failed">Ett fel har uppstått</string>
@@ -86,15 +51,11 @@
     <string name="moving_success">Filerna har flyttats</string>
     <string name="moving_success_partial">Det gick inte att flytta vissa filer</string>
     <string name="copying_success_partial">Det gick inte att kopiera vissa filer</string>
-    <string name="no_files_selected">Inga filer har valts</string>
     <string name="saving">Sparar…</string>
     <string name="could_not_create_folder">Det gick inte att skapa mappen %s</string>
     <string name="could_not_create_file">Det gick inte att skapa filen %s</string>
 
     <!-- Create new -->
-    <string name="create_new">Skapa ny</string>
-    <string name="folder">Mapp</string>
-    <string name="file">Fil</string>
     <string name="create_new_folder">Skapa ny mapp</string>
     <string name="name_taken">Det finns redan en fil eller mapp med samma namn</string>
     <string name="invalid_name">Namnet innehåller ogiltiga tecken</string>
@@ -109,7 +70,6 @@
     <string name="keep_both">Behåll båda</string>
     <string name="overwrite">Skriv över</string>
     <string name="skip">Hoppa över</string>
-    <string name="append">Lägg till \'_1\'</string>
     <string name="apply_to_all">Använd på alla konflikter</string>
 
     <!-- File picker -->
@@ -156,10 +116,6 @@
     <string name="duration">Varaktighet</string>
     <string name="artist">Artist</string>
     <string name="album">Album</string>
-    <string name="focal_length">Brännvidd</string>
-    <string name="exposure_time">Exponeringstid</string>
-    <string name="iso_speed">ISO-grader</string>
-    <string name="f_number">F-nummer</string>
     <string name="camera">Kamera</string>
     <string name="exif">EXIF</string>
     <string name="song_title">Låttitel</string>
@@ -168,17 +124,11 @@
     <string name="background_color">Bakgrundsfärg</string>
     <string name="text_color">Textfärg</string>
     <string name="primary_color">Primär färg</string>
-    <string name="foreground_color">Förgrundsfärg</string>
     <string name="app_icon_color">Appikonens färg</string>
-    <string name="bottom_navigation_bar_color">Navigeringsfältets färg</string>
-    <string name="restore_defaults">Återställ standardfärger</string>
-    <string name="change_color">Ändra färg</string>
     <string name="theme">Tema</string>
     <string name="changing_color_description">Om du ändrar en färg, ändras temat till anpassat tema</string>
     <string name="save">Spara</string>
     <string name="discard">Avbryt</string>
-    <string name="undo_changes">Ångra ändringar</string>
-    <string name="undo_changes_confirmation">Är du säker på att du vill ångra dina ändringar?</string>
     <string name="save_before_closing">Du har ändringar som inte är sparade. Spara innan du lämnar?</string>
     <string name="apply_to_all_apps">Använd färgerna i alla Simple-appar</string>
     <string name="app_icon_color_warning">WARNING: Some launchers do not handle app icon customization properly. In case the icon will disappear, try launching the app via Google Play or some widget, if available.
@@ -193,7 +143,6 @@
     <!-- Themes -->
     <string name="light_theme">Ljust</string>
     <string name="dark_theme">Mörkt</string>
-    <string name="solarized">Solariserat</string>
     <string name="dark_red">Mörkrött</string>
     <string name="black_white">Svartvitt</string>
     <string name="custom">Anpassat</string>
@@ -218,9 +167,6 @@
     <string name="stop_showing_hidden">Sluta visa dolda objekt</string>
     <string name="maximum_share_reached">Du kan inte dela så här mycket innehåll på en gång</string>
     <string name="empty_and_disable_recycle_bin">Töm och inaktivera Papperskorgen</string>
-    <string name="undo">Ångra</string>
-    <string name="redo">Gör om</string>
-    <string name="print">Skriv ut</string>
 
     <!-- Sorting -->
     <string name="sort_by">Sortera efter</string>
@@ -228,11 +174,9 @@
     <string name="size">Storlek</string>
     <string name="last_modified">Senast ändrad</string>
     <string name="date_taken">Fotodatum</string>
-    <string name="title">Titel</string>
     <string name="filename">Filnamn</string>
     <string name="extension">Filnamnstillägg</string>
     <string name="random">Slumpmässigt</string>
-    <string name="sort_randomly">Ordna slumpmässigt</string>
     <string name="ascending">Stigande</string>
     <string name="descending">Fallande</string>
     <string name="use_for_this_folder">Använd bara för denna mapp</string>
@@ -241,12 +185,9 @@
     <string name="proceed_with_deletion">Är du säker på att du vill fortsätta med borttagningen?</string>
     <string name="deletion_confirmation">Är du säker på att du vill ta bort %s?</string>    <!-- Are you sure you want to delete 5 items? -->
     <string name="move_to_recycle_bin_confirmation">Är du säker på att du vill flytta %s till Papperskorgen?</string>    <!-- Are you sure you want to move 3 items into the Recycle Bin? -->
-    <string name="are_you_sure_delete">Är du säker på att du vill ta bort det här objektet?</string>
-    <string name="are_you_sure_recycle_bin">Är du säker på att du vill flytta det här objektet till Papperskorgen?</string>
     <string name="do_not_ask_again">Fråga inte igen i denna session</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
-    <string name="maybe">Maybe</string>
 
     <plurals name="delete_warning">
         <item quantity="one">VARNING! Du håller på att ta bort %d mapp</item>
@@ -276,7 +217,6 @@
     <!-- Times -->
     <string name="yesterday">Igår</string>
     <string name="today">Idag</string>
-    <string name="tomorrow">Imorgon</string>
     <string name="seconds_raw">sekunder</string>
     <string name="minutes_raw">minuter</string>
     <string name="hours_raw">timmar</string>
@@ -298,48 +238,8 @@
         <item quantity="one">%d dag</item>
         <item quantity="other">%d dagar</item>
     </plurals>
-    <plurals name="weeks">
-        <item quantity="one">%d vecka</item>
-        <item quantity="other">%d veckor</item>
-    </plurals>
-    <plurals name="months">
-        <item quantity="one">%d månad</item>
-        <item quantity="other">%d månader</item>
-    </plurals>
-    <plurals name="years">
-        <item quantity="one">%d år</item>
-        <item quantity="other">%d år</item>
-    </plurals>
 
     <!-- For example: I will be there in 5 minutes -->
-    <plurals name="in_seconds">
-        <item quantity="one">%d sekund</item>
-        <item quantity="other">%d sekunder</item>
-    </plurals>
-    <plurals name="in_minutes">
-        <item quantity="one">%d minut</item>
-        <item quantity="other">%d minuter</item>
-    </plurals>
-    <plurals name="in_hours">
-        <item quantity="one">%d timme</item>
-        <item quantity="other">%d timmar</item>
-    </plurals>
-    <plurals name="in_days">
-        <item quantity="one">%d day</item>
-        <item quantity="other">%d days</item>
-    </plurals>
-    <plurals name="in_weeks">
-        <item quantity="one">%d week</item>
-        <item quantity="other">%d weeks</item>
-    </plurals>
-    <plurals name="in_months">
-        <item quantity="one">%d month</item>
-        <item quantity="other">%d months</item>
-    </plurals>
-    <plurals name="in_years">
-        <item quantity="one">%d year</item>
-        <item quantity="other">%d years</item>
-    </plurals>
 
     <!-- For example: Event reminder: 3 minutes before -->
     <plurals name="seconds_before">
@@ -402,16 +302,9 @@
     </plurals>
 
     <!-- For example: Time remaining till the alarm goes off: 6 hours, 5 minutes -->
-    <string name="alarm_goes_off_in">Återstående tid tills alarmet ringer:\n%s</string>
-    <string name="reminder_triggers_in">Återstående tid tills påminnelsen aktiveras:\n%s</string>
-    <string name="alarm_warning">Kontrollera att alarmet fungerar som det ska innan du förlitar dig på det. Det kanske inte fungerar som det ska på grund av batterisparrelaterade systembegränsningar.</string>
-    <string name="reminder_warning">Kontrollera att påminnelserna fungerar som de ska innan du förlitar dig på dem. De kanske inte fungerar som de ska på grund av batterisparrelaterade systembegränsningar.</string>
-    <string name="notifications_disabled">Notifications of this application are disabled. Please go in your device settings for enabling them.</string>
 
     <!-- Alarms -->
     <string name="alarm">Alarm</string>
-    <string name="snooze">Snooza</string>
-    <string name="dismiss">Stäng av</string>
     <string name="no_reminder">Ingen påminnelse</string>
     <string name="at_start">Vid start</string>
     <string name="system_sounds">Systemljud</string>
@@ -421,35 +314,20 @@
 
     <!-- Settings -->
     <string name="settings">Inställningar</string>
-    <string name="purchase_simple_thank_you">Köp Simple Thank You</string>
     <string name="customize_colors">Anpassa färger</string>
-    <string name="customize_widget_colors">Anpassa widgetarnas färger</string>
     <string name="use_english_language">Använd engelska</string>
     <string name="show_hidden_items">Visa dolda objekt</string>
-    <string name="font_size">Teckenstorlek</string>
-    <string name="small">Liten</string>
-    <string name="medium">Medelstor</string>
-    <string name="large">Stor</string>
-    <string name="extra_large">Extra stor</string>
     <string name="password_protect_hidden_items">Lösenordsskydda synligheten för dolda objekt</string>
     <string name="password_protect_whole_app">Lösenordsskydda hela appen</string>
     <string name="password_protect_file_deletion">Lösenordsskydda borttagning och flytt av filer</string>
     <string name="keep_last_modified">Behåll senast ändrad-tider vid filåtgärder</string>
     <string name="show_info_bubble">Visa en informationsbubbla när jag rullar genom objekt genom att dra rullningslisten</string>
-    <string name="prevent_phone_from_sleeping">Hindra aktivering av viloläge när appen körs i förgrunden</string>
     <string name="skip_delete_confirmation">Hoppa alltid över dialogrutan för bekräftelse av borttagning</string>
     <string name="enable_pull_to_refresh">Aktivera uppdatering vid svepning från överkant</string>
     <string name="use_24_hour_time_format">Använd 24-timmarsformat</string>
     <string name="change_date_and_time_format">Ändra datum- och tidsformat</string>
-    <string name="sunday_first">Börja veckan på söndag</string>
-    <string name="widgets">Widgetar</string>
-    <string name="use_same_snooze">Använd alltid samma snooze-intervall</string>
-    <string name="snooze_time">Snooze-intervall</string>
-    <string name="vibrate_on_button_press">Vibrera när jag trycker på knapparna</string>
     <string name="move_items_into_recycle_bin">Flytta objekt till Papperskorgen istället för att ta bort dem</string>
-    <string name="recycle_bin_cleaning_interval">Rensningsintervall för Papperskorgen</string>
     <string name="empty_recycle_bin">Töm Papperskorgen</string>
-    <string name="force_portrait_mode">Lås skärmen i stående läge</string>
     <string name="export_settings">Exportera inställningar</string>
     <string name="import_settings">Importera inställningar</string>
     <string name="settings_exported_successfully">Inställningarna har exporterats</string>
@@ -461,9 +339,6 @@
     <string name="scrolling">Rullning</string>
     <string name="file_operations">Filåtgärder</string>
     <string name="recycle_bin">Papperskorgen</string>
-    <string name="saving_label">Sparande</string>
-    <string name="startup">Start</string>
-    <string name="text">Text</string>
     <string name="migrating">Migrating</string>
 
     <!-- Recycle Bin -->
@@ -471,7 +346,6 @@
     <string name="restore_selected_files">Återställ valda filer</string>
     <string name="restore_all_files">Återställ alla filer</string>
     <string name="recycle_bin_emptied">Papperskorgen har tömts</string>
-    <string name="files_restored_successfully">Filerna har återställts</string>
     <string name="empty_recycle_bin_confirmation">Är du säker på att du vill tömma Papperskorgen? Filerna tas bort permanent.</string>
     <string name="recycle_bin_empty">Papperskorgen är tom</string>
     <string name="moving_recycle_bin_items_disabled">Moving Recycle bin items is disabled, please use Restore</string>
@@ -484,16 +358,7 @@
     </plurals>
 
     <!-- Import / Export -->
-    <string name="importing">Importerar…</string>
-    <string name="exporting">Exporterar…</string>
-    <string name="importing_successful">Importen lyckades</string>
-    <string name="exporting_successful">Exporten lyckades</string>
-    <string name="importing_failed">Importen misslyckades</string>
-    <string name="exporting_failed">Exporten misslyckades</string>
-    <string name="importing_some_entries_failed">Importen av vissa poster misslyckades</string>
-    <string name="exporting_some_entries_failed">Exporten av vissa poster misslyckades</string>
     <string name="no_entries_for_importing">No entries for importing have been found</string>
-    <string name="no_entries_for_exporting">Inga poster hittades för export</string>
 
     <!-- OTG devices -->
     <string name="usb">USB</string>
@@ -502,48 +367,9 @@
     <string name="wrong_root_selected_usb">Du har valt fel mapp, välj rotmappen på din USB-enhet</string>
 
     <!-- Dates -->
-    <string name="january">Januari</string>
-    <string name="february">Februari</string>
-    <string name="march">Mars</string>
     <string name="april">April</string>
-    <string name="may">Maj</string>
-    <string name="june">Juni</string>
-    <string name="july">Juli</string>
-    <string name="august">Augusti</string>
-    <string name="september">September</string>
-    <string name="october">Oktober</string>
-    <string name="november">November</string>
-    <string name="december">December</string>
 
     <!-- in January -->
-    <string name="in_january">i januari</string>
-    <string name="in_february">i februari</string>
-    <string name="in_march">i mars</string>
-    <string name="in_april">i april</string>
-    <string name="in_may">i maj</string>
-    <string name="in_june">i juni</string>
-    <string name="in_july">i juli</string>
-    <string name="in_august">i augusti</string>
-    <string name="in_september">i september</string>
-    <string name="in_october">i oktober</string>
-    <string name="in_november">i november</string>
-    <string name="in_december">i december</string>
-
-    <string name="monday">Måndag</string>
-    <string name="tuesday">Tisdag</string>
-    <string name="wednesday">Onsdag</string>
-    <string name="thursday">Torsdag</string>
-    <string name="friday">Fredag</string>
-    <string name="saturday">Lördag</string>
-    <string name="sunday">Söndag</string>
-
-    <string name="monday_letter">M</string>
-    <string name="tuesday_letter">T</string>
-    <string name="wednesday_letter">O</string>
-    <string name="thursday_letter">T</string>
-    <string name="friday_letter">F</string>
-    <string name="saturday_letter">L</string>
-    <string name="sunday_letter">S</string>
 
     <string name="monday_short">Mån</string>
     <string name="tuesday_short">Tis</string>
@@ -555,10 +381,8 @@
 
     <!-- Pro version -->
     <string name="upgrade_to_pro_long">This version of the app is no longer maintained. Please upgrade to the Pro version.</string>
-    <string name="it_is_free">It is free till: %s. If you download it till then, you will be able to use it for free forever.</string>
     <string name="more_info">More info</string>
     <string name="upgrade">Upgrade</string>
-    <string name="upgrade_calendar">You have to migrate locally stored events manually via exporting in an .ics file, then importing. You can find both export/import buttons at the main screen menu.</string>
 
     <!-- About -->
     <string name="about">Om</string>
@@ -571,11 +395,8 @@
     <string name="share_text">Hej, läs om %1$s på %2$s</string>
     <string name="invite_via">Bjud in via</string>
     <string name="rate_us_underlined"><u>Betygsätt oss</u></string>
-    <string name="donate">Donera</string>
-    <string name="donate_underlined"><u>Donera</u></string>
     <string name="follow_us">Följ oss</string>
     <string name="copyright">v %1$s\nCopyright © Eagle Tools %2$d</string>
-    <string name="additional_info">Ytterligare info</string>
     <string name="app_version">Appversion: %s</string>
     <string name="device_os">Enhetens operativsystem: %s</string>
     <string name="donate_please">
@@ -610,16 +431,9 @@
     <!-- FAQ -->
     <string name="frequently_asked_questions">Frågor och svar</string>
     <string name="before_asking_question">Innan du ställer en fråga, läs först</string>
-    <string name="faq_1_title_commons">How come I don\'t see this apps widget on the list of widgets?</string>
-    <string name="faq_1_text_commons">It is most likely because you moved the app on an SD card. There is an Android system limitation which hides the given app widgets
-        in that case. The only solution is to move the app back onto the Internal Storage via your device settings.</string>
     <string name="faq_2_title_commons">I want to support you, but I cannot donate money. Is there anything else I can do?</string>
     <string name="faq_2_text_commons">Yes, of course. You can spread the word about the apps or give good feedback and ratings. You can also help by translating the apps in a new language, or just update some existing translations.
         You can find the guide at https://github.com/EagleTools/General-Discussion , or just shoot me a message at tietudashi@gmail.com if you need help.</string>
-    <string name="faq_3_title_commons">I deleted some files by mistake, how can I recover them?</string>
-    <string name="faq_3_text_commons">Sadly, you cannot. Files are deleted instantly after the confirmation dialog, there is no trashbin available.</string>
-    <string name="faq_4_title_commons">I don\'t like the widget colors, can I change them?</string>
-    <string name="faq_4_text_commons">Yep, as you drag a widget on your home screen a widget config screen appears. You will see colored squares at the bottom left corner, just press them to pick a new color. You can use the slider for adjusting the alpha too.</string>
     <string name="faq_5_title_commons">Can I somehow restore deleted files?</string>
     <string name="faq_5_text_commons">If they were really deleted, you cannot. However, you can enable using a Recycle Bin instead of deleting in the app settings. That will just move the files in it instead of deleting them.</string>
     <string name="faq_6_title_commons">The app launcher icon disappeared. What can I do?</string>
