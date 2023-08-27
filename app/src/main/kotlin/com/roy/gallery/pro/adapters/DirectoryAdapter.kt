@@ -36,7 +36,7 @@ import com.roy.commons.ext.toast
 import com.roy.commons.models.FileDirItem
 import com.roy.commons.views.FastScroller
 import com.roy.commons.views.MyRecyclerView
-import kotlinx.android.synthetic.main.directory_item_list.view.*
+import kotlinx.android.synthetic.main.v_directory_item_list.view.*
 import java.io.File
 
 class DirectoryAdapter(
@@ -68,7 +68,7 @@ class DirectoryAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutType =
-            if (isListViewType) R.layout.directory_item_list else R.layout.directory_item_grid
+            if (isListViewType) R.layout.v_directory_item_list else R.layout.directory_item_grid
         return createViewHolder(layoutType, parent)
     }
 
@@ -139,7 +139,7 @@ class DirectoryAdapter(
     override fun onViewRecycled(holder: ViewHolder) {
         super.onViewRecycled(holder)
         if (!activity.isDestroyed) {
-            Glide.with(activity).clear(holder.itemView.dir_thumbnail!!)
+            Glide.with(activity).clear(holder.itemView.dirThumbnail!!)
         }
     }
 
@@ -533,10 +533,10 @@ class DirectoryAdapter(
     private fun setupView(view: View, directory: Directory) {
         val isSelected = selectedKeys.contains(directory.path.hashCode())
         view.apply {
-            dir_name.text =
+            dirName.text =
                 if (groupDirectSubfolders) "${directory.name} (${directory.subfoldersCount})" else directory.name
-            dir_path?.text = "${directory.path.substringBeforeLast("/")}/"
-            photo_cnt.text = directory.subfoldersMediaCount.toString()
+            dirPath?.text = "${directory.path.substringBeforeLast("/")}/"
+            photoCnt.text = directory.subfoldersMediaCount.toString()
             val thumbnailType = when {
                 directory.tmb.isVideoFast() -> TYPE_VIDEOS
                 directory.tmb.isGif() -> TYPE_GIFS
@@ -545,33 +545,33 @@ class DirectoryAdapter(
                 else -> TYPE_IMAGES
             }
 
-            dir_check?.beVisibleIf(isSelected)
+            dirCheck?.beVisibleIf(isSelected)
             if (isSelected) {
-                dir_check.background?.applyColorFilter(primaryColor)
+                dirCheck.background?.applyColorFilter(primaryColor)
             }
 
             activity.loadImage(
                 thumbnailType,
                 directory.tmb,
-                dir_thumbnail,
+                dirThumbnail,
                 scrollHorizontally,
                 animateGifs,
                 cropThumbnails
             )
-            dir_pin.beVisibleIf(pinnedFolders.contains(directory.path))
-            dir_location.beVisibleIf(directory.location != LOCAITON_INTERNAL)
-            if (dir_location.isVisible()) {
-                dir_location.setImageResource(if (directory.location == LOCATION_SD) R.drawable.ic_sd_card else R.drawable.ic_usb)
+            dirPin.beVisibleIf(pinnedFolders.contains(directory.path))
+            dirLocation.beVisibleIf(directory.location != LOCAITON_INTERNAL)
+            if (dirLocation.isVisible()) {
+                dirLocation.setImageResource(if (directory.location == LOCATION_SD) R.drawable.ic_sd_card else R.drawable.ic_usb)
             }
 
-            photo_cnt.beVisibleIf(showMediaCount)
+            photoCnt.beVisibleIf(showMediaCount)
 
             if (isListViewType) {
-                dir_name.setTextColor(textColor)
-                dir_path.setTextColor(textColor)
-                photo_cnt.setTextColor(textColor)
-                dir_pin.applyColorFilter(textColor)
-                dir_location.applyColorFilter(textColor)
+                dirName.setTextColor(textColor)
+                dirPath.setTextColor(textColor)
+                photoCnt.setTextColor(textColor)
+                dirPin.applyColorFilter(textColor)
+                dirLocation.applyColorFilter(textColor)
             }
         }
     }

@@ -97,7 +97,7 @@ class ViewPagerActivity : SimpleActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_medium)
 
-        top_shadow.layoutParams.height = statusBarHeight + actionBarHeight
+        topShadow.layoutParams.height = statusBarHeight + actionBarHeight
         checkNotchSupport()
         (MediaActivity.mMedia.clone() as ArrayList<ThumbnailItem>).filter { it is Medium }
             .mapTo(mMediaFiles) { it as Medium }
@@ -348,7 +348,7 @@ class ViewPagerActivity : SimpleActivity(),
                 (it as com.roy.gallery.pro.adapters.MyPagerAdapter).toggleFullscreen(mIsFullScreen)
                 checkSystemUI()
                 val newAlpha = if (mIsFullScreen) 0f else 1f
-                top_shadow.animate().alpha(newAlpha).start()
+                topShadow.animate().alpha(newAlpha).start()
                 if (bottom_actions.isVisible()) {
                     bottom_actions.animate().alpha(newAlpha).start()
                     arrayOf(

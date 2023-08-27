@@ -72,9 +72,9 @@ import kotlinx.android.synthetic.main.bottom_actions.bottom_share
 import kotlinx.android.synthetic.main.bottom_actions.bottom_show_on_map
 import kotlinx.android.synthetic.main.bottom_actions.bottom_slideshow
 import kotlinx.android.synthetic.main.bottom_actions.bottom_toggle_file_visibility
-import kotlinx.android.synthetic.main.fragment_holder.bottom_actions
-import kotlinx.android.synthetic.main.fragment_holder.fragment_holder
-import kotlinx.android.synthetic.main.fragment_holder.top_shadow
+import kotlinx.android.synthetic.main.f_holder.bottom_actions
+import kotlinx.android.synthetic.main.f_holder.fragmentHolder
+import kotlinx.android.synthetic.main.f_holder.topShadow
 import java.io.File
 import java.io.FileInputStream
 
@@ -90,7 +90,7 @@ open class PhotoVideoActivity : SimpleActivity(),
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_holder)
+        setContentView(R.layout.f_holder)
 
         if (config.appSideloadingStatus == SIDELOADING_TRUE) {
             showSideloadingDialog()
@@ -211,11 +211,11 @@ open class PhotoVideoActivity : SimpleActivity(),
             mFragment!!.listener = this
             mFragment!!.arguments = bundle
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_placeholder, mFragment!!).commit()
+                .replace(R.id.fragmentPlaceholder, mFragment!!).commit()
         }
 
         if (config.blackBackground) {
-            fragment_holder.background = ColorDrawable(Color.BLACK)
+            fragmentHolder.background = ColorDrawable(Color.BLACK)
         }
 
         if (config.maxBrightness) {
@@ -391,7 +391,7 @@ open class PhotoVideoActivity : SimpleActivity(),
         }
 
         val newAlpha = if (mIsFullScreen) 0f else 1f
-        top_shadow.animate().alpha(newAlpha).start()
+        topShadow.animate().alpha(newAlpha).start()
         if (!bottom_actions.isGone()) {
             bottom_actions.animate().alpha(newAlpha).start()
         }

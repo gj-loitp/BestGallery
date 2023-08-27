@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/editor_filter_item_holder"
+    android:id="@+id/editorFilterItemHolder"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/editor_filter_item_thumbnail"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/editorFilterItemThumbnail"
         android:layout_width="@dimen/bottom_filters_thumbnail_size"
         android:layout_height="@dimen/bottom_filters_thumbnail_size"
-        android:scaleType="centerCrop"
-        android:layout_above="@+id/editor_filter_item_label"
-        android:layout_margin="1dp"/>
-    <ImageView
-        android:id="@+id/editor_filter_item_bg"
-        android:layout_width="@dimen/bottom_filters_thumbnail_size"
-        android:layout_height="@dimen/bottom_filters_thumbnail_size"
-        android:scaleType="centerCrop"
-        android:layout_above="@+id/editor_filter_item_label"
-        android:background="@drawable/stroke_background"
-        android:layout_margin="1dp"/>
+        android:layout_above="@+id/editorFilterItemLabel"
+        android:layout_margin="1dp"
+        android:scaleType="centerCrop" />
 
-    <TextView
-        android:id="@+id/editor_filter_item_label"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/editorFilterItemBg"
+        android:layout_width="@dimen/bottom_filters_thumbnail_size"
+        android:layout_height="@dimen/bottom_filters_thumbnail_size"
+        android:layout_above="@+id/editorFilterItemLabel"
+        android:layout_margin="1dp"
+        android:background="@drawable/stroke_background"
+        android:scaleType="centerCrop" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/editorFilterItemLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -31,6 +31,6 @@
         android:gravity="center_horizontal"
         android:textColor="@android:color/white"
         android:textSize="@dimen/smaller_text_size"
-        tools:text="Filter"/>
+        tools:text="Filter" />
 
 </RelativeLayout>

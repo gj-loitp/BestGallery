@@ -57,7 +57,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import it.sephiroth.android.library.exif2.ExifInterface
 import jp.wasabeef.glide.transformations.BlurTransformation
-import kotlinx.android.synthetic.main.pager_photo_item.view.*
+import kotlinx.android.synthetic.main.v_pager_photo_item.view.*
 import org.apache.sanselan.common.byteSources.ByteSourceInputStream
 import org.apache.sanselan.formats.jpeg.JpegImageParser
 import pl.droidsonroids.gif.InputSource
@@ -99,36 +99,36 @@ class PhotoFragment : ViewPagerFragment() {
     private lateinit var mMedium: Medium
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        mView = (inflater.inflate(R.layout.pager_photo_item, container, false) as ViewGroup).apply {
-            subsampling_view.setOnClickListener { photoClicked() }
-            gestures_view.setOnClickListener { photoClicked() }
-            gif_view.setOnClickListener { photoClicked() }
-            instant_prev_item.setOnClickListener { listener?.goToPrevItem() }
-            instant_next_item.setOnClickListener { listener?.goToNextItem() }
-            panorama_outline.setOnClickListener { openPanorama() }
+        mView = (inflater.inflate(R.layout.v_pager_photo_item, container, false) as ViewGroup).apply {
+            subsamplingView.setOnClickListener { photoClicked() }
+            gesturesView.setOnClickListener { photoClicked() }
+            gifView.setOnClickListener { photoClicked() }
+            instantPrevItem.setOnClickListener { listener?.goToPrevItem() }
+            instantNextItem.setOnClickListener { listener?.goToNextItem() }
+            panoramaOutline.setOnClickListener { openPanorama() }
 
-            instant_prev_item.parentView = container
-            instant_next_item.parentView = container
+            instantPrevItem.parentView = container
+            instantNextItem.parentView = container
 
-            photo_brightness_controller.initialize(requireActivity(), slide_info, true, container) { x, y ->
+            photoBrightnessController.initialize(requireActivity(), slideInfo, true, container) { x, y ->
                 mView.apply {
-                    if (subsampling_view.isVisible()) {
-                        subsampling_view.sendFakeClick(x, y)
+                    if (subsamplingView.isVisible()) {
+                        subsamplingView.sendFakeClick(x, y)
                     } else {
-                        gestures_view.sendFakeClick(x, y)
+                        gesturesView.sendFakeClick(x, y)
                     }
                 }
             }
 
             if (context.config.allowDownGesture) {
-                gif_view.setOnTouchListener { v, event ->
-                    if (gif_view_frame.controller.state.zoom == 1f) {
+                gifView.setOnTouchListener { v, event ->
+                    if (gifViewFrame.controller.state.zoom == 1f) {
                         handleEvent(event)
                     }
                     false
                 }
 
-                gestures_view.controller.addOnStateChangeListener(object : GestureController.OnStateChangeListener {
+                gesturesView.controller.addOnStateChangeListener(object : GestureController.OnStateChangeListener {
                     override fun onStateChanged(state: State) {
                         mCurrentGestureViewZoom = state.zoom
                     }
@@ -137,15 +137,15 @@ class PhotoFragment : ViewPagerFragment() {
                     }
                 })
 
-                gestures_view.setOnTouchListener { v, event ->
+                gesturesView.setOnTouchListener { v, event ->
                     if (mCurrentGestureViewZoom == 1f) {
                         handleEvent(event)
                     }
                     false
                 }
 
-                subsampling_view.setOnTouchListener { v, event ->
-                    if (subsampling_view.isZoomedOut()) {
+                subsamplingView.setOnTouchListener { v, event ->
+                    if (subsamplingView.isZoomedOut()) {
                         handleEvent(event)
                     }
                     false
@@ -217,7 +217,7 @@ class PhotoFragment : ViewPagerFragment() {
             if (config.allowZoomingImages != mStoredAllowDeepZoomableImages || config.showHighestQuality != mStoredShowHighestQuality
                     || config.blackBackground != mBlackBackground) {
                 mIsSubsamplingVisible = false
-                mView.subsampling_view.beGone()
+                mView.subsamplingView.beGone()
                 loadImage()
             }
             /*else if (mMedium.isGIF()) {
@@ -229,9 +229,9 @@ class PhotoFragment : ViewPagerFragment() {
         val allowInstantChange = config.allowInstantChange
 
         mView.apply {
-            photo_brightness_controller.beVisibleIf(allowPhotoGestures)
-            instant_prev_item.beVisibleIf(allowInstantChange)
-            instant_next_item.beVisibleIf(allowInstantChange)
+            photoBrightnessController.beVisibleIf(allowPhotoGestures)
+            instantPrevItem.beVisibleIf(allowInstantChange)
+            instantNextItem.beVisibleIf(allowInstantChange)
         }
 
         storeStateVariables()
@@ -240,7 +240,7 @@ class PhotoFragment : ViewPagerFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         if (activity?.isDestroyed == false) {
-            mView.subsampling_view.recycle()
+            mView.subsamplingView.recycle()
         }
 
         mLoadZoomableViewHandler.removeCallbacksAndMessages(null)
@@ -260,7 +260,7 @@ class PhotoFragment : ViewPagerFragment() {
             mView.onGlobalLayout {
                 measureScreen()
                 Handler().postDelayed({
-                    mView.gif_view_frame.controller.resetState()
+                    mView.gifViewFrame.controller.resetState()
                     loadGif()
                 }, 50)
             }
@@ -285,7 +285,7 @@ class PhotoFragment : ViewPagerFragment() {
 
     fun doVisible() {
         if (!mMedium.isGIF()) {
-            mView.gestures_view?.beVisible()
+            mView.gesturesView?.beVisible()
         }
     }
 
@@ -357,12 +357,12 @@ class PhotoFragment : ViewPagerFragment() {
             }
         }
         if (isBlur && !requireContext().config.blackBackground) {
-            mView.imgv_bg.beVisible()
+            mView.imgvBg.beVisible()
             Glide.with(requireContext()).asBitmap().load(mMedium.path).transition(withCrossFade()).thumbnail(0.2f)
                     .apply(bitmapTransform(BlurTransformation(60, 3)))
-                    .into(mView.imgv_bg)
+                    .into(mView.imgvBg)
         } else {
-            mView.imgv_bg.beGone()
+            mView.imgvBg.beGone()
         }
     }
 
@@ -376,9 +376,9 @@ class PhotoFragment : ViewPagerFragment() {
             }
 
             mView.apply {
-                gestures_view.beGone()
-                gif_view.setInputSource(source)
-                gif_view_frame.beVisible()
+                gesturesView.beGone()
+                gifView.setInputSource(source)
+                gifViewFrame.beVisible()
             }
         } catch (e: Exception) {
             loadBitmap()
@@ -392,7 +392,7 @@ class PhotoFragment : ViewPagerFragment() {
                 .`as`(PictureDrawable::class.java)
                 .listener(SvgSoftwareLayerSetter())
                 .load(mMedium.path)
-                .into(mView.gestures_view)
+                .into(mView.gesturesView)
     }
 
     private fun loadBitmap(addZoomableView: Boolean = true) {
@@ -419,13 +419,13 @@ class PhotoFragment : ViewPagerFragment() {
                     }
 
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                        mView.gestures_view.controller.settings.isZoomEnabled = mCurrentRotationDegrees != 0 || context?.config?.allowZoomingImages == false
+                        mView.gesturesView.controller.settings.isZoomEnabled = mCurrentRotationDegrees != 0 || context?.config?.allowZoomingImages == false
                         if (mIsFragmentVisible && addZoomableView) {
                             scheduleZoomableView()
                         }
                         return false
                     }
-                }).into(mView.gestures_view)
+                }).into(mView.gesturesView)
     }
 
     private fun tryLoadingWithPicasso(addZoomableView: Boolean) {
@@ -445,9 +445,9 @@ class PhotoFragment : ViewPagerFragment() {
                 degreesForRotation(mImageOrientation).toFloat()
             }
 
-            picasso.into(mView.gestures_view, object : Callback {
+            picasso.into(mView.gesturesView, object : Callback {
                 override fun onSuccess() {
-                    mView.gestures_view.controller.settings.isZoomEnabled = mCurrentRotationDegrees != 0 || context?.config?.allowZoomingImages == false
+                    mView.gesturesView.controller.settings.isZoomEnabled = mCurrentRotationDegrees != 0 || context?.config?.allowZoomingImages == false
                     if (mIsFragmentVisible && addZoomableView) {
                         scheduleZoomableView()
                     }
@@ -497,7 +497,7 @@ class PhotoFragment : ViewPagerFragment() {
             newOrientation += 360
         }
 
-        mView.subsampling_view.apply {
+        mView.subsamplingView.apply {
             setMaxTileSize(if (showHighestQuality) Integer.MAX_VALUE else 4096)
             setMinimumTileDpi(if (showHighestQuality) -1 else getMinTileDpi())
             background = ColorDrawable(Color.TRANSPARENT)
@@ -515,11 +515,11 @@ class PhotoFragment : ViewPagerFragment() {
                     val useWidth = if (mImageOrientation == ORIENTATION_ROTATE_90 || mImageOrientation == ORIENTATION_ROTATE_270) sHeight else sWidth
                     val useHeight = if (mImageOrientation == ORIENTATION_ROTATE_90 || mImageOrientation == ORIENTATION_ROTATE_270) sWidth else sHeight
                     doubleTapZoomScale = getDoubleTapZoomScale(useWidth, useHeight)
-                    mView.gestures_view.beGone()
+                    mView.gesturesView.beGone()
                 }
 
                 override fun onImageLoadError(e: Exception) {
-                    mView.gestures_view.controller.settings.isZoomEnabled = true
+                    mView.gesturesView.controller.settings.isZoomEnabled = true
                     background = ColorDrawable(Color.TRANSPARENT)
                     mIsSubsamplingVisible = false
                     beGone()
@@ -561,9 +561,9 @@ class PhotoFragment : ViewPagerFragment() {
             false
         }
 
-        mView.panorama_outline.beVisibleIf(mIsPanorama)
+        mView.panoramaOutline.beVisibleIf(mIsPanorama)
         if (mIsFullscreen) {
-            mView.panorama_outline.alpha = 0f
+            mView.panoramaOutline.alpha = 0f
         }
     }
 
@@ -618,7 +618,7 @@ class PhotoFragment : ViewPagerFragment() {
 
     fun rotateImageViewBy(degrees: Int) {
         if (mIsSubsamplingVisible) {
-            mView.subsampling_view.rotateBy(degrees)
+            mView.subsamplingView.rotateBy(degrees)
         } else {
             mCurrentRotationDegrees = (mCurrentRotationDegrees + degrees) % 360
             mLoadZoomableViewHandler.removeCallbacksAndMessages(null)
@@ -629,7 +629,7 @@ class PhotoFragment : ViewPagerFragment() {
 
     private fun initExtendedDetails() {
         if (requireContext().config.showExtendedDetails) {
-            mView.photo_details.apply {
+            mView.photoDetails.apply {
                 beInvisible()   // make it invisible so we can measure it, but not show yet
                 text = getMediumExtendedDetails(mMedium)
                 onGlobalLayout {
@@ -644,15 +644,15 @@ class PhotoFragment : ViewPagerFragment() {
                 }
             }
         } else {
-            mView.photo_details.beGone()
+            mView.photoDetails.beGone()
         }
     }
 
     private fun hideZoomableView() {
         if (context?.config?.allowZoomingImages == true) {
             mIsSubsamplingVisible = false
-            mView.subsampling_view.recycle()
-            mView.subsampling_view.beGone()
+            mView.subsamplingView.recycle()
+            mView.subsamplingView.beGone()
             mLoadZoomableViewHandler.removeCallbacksAndMessages(null)
         }
     }
@@ -663,14 +663,14 @@ class PhotoFragment : ViewPagerFragment() {
 
     private fun updateInstantSwitchWidths() {
         val newWidth = resources.getDimension(R.dimen.instant_change_bar_width) + if (activity?.portrait == false) requireActivity().navigationBarWidth else 0
-        mView.instant_prev_item.layoutParams.width = newWidth.toInt()
-        mView.instant_next_item.layoutParams.width = newWidth.toInt()
+        mView.instantPrevItem.layoutParams.width = newWidth.toInt()
+        mView.instantNextItem.layoutParams.width = newWidth.toInt()
     }
 
     override fun fullscreenToggled(isFullscreen: Boolean) {
         this.mIsFullscreen = isFullscreen
         mView.apply {
-            photo_details.apply {
+            photoDetails.apply {
                 if (mStoredShowExtendedDetails && isVisible()) {
                     animate().y(getExtendedDetailsY(height))
 
@@ -681,7 +681,7 @@ class PhotoFragment : ViewPagerFragment() {
             }
 
             if (mIsPanorama) {
-                panorama_outline.animate().alpha(if (isFullscreen) 0f else 1f).start()
+                panoramaOutline.animate().alpha(if (isFullscreen) 0f else 1f).start()
             }
         }
     }

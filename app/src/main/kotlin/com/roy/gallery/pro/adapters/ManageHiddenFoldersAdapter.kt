@@ -11,7 +11,7 @@ import com.roy.commons.adt.MyRecyclerViewAdapter
 import com.roy.commons.ext.isPathOnSD
 import com.roy.commons.itf.RefreshRecyclerViewListener
 import com.roy.commons.views.MyRecyclerView
-import kotlinx.android.synthetic.main.item_manage_folder.view.*
+import kotlinx.android.synthetic.main.v_item_manage_folder.view.*
 import java.util.*
 
 class ManageHiddenFoldersAdapter(
@@ -47,7 +47,7 @@ class ManageHiddenFoldersAdapter(
     override fun getItemKeyPosition(key: Int) = folders.indexOfFirst { it.hashCode() == key }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        createViewHolder(R.layout.item_manage_folder, parent)
+        createViewHolder(R.layout.v_item_manage_folder, parent)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val folder = folders[position]
@@ -64,8 +64,8 @@ class ManageHiddenFoldersAdapter(
 
     private fun setupView(view: View, folder: String) {
         view.apply {
-            manage_folder_holder?.isSelected = selectedKeys.contains(folder.hashCode())
-            manage_folder_title.apply {
+            manageFolderHolder?.isSelected = selectedKeys.contains(folder.hashCode())
+            manageFolderTitle.apply {
                 text = folder
                 setTextColor(config.textColor)
             }

@@ -83,7 +83,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
 
     override fun onResume() {
         super.onResume()
-        top_shadow.layoutParams.height = statusBarHeight + actionBarHeight
+        topShadow.layoutParams.height = statusBarHeight + actionBarHeight
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window.statusBarColor = Color.TRANSPARENT
         window.navigationBarColor = Color.TRANSPARENT
@@ -140,8 +140,8 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         super.onConfigurationChanged(newConfig)
         setVideoSize()
         initTimeHolder()
-        video_surface_frame.onGlobalLayout {
-            video_surface_frame.controller.resetState()
+        videoSurfaceFrame.onGlobalLayout {
+            videoSurfaceFrame.controller.resetState()
         }
     }
 
@@ -169,7 +169,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         video_curr_time.setOnClickListener { skip(false) }
         videoDuration.setOnClickListener { skip(true) }
         video_toggle_play_pause.setOnClickListener { togglePlayPause() }
-        video_surface_frame.setOnClickListener { toggleFullscreen() }
+        videoSurfaceFrame.setOnClickListener { toggleFullscreen() }
 
         video_next_file.beVisibleIf(intent.getBooleanExtra(SHOW_NEXT_ITEM, false))
         video_next_file.setOnClickListener { handleNextFile() }
@@ -177,25 +177,25 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         video_prev_file.beVisibleIf(intent.getBooleanExtra(SHOW_PREV_ITEM, false))
         video_prev_file.setOnClickListener { handlePrevFile() }
 
-        video_surface_frame.setOnTouchListener { view, event ->
+        videoSurfaceFrame.setOnTouchListener { view, event ->
             handleEvent(event)
             false
         }
 
         initExoPlayer()
-        video_surface.surfaceTextureListener = this
+        videoSurface.surfaceTextureListener = this
 
         if (config.allowVideoGestures) {
-            video_brightness_controller.initialize(this, slide_info, true, video_player_holder) { x, y ->
+            videoBrightnessController.initialize(this, slideInfo, true, video_player_holder) { x, y ->
                 toggleFullscreen()
             }
 
-            video_volume_controller.initialize(this, slide_info, false, video_player_holder) { x, y ->
+            videoVolumeController.initialize(this, slideInfo, false, video_player_holder) { x, y ->
                 toggleFullscreen()
             }
         } else {
-            video_brightness_controller.beGone()
-            video_volume_controller.beGone()
+            videoBrightnessController.beGone()
+            videoVolumeController.beGone()
         }
 
         if (config.hideSystemUI) {
@@ -388,7 +388,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
 
         val screenProportion = screenWidth.toFloat() / screenHeight.toFloat()
 
-        video_surface.layoutParams.apply {
+        videoSurface.layoutParams.apply {
             if (videoProportion > screenProportion) {
                 width = screenWidth
                 height = (screenWidth.toFloat() / videoProportion).toInt()
@@ -396,7 +396,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
                 width = (videoProportion * screenHeight.toFloat()).toInt()
                 height = screenHeight
             }
-            video_surface.layoutParams = this
+            videoSurface.layoutParams = this
         }
 
         val multiplier = if (screenWidth > screenHeight) 0.5 else 0.8
@@ -433,7 +433,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         }
 
         val newAlpha = if (isFullScreen) 0f else 1f
-        arrayOf(video_prev_file, video_toggle_play_pause, video_next_file, video_curr_time, video_seekbar, videoDuration, top_shadow, video_bottom_gradient).forEach {
+        arrayOf(video_prev_file, video_toggle_play_pause, video_next_file, video_curr_time, video_seekbar, videoDuration, topShadow, video_bottom_gradient).forEach {
             it.animate().alpha(newAlpha).start()
         }
         video_seekbar.setOnSeekBarChangeListener(if (mIsFullscreen) null else this)
@@ -506,7 +506,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
                 val diffX = event.x - mTouchDownX
                 val diffY = event.y - mTouchDownY
 
-                if (mIsDragged || (Math.abs(diffX) > mDragThreshold && Math.abs(diffX) > Math.abs(diffY)) && video_surface_frame.controller.state.zoom == 1f) {
+                if (mIsDragged || (Math.abs(diffX) > mDragThreshold && Math.abs(diffX) > Math.abs(diffY)) && videoSurfaceFrame.controller.state.zoom == 1f) {
                     if (!mIsDragged) {
                         arrayOf(video_curr_time, video_seekbar, videoDuration).forEach {
                             it.animate().alpha(1f).start()
@@ -532,7 +532,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
                 val downGestureDuration = System.currentTimeMillis() - mTouchDownTime
                 if (config.allowDownGesture && !mIgnoreCloseDown && Math.abs(diffY) > Math.abs(diffX) && diffY < -mCloseDownThreshold &&
                         downGestureDuration < MAX_CLOSE_DOWN_GESTURE_DURATION &&
-                        video_surface_frame.controller.state.zoom == 1f) {
+                        videoSurfaceFrame.controller.state.zoom == 1f) {
                     supportFinishAfterTransition()
                 }
 
@@ -616,7 +616,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
 
     override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
         Thread {
-            mExoPlayer?.setVideoSurface(Surface(video_surface!!.surfaceTexture))
+            mExoPlayer?.setVideoSurface(Surface(videoSurface!!.surfaceTexture))
         }.start()
     }
 
