@@ -1,5 +1,6 @@
 package com.eagle.commons.dialogs
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.res.Resources
 import android.media.ExifInterface
@@ -32,9 +33,15 @@ class PropertiesDialog() {
      * @param path the file path
      * @param countHiddenItems toggle determining if we will count hidden files themselves and their sizes (reasonable only at directory properties)
      */
+    @SuppressLint("InflateParams", "MissingInflatedId")
     constructor(activity: Activity, path: String, countHiddenItems: Boolean = false) : this() {
         if (!File(path).exists()) {
-            activity.toast(String.format(activity.getString(R.string.source_file_doesnt_exist), path))
+            activity.toast(
+                String.format(
+                    activity.getString(R.string.source_file_doesnt_exist),
+                    path
+                )
+            )
             return
         }
 
@@ -55,7 +62,8 @@ class PropertiesDialog() {
                 view.findViewById<TextView>(R.id.properties_size).propertyValue.text = size
 
                 if (fileDirItem.isDirectory) {
-                    view.findViewById<TextView>(R.id.properties_file_count).propertyValue.text = fileCount.toString()
+                    view.findViewById<TextView>(R.id.properties_file_count).propertyValue.text =
+                        fileCount.toString()
                 }
             }
 
@@ -64,13 +72,29 @@ class PropertiesDialog() {
                 val uri = MediaStore.Files.getContentUri("external")
                 val selection = "${MediaStore.MediaColumns.DATA} = ?"
                 val selectionArgs = arrayOf(path)
-                val cursor = activity.contentResolver.query(uri, projection, selection, selectionArgs, null)
+                val cursor =
+                    activity.contentResolver.query(
+                        /* uri = */ uri,
+                        /* projection = */ projection,
+                        /* selection = */ selection,
+                        /* selectionArgs = */ selectionArgs,
+                        /* sortOrder = */ null
+                    )
                 cursor?.use {
                     if (cursor.moveToFirst()) {
-                        val dateModified = cursor.getLongValue(MediaStore.Images.Media.DATE_MODIFIED) * 1000L
-                        updateLastModified(activity, view, dateModified)
+                        val dateModified =
+                            cursor.getLongValue(MediaStore.Images.Media.DATE_MODIFIED) * 1000L
+                        updateLastModified(
+                            activity = activity,
+                            view = view,
+                            timestamp = dateModified
+                        )
                     } else {
-                        updateLastModified(activity, view, fileDirItem.getLastModified())
+                        updateLastModified(
+                            activity = activity,
+                            view = view,
+                            timestamp = fileDirItem.getLastModified()
+                        )
                     }
                 }
             }
@@ -78,21 +102,29 @@ class PropertiesDialog() {
 
         when {
             fileDirItem.isDirectory -> {
-                addProperty(R.string.direct_children_count, fileDirItem.getDirectChildrenCount(countHiddenItems).toString())
+                addProperty(
+                    R.string.direct_children_count,
+                    fileDirItem.getDirectChildrenCount(countHiddenItems).toString()
+                )
                 addProperty(R.string.files_count, "…", R.id.properties_file_count)
             }
+
             fileDirItem.path.isImageSlow() -> {
-                fileDirItem.getResolution()?.let { addProperty(R.string.resolution, it.formatAsResolution()) }
+                fileDirItem.getResolution()
+                    ?.let { addProperty(R.string.resolution, it.formatAsResolution()) }
             }
+
             fileDirItem.path.isAudioSlow() -> {
                 fileDirItem.getDuration()?.let { addProperty(R.string.duration, it) }
                 fileDirItem.getSongTitle()?.let { addProperty(R.string.song_title, it) }
                 fileDirItem.getArtist()?.let { addProperty(R.string.artist, it) }
                 fileDirItem.getAlbum()?.let { addProperty(R.string.album, it) }
             }
+
             fileDirItem.path.isVideoSlow() -> {
                 fileDirItem.getDuration()?.let { addProperty(R.string.duration, it) }
-                fileDirItem.getResolution()?.let { addProperty(R.string.resolution, it.formatAsResolution()) }
+                fileDirItem.getResolution()
+                    ?.let { addProperty(R.string.resolution, it.formatAsResolution()) }
                 fileDirItem.getArtist()?.let { addProperty(R.string.artist, it) }
                 fileDirItem.getAlbum()?.let { addProperty(R.string.album, it) }
             }
@@ -111,15 +143,16 @@ class PropertiesDialog() {
         }
 
         AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.ok, null)
-                .create().apply {
-                    activity.setupDialogStuff(view, this, R.string.properties)
-                }
+            .setPositiveButton(R.string.ok, null)
+            .create().apply {
+                activity.setupDialogStuff(view = view, dialog = this, titleId = R.string.properties)
+            }
     }
 
     private fun updateLastModified(activity: Activity, view: View, timestamp: Long) {
         activity.runOnUiThread {
-            view.findViewById<TextView>(R.id.properties_last_modified).propertyValue.text = timestamp.formatDate(activity)
+            view.findViewById<TextView>(R.id.properties_last_modified).propertyValue.text =
+                timestamp.formatDate(activity)
         }
     }
 
@@ -130,7 +163,12 @@ class PropertiesDialog() {
      * @param path the file path
      * @param countHiddenItems toggle determining if we will count hidden files themselves and their sizes
      */
-    constructor(activity: Activity, paths: List<String>, countHiddenItems: Boolean = false) : this() {
+    @SuppressLint("MissingInflatedId")
+    constructor(
+        activity: Activity,
+        paths: List<String>,
+        countHiddenItems: Boolean = false,
+    ) : this() {
         mInflater = LayoutInflater.from(activity)
         mResources = activity.resources
         val view = mInflater.inflate(R.layout.dlg_properties, null)
@@ -157,15 +195,16 @@ class PropertiesDialog() {
             val size = fileDirItems.sumByLong { it.getProperSize(countHiddenItems) }.formatSize()
             activity.runOnUiThread {
                 view.findViewById<TextView>(R.id.properties_size).propertyValue.text = size
-                view.findViewById<TextView>(R.id.properties_file_count).propertyValue.text = fileCount.toString()
+                view.findViewById<TextView>(R.id.properties_file_count).propertyValue.text =
+                    fileCount.toString()
             }
         }.start()
 
         AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.ok, null)
-                .create().apply {
-                    activity.setupDialogStuff(view, this, R.string.properties)
-                }
+            .setPositiveButton(R.string.ok, null)
+            .create().apply {
+                activity.setupDialogStuff(view, this, R.string.properties)
+            }
     }
 
     private fun addExifProperties(path: String, activity: Activity) {

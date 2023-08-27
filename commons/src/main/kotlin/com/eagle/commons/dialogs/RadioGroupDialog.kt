@@ -13,8 +13,15 @@ import com.eagle.commons.models.RadioItem
 import kotlinx.android.synthetic.main.dlg_radio_group.view.*
 import java.util.*
 
-class RadioGroupDialog(val activity: Activity, val items: ArrayList<RadioItem>, val checkedItemId: Int = -1, val titleId: Int = 0,
-                       showOKButton: Boolean = false, val cancelCallback: (() -> Unit)? = null, val callback: (newValue: Any) -> Unit) {
+class RadioGroupDialog(
+    val activity: Activity,
+    val items: ArrayList<RadioItem>,
+    val checkedItemId: Int = -1,
+    private val titleId: Int = 0,
+    showOKButton: Boolean = false,
+    val cancelCallback: (() -> Unit)? = null,
+    val callback: (newValue: Any) -> Unit,
+) {
     private val dialog: AlertDialog
     private var wasInit = false
     private var selectedItemId = -1
@@ -23,7 +30,10 @@ class RadioGroupDialog(val activity: Activity, val items: ArrayList<RadioItem>, 
         val view = activity.layoutInflater.inflate(R.layout.dlg_radio_group, null)
         view.dialogRadioGroup.apply {
             for (i in 0 until items.size) {
-                val radioButton = (activity.layoutInflater.inflate(R.layout.v_radio_button, null) as RadioButton).apply {
+                val radioButton = (activity.layoutInflater.inflate(
+                    /* resource = */ R.layout.v_radio_button,
+                    /* root = */ null
+                ) as RadioButton).apply {
                     text = items[i].title
                     isChecked = items[i].id == checkedItemId
                     id = i
@@ -34,12 +44,18 @@ class RadioGroupDialog(val activity: Activity, val items: ArrayList<RadioItem>, 
                     selectedItemId = i
                 }
 
-                addView(radioButton, RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+                addView(
+                    radioButton,
+                    RadioGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+                )
             }
         }
 
         val builder = AlertDialog.Builder(activity)
-                .setOnCancelListener { cancelCallback?.invoke() }
+            .setOnCancelListener { cancelCallback?.invoke() }
 
         if (selectedItemId != -1 && showOKButton) {
             builder.setPositiveButton(R.string.ok) { dialog, which -> itemSelected(selectedItemId) }
@@ -52,7 +68,8 @@ class RadioGroupDialog(val activity: Activity, val items: ArrayList<RadioItem>, 
         if (selectedItemId != -1) {
             view.dialogRadioHolder.apply {
                 onGlobalLayout {
-                    scrollY = view.dialogRadioGroup.findViewById<View>(selectedItemId).bottom - height
+                    scrollY =
+                        view.dialogRadioGroup.findViewById<View>(selectedItemId).bottom - height
                 }
             }
         }

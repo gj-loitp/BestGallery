@@ -9,81 +9,88 @@ import kotlinx.android.synthetic.main.dlg_rename_items.view.*
 import java.io.File
 import java.util.*
 
-class RenameItemsDialog(val activity: BaseSimpleActivity, val paths: ArrayList<String>, val callback: () -> Unit) {
+class RenameItemsDialog(
+    val activity: BaseSimpleActivity,
+    val paths: ArrayList<String>,
+    val callback: () -> Unit,
+) {
     init {
 
         val view = activity.layoutInflater.inflate(R.layout.dlg_rename_items, null)
 
         AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.ok, null)
-                .setNegativeButton(R.string.cancel, null)
-                .create().apply {
-                    activity.setupDialogStuff(view, this, R.string.rename) {
-                        showKeyboard(view.renameItemsValue)
-                        getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                            val valueToAdd = view.renameItemsValue.value
-                            val append = view.renameItemsRadioGroup.checkedRadioButtonId == renameItemsRadioAppend.id
+            .setPositiveButton(R.string.ok, null)
+            .setNegativeButton(R.string.cancel, null)
+            .create().apply {
+                activity.setupDialogStuff(view, this, R.string.rename) {
+                    showKeyboard(view.renameItemsValue)
+                    getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                        val valueToAdd = view.renameItemsValue.value
+                        val append =
+                            view.renameItemsRadioGroup.checkedRadioButtonId == renameItemsRadioAppend.id
 
-                            if (valueToAdd.isEmpty()) {
-                                callback()
-                                dismiss()
-                                return@setOnClickListener
-                            }
+                        if (valueToAdd.isEmpty()) {
+                            callback()
+                            dismiss()
+                            return@setOnClickListener
+                        }
 
-                            if (!valueToAdd.isAValidFilename()) {
-                                activity.toast(R.string.invalid_name)
-                                return@setOnClickListener
-                            }
+                        if (!valueToAdd.isAValidFilename()) {
+                            activity.toast(R.string.invalid_name)
+                            return@setOnClickListener
+                        }
 
-                            val validPaths = paths.filter { File(it).exists() }
-                            val sdFilePath = validPaths.firstOrNull { activity.isPathOnSD(it) } ?: validPaths.firstOrNull()
-                            if (sdFilePath == null) {
-                                activity.toast(R.string.unknown_error_occurred)
-                                dismiss()
-                                return@setOnClickListener
-                            }
+                        val validPaths = paths.filter { File(it).exists() }
+                        val sdFilePath = validPaths.firstOrNull { activity.isPathOnSD(it) }
+                            ?: validPaths.firstOrNull()
+                        if (sdFilePath == null) {
+                            activity.toast(R.string.unknown_error_occurred)
+                            dismiss()
+                            return@setOnClickListener
+                        }
 
-                            var pathsCnt = validPaths.size
+                        var pathsCnt = validPaths.size
 
-                            activity.handleSAFDialog(sdFilePath) {
-                                for (path in validPaths) {
-                                    val fullName = path.getFilenameFromPath()
-                                    var dotAt = fullName.lastIndexOf(".")
-                                    if (dotAt == -1) {
-                                        dotAt = fullName.length
-                                    }
+                        activity.handleSAFDialog(sdFilePath) {
+                            for (path in validPaths) {
+                                val fullName = path.getFilenameFromPath()
+                                var dotAt = fullName.lastIndexOf(".")
+                                if (dotAt == -1) {
+                                    dotAt = fullName.length
+                                }
 
-                                    val name = fullName.substring(0, dotAt)
-                                    val extension = if (fullName.contains(".")) ".${fullName.getFilenameExtension()}" else ""
+                                val name = fullName.substring(0, dotAt)
+                                val extension =
+                                    if (fullName.contains(".")) ".${fullName.getFilenameExtension()}" else ""
 
-                                    val newName = if (append) {
-                                        "$name$valueToAdd$extension"
-                                    } else {
-                                        "$valueToAdd$fullName"
-                                    }
+                                val newName = if (append) {
+                                    "$name$valueToAdd$extension"
+                                } else {
+                                    "$valueToAdd$fullName"
+                                }
 
-                                    val newPath = "${path.getParentPath()}/$newName"
+                                val newPath = "${path.getParentPath()}/$newName"
 
-                                    if (File(newPath).exists()) {
-                                        continue
-                                    }
+                                if (File(newPath).exists()) {
+                                    continue
+                                }
 
-                                    activity.renameFile(path, newPath) {
-                                        if (it) {
-                                            pathsCnt--
-                                            if (pathsCnt == 0) {
-                                                callback()
-                                                dismiss()
-                                            }
-                                        } else {
-                                            activity.toast(R.string.unknown_error_occurred)
+                                activity.renameFile(path, newPath) {
+                                    if (it) {
+                                        pathsCnt--
+                                        if (pathsCnt == 0) {
+                                            callback()
                                             dismiss()
                                         }
+                                    } else {
+                                        activity.toast(R.string.unknown_error_occurred)
+                                        dismiss()
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
     }
 }

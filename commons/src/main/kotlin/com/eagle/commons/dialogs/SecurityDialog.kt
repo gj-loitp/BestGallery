@@ -2,6 +2,7 @@ package com.eagle.commons.dialogs
 
 import android.app.Activity
 import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.adapters.PasswordTypesAdapter
@@ -14,18 +15,28 @@ import com.eagle.commons.itf.HashListener
 import com.eagle.commons.views.MyDialogViewPager
 import kotlinx.android.synthetic.main.dlg_security.view.*
 
-class SecurityDialog(val activity: Activity, val requiredHash: String, val showTabIndex: Int, val callback: (hash: String, type: Int, success: Boolean) -> Unit)
-    : HashListener {
+class SecurityDialog(
+    val activity: Activity,
+    val requiredHash: String,
+    val showTabIndex: Int,
+    val callback: (hash: String, type: Int, success: Boolean) -> Unit,
+) : HashListener {
     var dialog: AlertDialog? = null
-    val view = LayoutInflater.from(activity).inflate(R.layout.dlg_security, null)
-    lateinit var tabsAdapter: PasswordTypesAdapter
-    lateinit var viewPager: MyDialogViewPager
+    val view: View = LayoutInflater.from(activity).inflate(R.layout.dlg_security, null)
+    private var tabsAdapter: PasswordTypesAdapter
+    private var viewPager: MyDialogViewPager
 
     init {
         view.apply {
             viewPager = findViewById(R.id.dialogTabViewPager)
             viewPager.offscreenPageLimit = 2
-            tabsAdapter = PasswordTypesAdapter(context, requiredHash, this@SecurityDialog, dialogScrollView)
+            tabsAdapter =
+                PasswordTypesAdapter(
+                    context = context,
+                    requiredHash = requiredHash,
+                    hashListener = this@SecurityDialog,
+                    scrollView = dialogScrollView
+                )
             viewPager.adapter = tabsAdapter
             viewPager.onPageChangeListener {
                 dialogTabLayout.getTabAt(it)!!.select()
@@ -45,8 +56,14 @@ class SecurityDialog(val activity: Activity, val requiredHash: String, val showT
                 dialogTabLayout.setSelectedTabIndicatorColor(context.baseConfig.primaryColor)
                 dialogTabLayout.onTabSelectionChanged(tabSelectedAction = {
                     viewPager.currentItem = when {
-                        it.text.toString().equals(resources.getString(R.string.pattern), true) -> PROTECTION_PATTERN
-                        it.text.toString().equals(resources.getString(R.string.pin), true) -> PROTECTION_PIN
+                        it.text.toString().equals(
+                            resources.getString(R.string.pattern),
+                            true
+                        ) -> PROTECTION_PATTERN
+
+                        it.text.toString()
+                            .equals(resources.getString(R.string.pin), true) -> PROTECTION_PIN
+
                         else -> PROTECTION_FINGERPRINT
                     }
                     updateTabVisibility()
@@ -59,21 +76,21 @@ class SecurityDialog(val activity: Activity, val requiredHash: String, val showT
         }
 
         dialog = AlertDialog.Builder(activity)
-                .setOnCancelListener { onCancelFail() }
-                .setNegativeButton(R.string.cancel) { dialog, which -> onCancelFail() }
-                .create().apply {
-                    activity.setupDialogStuff(view, this)
-                }
+            .setOnCancelListener { onCancelFail() }
+            .setNegativeButton(R.string.cancel) { _, _ -> onCancelFail() }
+            .create().apply {
+                activity.setupDialogStuff(view = view, dialog = this)
+            }
     }
 
     private fun onCancelFail() {
         callback("", 0, false)
-        dialog!!.dismiss()
+        dialog?.dismiss()
     }
 
     override fun receivedHash(hash: String, type: Int) {
         callback(hash, type, true)
-        dialog!!.dismiss()
+        dialog?.dismiss()
     }
 
     private fun updateTabVisibility() {

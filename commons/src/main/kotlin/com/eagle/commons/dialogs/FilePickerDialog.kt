@@ -1,5 +1,6 @@
 package com.eagle.commons.dialogs
 
+import android.annotation.SuppressLint
 import android.os.Environment
 import android.os.Parcelable
 import android.view.KeyEvent
@@ -27,19 +28,22 @@ import java.util.*
  * @param showFAB toggle the displaying of a Floating Action Button for creating new folders
  * @param callback the callback used for returning the selected file/folder
  */
-class FilePickerDialog(val activity: BaseSimpleActivity,
-                       var currPath: String = Environment.getExternalStorageDirectory().toString(),
-                       val pickFile: Boolean = true,
-                       var showHidden: Boolean = false,
-                       val showFAB: Boolean = false,
-                       val canAddShowHiddenButton: Boolean = false,
-                       val callback: (pickedPath: String) -> Unit) : Breadcrumbs.BreadcrumbsListener {
+class FilePickerDialog(
+    val activity: BaseSimpleActivity,
+    private var currPath: String = Environment.getExternalStorageDirectory().toString(),
+    private val pickFile: Boolean = true,
+    private var showHidden: Boolean = false,
+    val showFAB: Boolean = false,
+    private val canAddShowHiddenButton: Boolean = false,
+    val callback: (pickedPath: String) -> Unit,
+) : Breadcrumbs.BreadcrumbsListener {
 
     private var mFirstUpdate = true
     private var mPrevPath = ""
     private var mScrollStates = HashMap<String, Parcelable>()
 
     private lateinit var mDialog: AlertDialog
+    @SuppressLint("InflateParams")
     private var mDialogView = activity.layoutInflater.inflate(R.layout.dlg_filepicker, null)
 
     init {
@@ -60,20 +64,20 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
         tryUpdateItems()
 
         val builder = AlertDialog.Builder(activity)
-                .setNegativeButton(R.string.cancel, null)
-                .setOnKeyListener { dialogInterface, i, keyEvent ->
-                    if (keyEvent.action == KeyEvent.ACTION_UP && i == KeyEvent.KEYCODE_BACK) {
-                        val breadcrumbs = mDialogView.filePickerBreadcrumbs
-                        if (breadcrumbs.childCount > 1) {
-                            breadcrumbs.removeBreadcrumb()
-                            currPath = breadcrumbs.getLastItem().path.trimEnd('/')
-                            tryUpdateItems()
-                        } else {
-                            mDialog.dismiss()
-                        }
+            .setNegativeButton(R.string.cancel, null)
+            .setOnKeyListener { _, i, keyEvent ->
+                if (keyEvent.action == KeyEvent.ACTION_UP && i == KeyEvent.KEYCODE_BACK) {
+                    val breadcrumbs = mDialogView.filePickerBreadcrumbs
+                    if (breadcrumbs.childCount > 1) {
+                        breadcrumbs.removeBreadcrumb()
+                        currPath = breadcrumbs.getLastItem().path.trimEnd('/')
+                        tryUpdateItems()
+                    } else {
+                        mDialog.dismiss()
                     }
-                    true
                 }
+                true
+            }
 
         if (!pickFile)
             builder.setPositiveButton(R.string.ok, null)
@@ -85,7 +89,9 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
             }
         }
 
-        val secondaryFabBottomMargin = activity.resources.getDimension(if (showFAB) R.dimen.secondary_fab_bottom_margin else R.dimen.activity_margin).toInt()
+        val secondaryFabBottomMargin =
+            activity.resources.getDimension(if (showFAB) R.dimen.secondary_fab_bottom_margin else R.dimen.activity_margin)
+                .toInt()
         mDialogView.filePickerFabShowHidden.apply {
             beVisibleIf(!showHidden && canAddShowHiddenButton)
             (layoutParams as CoordinatorLayout.LayoutParams).bottomMargin = secondaryFabBottomMargin
@@ -120,7 +126,10 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
 
     private fun tryUpdateItems() {
         Thread {
-            getItems(currPath, activity.baseConfig.sorting and SORT_BY_SIZE != 0) {
+            getItems(
+                path = currPath,
+                getProperFileSize = activity.baseConfig.sorting and SORT_BY_SIZE != 0
+            ) {
                 activity.runOnUiThread {
                     updateItems(it)
                 }
@@ -134,7 +143,8 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
             return
         }
 
-        val sortedItems = items.sortedWith(compareBy({ !it.isDirectory }, { it.name.toLowerCase() }))
+        val sortedItems =
+            items.sortedWith(compareBy({ !it.isDirectory }, { it.name.lowercase(Locale.getDefault()) }))
 
         val adapter = FilepickerItemsAdapter(activity, sortedItems, mDialogView.filePickerList) {
             if ((it as FileDirItem).isDirectory) {
@@ -155,7 +165,9 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
             filePickerBreadcrumbs.setBreadcrumb(currPath)
             filePickerFastscroller.allowBubbleDisplay = context.baseConfig.showInfoBubble
             filePickerFastscroller.setViews(filePickerList) {
-                filePickerFastscroller.updateBubbleText(sortedItems.getOrNull(it)?.getBubbleText(context) ?: "")
+                filePickerFastscroller.updateBubbleText(
+                    sortedItems.getOrNull(it)?.getBubbleText(context) ?: ""
+                )
             }
 
             layoutManager.onRestoreInstanceState(mScrollStates[currPath.trimEnd('/')])
@@ -185,7 +197,11 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
         mDialog.dismiss()
     }
 
-    private fun getItems(path: String, getProperFileSize: Boolean, callback: (List<FileDirItem>) -> Unit) {
+    private fun getItems(
+        path: String,
+        getProperFileSize: Boolean,
+        callback: (List<FileDirItem>) -> Unit,
+    ) {
         val items = ArrayList<FileDirItem>()
         val base = File(path)
         val files = base.listFiles()
@@ -202,7 +218,15 @@ class FilePickerDialog(val activity: BaseSimpleActivity,
             val curPath = file.absolutePath
             val curName = curPath.getFilenameFromPath()
             val size = if (getProperFileSize) file.getProperSize(showHidden) else file.length()
-            items.add(FileDirItem(curPath, curName, file.isDirectory, file.getDirectChildrenCount(showHidden), size))
+            items.add(
+                FileDirItem(
+                    path = curPath,
+                    name = curName,
+                    isDirectory = file.isDirectory,
+                    children = file.getDirectChildrenCount(showHidden),
+                    size = size
+                )
+            )
         }
         callback(items)
     }

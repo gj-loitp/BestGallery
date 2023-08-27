@@ -1,5 +1,6 @@
 package com.eagle.commons.dialogs
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
@@ -14,13 +15,20 @@ import com.eagle.commons.helpers.CONFLICT_SKIP
 import com.eagle.commons.models.FileDirItem
 import kotlinx.android.synthetic.main.dlg_file_conflict.view.*
 
-class FileConflictDialog(val activity: Activity, val fileDirItem: FileDirItem, val callback: (resolution: Int, applyForAll: Boolean) -> Unit) {
+class FileConflictDialog(
+    val activity: Activity,
+    val fileDirItem: FileDirItem,
+    val callback: (resolution: Int, applyForAll: Boolean) -> Unit,
+) {
+    @SuppressLint("InflateParams")
     val view = activity.layoutInflater.inflate(R.layout.dlg_file_conflict, null)!!
 
     init {
         view.apply {
-            val stringBase = if (fileDirItem.isDirectory) R.string.folder_already_exists else R.string.file_already_exists
-            conflictDialogTitle.text = String.format(activity.getString(stringBase), fileDirItem.name)
+            val stringBase =
+                if (fileDirItem.isDirectory) R.string.folder_already_exists else R.string.file_already_exists
+            conflictDialogTitle.text =
+                String.format(activity.getString(stringBase), fileDirItem.name)
             conflictDialogApplyToAll.isChecked = activity.baseConfig.lastConflictApplyToAll
             conflictDialogRadioMerge.beVisibleIf(fileDirItem.isDirectory)
 
@@ -33,11 +41,11 @@ class FileConflictDialog(val activity: Activity, val fileDirItem: FileDirItem, v
         }
 
         AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.ok) { dialog, which -> dialogConfirmed() }
-                .setNegativeButton(R.string.cancel, null)
-                .create().apply {
-                    activity.setupDialogStuff(view, this)
-                }
+            .setPositiveButton(R.string.ok) { _, _ -> dialogConfirmed() }
+            .setNegativeButton(R.string.cancel, null)
+            .create().apply {
+                activity.setupDialogStuff(view, this)
+            }
     }
 
     private fun dialogConfirmed() {

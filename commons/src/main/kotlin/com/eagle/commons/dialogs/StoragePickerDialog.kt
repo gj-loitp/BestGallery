@@ -18,7 +18,11 @@ import kotlinx.android.synthetic.main.dlg_radio_group.view.*
  * @param callback an anonymous function
  *
  */
-class StoragePickerDialog(val activity: BaseSimpleActivity, currPath: String, val callback: (pickedPath: String) -> Unit) {
+class StoragePickerDialog(
+    val activity: BaseSimpleActivity,
+    currPath: String,
+    val callback: (pickedPath: String) -> Unit,
+) {
     private val ID_INTERNAL = 1
     private val ID_SD = 2
     private val ID_OTG = 3
@@ -31,7 +35,10 @@ class StoragePickerDialog(val activity: BaseSimpleActivity, currPath: String, va
     init {
         val inflater = LayoutInflater.from(activity)
         val resources = activity.resources
-        val layoutParams = RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val layoutParams = RadioGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         val view = inflater.inflate(R.layout.dlg_radio_group, null)
         radioGroup = view.dialogRadioGroup
         val basePath = currPath.getBasePath(activity)
@@ -89,9 +96,13 @@ class StoragePickerDialog(val activity: BaseSimpleActivity, currPath: String, va
         radioGroup.addView(rootButton, layoutParams)
 
         mDialog = AlertDialog.Builder(activity)
-                .create().apply {
-                    activity.setupDialogStuff(view, this, R.string.select_storage)
-                }
+            .create().apply {
+                activity.setupDialogStuff(
+                    view = view,
+                    dialog = this,
+                    titleId = R.string.select_storage
+                )
+            }
     }
 
     private fun internalPicked() {
@@ -106,9 +117,11 @@ class StoragePickerDialog(val activity: BaseSimpleActivity, currPath: String, va
 
     private fun otgPicked() {
         if (activity.baseConfig.OTGPath.isEmpty()) {
-            activity.getStorageDirectories().firstOrNull { it.trimEnd('/') != activity.internalStoragePath && it.trimEnd('/') != activity.sdCardPath }?.apply {
-                activity.baseConfig.OTGPath = trimEnd('/')
-            }
+            activity.getStorageDirectories()
+                .firstOrNull { it.trimEnd('/') != activity.internalStoragePath && it.trimEnd('/') != activity.sdCardPath }
+                ?.apply {
+                    activity.baseConfig.OTGPath = trimEnd('/')
+                }
         }
 
         mDialog.dismiss()
