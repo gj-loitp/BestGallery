@@ -1,4 +1,4 @@
-package com.eagle.commons.adapters
+package com.eagle.commons.adt
 
 import android.content.Context
 import android.util.SparseArray
@@ -12,14 +12,23 @@ import com.eagle.commons.itf.HashListener
 import com.eagle.commons.itf.SecurityTab
 import com.eagle.commons.views.MyScrollView
 
-class PasswordTypesAdapter(val context: Context, val requiredHash: String, val hashListener: HashListener, val scrollView: MyScrollView) : PagerAdapter() {
+class PasswordTypesAdapter(
+    val context: Context,
+    val requiredHash: String,
+    val hashListener: HashListener,
+    val scrollView: MyScrollView,
+) : PagerAdapter() {
     private val tabs = SparseArray<SecurityTab>()
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = LayoutInflater.from(context).inflate(layoutSelection(position), container, false)
         container.addView(view)
         tabs.put(position, view as SecurityTab)
-        (view as SecurityTab).initTab(requiredHash, hashListener, scrollView)
+        (view as SecurityTab).initTab(
+            requiredHash = requiredHash,
+            listener = hashListener,
+            scrollView = scrollView
+        )
         return view
     }
 

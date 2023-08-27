@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.util.Pair
 import com.eagle.commons.R
-import com.eagle.commons.asynctasks.CopyMoveTask
+import com.eagle.commons.sv.CopyMoveTask
 import com.eagle.commons.dlg.ConfirmationDialog
 import com.eagle.commons.dlg.ExportSettingsDialog
 import com.eagle.commons.dlg.FileConflictDialog

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.adapters.MyRecyclerViewAdapter
+import com.eagle.commons.adt.MyRecyclerViewAdapter
 import com.eagle.commons.dlg.ConfirmationDialog
 import com.eagle.commons.dlg.PropertiesDialog
 import com.eagle.commons.dlg.RenameItemDialog

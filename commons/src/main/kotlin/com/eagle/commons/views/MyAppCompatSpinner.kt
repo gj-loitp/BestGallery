@@ -7,7 +7,7 @@ import android.widget.AdapterView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSpinner
 import com.eagle.commons.R
-import com.eagle.commons.adapters.MyArrayAdapter
+import com.eagle.commons.adt.MyArrayAdapter
 import com.eagle.commons.ext.applyColorFilter
 
 class MyAppCompatSpinner : AppCompatSpinner {

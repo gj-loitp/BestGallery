@@ -1,4 +1,4 @@
-package com.eagle.commons.adapters
+package com.eagle.commons.adt
 
 import android.content.Context
 import android.graphics.drawable.ColorDrawable

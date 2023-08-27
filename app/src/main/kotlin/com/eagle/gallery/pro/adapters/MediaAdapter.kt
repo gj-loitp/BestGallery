@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.adapters.MyRecyclerViewAdapter
+import com.eagle.commons.adt.MyRecyclerViewAdapter
 import com.eagle.commons.dlg.PropertiesDialog
 import com.eagle.commons.dlg.RenameItemDialog
 import com.eagle.commons.dlg.RenameItemsDialog

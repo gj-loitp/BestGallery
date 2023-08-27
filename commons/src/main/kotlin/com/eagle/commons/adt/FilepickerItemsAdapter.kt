@@ -1,4 +1,4 @@
-package com.eagle.commons.adapters
+package com.eagle.commons.adt
 
 import android.content.pm.PackageManager
 import android.view.Menu
