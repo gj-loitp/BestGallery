@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import com.eagle.commons.R
 import com.eagle.commons.extensions.*
 import com.eagle.commons.models.FileDirItem
-import kotlinx.android.synthetic.main.breadcrumb_item.view.*
+import kotlinx.android.synthetic.main.v_breadcrumb_item.view.*
 
 class Breadcrumbs(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs), View.OnClickListener {
     private var availableWidth = 0
@@ -108,7 +108,7 @@ class Breadcrumbs(context: Context, attrs: AttributeSet) : LinearLayout(context,
     }
 
     private fun addBreadcrumb(item: FileDirItem, addPrefix: Boolean) {
-        inflater.inflate(R.layout.breadcrumb_item, null, false).apply {
+        inflater.inflate(R.layout.v_breadcrumb_item, null, false).apply {
             var textToAdd = item.name
             if (addPrefix) {
                 textToAdd = "/ $textToAdd"
@@ -123,8 +123,8 @@ class Breadcrumbs(context: Context, attrs: AttributeSet) : LinearLayout(context,
                 }
             }
 
-            breadcrumb_text.text = textToAdd
-            breadcrumb_text.setTextColor(textColor)
+            breadcrumbText.text = textToAdd
+            breadcrumbText.setTextColor(textColor)
             addView(this)
             setOnClickListener(this@Breadcrumbs)
 

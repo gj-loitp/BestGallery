@@ -5,22 +5,22 @@ import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.extensions.*
-import kotlinx.android.synthetic.main.dialog_create_new_folder.view.*
+import kotlinx.android.synthetic.main.dlg_create_new_folder.view.*
 import java.io.File
 
 class CreateNewFolderDialog(val activity: BaseSimpleActivity, val path: String, val callback: (path: String) -> Unit) {
     init {
-        val view = activity.layoutInflater.inflate(R.layout.dialog_create_new_folder, null)
-        view.folder_path.text = "${activity.humanizePath(path).trimEnd('/')}/"
+        val view = activity.layoutInflater.inflate(R.layout.dlg_create_new_folder, null)
+        view.folderPath.text = "${activity.humanizePath(path).trimEnd('/')}/"
 
         AlertDialog.Builder(activity)
                 .setPositiveButton(R.string.ok, null)
                 .setNegativeButton(R.string.cancel, null)
                 .create().apply {
                     activity.setupDialogStuff(view, this, R.string.create_new_folder) {
-                        showKeyboard(view.folder_name)
+                        showKeyboard(view.folderName)
                         getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(View.OnClickListener {
-                            val name = view.folder_name.value
+                            val name = view.folderName.value
                             when {
                                 name.isEmpty() -> activity.toast(R.string.empty_name)
                                 name.isAValidFilename() -> {

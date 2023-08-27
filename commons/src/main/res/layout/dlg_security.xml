@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/dialog_holder"
+        android:id="@+id/dialogHolder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 

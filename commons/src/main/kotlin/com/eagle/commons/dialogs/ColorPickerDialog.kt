@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.extensions.*
 import com.eagle.commons.views.ColorPickerSquare
-import kotlinx.android.synthetic.main.dialog_color_picker.view.*
+import kotlinx.android.synthetic.main.dlg_color_picker.view.*
 
 // forked from https://github.com/yukuku/ambilwarna
 class ColorPickerDialog(val activity: Activity, color: Int, val removeDimmedBackground: Boolean = false,
@@ -34,22 +34,22 @@ class ColorPickerDialog(val activity: Activity, color: Int, val removeDimmedBack
     init {
         Color.colorToHSV(color, currentColorHsv)
 
-        val view = activity.layoutInflater.inflate(R.layout.dialog_color_picker, null).apply {
-            viewHue = color_picker_hue
-            viewSatVal = color_picker_square
-            viewCursor = color_picker_hue_cursor
+        val view = activity.layoutInflater.inflate(R.layout.dlg_color_picker, null).apply {
+            viewHue = colorPickerHue
+            viewSatVal = colorPickerSquare
+            viewCursor = colorPickerHueCursor
 
-            viewNewColor = color_picker_new_color
-            viewTarget = color_picker_cursor
-            viewContainer = color_picker_holder
-            newHexField = color_picker_new_hex
+            viewNewColor = colorPickerNewColor
+            viewTarget = colorPickerCursor
+            viewContainer = colorPickerHolder
+            newHexField = colorPickerNewHex
 
             viewSatVal.setHue(getHue())
             viewNewColor.setFillWithStroke(getColor(), backgroundColor)
-            color_picker_old_color.setFillWithStroke(color, backgroundColor)
+            colorPickerOldColor.setFillWithStroke(color, backgroundColor)
 
             val hexCode = getHexCode(color)
-            color_picker_old_hex.text = "#$hexCode"
+            colorPickerOldHex.text = "#$hexCode"
             newHexField.setText(hexCode)
         }
 
@@ -126,8 +126,8 @@ class ColorPickerDialog(val activity: Activity, color: Int, val removeDimmedBack
                 .setOnCancelListener { dialogDismissed() }
                 .create().apply {
                     activity.setupDialogStuff(view, this) {
-                        view.color_picker_arrow.applyColorFilter(textColor)
-                        view.color_picker_hex_arrow.applyColorFilter(textColor)
+                        view.colorPickerArrow.applyColorFilter(textColor)
+                        view.colorPickerHexArrow.applyColorFilter(textColor)
                         viewCursor.applyColorFilter(textColor)
                     }
                 }

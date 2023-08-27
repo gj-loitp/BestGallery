@@ -8,32 +8,32 @@ import com.eagle.commons.extensions.*
 import com.eagle.commons.helpers.DAY_SECONDS
 import com.eagle.commons.helpers.HOUR_SECONDS
 import com.eagle.commons.helpers.MINUTE_SECONDS
-import kotlinx.android.synthetic.main.dialog_custom_interval_picker.view.*
+import kotlinx.android.synthetic.main.dlg_custom_interval_picker.view.*
 
 class CustomIntervalPickerDialog(val activity: Activity, val selectedSeconds: Int = 0, val showSeconds: Boolean = false, val callback: (minutes: Int) -> Unit) {
     var dialog: AlertDialog
-    var view = (activity.layoutInflater.inflate(R.layout.dialog_custom_interval_picker, null) as ViewGroup)
+    var view = (activity.layoutInflater.inflate(R.layout.dlg_custom_interval_picker, null) as ViewGroup)
 
     init {
         view.apply {
-            dialog_radio_seconds.beVisibleIf(showSeconds)
+            dlgRadioSeconds.beVisibleIf(showSeconds)
             when {
-                selectedSeconds == 0 -> dialog_radio_view.check(R.id.dialog_radio_minutes)
+                selectedSeconds == 0 -> dlgRadioView.check(R.id.dlgRadioMinutes)
                 selectedSeconds % DAY_SECONDS == 0 -> {
-                    dialog_radio_view.check(R.id.dialog_radio_days)
-                    dialog_custom_interval_value.setText((selectedSeconds / DAY_SECONDS).toString())
+                    dlgRadioView.check(R.id.dialogRadioDays)
+                    dlgCustomIntervalValue.setText((selectedSeconds / DAY_SECONDS).toString())
                 }
                 selectedSeconds % HOUR_SECONDS == 0 -> {
-                    dialog_radio_view.check(R.id.dialog_radio_hours)
-                    dialog_custom_interval_value.setText((selectedSeconds / HOUR_SECONDS).toString())
+                    dlgRadioView.check(R.id.dialogRadioHours)
+                    dlgCustomIntervalValue.setText((selectedSeconds / HOUR_SECONDS).toString())
                 }
                 selectedSeconds % MINUTE_SECONDS == 0 -> {
-                    dialog_radio_view.check(R.id.dialog_radio_minutes)
-                    dialog_custom_interval_value.setText((selectedSeconds / MINUTE_SECONDS).toString())
+                    dlgRadioView.check(R.id.dlgRadioMinutes)
+                    dlgCustomIntervalValue.setText((selectedSeconds / MINUTE_SECONDS).toString())
                 }
                 else -> {
-                    dialog_radio_view.check(R.id.dialog_radio_seconds)
-                    dialog_custom_interval_value.setText(selectedSeconds.toString())
+                    dlgRadioView.check(R.id.dlgRadioSeconds)
+                    dlgCustomIntervalValue.setText(selectedSeconds.toString())
                 }
             }
         }
@@ -43,14 +43,14 @@ class CustomIntervalPickerDialog(val activity: Activity, val selectedSeconds: In
                 .setNegativeButton(R.string.cancel, null)
                 .create().apply {
                     activity.setupDialogStuff(view, this) {
-                        showKeyboard(view.dialog_custom_interval_value)
+                        showKeyboard(view.dlgCustomIntervalValue)
                     }
                 }
     }
 
     private fun confirmReminder() {
-        val value = view.dialog_custom_interval_value.value
-        val multiplier = getMultiplier(view.dialog_radio_view.checkedRadioButtonId)
+        val value = view.dlgCustomIntervalValue.value
+        val multiplier = getMultiplier(view.dlgRadioView.checkedRadioButtonId)
         val minutes = Integer.valueOf(if (value.isEmpty()) "0" else value)
         callback(minutes * multiplier)
         activity.hideKeyboard()
@@ -58,9 +58,9 @@ class CustomIntervalPickerDialog(val activity: Activity, val selectedSeconds: In
     }
 
     private fun getMultiplier(id: Int) = when (id) {
-        R.id.dialog_radio_days -> DAY_SECONDS
-        R.id.dialog_radio_hours -> HOUR_SECONDS
-        R.id.dialog_radio_minutes -> MINUTE_SECONDS
+        R.id.dialogRadioDays -> DAY_SECONDS
+        R.id.dialogRadioHours -> HOUR_SECONDS
+        R.id.dlgRadioMinutes -> MINUTE_SECONDS
         else -> 1
     }
 }

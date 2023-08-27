@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/change_date_time_dialog_holder"
+    android:id="@+id/changeDateTimeDialogHolder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -11,56 +10,56 @@
     android:paddingRight="@dimen/activity_margin">
 
     <RadioGroup
-        android:id="@+id/change_date_time_dialog_radio_group"
+        android:id="@+id/changeDateTimeDialogRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/medium_margin">
 
         <com.eagle.commons.views.MyCompatRadioButton
-            android:id="@+id/change_date_time_dialog_radio_one"
+            android:id="@+id/changeDateTimeDialogRadioOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
             android:paddingTop="@dimen/normal_margin"
             android:paddingBottom="@dimen/normal_margin"
             android:textAllCaps="true"
-            tools:text="dd.MM.yyyy"/>
+            tools:text="dd.MM.yyyy" />
 
         <com.eagle.commons.views.MyCompatRadioButton
-            android:id="@+id/change_date_time_dialog_radio_two"
+            android:id="@+id/changeDateTimeDialogRadioTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/normal_margin"
             android:paddingBottom="@dimen/normal_margin"
             android:textAllCaps="true"
-            tools:text="dd/MM/yyyy"/>
+            tools:text="dd/MM/yyyy" />
 
         <com.eagle.commons.views.MyCompatRadioButton
-            android:id="@+id/change_date_time_dialog_radio_three"
+            android:id="@+id/changeDateTimeDialogRadioThree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/normal_margin"
             android:paddingBottom="@dimen/normal_margin"
             android:textAllCaps="true"
-            tools:text="MM/dd/yyyy"/>
+            tools:text="MM/dd/yyyy" />
 
         <com.eagle.commons.views.MyCompatRadioButton
-            android:id="@+id/change_date_time_dialog_radio_four"
+            android:id="@+id/changeDateTimeDialogRadioFour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/normal_margin"
             android:paddingBottom="@dimen/normal_margin"
             android:textAllCaps="true"
-            tools:text="yyyy-MM-dd"/>
+            tools:text="yyyy-MM-dd" />
 
     </RadioGroup>
 
     <com.eagle.commons.views.MyAppCompatCheckbox
-        android:id="@+id/change_date_time_dialog_24_hour"
+        android:id="@+id/changeDateTimeDialog24Hour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_margin"
         android:paddingBottom="@dimen/activity_margin"
-        android:text="@string/use_24_hour_time_format"/>
+        android:text="@string/use_24_hour_time_format" />
 
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
