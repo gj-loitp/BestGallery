@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.adapters.FilepickerItemsAdapter
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.SORT_BY_SIZE
 import com.eagle.commons.models.FileDirItem
 import com.eagle.commons.views.Breadcrumbs

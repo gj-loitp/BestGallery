@@ -23,10 +23,8 @@ import com.google.android.exoplayer2.upstream.ContentDataSource
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DataSpec
 import com.google.android.exoplayer2.upstream.FileDataSource
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.activities.PanoramaVideoActivity
-import com.eagle.gallery.pro.activities.VideoActivity
 import com.eagle.gallery.pro.extensions.*
 import com.eagle.gallery.pro.helpers.Config
 import com.eagle.gallery.pro.helpers.MEDIUM

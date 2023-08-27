@@ -3,9 +3,9 @@ package com.eagle.commons.receivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.eagle.commons.extensions.baseConfig
-import com.eagle.commons.extensions.checkAppIconColor
-import com.eagle.commons.extensions.getSharedTheme
+import com.eagle.commons.ext.baseConfig
+import com.eagle.commons.ext.checkAppIconColor
+import com.eagle.commons.ext.getSharedTheme
 import com.eagle.commons.helpers.MyContentProvider
 
 class SharedThemeReceiver : BroadcastReceiver() {

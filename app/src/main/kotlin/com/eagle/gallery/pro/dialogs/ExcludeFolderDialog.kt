@@ -5,9 +5,9 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.beVisibleIf
-import com.eagle.commons.extensions.getBasePath
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.beVisibleIf
+import com.eagle.commons.ext.getBasePath
+import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
 import kotlinx.android.synthetic.main.dialog_exclude_folder.view.*

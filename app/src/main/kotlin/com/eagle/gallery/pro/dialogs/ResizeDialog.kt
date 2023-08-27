@@ -4,7 +4,7 @@ import android.graphics.Point
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.gallery.pro.R
 import kotlinx.android.synthetic.main.dialog_resize_image.view.*
 

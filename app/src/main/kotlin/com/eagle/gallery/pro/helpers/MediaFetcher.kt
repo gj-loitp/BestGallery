@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import android.text.format.DateFormat
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.*
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.*

@@ -7,8 +7,8 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
-import com.eagle.commons.extensions.onGlobalLayout
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.onGlobalLayout
+import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.commons.models.RadioItem
 import kotlinx.android.synthetic.main.dlg_radio_group.view.*
 import java.util.*

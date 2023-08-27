@@ -7,7 +7,7 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.eagle.commons.R
-import com.eagle.commons.extensions.adjustAlpha
+import com.eagle.commons.ext.adjustAlpha
 
 class MySwitchCompat : SwitchCompat {
     constructor(context: Context) : super(context)

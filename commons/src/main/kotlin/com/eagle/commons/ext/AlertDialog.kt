@@ -1,4 +1,4 @@
-package com.eagle.commons.extensions
+package com.eagle.commons.ext
 
 import android.view.WindowManager
 import android.widget.EditText

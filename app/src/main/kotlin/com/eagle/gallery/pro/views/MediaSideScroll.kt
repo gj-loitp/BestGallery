@@ -10,7 +10,7 @@ import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.eagle.commons.extensions.onGlobalLayout
+import com.eagle.commons.ext.onGlobalLayout
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.audioManager
 import com.eagle.gallery.pro.helpers.CLICK_MAX_DISTANCE

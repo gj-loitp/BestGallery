@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.baseConfig
+import com.eagle.commons.ext.baseConfig
 import com.eagle.commons.itf.MyActionModeCallback
 import com.eagle.commons.views.FastScroller
 import com.eagle.commons.views.MyRecyclerView

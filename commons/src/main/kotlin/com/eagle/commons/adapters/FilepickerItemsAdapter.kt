@@ -9,9 +9,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.bumptech.glide.request.RequestOptions
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.formatSize
-import com.eagle.commons.extensions.getColoredDrawableWithColor
-import com.eagle.commons.extensions.hasOTGConnected
+import com.eagle.commons.ext.formatSize
+import com.eagle.commons.ext.getColoredDrawableWithColor
+import com.eagle.commons.ext.hasOTGConnected
 import com.eagle.commons.models.FileDirItem
 import com.eagle.commons.views.MyRecyclerView
 import kotlinx.android.synthetic.main.v_filepicker_list_item.view.*

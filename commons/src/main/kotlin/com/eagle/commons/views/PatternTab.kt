@@ -11,9 +11,9 @@ import com.andrognito.patternlockview.PatternLockView
 import com.andrognito.patternlockview.listener.PatternLockViewListener
 import com.andrognito.patternlockview.utils.PatternLockUtils
 import com.eagle.commons.R
-import com.eagle.commons.extensions.baseConfig
-import com.eagle.commons.extensions.toast
-import com.eagle.commons.extensions.updateTextColors
+import com.eagle.commons.ext.baseConfig
+import com.eagle.commons.ext.toast
+import com.eagle.commons.ext.updateTextColors
 import com.eagle.commons.helpers.PROTECTION_PATTERN
 import com.eagle.commons.itf.HashListener
 import com.eagle.commons.itf.SecurityTab

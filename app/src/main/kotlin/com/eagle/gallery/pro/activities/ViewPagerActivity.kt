@@ -23,13 +23,11 @@ import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
 import com.eagle.commons.dialogs.PropertiesDialog
 import com.eagle.commons.dialogs.RenameItemDialog
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.*
 import com.eagle.commons.models.FileDirItem
 import com.eagle.gallery.pro.BuildConfig
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.adapters.MyPagerAdapter
-import com.eagle.gallery.pro.asynctasks.GetMediaAsynctask
 import com.eagle.gallery.pro.dialogs.DeleteWithRememberDialog
 import com.eagle.gallery.pro.dialogs.SaveAsDialog
 import com.eagle.gallery.pro.dialogs.SlideshowDialog
@@ -42,7 +40,6 @@ import com.eagle.gallery.pro.models.Medium
 import com.eagle.gallery.pro.models.ThumbnailItem
 import kotlinx.android.synthetic.main.activity_medium.*
 import kotlinx.android.synthetic.main.bottom_actions.*
-import org.greenrobot.eventbus.EventBus
 import java.io.File
 import java.util.*
 

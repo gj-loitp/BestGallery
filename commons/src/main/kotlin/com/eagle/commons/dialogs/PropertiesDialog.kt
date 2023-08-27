@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.sumByInt
 import com.eagle.commons.helpers.sumByLong
 import com.eagle.commons.models.FileDirItem

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.dialogs.ConfirmationDialog
 import com.eagle.commons.dialogs.FilePickerDialog
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.gallery.pro.R
 import kotlinx.android.synthetic.main.dialog_save_as.view.*
 import java.io.File

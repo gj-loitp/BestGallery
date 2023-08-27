@@ -3,7 +3,7 @@ package com.eagle.commons.dialogs
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import kotlinx.android.synthetic.main.dlg_rename_item.view.*
 import java.io.File
 import java.util.*

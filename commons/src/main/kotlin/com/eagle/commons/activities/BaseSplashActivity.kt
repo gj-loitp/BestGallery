@@ -3,10 +3,10 @@ package com.eagle.commons.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.eagle.commons.R
-import com.eagle.commons.extensions.baseConfig
-import com.eagle.commons.extensions.getSharedTheme
-import com.eagle.commons.extensions.isThankYouInstalled
-import com.eagle.commons.extensions.showSideloadingDialog
+import com.eagle.commons.ext.baseConfig
+import com.eagle.commons.ext.getSharedTheme
+import com.eagle.commons.ext.isThankYouInstalled
+import com.eagle.commons.ext.showSideloadingDialog
 import com.eagle.commons.helpers.SIDELOADING_FALSE
 import com.eagle.commons.helpers.SIDELOADING_TRUE
 import com.eagle.commons.helpers.SIDELOADING_UNCHECKED

@@ -3,9 +3,9 @@ package com.eagle.commons.dialogs
 import android.app.Activity
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
-import com.eagle.commons.extensions.launchUpgradeToProIntent
-import com.eagle.commons.extensions.launchViewIntent
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.launchUpgradeToProIntent
+import com.eagle.commons.ext.launchViewIntent
+import com.eagle.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_upgrade_to_pro.view.*
 
 class UpgradeToProDialog(val activity: Activity) {

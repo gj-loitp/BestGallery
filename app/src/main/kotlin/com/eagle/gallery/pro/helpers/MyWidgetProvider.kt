@@ -10,11 +10,10 @@ import android.widget.RemoteViews
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.eagle.commons.extensions.setBackgroundColor
-import com.eagle.commons.extensions.setText
-import com.eagle.commons.extensions.setVisibleIf
+import com.eagle.commons.ext.setBackgroundColor
+import com.eagle.commons.ext.setText
+import com.eagle.commons.ext.setVisibleIf
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.activities.MediaActivity
 import com.eagle.gallery.pro.extensions.*
 import com.eagle.gallery.pro.models.Widget
 

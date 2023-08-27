@@ -4,7 +4,7 @@ import android.app.Activity
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.commons.models.Release
 import kotlinx.android.synthetic.main.dlg_whats_new.view.*
 

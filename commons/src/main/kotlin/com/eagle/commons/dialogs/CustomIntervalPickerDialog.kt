@@ -4,7 +4,7 @@ import android.app.Activity
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.DAY_SECONDS
 import com.eagle.commons.helpers.HOUR_SECONDS
 import com.eagle.commons.helpers.MINUTE_SECONDS

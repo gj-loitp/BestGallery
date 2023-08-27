@@ -3,9 +3,9 @@ package com.eagle.commons.activities
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.eagle.commons.R
-import com.eagle.commons.extensions.baseConfig
-import com.eagle.commons.extensions.getAdjustedPrimaryColor
-import com.eagle.commons.extensions.underlineText
+import com.eagle.commons.ext.baseConfig
+import com.eagle.commons.ext.getAdjustedPrimaryColor
+import com.eagle.commons.ext.underlineText
 import com.eagle.commons.helpers.APP_FAQ
 import com.eagle.commons.helpers.APP_ICON_IDS
 import com.eagle.commons.helpers.APP_LAUNCHER_NAME

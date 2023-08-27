@@ -2,7 +2,7 @@ package com.eagle.gallery.pro.dialogs
 
 import android.app.Activity
 import androidx.appcompat.app.AlertDialog
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.gallery.pro.R
 import kotlinx.android.synthetic.main.dialog_delete_with_remember.view.*
 

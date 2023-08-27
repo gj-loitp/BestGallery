@@ -25,7 +25,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.eagle.commons.dialogs.ColorPickerDialog
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.PERMISSION_WRITE_STORAGE
 import com.eagle.commons.helpers.REAL_FILE_PATH
 import com.eagle.commons.helpers.SIDELOADING_TRUE

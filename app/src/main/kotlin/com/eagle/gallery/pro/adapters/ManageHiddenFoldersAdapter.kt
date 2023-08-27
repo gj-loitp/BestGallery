@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.adapters.MyRecyclerViewAdapter
-import com.eagle.commons.extensions.isPathOnSD
+import com.eagle.commons.ext.isPathOnSD
 import com.eagle.commons.itf.RefreshRecyclerViewListener
 import com.eagle.commons.views.MyRecyclerView
 import com.eagle.gallery.pro.R

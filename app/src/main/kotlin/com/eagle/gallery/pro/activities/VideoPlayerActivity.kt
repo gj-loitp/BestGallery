@@ -23,7 +23,7 @@ import com.google.android.exoplayer2.upstream.ContentDataSource
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DataSpec
 import com.google.android.exoplayer2.video.VideoListener
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.PERMISSION_WRITE_STORAGE
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.*

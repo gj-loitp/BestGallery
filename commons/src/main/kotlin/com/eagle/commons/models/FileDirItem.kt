@@ -2,7 +2,7 @@ package com.eagle.commons.models
 
 import android.content.Context
 import androidx.annotation.Keep
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.*
 import java.io.File
 import java.util.Locale

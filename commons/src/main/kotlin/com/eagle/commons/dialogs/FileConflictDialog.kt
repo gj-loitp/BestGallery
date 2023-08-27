@@ -4,9 +4,9 @@ import android.app.Activity
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.R.id.*
-import com.eagle.commons.extensions.baseConfig
-import com.eagle.commons.extensions.beVisibleIf
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.baseConfig
+import com.eagle.commons.ext.beVisibleIf
+import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.commons.helpers.CONFLICT_KEEP_BOTH
 import com.eagle.commons.helpers.CONFLICT_MERGE
 import com.eagle.commons.helpers.CONFLICT_OVERWRITE

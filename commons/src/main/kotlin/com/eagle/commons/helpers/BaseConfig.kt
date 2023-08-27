@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.text.format.DateFormat
 import com.eagle.commons.R
-import com.eagle.commons.extensions.getInternalStoragePath
-import com.eagle.commons.extensions.getSDCardPath
-import com.eagle.commons.extensions.getSharedPrefs
+import com.eagle.commons.ext.getInternalStoragePath
+import com.eagle.commons.ext.getSDCardPath
+import com.eagle.commons.ext.getSharedPrefs
 import java.text.SimpleDateFormat
 import java.util.*
 

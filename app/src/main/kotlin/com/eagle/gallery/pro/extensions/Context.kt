@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.database.Cursor
-import android.database.sqlite.SQLiteException
 import android.graphics.Point
 import android.graphics.drawable.PictureDrawable
 import android.media.AudioManager
@@ -18,11 +17,9 @@ import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.*
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.activities.SettingsActivity
-import com.eagle.gallery.pro.asynctasks.GetMediaAsynctask
 import com.eagle.gallery.pro.databases.GalleryDatabase
 import com.eagle.gallery.pro.helpers.*
 import com.eagle.gallery.pro.interfaces.DirectoryDao

@@ -12,7 +12,7 @@ import android.widget.RelativeLayout
 import android.widget.SeekBar
 import com.google.vr.sdk.widgets.video.VrVideoEventListener
 import com.google.vr.sdk.widgets.video.VrVideoView
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.PERMISSION_WRITE_STORAGE
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.*

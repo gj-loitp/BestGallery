@@ -4,8 +4,8 @@ import android.app.Activity
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.R.id.*
-import com.eagle.commons.extensions.baseConfig
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.baseConfig
+import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.commons.helpers.DATE_FORMAT_FOUR
 import com.eagle.commons.helpers.DATE_FORMAT_ONE
 import com.eagle.commons.helpers.DATE_FORMAT_THREE

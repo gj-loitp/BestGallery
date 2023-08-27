@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.widget.RelativeLayout
 import android.widget.RemoteViews
 import com.eagle.commons.dialogs.ColorPickerDialog
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.dialogs.PickDirectoryDialog
 import com.eagle.gallery.pro.extensions.*

@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.eagle.commons.R
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.models.FileDirItem
 import kotlinx.android.synthetic.main.v_breadcrumb_item.view.*
 

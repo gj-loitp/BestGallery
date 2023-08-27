@@ -2,7 +2,7 @@ package com.eagle.gallery.pro.dialogs
 
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
 import com.eagle.gallery.pro.helpers.*

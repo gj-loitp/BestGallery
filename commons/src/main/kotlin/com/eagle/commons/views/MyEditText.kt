@@ -2,9 +2,8 @@ package com.eagle.commons.views
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.EditText
-import com.eagle.commons.extensions.adjustAlpha
-import com.eagle.commons.extensions.applyColorFilter
+import com.eagle.commons.ext.adjustAlpha
+import com.eagle.commons.ext.applyColorFilter
 
 class MyEditText : androidx.appcompat.widget.AppCompatEditText {
     constructor(context: Context) : super(context)

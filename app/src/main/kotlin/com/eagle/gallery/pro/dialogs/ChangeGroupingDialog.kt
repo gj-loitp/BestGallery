@@ -4,8 +4,8 @@ import android.content.DialogInterface
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.beVisibleIf
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.beVisibleIf
+import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.config
 import com.eagle.gallery.pro.helpers.*

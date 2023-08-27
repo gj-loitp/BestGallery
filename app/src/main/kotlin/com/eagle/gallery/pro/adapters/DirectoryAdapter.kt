@@ -11,7 +11,7 @@ import com.eagle.commons.dialogs.ConfirmationDialog
 import com.eagle.commons.dialogs.PropertiesDialog
 import com.eagle.commons.dialogs.RenameItemDialog
 import com.eagle.commons.dialogs.RenameItemsDialog
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.models.FileDirItem
 import com.eagle.commons.views.FastScroller
 import com.eagle.commons.views.MyRecyclerView

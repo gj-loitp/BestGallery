@@ -1,4 +1,4 @@
-package com.eagle.commons.extensions
+package com.eagle.commons.ext
 
 // extensions used mostly at importing app settings for now
 fun Any.toBoolean() = toString() == "true"

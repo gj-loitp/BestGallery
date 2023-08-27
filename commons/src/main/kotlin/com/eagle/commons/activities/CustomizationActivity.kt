@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.eagle.commons.R
 import com.eagle.commons.dialogs.*
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.APP_ICON_IDS
 import com.eagle.commons.helpers.APP_LAUNCHER_NAME
 import com.eagle.commons.helpers.MyContentProvider

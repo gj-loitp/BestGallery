@@ -5,9 +5,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.eagle.commons.extensions.formatDate
-import com.eagle.commons.extensions.formatSize
-import com.eagle.commons.extensions.getFilenameExtension
+import com.eagle.commons.ext.formatDate
+import com.eagle.commons.ext.formatSize
+import com.eagle.commons.ext.getFilenameExtension
 import com.eagle.commons.helpers.SORT_BY_DATE_MODIFIED
 import com.eagle.commons.helpers.SORT_BY_NAME
 import com.eagle.commons.helpers.SORT_BY_PATH

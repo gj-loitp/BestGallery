@@ -3,7 +3,7 @@ package com.eagle.gallery.pro.fragments
 import android.provider.MediaStore
 import android.view.MotionEvent
 import androidx.fragment.app.Fragment
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.gallery.pro.extensions.config
 import com.eagle.gallery.pro.helpers.*
 import com.eagle.gallery.pro.models.Medium

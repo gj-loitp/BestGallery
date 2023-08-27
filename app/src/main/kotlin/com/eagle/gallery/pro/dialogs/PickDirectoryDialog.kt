@@ -5,10 +5,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.dialogs.FilePickerDialog
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.views.MyGridLayoutManager
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.adapters.DirectoryAdapter
 import com.eagle.gallery.pro.extensions.*
 import com.eagle.gallery.pro.helpers.VIEW_TYPE_GRID
 import com.eagle.gallery.pro.models.Directory

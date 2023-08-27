@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.LinearLayout
 import com.eagle.commons.R
-import com.eagle.commons.extensions.isRTLLayout
-import com.eagle.commons.extensions.onGlobalLayout
+import com.eagle.commons.ext.isRTLLayout
+import com.eagle.commons.ext.onGlobalLayout
 import com.eagle.commons.itf.LineColorPickerListener
 import java.util.*
 import kotlin.math.max

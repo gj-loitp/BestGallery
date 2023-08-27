@@ -5,9 +5,9 @@ import android.text.Html
 import android.text.method.LinkMovementMethod
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
-import com.eagle.commons.extensions.baseConfig
-import com.eagle.commons.extensions.launchViewIntent
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.baseConfig
+import com.eagle.commons.ext.launchViewIntent
+import com.eagle.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_textview.view.*
 
 class AppSideloadedDialog(val activity: Activity, val callback: () -> Unit) {

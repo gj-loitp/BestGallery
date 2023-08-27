@@ -5,8 +5,8 @@ import android.text.Html
 import android.text.method.LinkMovementMethod
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
-import com.eagle.commons.extensions.launchPurchaseThankYouIntent
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.launchPurchaseThankYouIntent
+import com.eagle.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_purchase_thank_you.view.*
 
 class PurchaseThankYouDialog(val activity: Activity) {

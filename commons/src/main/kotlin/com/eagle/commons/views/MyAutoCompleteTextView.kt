@@ -2,9 +2,8 @@ package com.eagle.commons.views
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.AutoCompleteTextView
-import com.eagle.commons.extensions.adjustAlpha
-import com.eagle.commons.extensions.applyColorFilter
+import com.eagle.commons.ext.adjustAlpha
+import com.eagle.commons.ext.applyColorFilter
 
 class MyAutoCompleteTextView : androidx.appcompat.widget.AppCompatAutoCompleteTextView {
     constructor(context: Context) : super(context)

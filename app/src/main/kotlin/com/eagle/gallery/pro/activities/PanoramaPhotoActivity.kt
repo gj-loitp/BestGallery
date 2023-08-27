@@ -10,10 +10,10 @@ import android.view.Window
 import android.widget.RelativeLayout
 import com.google.vr.sdk.widgets.pano.VrPanoramaEventListener
 import com.google.vr.sdk.widgets.pano.VrPanoramaView
-import com.eagle.commons.extensions.beVisible
-import com.eagle.commons.extensions.onGlobalLayout
-import com.eagle.commons.extensions.showErrorToast
-import com.eagle.commons.extensions.toast
+import com.eagle.commons.ext.beVisible
+import com.eagle.commons.ext.onGlobalLayout
+import com.eagle.commons.ext.showErrorToast
+import com.eagle.commons.ext.toast
 import com.eagle.commons.helpers.PERMISSION_WRITE_STORAGE
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.*

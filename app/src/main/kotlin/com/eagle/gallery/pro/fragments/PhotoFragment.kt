@@ -36,7 +36,7 @@ import com.roy.labs.subscaleview.ImageDecoder
 import com.roy.labs.subscaleview.ImageRegionDecoder
 import com.roy.labs.subscaleview.SubsamplingScaleImageView
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.*
 import com.eagle.gallery.pro.helpers.MEDIUM

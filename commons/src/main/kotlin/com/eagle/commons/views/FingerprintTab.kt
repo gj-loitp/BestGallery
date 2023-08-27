@@ -11,7 +11,7 @@ import com.github.ajalt.reprint.core.AuthenticationFailureReason
 import com.github.ajalt.reprint.core.AuthenticationListener
 import com.github.ajalt.reprint.core.Reprint
 import com.eagle.commons.R
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.PROTECTION_FINGERPRINT
 import com.eagle.commons.itf.HashListener
 import com.eagle.commons.itf.SecurityTab

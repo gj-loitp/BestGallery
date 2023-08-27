@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.eagle.commons.extensions.applyColorFilter
-import com.eagle.commons.extensions.getContrastColor
+import com.eagle.commons.ext.applyColorFilter
+import com.eagle.commons.ext.getContrastColor
 
 class MyFloatingActionButton : FloatingActionButton {
     constructor(context: Context) : super(context)

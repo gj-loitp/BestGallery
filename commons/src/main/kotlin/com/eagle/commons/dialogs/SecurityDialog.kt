@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.adapters.PasswordTypesAdapter
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.PROTECTION_FINGERPRINT
 import com.eagle.commons.helpers.PROTECTION_PATTERN
 import com.eagle.commons.helpers.PROTECTION_PIN

@@ -6,7 +6,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_write_permission.view.*
 import kotlinx.android.synthetic.main.dlg_write_permission_otg.view.*
 

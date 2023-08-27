@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.eagle.commons.R
-import com.eagle.commons.extensions.applyColorFilter
-import com.eagle.commons.extensions.baseConfig
-import com.eagle.commons.extensions.getAdjustedPrimaryColor
-import com.eagle.commons.extensions.onGlobalLayout
+import com.eagle.commons.ext.applyColorFilter
+import com.eagle.commons.ext.baseConfig
+import com.eagle.commons.ext.getAdjustedPrimaryColor
+import com.eagle.commons.ext.onGlobalLayout
 import kotlin.math.abs
 import kotlin.math.floor
 

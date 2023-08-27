@@ -16,13 +16,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.eagle.commons.activities.BaseSimpleActivity
 import com.eagle.commons.dialogs.ConfirmationDialog
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import com.eagle.commons.helpers.*
 import com.eagle.commons.models.FAQItem
 import com.eagle.commons.models.FileDirItem
 import com.eagle.gallery.pro.BuildConfig
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.activities.SimpleActivity
 import com.eagle.gallery.pro.dialogs.PickDirectoryDialog
 import com.eagle.gallery.pro.helpers.NOMEDIA
 import com.eagle.gallery.pro.helpers.RECYCLE_BIN

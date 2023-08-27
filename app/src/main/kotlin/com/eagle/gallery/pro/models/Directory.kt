@@ -2,8 +2,8 @@ package com.eagle.gallery.pro.models
 
 import android.content.Context
 import androidx.room.*
-import com.eagle.commons.extensions.formatDate
-import com.eagle.commons.extensions.formatSize
+import com.eagle.commons.ext.formatDate
+import com.eagle.commons.ext.formatSize
 import com.eagle.commons.helpers.SORT_BY_DATE_MODIFIED
 import com.eagle.commons.helpers.SORT_BY_NAME
 import com.eagle.commons.helpers.SORT_BY_PATH

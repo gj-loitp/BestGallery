@@ -3,7 +3,7 @@ package com.eagle.commons.views
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.SeekBar
-import com.eagle.commons.extensions.applyColorFilter
+import com.eagle.commons.ext.applyColorFilter
 
 class MySeekBar : SeekBar {
     constructor(context: Context) : super(context)

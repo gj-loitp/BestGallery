@@ -1,4 +1,4 @@
-package com.eagle.commons.extensions
+package com.eagle.commons.ext
 
 import android.content.Context
 import com.eagle.commons.helpers.audioExtensions

@@ -3,9 +3,9 @@ package com.eagle.gallery.pro.dialogs
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.setupDialogStuff
-import com.eagle.commons.extensions.showKeyboard
-import com.eagle.commons.extensions.value
+import com.eagle.commons.ext.setupDialogStuff
+import com.eagle.commons.ext.showKeyboard
+import com.eagle.commons.ext.value
 import com.eagle.gallery.pro.R
 import kotlinx.android.synthetic.main.dialog_custom_aspect_ratio.view.*
 

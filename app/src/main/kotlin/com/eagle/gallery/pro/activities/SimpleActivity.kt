@@ -6,7 +6,7 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.view.WindowManager
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.getRealPathFromURI
+import com.eagle.commons.ext.getRealPathFromURI
 import com.eagle.commons.helpers.isPiePlus
 import com.eagle.gallery.pro.R
 import com.eagle.gallery.pro.extensions.addPathToDB

@@ -4,7 +4,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.eagle.commons.R
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.*
+import com.eagle.commons.ext.*
 import kotlinx.android.synthetic.main.dlg_create_new_folder.view.*
 import java.io.File
 

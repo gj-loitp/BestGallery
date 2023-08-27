@@ -12,7 +12,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.provider.MediaStore
-import com.eagle.commons.extensions.getStringValue
+import com.eagle.commons.ext.getStringValue
 import com.eagle.gallery.pro.extensions.addPathToDB
 
 // based on https://developer.android.com/reference/android/app/job/JobInfo.Builder.html#addTriggerContentUri(android.app.job.JobInfo.TriggerContentUri)

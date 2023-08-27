@@ -3,13 +3,11 @@ package com.eagle.gallery.pro.dialogs
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.eagle.commons.activities.BaseSimpleActivity
-import com.eagle.commons.extensions.beGoneIf
-import com.eagle.commons.extensions.beVisibleIf
-import com.eagle.commons.extensions.setupDialogStuff
+import com.eagle.commons.ext.beGoneIf
+import com.eagle.commons.ext.beVisibleIf
+import com.eagle.commons.ext.setupDialogStuff
 import com.eagle.commons.views.MyGridLayoutManager
 import com.eagle.gallery.pro.R
-import com.eagle.gallery.pro.adapters.MediaAdapter
-import com.eagle.gallery.pro.asynctasks.GetMediaAsynctask
 import com.eagle.gallery.pro.extensions.config
 import com.eagle.gallery.pro.extensions.getCachedMedia
 import com.eagle.gallery.pro.helpers.SHOW_ALL
