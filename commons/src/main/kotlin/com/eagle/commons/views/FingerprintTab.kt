@@ -3,6 +3,7 @@ package com.eagle.commons.views
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.util.AttributeSet
 import android.widget.RelativeLayout
@@ -16,9 +17,10 @@ import com.eagle.commons.interfaces.HashListener
 import com.eagle.commons.interfaces.SecurityTab
 import kotlinx.android.synthetic.main.v_tab_fingerprint.view.*
 
-class FingerprintTab(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs), SecurityTab {
+class FingerprintTab(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs),
+    SecurityTab {
     private val RECHECK_PERIOD = 3000L
-    private val registerHandler = Handler()
+    private val registerHandler = Handler(Looper.getMainLooper())
 
     lateinit var hashListener: HashListener
 
@@ -48,17 +50,25 @@ class FingerprintTab(context: Context, attrs: AttributeSet) : RelativeLayout(con
     private fun checkRegisteredFingerprints() {
         val hasFingerprints = Reprint.hasFingerprintRegistered()
         fingerprintSettings.beGoneIf(hasFingerprints)
-        fingerprintLabel.text = context.getString(if (hasFingerprints) R.string.place_finger else R.string.no_fingerprints_registered)
+        fingerprintLabel.text =
+            context.getString(if (hasFingerprints) R.string.place_finger else R.string.no_fingerprints_registered)
 
         Reprint.authenticate(object : AuthenticationListener {
             override fun onSuccess(moduleTag: Int) {
                 hashListener.receivedHash("", PROTECTION_FINGERPRINT)
             }
 
-            override fun onFailure(failureReason: AuthenticationFailureReason, fatal: Boolean, errorMessage: CharSequence?, moduleTag: Int, errorCode: Int) {
+            override fun onFailure(
+                failureReason: AuthenticationFailureReason,
+                fatal: Boolean,
+                errorMessage: CharSequence?,
+                moduleTag: Int,
+                errorCode: Int,
+            ) {
                 when (failureReason) {
                     AuthenticationFailureReason.AUTHENTICATION_FAILED -> context.toast(R.string.authentication_failed)
                     AuthenticationFailureReason.LOCKED_OUT -> context.toast(R.string.authentication_blocked)
+                    else -> {}
                 }
             }
         })

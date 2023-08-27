@@ -6,12 +6,16 @@ import android.widget.AutoCompleteTextView
 import com.eagle.commons.extensions.adjustAlpha
 import com.eagle.commons.extensions.applyColorFilter
 
-class MyAutoCompleteTextView : AutoCompleteTextView {
+class MyAutoCompleteTextView : androidx.appcompat.widget.AppCompatAutoCompleteTextView {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle)
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    )
 
     fun setColors(textColor: Int, accentColor: Int, backgroundColor: Int) {
         background?.mutate()?.applyColorFilter(accentColor)

@@ -1,5 +1,6 @@
 package com.eagle.commons.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -10,7 +11,10 @@ import com.eagle.commons.extensions.isRTLLayout
 import com.eagle.commons.extensions.onGlobalLayout
 import com.eagle.commons.interfaces.LineColorPickerListener
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
+@SuppressLint("ClickableViewAccessibility")
 class LineColorPicker(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
     private var colorsCount = 0
     private var pickerWidth = 0
@@ -38,9 +42,9 @@ class LineColorPicker(context: Context, attrs: AttributeSet) : LinearLayout(cont
                 updateItemMargin(lastColorIndex, false)
             }
         }
-        orientation = LinearLayout.HORIZONTAL
+        orientation = HORIZONTAL
 
-        setOnTouchListener { view, motionEvent ->
+        setOnTouchListener { _, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_MOVE, MotionEvent.ACTION_UP -> {
                     if (pickerWidth != 0 && stripeWidth != 0) {
@@ -86,7 +90,7 @@ class LineColorPicker(context: Context, attrs: AttributeSet) : LinearLayout(cont
         if (context.isRTLLayout) {
             colorIndex = colors.size - colorIndex - 1
         }
-        val index = Math.max(0, Math.min(colorIndex, colorsCount - 1))
+        val index = max(0, min(colorIndex, colorsCount - 1))
         if (lastColorIndex != index) {
             updateItemMargin(lastColorIndex, true)
             lastColorIndex = index
@@ -97,7 +101,7 @@ class LineColorPicker(context: Context, attrs: AttributeSet) : LinearLayout(cont
 
     private fun updateItemMargin(index: Int, addMargin: Boolean) {
         getChildAt(index)?.apply {
-            (layoutParams as LinearLayout.LayoutParams).apply {
+            (layoutParams as LayoutParams).apply {
                 topMargin = if (addMargin) unselectedMargin else 0
                 bottomMargin = if (addMargin) unselectedMargin else 0
             }

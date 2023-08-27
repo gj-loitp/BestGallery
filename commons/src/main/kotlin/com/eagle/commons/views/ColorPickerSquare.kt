@@ -8,8 +8,16 @@ import android.util.AttributeSet
 import android.view.View
 
 class ColorPickerSquare(context: Context, attrs: AttributeSet) : View(context, attrs) {
-    var paint: Paint? = null
-    var luar: Shader = LinearGradient(0f, 0f, 0f, measuredHeight.toFloat(), Color.WHITE, Color.BLACK, Shader.TileMode.CLAMP)
+    private var paint: Paint? = null
+    private var luar: Shader = LinearGradient(
+        /* x0 = */ 0f,
+        /* y0 = */ 0f,
+        /* x1 = */ 0f,
+        /* y1 = */ measuredHeight.toFloat(),
+        /* color0 = */ Color.WHITE,
+        /* color1 = */ Color.BLACK,
+        /* tile = */ Shader.TileMode.CLAMP
+    )
     val color = floatArrayOf(1f, 1f, 1f)
 
     @SuppressLint("DrawAllocation")
@@ -17,13 +25,35 @@ class ColorPickerSquare(context: Context, attrs: AttributeSet) : View(context, a
         super.onDraw(canvas)
         if (paint == null) {
             paint = Paint()
-            luar = LinearGradient(0f, 0f, 0f, measuredHeight.toFloat(), Color.WHITE, Color.BLACK, TileMode.CLAMP)
+            luar = LinearGradient(
+                /* x0 = */ 0f,
+                /* y0 = */ 0f,
+                /* x1 = */ 0f,
+                /* y1 = */ measuredHeight.toFloat(),
+                /* color0 = */ Color.WHITE,
+                /* color1 = */ Color.BLACK,
+                /* tile = */ TileMode.CLAMP
+            )
         }
         val rgb = Color.HSVToColor(color)
-        val dalam = LinearGradient(0f, 0f, measuredWidth.toFloat(), 0f, Color.WHITE, rgb, TileMode.CLAMP)
+        val dalam = LinearGradient(
+            /* x0 = */ 0f,
+            /* y0 = */ 0f,
+            /* x1 = */ measuredWidth.toFloat(),
+            /* y1 = */ 0f,
+            /* color0 = */ Color.WHITE,
+            /* color1 = */ rgb,
+            /* tile = */ TileMode.CLAMP
+        )
         val shader = ComposeShader(luar, dalam, PorterDuff.Mode.MULTIPLY)
-        paint!!.shader = shader
-        canvas.drawRect(0f, 0f, measuredWidth.toFloat(), measuredHeight.toFloat(), paint!!)
+        paint?.shader = shader
+        canvas.drawRect(
+            /* left = */ 0f,
+            /* top = */ 0f,
+            /* right = */ measuredWidth.toFloat(),
+            /* bottom = */ measuredHeight.toFloat(),
+            /* paint = */ paint!!
+        )
     }
 
     fun setHue(hue: Float) {

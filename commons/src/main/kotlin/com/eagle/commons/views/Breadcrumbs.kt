@@ -5,14 +5,17 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import com.eagle.commons.R
 import com.eagle.commons.extensions.*
 import com.eagle.commons.models.FileDirItem
 import kotlinx.android.synthetic.main.v_breadcrumb_item.view.*
 
-class Breadcrumbs(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs), View.OnClickListener {
+class Breadcrumbs(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs),
+    View.OnClickListener {
     private var availableWidth = 0
-    private var inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private var inflater =
+        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     private var textColor = context.baseConfig.textColor
     private var lastPath = ""
 
@@ -40,8 +43,10 @@ class Breadcrumbs(context: Context, attrs: AttributeSet) : LinearLayout(context,
         for (i in 0 until cnt) {
             val child = getChildAt(i)
 
-            child.measure(MeasureSpec.makeMeasureSpec(usableWidth, MeasureSpec.AT_MOST),
-                    MeasureSpec.makeMeasureSpec(childHeight, MeasureSpec.AT_MOST))
+            child.measure(
+                MeasureSpec.makeMeasureSpec(usableWidth, MeasureSpec.AT_MOST),
+                MeasureSpec.makeMeasureSpec(childHeight, MeasureSpec.AT_MOST)
+            )
             curWidth = child.measuredWidth
             curHeight = child.measuredHeight
 
@@ -94,7 +99,7 @@ class Breadcrumbs(context: Context, attrs: AttributeSet) : LinearLayout(context,
         for (i in dirs.indices) {
             val dir = dirs[i]
             if (i > 0) {
-                currPath += dir + "/"
+                currPath += "$dir/"
             }
 
             if (dir.isEmpty()) {
@@ -116,7 +121,7 @@ class Breadcrumbs(context: Context, attrs: AttributeSet) : LinearLayout(context,
 
             if (childCount == 0) {
                 resources.apply {
-                    background = getDrawable(R.drawable.button_background)
+                    background = ContextCompat.getDrawable(context, R.drawable.button_background)
                     background.applyColorFilter(textColor)
                     val medium = getDimension(R.dimen.medium_margin).toInt()
                     setPadding(medium, medium, medium, medium)

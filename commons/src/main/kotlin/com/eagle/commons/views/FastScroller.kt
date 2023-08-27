@@ -1,8 +1,10 @@
 package com.eagle.commons.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -16,12 +18,14 @@ import com.eagle.commons.extensions.applyColorFilter
 import com.eagle.commons.extensions.baseConfig
 import com.eagle.commons.extensions.getAdjustedPrimaryColor
 import com.eagle.commons.extensions.onGlobalLayout
+import kotlin.math.abs
+import kotlin.math.floor
 
 // based on https://blog.stylingandroid.com/recyclerview-fastscroll-part-1
 class FastScroller : FrameLayout {
     var isHorizontal = false
     var allowBubbleDisplay = false
-    var measureItemIndex = 0
+    private var measureItemIndex = 0
 
     private var handle: View? = null
     private var bubble: TextView? = null
@@ -37,24 +41,34 @@ class FastScroller : FrameLayout {
     private var recyclerViewContentWidth = 1
     private var recyclerViewContentHeight = 1
     private var tinyMargin = 0
-    private var isScrollingEnabled = false      // a boolean indicating whether the actual recycler view content is higher than the screen
+    private var isScrollingEnabled =
+        false      // a boolean indicating whether the actual recycler view content is higher than the screen
     private var fastScrollCallback: ((Int) -> Unit)? = null
-    private var wasRecyclerViewContentSizeSet = false       // stop measuring and calculating content size as soon as it is manually set once
+    private var wasRecyclerViewContentSizeSet =
+        false       // stop measuring and calculating content size as soon as it is manually set once
 
     private val HANDLE_HIDE_DELAY = 1000L
     private var recyclerView: RecyclerView? = null
     private var swipeRefreshLayout: SwipeRefreshLayout? = null
-    private var bubbleHideHandler = Handler()
-    private var handleHideHandler = Handler()
+    private var bubbleHideHandler = Handler(Looper.getMainLooper())
+    private var handleHideHandler = Handler(Looper.getMainLooper())
     private var lastUpdateTime: Long = 0L
 
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle)
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    )
 
-    fun setViews(recyclerView: RecyclerView, swipeRefreshLayout: SwipeRefreshLayout? = null, callback: ((Int) -> Unit)? = null) {
+    fun setViews(
+        recyclerView: RecyclerView,
+        swipeRefreshLayout: SwipeRefreshLayout? = null,
+        callback: ((Int) -> Unit)? = null,
+    ) {
         this.recyclerView = recyclerView
         this.swipeRefreshLayout = swipeRefreshLayout
         tinyMargin = context.resources.getDimension(R.dimen.tiny_margin).toInt()
@@ -72,8 +86,16 @@ class FastScroller : FrameLayout {
                     currScrollX += dx
                     currScrollY += dy
 
-                    currScrollX = getValueInRange(0, recyclerViewContentWidth, currScrollX.toFloat()).toInt()
-                    currScrollY = getValueInRange(0, recyclerViewContentHeight, currScrollY.toFloat()).toInt()
+                    currScrollX = getValueInRange(
+                        min = 0,
+                        max = recyclerViewContentWidth,
+                        value = currScrollX.toFloat()
+                    ).toInt()
+                    currScrollY = getValueInRange(
+                        min = 0,
+                        max = recyclerViewContentHeight,
+                        value = currScrollY.toFloat()
+                    ).toInt()
 
                     updateHandlePosition()
                 }
@@ -103,7 +125,7 @@ class FastScroller : FrameLayout {
         currScrollY = 0
     }
 
-    fun measureRecyclerViewOnRedraw() {
+    private fun measureRecyclerViewOnRedraw() {
         recyclerView?.onGlobalLayout {
             measureRecyclerView()
         }
@@ -115,12 +137,9 @@ class FastScroller : FrameLayout {
         }
 
         if (!wasRecyclerViewContentSizeSet) {
-            val adapter = recyclerView!!.adapter
-            if (adapter == null) {
-                return
-            }
+            val adapter = recyclerView!!.adapter ?: return
             val spanCount = ((recyclerView!!.layoutManager as? GridLayoutManager)?.spanCount ?: 1)
-            val otherDimension = Math.floor((adapter.itemCount - 1) / spanCount.toDouble()) + 1
+            val otherDimension = floor((adapter.itemCount - 1) / spanCount.toDouble()) + 1
             val size = recyclerView!!.getChildAt(measureItemIndex)?.height ?: 0
             if (isHorizontal) {
                 recyclerViewContentWidth = (otherDimension * size).toInt()
@@ -176,7 +195,7 @@ class FastScroller : FrameLayout {
     }
 
     fun updatePrimaryColor() {
-        handle!!.background.applyColorFilter(context.getAdjustedPrimaryColor())
+        handle?.background?.applyColorFilter(context.getAdjustedPrimaryColor())
         updateBubblePrimaryColor()
     }
 
@@ -186,15 +205,18 @@ class FastScroller : FrameLayout {
         updateBubbleBackgroundColor()
     }
 
-    fun updateBubblePrimaryColor() {
-        getBubbleBackgroundDrawable()?.setStroke(resources.displayMetrics.density.toInt(), context.getAdjustedPrimaryColor())
+    private fun updateBubblePrimaryColor() {
+        getBubbleBackgroundDrawable()?.setStroke(
+            resources.displayMetrics.density.toInt(),
+            context.getAdjustedPrimaryColor()
+        )
     }
 
-    fun updateBubbleTextColor() {
+    private fun updateBubbleTextColor() {
         bubble?.setTextColor(context.baseConfig.textColor)
     }
 
-    fun updateBubbleBackgroundColor() {
+    private fun updateBubbleBackgroundColor() {
         getBubbleBackgroundDrawable()?.setColor(context.baseConfig.backgroundColor)
     }
 
@@ -217,15 +239,17 @@ class FastScroller : FrameLayout {
         if (isHorizontal) {
             val proportion = currScrollX.toFloat() / (recyclerViewContentWidth - recyclerViewWidth)
             val targetX = proportion * (recyclerViewWidth - handleWidth)
-            handle!!.x = getValueInRange(0, recyclerViewWidth - handleWidth, targetX)
+            handle?.x = getValueInRange(0, recyclerViewWidth - handleWidth, targetX)
         } else {
-            val proportion = currScrollY.toFloat() / (recyclerViewContentHeight - recyclerViewHeight)
+            val proportion =
+                currScrollY.toFloat() / (recyclerViewContentHeight - recyclerViewHeight)
             val targetY = proportion * (recyclerViewHeight - handleHeight)
-            handle!!.y = getValueInRange(0, recyclerViewHeight - handleHeight, targetY)
+            handle?.y = getValueInRange(0, recyclerViewHeight - handleHeight, targetY)
         }
         showHandle()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         // allow dragging only the handle itself
         if (!isScrollingEnabled) {
@@ -260,8 +284,9 @@ class FastScroller : FrameLayout {
                 }
                 true
             }
+
             MotionEvent.ACTION_MOVE -> {
-                if (isScrollingEnabled && Math.abs(System.currentTimeMillis() - lastUpdateTime) > 50) {
+                if (isScrollingEnabled && abs(System.currentTimeMillis() - lastUpdateTime) > 50) {
                     try {
                         lastUpdateTime = System.currentTimeMillis()
                         if (isHorizontal) {
@@ -277,21 +302,23 @@ class FastScroller : FrameLayout {
                 }
                 true
             }
+
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 handleYOffset = 0
-                handle!!.isSelected = false
+                handle?.isSelected = false
                 if (context.baseConfig.enablePullToRefresh) {
                     swipeRefreshLayout?.isEnabled = true
                 }
                 hideHandle()
                 true
             }
+
             else -> super.onTouchEvent(event)
         }
     }
 
     private fun startScrolling() {
-        handle!!.isSelected = true
+        handle?.isSelected = true
         swipeRefreshLayout?.isEnabled = false
         showHandle()
     }
@@ -312,7 +339,7 @@ class FastScroller : FrameLayout {
                 val movePercent = diffInMove / (recyclerViewHeight.toFloat() - handleHeight)
                 val target = (recyclerViewContentHeight - recyclerViewHeight) * movePercent
                 val diff = target.toInt() - currScrollY
-                recyclerView!!.scrollBy(0, diff)
+                recyclerView?.scrollBy(0, diff)
             }
 
             val itemCount = recyclerView!!.adapter!!.itemCount
@@ -324,7 +351,7 @@ class FastScroller : FrameLayout {
     override fun onFinishInflate() {
         super.onFinishInflate()
         handle = getChildAt(0)
-        handle!!.onGlobalLayout {
+        handle?.onGlobalLayout {
             handleWidth = handle!!.width
             handleHeight = handle!!.height
             showHandle()
@@ -346,8 +373,8 @@ class FastScroller : FrameLayout {
         }
 
         handleHideHandler.removeCallbacksAndMessages(null)
-        handle!!.animate().cancel()
-        handle!!.alpha = 1f
+        handle?.animate()?.cancel()
+        handle?.alpha = 1f
         if (handleWidth == 0 && handleHeight == 0) {
             handleWidth = handle!!.width
             handleHeight = handle!!.height
@@ -358,7 +385,7 @@ class FastScroller : FrameLayout {
         if (!handle!!.isSelected) {
             handleHideHandler.removeCallbacksAndMessages(null)
             handleHideHandler.postDelayed({
-                handle!!.animate().alpha(0f).start()
+                handle?.animate()?.alpha(0f)?.start()
             }, HANDLE_HIDE_DELAY)
 
             if (bubble != null) {
@@ -379,14 +406,22 @@ class FastScroller : FrameLayout {
             handle!!.x = getValueInRange(0, recyclerViewWidth - handleWidth, pos - handleXOffset)
             if (bubble != null && allowBubbleDisplay && handle!!.isSelected) {
                 val bubbleWidth = bubble!!.width
-                bubble!!.x = getValueInRange(tinyMargin, recyclerViewWidth - bubbleWidth, handle!!.x - bubbleWidth)
+                bubble?.x = getValueInRange(
+                    min = tinyMargin,
+                    max = recyclerViewWidth - bubbleWidth,
+                    value = handle!!.x - bubbleWidth
+                )
                 bubbleHideHandler.removeCallbacksAndMessages(null)
                 bubble?.alpha = 1f
             }
         } else {
-            handle!!.y = getValueInRange(0, recyclerViewHeight - handleHeight, pos - handleYOffset)
+            handle?.y = getValueInRange(0, recyclerViewHeight - handleHeight, pos - handleYOffset)
             if (bubble != null && allowBubbleDisplay && handle!!.isSelected) {
-                bubble!!.y = getValueInRange(tinyMargin.toInt(), recyclerViewHeight - bubbleHeight, handle!!.y - bubbleHeight)
+                bubble?.y = getValueInRange(
+                    min = tinyMargin,
+                    max = recyclerViewHeight - bubbleHeight,
+                    value = handle!!.y - bubbleHeight
+                )
                 bubbleHideHandler.removeCallbacksAndMessages(null)
                 bubble?.alpha = 1f
             }
@@ -394,5 +429,6 @@ class FastScroller : FrameLayout {
         hideHandle()
     }
 
-    private fun getValueInRange(min: Int, max: Int, value: Float) = Math.min(Math.max(min.toFloat(), value), max.toFloat())
+    private fun getValueInRange(min: Int, max: Int, value: Float) =
+        kotlin.math.min(kotlin.math.max(min.toFloat(), value), max.toFloat())
 }
