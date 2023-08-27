@@ -653,4 +653,5 @@
     <string name="sanselan_title">Apache Sanselan (reading image metadata)</string>
     <string name="filters_title">Android Photo Filters (image filters)</string>
     <string name="gesture_views_title">Gesture Views (zoomable images)</string>
+    <string name="copyright_roy93group">Copyright © Roy93Group</string>
 </resources>

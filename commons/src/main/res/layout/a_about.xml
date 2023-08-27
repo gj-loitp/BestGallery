@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/about_scrollview"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/aboutScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -12,7 +13,7 @@
         android:padding="@dimen/activity_margin">
 
         <com.eagle.commons.views.MyTextView
-            android:id="@+id/about_website"
+            android:id="@+id/aboutWebsite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autoLink="web"
@@ -21,37 +22,37 @@
             android:visibility="gone" />
 
         <com.eagle.commons.views.MyTextView
-            android:id="@+id/about_email"
+            android:id="@+id/aboutEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/about_website"
+            android:layout_below="@+id/aboutWebsite"
             android:text="@string/my_email"
             android:textColorLink="@color/color_primary" />
 
         <com.eagle.commons.views.MyTextView
-            android:id="@+id/about_faq_label"
+            android:id="@+id/aboutFaqLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/about_email"
+            android:layout_below="@+id/aboutEmail"
             android:layout_marginTop="@dimen/activity_margin"
             android:text="@string/before_asking_question"
             android:visibility="gone" />
 
         <com.eagle.commons.views.MyTextView
-            android:id="@+id/about_faq"
+            android:id="@+id/aboutFaq"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/about_faq_label"
+            android:layout_below="@+id/aboutFaqLabel"
             android:paddingBottom="@dimen/activity_margin"
             android:text="@string/frequently_asked_questions"
             android:textColor="@color/color_primary"
             android:visibility="gone" />
 
         <com.eagle.commons.views.MyTextView
-            android:id="@+id/about_upgrade_to_pro"
+            android:id="@+id/aboutUpgradeToPro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/about_faq"
+            android:layout_below="@+id/aboutFaq"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
             android:text="@string/upgrade_to_pro"
@@ -59,85 +60,86 @@
             android:visibility="gone" />
 
         <com.eagle.commons.views.MyTextView
-            android:id="@+id/about_more_apps"
+            android:id="@+id/aboutMoreApps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/about_upgrade_to_pro"
+            android:layout_below="@+id/aboutUpgradeToPro"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
             android:text="@string/more_apps_underlined"
             android:textColor="@color/color_primary"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <com.eagle.commons.views.MyTextView
-            android:id="@+id/about_invite"
+            android:id="@+id/aboutInvite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/about_more_apps"
+            android:layout_below="@+id/aboutMoreApps"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
             android:text="@string/invite_friends_underlined"
             android:textColor="@color/color_primary" />
 
         <com.eagle.commons.views.MyTextView
-            android:id="@+id/about_rate_us"
+            android:id="@+id/aboutRateUs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/about_invite"
+            android:layout_below="@+id/aboutInvite"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
             android:text="@string/rate_us_underlined"
             android:textColor="@color/color_primary" />
 
         <com.eagle.commons.views.MyTextView
-            android:id="@+id/about_license"
+            android:id="@+id/aboutLicense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/about_rate_us"
+            android:layout_below="@+id/aboutRateUs"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
             android:text="@string/third_party_licences_underlined"
             android:textColor="@color/color_primary" />
 
         <com.eagle.commons.views.MyTextView
-            android:id="@+id/about_follow_us"
+            android:id="@+id/aboutFollowUs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/about_license"
+            android:layout_below="@+id/aboutLicense"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/medium_margin"
             android:text="@string/follow_us"
             android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/about_facebook"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/aboutFacebook"
             android:layout_width="@dimen/social_logo"
             android:layout_height="@dimen/social_logo"
-            android:layout_below="@+id/about_follow_us"
+            android:layout_below="@+id/aboutFollowUs"
             android:src="@drawable/ic_facebook"
             android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/about_reddit"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/aboutReddit"
             android:layout_width="@dimen/social_logo"
             android:layout_height="@dimen/social_logo"
-            android:layout_below="@+id/about_follow_us"
+            android:layout_below="@+id/aboutFollowUs"
             android:layout_marginLeft="@dimen/medium_margin"
             android:layout_marginRight="@dimen/medium_margin"
-            android:layout_toEndOf="@+id/about_facebook"
-            android:layout_toRightOf="@+id/about_facebook"
+            android:layout_toEndOf="@+id/aboutFacebook"
             android:src="@drawable/ic_reddit"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <com.eagle.commons.views.MyTextView
-            android:id="@+id/about_copyright"
+            android:id="@+id/aboutCopyright"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/about_facebook"
+            android:layout_below="@+id/aboutFacebook"
             android:layout_alignParentBottom="true"
             android:gravity="center_horizontal|bottom"
             android:paddingTop="@dimen/activity_margin"
-            android:text="v1.0\nCopyright © Eagle Tools 2019" />
+            android:text="@string/copyright_roy93group" />
 
     </RelativeLayout>
 </ScrollView>

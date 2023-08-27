@@ -61,7 +61,7 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
             override fun onCreateActionMode(actionMode: ActionMode, menu: Menu?): Boolean {
                 isSelectable = true
                 actMode = actionMode
-                actBarTextView = layoutInflater.inflate(R.layout.actionbar_title, null) as TextView
+                actBarTextView = layoutInflater.inflate(R.layout.v_actionbar_title, null) as TextView
                 actBarTextView!!.layoutParams = ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
                 actMode!!.customView = actBarTextView
                 actBarTextView!!.setOnClickListener {

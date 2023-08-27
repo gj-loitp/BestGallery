@@ -12,7 +12,7 @@ import com.eagle.commons.dialogs.ConfirmationDialog
 import com.eagle.commons.extensions.*
 import com.eagle.commons.helpers.*
 import com.eagle.commons.models.FAQItem
-import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.a_about.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -26,7 +26,7 @@ class AboutActivity : BaseSimpleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
+        setContentView(R.layout.a_about)
         appName = intent.getStringExtra(APP_NAME) ?: ""
         linkColor = getAdjustedPrimaryColor()
     }
@@ -50,7 +50,7 @@ class AboutActivity : BaseSimpleActivity() {
 
     private fun setupWebsite() {
         val websiteText = String.format(getString(R.string.two_string_placeholder), getString(R.string.website_label), getString(R.string.my_website))
-        about_website.text = websiteText
+        aboutWebsite.text = websiteText
     }
 
     private fun setupEmail() {
@@ -63,46 +63,46 @@ class AboutActivity : BaseSimpleActivity() {
         val separator = "------------------------------"
         val body = "$appVersion$newline$deviceOS$newline$separator$newline$newline$newline"
         val href = "$label<br><a href=\"mailto:$email?subject=$appName&body=$body\">$email</a>"
-        about_email.text = Html.fromHtml(href)
+        aboutEmail.text = Html.fromHtml(href)
 
         if (intent.getBooleanExtra(SHOW_FAQ_BEFORE_MAIL, false) && !baseConfig.wasBeforeAskingShown) {
-            about_email.setOnClickListener {
+            aboutEmail.setOnClickListener {
                 baseConfig.wasBeforeAskingShown = true
-                about_email.movementMethod = LinkMovementMethod.getInstance()
-                about_email.setOnClickListener(null)
+                aboutEmail.movementMethod = LinkMovementMethod.getInstance()
+                aboutEmail.setOnClickListener(null)
                 ConfirmationDialog(this, "", R.string.before_asking_question_read_faq, R.string.read_it, R.string.skip) {
-                    about_faq_label.performClick()
+                    aboutFaqLabel.performClick()
                 }
             }
         } else {
-            about_email.movementMethod = LinkMovementMethod.getInstance()
+            aboutEmail.movementMethod = LinkMovementMethod.getInstance()
         }
     }
 
     private fun setupFAQ() {
         var faqItems = /*intent.getSerializableExtra(APP_FAQ) as ArrayList<FAQItem>*/ ArrayList<FAQItem>()
-        about_faq_label.beVisibleIf(faqItems.isNotEmpty())
-        about_faq_label.setOnClickListener {
+        aboutFaqLabel.beVisibleIf(faqItems.isNotEmpty())
+        aboutFaqLabel.setOnClickListener {
             openFAQ(faqItems)
         }
 
-        about_faq.beVisibleIf(faqItems.isNotEmpty())
-        about_faq.setOnClickListener {
+        aboutFaq.beVisibleIf(faqItems.isNotEmpty())
+        aboutFaq.setOnClickListener {
             openFAQ(faqItems)
         }
 
-        about_faq.setTextColor(linkColor)
-        about_faq.underlineText()
+        aboutFaq.setTextColor(linkColor)
+        aboutFaq.underlineText()
     }
 
     private fun setupUpgradeToPro() {
-        about_upgrade_to_pro.beVisibleIf(getCanAppBeUpgraded())
-        about_upgrade_to_pro.setOnClickListener {
+        aboutUpgradeToPro.beVisibleIf(getCanAppBeUpgraded())
+        aboutUpgradeToPro.setOnClickListener {
             launchUpgradeToProIntent()
         }
 
-        about_upgrade_to_pro.setTextColor(linkColor)
-        about_upgrade_to_pro.underlineText()
+        aboutUpgradeToPro.setTextColor(linkColor)
+        aboutUpgradeToPro.underlineText()
     }
 
     private fun openFAQ(faqItems: ArrayList<FAQItem>) {
@@ -115,14 +115,14 @@ class AboutActivity : BaseSimpleActivity() {
     }
 
     private fun setupMoreApps() {
-        about_more_apps.setOnClickListener {
+        aboutMoreApps.setOnClickListener {
             launchViewIntent("https://play.google.com/store/apps/dev?id=9070296388022589266")
         }
-        about_more_apps.setTextColor(linkColor)
+        aboutMoreApps.setTextColor(linkColor)
     }
 
     private fun setupInvite() {
-        about_invite.setOnClickListener {
+        aboutInvite.setOnClickListener {
             val text = String.format(getString(R.string.share_text), appName, getStoreUrl())
             Intent().apply {
                 action = Intent.ACTION_SEND
@@ -132,14 +132,14 @@ class AboutActivity : BaseSimpleActivity() {
                 startActivity(Intent.createChooser(this, getString(R.string.invite_via)))
             }
         }
-        about_invite.setTextColor(linkColor)
+        aboutInvite.setTextColor(linkColor)
     }
 
     private fun setupRateUs() {
         if (baseConfig.appRunCount < 10) {
-            about_rate_us.visibility = View.GONE
+            aboutRateUs.visibility = View.GONE
         } else {
-            about_rate_us.setOnClickListener {
+            aboutRateUs.setOnClickListener {
                 try {
                     launchViewIntent("market://details?id=${packageName.removeSuffix(".debug")}")
                 } catch (ignored: ActivityNotFoundException) {
@@ -147,11 +147,11 @@ class AboutActivity : BaseSimpleActivity() {
                 }
             }
         }
-        about_rate_us.setTextColor(linkColor)
+        aboutRateUs.setTextColor(linkColor)
     }
 
     private fun setupLicense() {
-        about_license.setOnClickListener {
+        aboutLicense.setOnClickListener {
             Intent(applicationContext, LicenseActivity::class.java).apply {
                 putExtra(APP_ICON_IDS, getAppIconIDs())
                 putExtra(APP_LAUNCHER_NAME, getAppLauncherName())
@@ -159,11 +159,11 @@ class AboutActivity : BaseSimpleActivity() {
                 startActivity(this)
             }
         }
-        about_license.setTextColor(linkColor)
+        aboutLicense.setTextColor(linkColor)
     }
 
     private fun setupFacebook() {
-        about_facebook.setOnClickListener {
+        aboutFacebook.setOnClickListener {
             var link = "https://www.facebook.com/eagle"
             try {
                 packageManager.getPackageInfo("com.facebook.katana", 0)
@@ -176,7 +176,7 @@ class AboutActivity : BaseSimpleActivity() {
     }
 
     private fun setupReddit() {
-        about_reddit.setOnClickListener {
+        aboutReddit.setOnClickListener {
             launchViewIntent("https://www.reddit.com/r/eagle")
         }
     }
@@ -184,7 +184,7 @@ class AboutActivity : BaseSimpleActivity() {
     private fun setupCopyright() {
         val versionName = intent.getStringExtra(APP_VERSION_NAME) ?: ""
         val year = Calendar.getInstance().get(Calendar.YEAR)
-        about_copyright.text = String.format(getString(R.string.copyright), versionName, year)
+        aboutCopyright.text = String.format(getString(R.string.copyright), versionName, year)
     }
 
     private fun getStoreUrl() = "https://play.google.com/store/apps/details?id=${packageName.removeSuffix(".debug")}"
