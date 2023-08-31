@@ -98,7 +98,7 @@
         </RadioGroup>
 
         <include
-            android:id="@+id/use_for_this_folder_divider"
+            android:id="@+id/useForThisFolderDivider"
             layout="@layout/v_divider"/>
 
         <com.roy.commons.views.MyAppCompatCheckbox
