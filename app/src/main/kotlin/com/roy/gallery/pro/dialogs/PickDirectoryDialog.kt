@@ -16,20 +16,20 @@ import com.roy.commons.ext.handleHiddenFolderPasswordProtection
 import com.roy.commons.ext.setupDialogStuff
 import com.roy.commons.ext.toast
 import com.roy.commons.views.MyGridLayoutManager
-import kotlinx.android.synthetic.main.dialog_directory_picker.view.*
+import kotlinx.android.synthetic.main.dlg_directory_picker.view.*
 
 class PickDirectoryDialog(val activity: BaseSimpleActivity, val sourcePath: String, showOtherFolderButton: Boolean, val callback: (path: String) -> Unit) {
     private var dialog: AlertDialog
     private var shownDirectories = ArrayList<Directory>()
     private var allDirectories = ArrayList<Directory>()
     private var openedSubfolders = arrayListOf("")
-    private var view = activity.layoutInflater.inflate(R.layout.dialog_directory_picker, null)
+    private var view = activity.layoutInflater.inflate(R.layout.dlg_directory_picker, null)
     private var isGridViewType = activity.config.viewTypeFolders == VIEW_TYPE_GRID
     private var showHidden = activity.config.shouldShowHidden
     private var currentPathPrefix = ""
 
     init {
-        (view.directories_grid.layoutManager as MyGridLayoutManager).apply {
+        (view.directoriesGrid.layoutManager as MyGridLayoutManager).apply {
             orientation = if (activity.config.scrollHorizontally && isGridViewType) RecyclerView.HORIZONTAL else RecyclerView.VERTICAL
             spanCount = if (isGridViewType) activity.config.dirColumnCnt else 1
         }
@@ -50,10 +50,10 @@ class PickDirectoryDialog(val activity: BaseSimpleActivity, val sourcePath: Stri
 
         dialog = builder.create().apply {
             activity.setupDialogStuff(view, this, R.string.select_destination) {
-                view.directories_show_hidden.beVisibleIf(!context.config.shouldShowHidden)
-                view.directories_show_hidden.setOnClickListener {
+                view.directoriesShowHidden.beVisibleIf(!context.config.shouldShowHidden)
+                view.directoriesShowHidden.setOnClickListener {
                     activity.handleHiddenFolderPasswordProtection {
-                        view.directories_show_hidden.beGone()
+                        view.directoriesShowHidden.beGone()
                         showHidden = true
                         fetchDirectories(true)
                     }
@@ -96,7 +96,7 @@ class PickDirectoryDialog(val activity: BaseSimpleActivity, val sourcePath: Stri
         }
 
         shownDirectories = dirs
-        val adapter = com.roy.gallery.pro.adapters.DirectoryAdapter(activity, dirs.clone() as ArrayList<Directory>, null, view.directories_grid, true) {
+        val adapter = com.roy.gallery.pro.adapters.DirectoryAdapter(activity, dirs.clone() as ArrayList<Directory>, null, view.directoriesGrid, true) {
             val clickedDir = it as Directory
             val path = clickedDir.path
             if (clickedDir.subfoldersCount == 1 || !activity.config.groupDirectSubfolders) {
@@ -117,23 +117,23 @@ class PickDirectoryDialog(val activity: BaseSimpleActivity, val sourcePath: Stri
         val scrollHorizontally = activity.config.scrollHorizontally && isGridViewType
         val sorting = activity.config.directorySorting
         view.apply {
-            directories_grid.adapter = adapter
+            directoriesGrid.adapter = adapter
 
-            directories_vertical_fastscroller.isHorizontal = false
-            directories_vertical_fastscroller.beGoneIf(scrollHorizontally)
+            directoriesVerticalFastScroller.isHorizontal = false
+            directoriesVerticalFastScroller.beGoneIf(scrollHorizontally)
 
-            directories_horizontal_fastscroller.isHorizontal = true
-            directories_horizontal_fastscroller.beVisibleIf(scrollHorizontally)
+            directoriesHorizontalFastScroller.isHorizontal = true
+            directoriesHorizontalFastScroller.beVisibleIf(scrollHorizontally)
 
             if (scrollHorizontally) {
-                directories_horizontal_fastscroller.allowBubbleDisplay = activity.config.showInfoBubble
-                directories_horizontal_fastscroller.setViews(directories_grid) {
-                    directories_horizontal_fastscroller.updateBubbleText(dirs[it].getBubbleText(sorting, activity))
+                directoriesHorizontalFastScroller.allowBubbleDisplay = activity.config.showInfoBubble
+                directoriesHorizontalFastScroller.setViews(directoriesGrid) {
+                    directoriesHorizontalFastScroller.updateBubbleText(dirs[it].getBubbleText(sorting, activity))
                 }
             } else {
-                directories_vertical_fastscroller.allowBubbleDisplay = activity.config.showInfoBubble
-                directories_vertical_fastscroller.setViews(directories_grid) {
-                    directories_vertical_fastscroller.updateBubbleText(dirs[it].getBubbleText(sorting, activity))
+                directoriesVerticalFastScroller.allowBubbleDisplay = activity.config.showInfoBubble
+                directoriesVerticalFastScroller.setViews(directoriesGrid) {
+                    directoriesVerticalFastScroller.updateBubbleText(dirs[it].getBubbleText(sorting, activity))
                 }
             }
         }

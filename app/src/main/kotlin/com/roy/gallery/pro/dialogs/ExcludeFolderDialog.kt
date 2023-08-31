@@ -10,18 +10,18 @@ import com.roy.commons.activities.BaseSimpleActivity
 import com.roy.commons.ext.beVisibleIf
 import com.roy.commons.ext.getBasePath
 import com.roy.commons.ext.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_exclude_folder.view.*
+import kotlinx.android.synthetic.main.dlg_exclude_folder.view.*
 
 class ExcludeFolderDialog(val activity: BaseSimpleActivity, val selectedPaths: List<String>, val callback: () -> Unit) {
     val alternativePaths = getAlternativePathsList()
     var radioGroup: RadioGroup? = null
 
     init {
-        val view = activity.layoutInflater.inflate(R.layout.dialog_exclude_folder, null).apply {
-            exclude_folder_parent.beVisibleIf(alternativePaths.size > 1)
+        val view = activity.layoutInflater.inflate(R.layout.dlg_exclude_folder, null).apply {
+            excludeFolderParent.beVisibleIf(alternativePaths.size > 1)
 
-            radioGroup = exclude_folder_radio_group
-            exclude_folder_radio_group.beVisibleIf(alternativePaths.size > 1)
+            radioGroup = excludeFolderRadioGroup
+            excludeFolderRadioGroup.beVisibleIf(alternativePaths.size > 1)
         }
 
         alternativePaths.forEachIndexed { index, value ->

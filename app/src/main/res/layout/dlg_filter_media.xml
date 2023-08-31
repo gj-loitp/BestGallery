@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/filter_media_dialog_holder"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/filterMediaDialogHolder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -10,43 +9,43 @@
     android:paddingRight="@dimen/activity_margin">
 
     <com.roy.commons.views.MyAppCompatCheckbox
-        android:id="@+id/filter_media_images"
+        android:id="@+id/filterMediaImages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_margin"
         android:paddingBottom="@dimen/activity_margin"
-        android:text="@string/images"/>
+        android:text="@string/images" />
 
     <com.roy.commons.views.MyAppCompatCheckbox
-        android:id="@+id/filter_media_videos"
+        android:id="@+id/filterMediaVideos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_margin"
         android:paddingBottom="@dimen/activity_margin"
-        android:text="@string/videos"/>
+        android:text="@string/videos" />
 
     <com.roy.commons.views.MyAppCompatCheckbox
-        android:id="@+id/filter_media_gifs"
+        android:id="@+id/filterMediaGifs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_margin"
         android:paddingBottom="@dimen/activity_margin"
-        android:text="@string/gifs"/>
+        android:text="@string/gifs" />
 
     <com.roy.commons.views.MyAppCompatCheckbox
-        android:id="@+id/filter_media_raws"
+        android:id="@+id/filterMediaRaws"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_margin"
         android:paddingBottom="@dimen/activity_margin"
-        android:text="@string/raw_images"/>
+        android:text="@string/raw_images" />
 
     <com.roy.commons.views.MyAppCompatCheckbox
-        android:id="@+id/filter_media_svgs"
+        android:id="@+id/filterMediaSvgs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_margin"
         android:paddingBottom="@dimen/activity_margin"
-        android:text="@string/svgs"/>
+        android:text="@string/svgs" />
 
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

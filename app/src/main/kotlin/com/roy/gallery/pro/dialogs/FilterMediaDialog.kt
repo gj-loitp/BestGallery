@@ -6,19 +6,19 @@ import com.roy.gallery.pro.extensions.config
 import com.roy.gallery.pro.helpers.*
 import com.roy.commons.activities.BaseSimpleActivity
 import com.roy.commons.ext.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_filter_media.view.*
+import kotlinx.android.synthetic.main.dlg_filter_media.view.*
 
 class FilterMediaDialog(val activity: BaseSimpleActivity, val callback: (result: Int) -> Unit) {
-    private var view = activity.layoutInflater.inflate(R.layout.dialog_filter_media, null)
+    private var view = activity.layoutInflater.inflate(R.layout.dlg_filter_media, null)
 
     init {
         val filterMedia = activity.config.filterMedia
         view.apply {
-            filter_media_images.isChecked = filterMedia and TYPE_IMAGES != 0
-            filter_media_videos.isChecked = filterMedia and TYPE_VIDEOS != 0
-            filter_media_gifs.isChecked = filterMedia and TYPE_GIFS != 0
-            filter_media_raws.isChecked = filterMedia and TYPE_RAWS != 0
-            filter_media_svgs.isChecked = filterMedia and TYPE_SVGS != 0
+            filterMediaImages.isChecked = filterMedia and TYPE_IMAGES != 0
+            filterMediaVideos.isChecked = filterMedia and TYPE_VIDEOS != 0
+            filterMediaGifs.isChecked = filterMedia and TYPE_GIFS != 0
+            filterMediaRaws.isChecked = filterMedia and TYPE_RAWS != 0
+            filterMediaSvgs.isChecked = filterMedia and TYPE_SVGS != 0
         }
 
         AlertDialog.Builder(activity)
@@ -31,15 +31,15 @@ class FilterMediaDialog(val activity: BaseSimpleActivity, val callback: (result:
 
     private fun dialogConfirmed() {
         var result = 0
-        if (view.filter_media_images.isChecked)
+        if (view.filterMediaImages.isChecked)
             result += TYPE_IMAGES
-        if (view.filter_media_videos.isChecked)
+        if (view.filterMediaVideos.isChecked)
             result += TYPE_VIDEOS
-        if (view.filter_media_gifs.isChecked)
+        if (view.filterMediaGifs.isChecked)
             result += TYPE_GIFS
-        if (view.filter_media_raws.isChecked)
+        if (view.filterMediaRaws.isChecked)
             result += TYPE_RAWS
-        if (view.filter_media_svgs.isChecked)
+        if (view.filterMediaSvgs.isChecked)
             result += TYPE_SVGS
 
         activity.config.filterMedia = result

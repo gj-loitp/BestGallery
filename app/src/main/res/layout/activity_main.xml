@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/directories_holder"
+        android:id="@+id/directoriesHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -35,7 +35,7 @@
             android:visibility="gone" />
 
         <com.roy.commons.views.MyRecyclerView
-            android:id="@+id/directories_grid"
+            android:id="@+id/directoriesGrid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"
@@ -43,7 +43,7 @@
             app:spanCount="@integer/directory_columns_vertical_scroll" />
 
         <com.roy.commons.views.FastScroller
-            android:id="@+id/directories_vertical_fastscroller"
+            android:id="@+id/directoriesVerticalFastScroller"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -57,7 +57,7 @@
         </com.roy.commons.views.FastScroller>
 
         <com.roy.commons.views.FastScroller
-            android:id="@+id/directories_horizontal_fastscroller"
+            android:id="@+id/directoriesHorizontalFastScroller"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
