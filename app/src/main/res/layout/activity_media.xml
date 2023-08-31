@@ -36,7 +36,7 @@
             android:visibility="gone"/>
 
         <com.roy.commons.views.MyRecyclerView
-            android:id="@+id/media_grid"
+            android:id="@+id/mediaGrid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"
@@ -44,7 +44,7 @@
             app:spanCount="@integer/media_columns_vertical_scroll"/>
 
         <com.roy.commons.views.FastScroller
-            android:id="@+id/media_vertical_fastscroller"
+            android:id="@+id/mediaVerticalFastScroller"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -58,7 +58,7 @@
         </com.roy.commons.views.FastScroller>
 
         <com.roy.commons.views.FastScroller
-            android:id="@+id/media_horizontal_fastscroller"
+            android:id="@+id/mediaHorizontalFastScroller"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"

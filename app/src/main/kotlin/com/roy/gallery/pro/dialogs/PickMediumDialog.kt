@@ -14,17 +14,17 @@ import com.roy.commons.ext.beGoneIf
 import com.roy.commons.ext.beVisibleIf
 import com.roy.commons.ext.setupDialogStuff
 import com.roy.commons.views.MyGridLayoutManager
-import kotlinx.android.synthetic.main.dialog_medium_picker.view.*
+import kotlinx.android.synthetic.main.dlg_medium_picker.view.*
 
 class PickMediumDialog(val activity: BaseSimpleActivity, val path: String, val callback: (path: String) -> Unit) {
     var dialog: AlertDialog
     var shownMedia = ArrayList<ThumbnailItem>()
-    val view = activity.layoutInflater.inflate(R.layout.dialog_medium_picker, null)
+    val view = activity.layoutInflater.inflate(R.layout.dlg_medium_picker, null)
     val viewType = activity.config.getFolderViewType(if (activity.config.showAll) SHOW_ALL else path)
     var isGridViewType = viewType == VIEW_TYPE_GRID
 
     init {
-        (view.media_grid.layoutManager as MyGridLayoutManager).apply {
+        (view.mediaGrid.layoutManager as MyGridLayoutManager).apply {
             orientation = if (activity.config.scrollHorizontally && isGridViewType) RecyclerView.HORIZONTAL else RecyclerView.VERTICAL
             spanCount = if (isGridViewType) activity.config.mediaColumnCnt else 1
         }
@@ -63,7 +63,7 @@ class PickMediumDialog(val activity: BaseSimpleActivity, val path: String, val c
             return
 
         shownMedia = media
-        val adapter = com.roy.gallery.pro.adapters.MediaAdapter(activity, shownMedia.clone() as ArrayList<ThumbnailItem>, null, true, false, path, view.media_grid, null) {
+        val adapter = com.roy.gallery.pro.adapters.MediaAdapter(activity, shownMedia.clone() as ArrayList<ThumbnailItem>, null, true, false, path, view.mediaGrid, null) {
             if (it is Medium) {
                 callback(it.path)
                 dialog.dismiss()
@@ -73,23 +73,23 @@ class PickMediumDialog(val activity: BaseSimpleActivity, val path: String, val c
         val scrollHorizontally = activity.config.scrollHorizontally && isGridViewType
         val sorting = activity.config.getFileSorting(if (path.isEmpty()) SHOW_ALL else path)
         view.apply {
-            media_grid.adapter = adapter
+            mediaGrid.adapter = adapter
 
-            media_vertical_fastscroller.isHorizontal = false
-            media_vertical_fastscroller.beGoneIf(scrollHorizontally)
+            mediaVerticalFastScroller.isHorizontal = false
+            mediaVerticalFastScroller.beGoneIf(scrollHorizontally)
 
-            media_horizontal_fastscroller.isHorizontal = true
-            media_horizontal_fastscroller.beVisibleIf(scrollHorizontally)
+            mediaHorizontalFastScroller.isHorizontal = true
+            mediaHorizontalFastScroller.beVisibleIf(scrollHorizontally)
 
             if (scrollHorizontally) {
-                media_horizontal_fastscroller.allowBubbleDisplay = activity.config.showInfoBubble
-                media_horizontal_fastscroller.setViews(media_grid) {
-                    media_horizontal_fastscroller.updateBubbleText((media[it] as? Medium)?.getBubbleText(sorting, activity) ?: "")
+                mediaHorizontalFastScroller.allowBubbleDisplay = activity.config.showInfoBubble
+                mediaHorizontalFastScroller.setViews(mediaGrid) {
+                    mediaHorizontalFastScroller.updateBubbleText((media[it] as? Medium)?.getBubbleText(sorting, activity) ?: "")
                 }
             } else {
-                media_vertical_fastscroller.allowBubbleDisplay = activity.config.showInfoBubble
-                media_vertical_fastscroller.setViews(media_grid) {
-                    media_vertical_fastscroller.updateBubbleText((media[it] as? Medium)?.getBubbleText(sorting, activity) ?: "")
+                mediaVerticalFastScroller.allowBubbleDisplay = activity.config.showInfoBubble
+                mediaVerticalFastScroller.setViews(mediaGrid) {
+                    mediaVerticalFastScroller.updateBubbleText((media[it] as? Medium)?.getBubbleText(sorting, activity) ?: "")
                 }
             }
         }

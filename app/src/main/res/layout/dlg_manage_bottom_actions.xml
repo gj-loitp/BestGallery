@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/manage_bottom_actions_scrollview"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/manageBottomActionsScrollview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/manage_bottom_actions_holder"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/manageBottomActionsHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -15,116 +14,116 @@
         android:paddingRight="@dimen/activity_margin">
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_toggle_favorite"
+            android:id="@+id/manageBottomActionsToggleFavorite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/toggle_favorite"/>
+            android:text="@string/toggle_favorite" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_edit"
+            android:id="@+id/manageBottomActionsEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/edit"/>
+            android:text="@string/edit" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_share"
+            android:id="@+id/manageBottomActionsShare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/share"/>
+            android:text="@string/share" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_delete"
+            android:id="@+id/manageBottomActionsDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/delete"/>
+            android:text="@string/delete" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_rotate"
+            android:id="@+id/manageBottomActionsRotate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/rotate"/>
+            android:text="@string/rotate" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_properties"
+            android:id="@+id/manageBottomActionsProperties"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/properties"/>
+            android:text="@string/properties" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_change_orientation"
+            android:id="@+id/manageBottomActionsChangeOrientation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/change_orientation"/>
+            android:text="@string/change_orientation" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_slideshow"
+            android:id="@+id/manageBottomActionsSlideshow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/slideshow"/>
+            android:text="@string/slideshow" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_show_on_map"
+            android:id="@+id/manageBottomActionsShowOnMap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/show_on_map"/>
+            android:text="@string/show_on_map" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_toggle_visibility"
+            android:id="@+id/manageBottomActionsToggleVisibility"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/toggle_file_visibility"/>
+            android:text="@string/toggle_file_visibility" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_rename"
+            android:id="@+id/manageBottomActionsRename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/rename"/>
+            android:text="@string/rename" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_set_as"
+            android:id="@+id/manageBottomActionsSetAs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/set_as"/>
+            android:text="@string/set_as" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_copy"
+            android:id="@+id/manageBottomActionsCopy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/copy"/>
+            android:text="@string/copy" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_bottom_actions_move"
+            android:id="@+id/manageBottomActionsMove"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/move"/>
+            android:text="@string/move" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

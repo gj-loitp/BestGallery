@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/manage_extended_details_scrollview"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/manageExtendedDetailsScrollview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/manage_extended_details_holder"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/manageExtendedDetailsHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -15,99 +14,99 @@
         android:paddingRight="@dimen/activity_margin">
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_extended_details_name"
+            android:id="@+id/manageExtendedDetailsName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/filename"/>
+            android:text="@string/filename" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_extended_details_path"
+            android:id="@+id/manageExtendedDetailsPath"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/path"/>
+            android:text="@string/path" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_extended_details_size"
+            android:id="@+id/manageExtendedDetailsSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/size"/>
+            android:text="@string/size" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_extended_details_resolution"
+            android:id="@+id/manageExtendedDetailsResolution"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/resolution"/>
+            android:text="@string/resolution" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_extended_details_last_modified"
+            android:id="@+id/manageExtendedDetailsLastModified"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/last_modified"/>
+            android:text="@string/last_modified" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_extended_details_date_taken"
+            android:id="@+id/manageExtendedDetailsDateTaken"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/date_taken"/>
+            android:text="@string/date_taken" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_extended_details_camera"
+            android:id="@+id/manageExtendedDetailsCamera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/camera"/>
+            android:text="@string/camera" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_extended_details_exif"
+            android:id="@+id/manageExtendedDetailsExif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/exif"/>
+            android:text="@string/exif" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
-            android:importantForAccessibility="no"/>
+            android:importantForAccessibility="no" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_extended_details_duration"
+            android:id="@+id/manageExtendedDetailsDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/duration"/>
+            android:text="@string/duration" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_extended_details_artist"
+            android:id="@+id/manageExtendedDetailsArtist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/artist"/>
+            android:text="@string/artist" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/manage_extended_details_album"
+            android:id="@+id/manageExtendedDetailsAlbum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/album"/>
+            android:text="@string/album" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>
