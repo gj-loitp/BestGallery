@@ -13,7 +13,7 @@ import com.roy.commons.ext.setupDialogStuff
 import com.roy.commons.ext.showKeyboard
 import com.roy.commons.ext.toast
 import com.roy.commons.ext.value
-import kotlinx.android.synthetic.main.dialog_save_as.view.*
+import kotlinx.android.synthetic.main.dlg_save_as.view.*
 import java.io.File
 
 class SaveAsDialog(val activity: BaseSimpleActivity, val path: String, val appendFilename: Boolean, val callback: (savePath: String) -> Unit) {
@@ -21,8 +21,8 @@ class SaveAsDialog(val activity: BaseSimpleActivity, val path: String, val appen
     init {
         var realPath = path.getParentPath()
 
-        val view = activity.layoutInflater.inflate(R.layout.dialog_save_as, null).apply {
-            save_as_path.text = "${activity.humanizePath(realPath).trimEnd('/')}/"
+        val view = activity.layoutInflater.inflate(R.layout.dlg_save_as, null).apply {
+            saveAsPath.text = "${activity.humanizePath(realPath).trimEnd('/')}/"
 
             val fullName = path.getFilenameFromPath()
             val dotAt = fullName.lastIndexOf(".")
@@ -31,17 +31,17 @@ class SaveAsDialog(val activity: BaseSimpleActivity, val path: String, val appen
             if (dotAt > 0) {
                 name = fullName.substring(0, dotAt)
                 val extension = fullName.substring(dotAt + 1)
-                save_as_extension.setText(extension)
+                saveAsExtension.setText(extension)
             }
 
             if (appendFilename) {
                 name += "_1"
             }
 
-            save_as_name.setText(name)
-            save_as_path.setOnClickListener {
+            saveAsName.setText(name)
+            saveAsPath.setOnClickListener {
                 FilePickerDialog(activity, realPath, false, false, true, true) {
-                    save_as_path.text = activity.humanizePath(it)
+                    saveAsPath.text = activity.humanizePath(it)
                     realPath = it
                 }
             }
@@ -52,10 +52,10 @@ class SaveAsDialog(val activity: BaseSimpleActivity, val path: String, val appen
                 .setNegativeButton(R.string.cancel, null)
                 .create().apply {
                     activity.setupDialogStuff(view, this, R.string.save_as) {
-                        showKeyboard(view.save_as_name)
+                        showKeyboard(view.saveAsName)
                         getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                            val filename = view.save_as_name.value
-                            val extension = view.save_as_extension.value
+                            val filename = view.saveAsName.value
+                            val extension = view.saveAsExtension.value
 
                             if (filename.isEmpty()) {
                                 activity.toast(R.string.filename_cannot_be_empty)

@@ -4,52 +4,52 @@ import androidx.appcompat.app.AlertDialog
 import com.roy.gallery.pro.R
 import com.roy.commons.activities.BaseSimpleActivity
 import com.roy.commons.ext.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_other_aspect_ratio.view.*
+import kotlinx.android.synthetic.main.dlg_other_aspect_ratio.view.*
 
 class OtherAspectRatioDialog(val activity: BaseSimpleActivity, val lastOtherAspectRatio: Pair<Int, Int>?, val callback: (aspectRatio: Pair<Int, Int>) -> Unit) {
     private val dialog: AlertDialog
 
     init {
-        val view = activity.layoutInflater.inflate(R.layout.dialog_other_aspect_ratio, null).apply {
-            other_aspect_ratio_2_1.setOnClickListener { ratioPicked(Pair(2, 1)) }
-            other_aspect_ratio_3_2.setOnClickListener { ratioPicked(Pair(3, 2)) }
-            other_aspect_ratio_4_3.setOnClickListener { ratioPicked(Pair(4, 3)) }
-            other_aspect_ratio_5_3.setOnClickListener { ratioPicked(Pair(5, 3)) }
-            other_aspect_ratio_16_9.setOnClickListener { ratioPicked(Pair(16, 9)) }
-            other_aspect_ratio_19_9.setOnClickListener { ratioPicked(Pair(19, 9)) }
-            other_aspect_ratio_custom.setOnClickListener { customRatioPicked() }
+        val view = activity.layoutInflater.inflate(R.layout.dlg_other_aspect_ratio, null).apply {
+            otherAspectRatio21.setOnClickListener { ratioPicked(Pair(2, 1)) }
+            otherAspectRatio32.setOnClickListener { ratioPicked(Pair(3, 2)) }
+            otherAspectRatio43.setOnClickListener { ratioPicked(Pair(4, 3)) }
+            otherAspectRatio53.setOnClickListener { ratioPicked(Pair(5, 3)) }
+            otherAspectRatio169.setOnClickListener { ratioPicked(Pair(16, 9)) }
+            otherAspectRatio199.setOnClickListener { ratioPicked(Pair(19, 9)) }
+            otherAspectRatioCustom.setOnClickListener { customRatioPicked() }
 
-            other_aspect_ratio_1_2.setOnClickListener { ratioPicked(Pair(1, 2)) }
-            other_aspect_ratio_2_3.setOnClickListener { ratioPicked(Pair(2, 3)) }
-            other_aspect_ratio_3_4.setOnClickListener { ratioPicked(Pair(3, 4)) }
-            other_aspect_ratio_3_5.setOnClickListener { ratioPicked(Pair(3, 5)) }
-            other_aspect_ratio_9_16.setOnClickListener { ratioPicked(Pair(9, 16)) }
-            other_aspect_ratio_9_19.setOnClickListener { ratioPicked(Pair(9, 19)) }
+            otherAspectRatio12.setOnClickListener { ratioPicked(Pair(1, 2)) }
+            otherAspectRatio23.setOnClickListener { ratioPicked(Pair(2, 3)) }
+            otherAspectRatio34.setOnClickListener { ratioPicked(Pair(3, 4)) }
+            otherAspectRatio35.setOnClickListener { ratioPicked(Pair(3, 5)) }
+            otherAspectRatio916.setOnClickListener { ratioPicked(Pair(9, 16)) }
+            otherAspectRatio919.setOnClickListener { ratioPicked(Pair(9, 19)) }
 
             val radio1SelectedItemId = when (lastOtherAspectRatio) {
-                Pair(2, 1) -> other_aspect_ratio_2_1.id
-                Pair(3, 2) -> other_aspect_ratio_3_2.id
-                Pair(4, 3) -> other_aspect_ratio_4_3.id
-                Pair(5, 3) -> other_aspect_ratio_5_3.id
-                Pair(16, 9) -> other_aspect_ratio_16_9.id
-                Pair(19, 9) -> other_aspect_ratio_19_9.id
+                Pair(2, 1) -> otherAspectRatio21.id
+                Pair(3, 2) -> otherAspectRatio32.id
+                Pair(4, 3) -> otherAspectRatio43.id
+                Pair(5, 3) -> otherAspectRatio53.id
+                Pair(16, 9) -> otherAspectRatio169.id
+                Pair(19, 9) -> otherAspectRatio199.id
                 else -> 0
             }
-            other_aspect_ratio_dialog_radio_1.check(radio1SelectedItemId)
+            otherAspectRatioDialogRadio1.check(radio1SelectedItemId)
 
             val radio2SelectedItemId = when (lastOtherAspectRatio) {
-                Pair(1, 2) -> other_aspect_ratio_1_2.id
-                Pair(2, 3) -> other_aspect_ratio_2_3.id
-                Pair(3, 4) -> other_aspect_ratio_3_4.id
-                Pair(3, 5) -> other_aspect_ratio_3_5.id
-                Pair(9, 16) -> other_aspect_ratio_9_16.id
-                Pair(9, 19) -> other_aspect_ratio_9_19.id
+                Pair(1, 2) -> otherAspectRatio12.id
+                Pair(2, 3) -> otherAspectRatio23.id
+                Pair(3, 4) -> otherAspectRatio34.id
+                Pair(3, 5) -> otherAspectRatio35.id
+                Pair(9, 16) -> otherAspectRatio916.id
+                Pair(9, 19) -> otherAspectRatio919.id
                 else -> 0
             }
-            other_aspect_ratio_dialog_radio_2.check(radio2SelectedItemId)
+            otherAspectRatioDialogRadio2.check(radio2SelectedItemId)
 
             if (radio1SelectedItemId == 0 && radio2SelectedItemId == 0) {
-                other_aspect_ratio_dialog_radio_1.check(other_aspect_ratio_custom.id)
+                otherAspectRatioDialogRadio1.check(otherAspectRatioCustom.id)
             }
         }
 

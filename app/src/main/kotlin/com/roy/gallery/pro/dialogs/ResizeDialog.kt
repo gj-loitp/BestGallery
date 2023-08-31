@@ -10,13 +10,13 @@ import com.roy.commons.ext.setupDialogStuff
 import com.roy.commons.ext.showKeyboard
 import com.roy.commons.ext.toast
 import com.roy.commons.ext.value
-import kotlinx.android.synthetic.main.dialog_resize_image.view.*
+import kotlinx.android.synthetic.main.dlg_resize_image.view.*
 
 class ResizeDialog(val activity: BaseSimpleActivity, val size: Point, val callback: (newSize: Point) -> Unit) {
     init {
-        val view = activity.layoutInflater.inflate(R.layout.dialog_resize_image, null)
+        val view = activity.layoutInflater.inflate(R.layout.dlg_resize_image, null)
         val widthView = view.image_width
-        val heightView = view.image_height
+        val heightView = view.imageHeight
 
         widthView.setText(size.x.toString())
         heightView.setText(size.y.toString())
@@ -31,7 +31,7 @@ class ResizeDialog(val activity: BaseSimpleActivity, val size: Point, val callba
                     width = size.x
                 }
 
-                if (view.keep_aspect_ratio.isChecked) {
+                if (view.keepAspectRatio.isChecked) {
                     heightView.setText((width / ratio).toInt().toString())
                 }
             }
@@ -45,7 +45,7 @@ class ResizeDialog(val activity: BaseSimpleActivity, val size: Point, val callba
                     height = size.y
                 }
 
-                if (view.keep_aspect_ratio.isChecked) {
+                if (view.keepAspectRatio.isChecked) {
                     widthView.setText((height * ratio).toInt().toString())
                 }
             }
