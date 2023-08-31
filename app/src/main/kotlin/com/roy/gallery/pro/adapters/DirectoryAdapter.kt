@@ -68,7 +68,7 @@ class DirectoryAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutType =
-            if (isListViewType) R.layout.v_directory_item_list else R.layout.directory_item_grid
+            if (isListViewType) R.layout.v_directory_item_list else R.layout.v_directory_item_grid
         return createViewHolder(layoutType, parent)
     }
 

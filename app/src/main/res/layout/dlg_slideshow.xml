@@ -1,115 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/slideshow_scrollview"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/slideshowScrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/slideshow_holder"
+        android:id="@+id/slideshowHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/activity_margin">
 
         <com.roy.commons.views.MyTextView
-            android:id="@+id/interval_label"
+            android:id="@+id/intervalLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/medium_margin"
-            android:paddingLeft="@dimen/medium_margin"
             android:paddingTop="@dimen/activity_margin"
+            android:paddingEnd="0dp"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/interval"/>
+            android:text="@string/interval" />
 
         <com.roy.commons.views.MyEditText
-            android:id="@+id/interval_value"
+            android:id="@+id/intervalValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:ems="5"
-            android:gravity="right"
+            android:gravity="end"
             android:imeOptions="actionDone"
             android:inputType="number"
             android:maxLength="2"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/normal_text_size"/>
+            android:textSize="@dimen/normal_text_size"
+            tools:ignore="RelativeOverlap" />
 
         <RelativeLayout
-            android:id="@+id/include_videos_holder"
+            android:id="@+id/includeVideosHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/interval_label"
+            android:layout_below="@+id/intervalLabel"
             android:background="?attr/selectableItemBackground"
             android:paddingStart="@dimen/medium_margin"
-            android:paddingLeft="@dimen/medium_margin"
             android:paddingTop="@dimen/activity_margin"
+            android:paddingEnd="0dp"
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MySwitchCompat
-                android:id="@+id/include_videos"
+                android:id="@+id/includeVideos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:clickable="false"
-                android:text="@string/include_videos"/>
+                android:text="@string/include_videos" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/include_gifs_holder"
+            android:id="@+id/includeGifsHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/include_videos_holder"
+            android:layout_below="@+id/includeVideosHolder"
             android:background="?attr/selectableItemBackground"
             android:paddingStart="@dimen/medium_margin"
-            android:paddingLeft="@dimen/medium_margin"
             android:paddingTop="@dimen/activity_margin"
+            android:paddingEnd="0dp"
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MySwitchCompat
-                android:id="@+id/include_gifs"
+                android:id="@+id/includeGifs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:clickable="false"
-                android:text="@string/include_gifs"/>
+                android:text="@string/include_gifs" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/random_order_holder"
+            android:id="@+id/randomOrderHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/include_gifs_holder"
+            android:layout_below="@+id/includeGifsHolder"
             android:background="?attr/selectableItemBackground"
             android:paddingStart="@dimen/medium_margin"
-            android:paddingLeft="@dimen/medium_margin"
             android:paddingTop="@dimen/activity_margin"
+            android:paddingEnd="0dp"
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MySwitchCompat
-                android:id="@+id/random_order"
+                android:id="@+id/randomOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:clickable="false"
-                android:text="@string/random_order"/>
+                android:text="@string/random_order" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/use_fade_holder"
+            android:id="@+id/useFadeHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/random_order_holder"
+            android:layout_below="@+id/randomOrderHolder"
             android:background="?attr/selectableItemBackground"
             android:paddingStart="@dimen/medium_margin"
-            android:paddingLeft="@dimen/medium_margin"
             android:paddingTop="@dimen/activity_margin"
+            android:paddingEnd="0dp"
             android:paddingBottom="@dimen/activity_margin"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <com.roy.commons.views.MySwitchCompat
                 android:id="@+id/use_fade"
@@ -117,49 +118,49 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:clickable="false"
-                android:text="@string/use_fade"/>
+                android:text="@string/use_fade" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/move_backwards_holder"
+            android:id="@+id/moveBackwardsHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/use_fade_holder"
+            android:layout_below="@+id/useFadeHolder"
             android:background="?attr/selectableItemBackground"
             android:paddingStart="@dimen/medium_margin"
-            android:paddingLeft="@dimen/medium_margin"
             android:paddingTop="@dimen/activity_margin"
+            android:paddingEnd="0dp"
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MySwitchCompat
-                android:id="@+id/move_backwards"
+                android:id="@+id/moveBackwards"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:clickable="false"
-                android:text="@string/move_backwards"/>
+                android:text="@string/move_backwards" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/loop_slideshow_holder"
+            android:id="@+id/loopSlideshowHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/move_backwards_holder"
+            android:layout_below="@+id/moveBackwardsHolder"
             android:background="?attr/selectableItemBackground"
             android:paddingStart="@dimen/medium_margin"
-            android:paddingLeft="@dimen/medium_margin"
             android:paddingTop="@dimen/activity_margin"
+            android:paddingEnd="0dp"
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MySwitchCompat
-                android:id="@+id/loop_slideshow"
+                android:id="@+id/loopSlideshow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:clickable="false"
-                android:text="@string/loop_slideshow"/>
+                android:text="@string/loop_slideshow" />
 
         </RelativeLayout>
     </RelativeLayout>

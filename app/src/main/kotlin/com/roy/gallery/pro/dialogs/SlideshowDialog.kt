@@ -8,54 +8,54 @@ import com.roy.gallery.pro.helpers.SLIDESHOW_DEFAULT_INTERVAL
 import com.roy.commons.activities.BaseSimpleActivity
 import com.roy.commons.ext.hideKeyboard
 import com.roy.commons.ext.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_slideshow.view.*
+import kotlinx.android.synthetic.main.dlg_slideshow.view.*
 
 class SlideshowDialog(val activity: BaseSimpleActivity, val callback: () -> Unit) {
     val view: View
 
     init {
-        view = activity.layoutInflater.inflate(R.layout.dialog_slideshow, null).apply {
-            interval_value.setOnClickListener {
-                val text = interval_value.text
+        view = activity.layoutInflater.inflate(R.layout.dlg_slideshow, null).apply {
+            intervalValue.setOnClickListener {
+                val text = intervalValue.text
                 if (text?.isNotEmpty() == true) {
                     text.replace(0, 1, text.subSequence(0, 1), 0, 1)
-                    interval_value.selectAll()
+                    intervalValue.selectAll()
                 }
             }
 
-            interval_value.setOnFocusChangeListener { v, hasFocus ->
+            intervalValue.setOnFocusChangeListener { v, hasFocus ->
                 if (!hasFocus)
                     activity.hideKeyboard(v)
             }
 
-            include_videos_holder.setOnClickListener {
-                interval_value.clearFocus()
-                include_videos.toggle()
+            includeVideosHolder.setOnClickListener {
+                intervalValue.clearFocus()
+                includeVideos.toggle()
             }
 
-            include_gifs_holder.setOnClickListener {
-                interval_value.clearFocus()
-                include_gifs.toggle()
+            includeGifsHolder.setOnClickListener {
+                intervalValue.clearFocus()
+                includeGifs.toggle()
             }
 
-            random_order_holder.setOnClickListener {
-                interval_value.clearFocus()
-                random_order.toggle()
+            randomOrderHolder.setOnClickListener {
+                intervalValue.clearFocus()
+                randomOrder.toggle()
             }
 
-            use_fade_holder.setOnClickListener {
-                interval_value.clearFocus()
+            useFadeHolder.setOnClickListener {
+                intervalValue.clearFocus()
                 use_fade.toggle()
             }
 
-            move_backwards_holder.setOnClickListener {
-                interval_value.clearFocus()
-                move_backwards.toggle()
+            moveBackwardsHolder.setOnClickListener {
+                intervalValue.clearFocus()
+                moveBackwards.toggle()
             }
 
-            loop_slideshow_holder.setOnClickListener {
-                interval_value.clearFocus()
-                loop_slideshow.toggle()
+            loopSlideshowHolder.setOnClickListener {
+                intervalValue.clearFocus()
+                loopSlideshow.toggle()
             }
         }
         setupValues()
@@ -78,29 +78,29 @@ class SlideshowDialog(val activity: BaseSimpleActivity, val callback: () -> Unit
     private fun setupValues() {
         val config = activity.config
         view.apply {
-            interval_value.setText(config.slideshowInterval.toString())
-            include_videos.isChecked = config.slideshowIncludeVideos
-            include_gifs.isChecked = config.slideshowIncludeGIFs
-            random_order.isChecked = config.slideshowRandomOrder
+            intervalValue.setText(config.slideshowInterval.toString())
+            includeVideos.isChecked = config.slideshowIncludeVideos
+            includeGifs.isChecked = config.slideshowIncludeGIFs
+            randomOrder.isChecked = config.slideshowRandomOrder
             use_fade.isChecked = config.slideshowUseFade
-            move_backwards.isChecked = config.slideshowMoveBackwards
-            loop_slideshow.isChecked = config.loopSlideshow
+            moveBackwards.isChecked = config.slideshowMoveBackwards
+            loopSlideshow.isChecked = config.loopSlideshow
         }
     }
 
     private fun storeValues() {
-        var interval = view.interval_value.text.toString()
+        var interval = view.intervalValue.text.toString()
         if (interval.trim('0').isEmpty())
             interval = SLIDESHOW_DEFAULT_INTERVAL.toString()
 
         activity.config.apply {
             slideshowInterval = interval.toInt()
-            slideshowIncludeVideos = view.include_videos.isChecked
-            slideshowIncludeGIFs = view.include_gifs.isChecked
-            slideshowRandomOrder = view.random_order.isChecked
+            slideshowIncludeVideos = view.includeVideos.isChecked
+            slideshowIncludeGIFs = view.includeGifs.isChecked
+            slideshowRandomOrder = view.randomOrder.isChecked
             slideshowUseFade = view.use_fade.isChecked
-            slideshowMoveBackwards = view.move_backwards.isChecked
-            loopSlideshow = view.loop_slideshow.isChecked
+            slideshowMoveBackwards = view.moveBackwards.isChecked
+            loopSlideshow = view.loopSlideshow.isChecked
         }
     }
 }
