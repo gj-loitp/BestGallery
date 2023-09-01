@@ -31,7 +31,7 @@ const val MEDIA_COLUMN_CNT = "media_column_cnt"
 const val MEDIA_LANDSCAPE_COLUMN_CNT = "media_landscape_column_cnt"
 const val MEDIA_HORIZONTAL_COLUMN_CNT = "media_horizontal_column_cnt"
 const val MEDIA_LANDSCAPE_HORIZONTAL_COLUMN_CNT = "media_landscape_horizontal_column_cnt"
-const val SHOW_ALL = "show_all"                           // display images and videos from all folders together
+const val SHOW_ALL = "show_all"// display images and videos from all folders together
 const val HIDE_FOLDER_TOOLTIP_SHOWN = "hide_folder_tooltip_shown"
 const val EXCLUDED_FOLDERS = "excluded_folders"
 const val INCLUDED_FOLDERS = "included_folders"
@@ -183,7 +183,8 @@ const val BOTTOM_ACTION_SET_AS = 2048
 const val BOTTOM_ACTION_COPY = 4096
 const val BOTTOM_ACTION_MOVE = 8192
 
-const val DEFAULT_BOTTOM_ACTIONS = BOTTOM_ACTION_TOGGLE_FAVORITE or BOTTOM_ACTION_EDIT or BOTTOM_ACTION_SHARE or BOTTOM_ACTION_DELETE or BOTTOM_ACTION_PROPERTIES or BOTTOM_ACTION_SLIDESHOW
+const val DEFAULT_BOTTOM_ACTIONS =
+    BOTTOM_ACTION_TOGGLE_FAVORITE or BOTTOM_ACTION_EDIT or BOTTOM_ACTION_SHARE or BOTTOM_ACTION_DELETE or BOTTOM_ACTION_PROPERTIES or BOTTOM_ACTION_SLIDESHOW
 
 // aspect ratios used at the editor for cropping
 const val ASPECT_RATIO_FREE = 0

@@ -11,6 +11,7 @@ import com.roy.commons.helpers.BaseConfig
 import com.roy.commons.helpers.SORT_BY_DATE_MODIFIED
 import com.roy.commons.helpers.SORT_DESCENDING
 import java.util.Arrays
+import java.util.Locale
 
 class Config(context: Context) : BaseConfig(context) {
     companion object {
@@ -25,29 +26,33 @@ class Config(context: Context) : BaseConfig(context) {
         if (path.isEmpty()) {
             sorting = value
         } else {
-            prefs.edit().putInt(SORT_FOLDER_PREFIX + path.toLowerCase(), value).apply()
+            prefs.edit().putInt(SORT_FOLDER_PREFIX + path.lowercase(Locale.getDefault()), value)
+                .apply()
         }
     }
 
     fun getFileSorting(path: String) =
-        prefs.getInt(SORT_FOLDER_PREFIX + path.toLowerCase(), sorting)
+        prefs.getInt(SORT_FOLDER_PREFIX + path.lowercase(Locale.getDefault()), sorting)
 
     fun removeFileSorting(path: String) {
-        prefs.edit().remove(SORT_FOLDER_PREFIX + path.toLowerCase()).apply()
+        prefs.edit().remove(SORT_FOLDER_PREFIX + path.lowercase(Locale.getDefault())).apply()
     }
 
-    fun hasCustomSorting(path: String) = prefs.contains(SORT_FOLDER_PREFIX + path.toLowerCase())
+    fun hasCustomSorting(path: String) =
+        prefs.contains(SORT_FOLDER_PREFIX + path.lowercase(Locale.getDefault()))
 
     fun saveFolderGrouping(path: String, value: Int) {
         if (path.isEmpty()) {
             groupBy = value
         } else {
-            prefs.edit().putInt(GROUP_FOLDER_PREFIX + path.toLowerCase(), value).apply()
+            prefs.edit().putInt(GROUP_FOLDER_PREFIX + path.lowercase(Locale.getDefault()), value)
+                .apply()
         }
     }
 
     fun getFolderGrouping(path: String): Int {
-        var groupBy = prefs.getInt(GROUP_FOLDER_PREFIX + path.toLowerCase(), groupBy)
+        var groupBy =
+            prefs.getInt(GROUP_FOLDER_PREFIX + path.lowercase(Locale.getDefault()), groupBy)
         if (path != SHOW_ALL && groupBy and GROUP_BY_FOLDER != 0) {
             groupBy -= GROUP_BY_FOLDER + 1
         }
@@ -55,27 +60,30 @@ class Config(context: Context) : BaseConfig(context) {
     }
 
     fun removeFolderGrouping(path: String) {
-        prefs.edit().remove(GROUP_FOLDER_PREFIX + path.toLowerCase()).apply()
+        prefs.edit().remove(GROUP_FOLDER_PREFIX + path.lowercase(Locale.getDefault())).apply()
     }
 
-    fun hasCustomGrouping(path: String) = prefs.contains(GROUP_FOLDER_PREFIX + path.toLowerCase())
+    fun hasCustomGrouping(path: String) =
+        prefs.contains(GROUP_FOLDER_PREFIX + path.lowercase(Locale.getDefault()))
 
     fun saveFolderViewType(path: String, value: Int) {
         if (path.isEmpty()) {
             viewTypeFiles = value
         } else {
-            prefs.edit().putInt(VIEW_TYPE_PREFIX + path.toLowerCase(), value).apply()
+            prefs.edit().putInt(VIEW_TYPE_PREFIX + path.lowercase(Locale.getDefault()), value)
+                .apply()
         }
     }
 
     fun getFolderViewType(path: String) =
-        prefs.getInt(VIEW_TYPE_PREFIX + path.toLowerCase(), viewTypeFiles)
+        prefs.getInt(VIEW_TYPE_PREFIX + path.lowercase(Locale.getDefault()), viewTypeFiles)
 
     fun removeFolderViewType(path: String) {
-        prefs.edit().remove(VIEW_TYPE_PREFIX + path.toLowerCase()).apply()
+        prefs.edit().remove(VIEW_TYPE_PREFIX + path.lowercase(Locale.getDefault())).apply()
     }
 
-    fun hasCustomViewType(path: String) = prefs.contains(VIEW_TYPE_PREFIX + path.toLowerCase())
+    fun hasCustomViewType(path: String) =
+        prefs.contains(VIEW_TYPE_PREFIX + path.lowercase(Locale.getDefault()))
 
     var wasHideFolderTooltipShown: Boolean
         get() = prefs.getBoolean(HIDE_FOLDER_TOOLTIP_SHOWN, false)
@@ -122,7 +130,7 @@ class Config(context: Context) : BaseConfig(context) {
     }
 
     fun addExcludedFolder(path: String) {
-        addExcludedFolders(HashSet<String>(Arrays.asList(path)))
+        addExcludedFolders(HashSet<String>(listOf(path)))
     }
 
     fun addExcludedFolders(paths: Set<String>) {

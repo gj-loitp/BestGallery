@@ -11,6 +11,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import com.roy.gallery.pro.extensions.addPathToDB
 import com.roy.commons.ext.getStringValue
@@ -25,7 +26,7 @@ class NewPhotoFetcher : JobService() {
         private val VIDEO_PATH_SEGMENTS = MediaStore.Video.Media.EXTERNAL_CONTENT_URI.pathSegments
     }
 
-    private val mHandler = Handler()
+    private val mHandler = Handler(Looper.getMainLooper())
     private val mWorker = Runnable {
         try {
             scheduleJob(this@NewPhotoFetcher)
@@ -42,8 +43,18 @@ class NewPhotoFetcher : JobService() {
         val photoUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         val videoUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
         JobInfo.Builder(PHOTO_VIDEO_CONTENT_JOB, componentName).apply {
-            addTriggerContentUri(JobInfo.TriggerContentUri(photoUri, JobInfo.TriggerContentUri.FLAG_NOTIFY_FOR_DESCENDANTS))
-            addTriggerContentUri(JobInfo.TriggerContentUri(videoUri, JobInfo.TriggerContentUri.FLAG_NOTIFY_FOR_DESCENDANTS))
+            addTriggerContentUri(
+                JobInfo.TriggerContentUri(
+                    /* uri = */ photoUri,
+                    /* flags = */ JobInfo.TriggerContentUri.FLAG_NOTIFY_FOR_DESCENDANTS
+                )
+            )
+            addTriggerContentUri(
+                JobInfo.TriggerContentUri(
+                    /* uri = */ videoUri,
+                    /* flags = */ JobInfo.TriggerContentUri.FLAG_NOTIFY_FOR_DESCENDANTS
+                )
+            )
             addTriggerContentUri(JobInfo.TriggerContentUri(MEDIA_URI, 0))
             try {
                 context.getSystemService(JobScheduler::class.java).schedule(build())
@@ -55,7 +66,7 @@ class NewPhotoFetcher : JobService() {
 
     fun isScheduled(context: Context): Boolean {
         val jobScheduler = context.getSystemService(JobScheduler::class.java)
-        val jobs = jobScheduler.allPendingJobs ?: return false
+        val jobs = jobScheduler.allPendingJobs
         return jobs.any { it.id == PHOTO_VIDEO_CONTENT_JOB }
     }
 
@@ -83,9 +94,18 @@ class NewPhotoFetcher : JobService() {
                 var cursor: Cursor? = null
                 try {
                     val projection = arrayOf(MediaStore.Images.ImageColumns.DATA)
-                    val uris = arrayListOf(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
+                    val uris = arrayListOf(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                    )
                     uris.forEach {
-                        cursor = contentResolver.query(it, projection, selection.toString(), null, null)
+                        cursor = contentResolver.query(
+                            /* uri = */ it,
+                            /* projection = */ projection,
+                            /* selection = */ selection.toString(),
+                            /* selectionArgs = */ null,
+                            /* sortOrder = */ null
+                        )
                         while (cursor!!.moveToNext()) {
                             val path = cursor!!.getStringValue(MediaStore.Images.ImageColumns.DATA)
                             addPathToDB(path)

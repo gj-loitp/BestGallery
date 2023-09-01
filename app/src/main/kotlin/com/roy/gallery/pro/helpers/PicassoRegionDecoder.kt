@@ -5,14 +5,19 @@ import android.graphics.*
 import android.net.Uri
 import com.roy.labs.subscaleview.ImageRegionDecoder
 
-class PicassoRegionDecoder(val showHighestQuality: Boolean) : ImageRegionDecoder {
+class PicassoRegionDecoder(private val showHighestQuality: Boolean) : ImageRegionDecoder {
     private var decoder: BitmapRegionDecoder? = null
     private val decoderLock = Any()
 
     override fun init(context: Context, uri: Uri): Point {
         val newUri = Uri.parse(uri.toString().replace("%", "%25").replace("#", "%23"))
         val inputStream = context.contentResolver.openInputStream(newUri)
-        decoder = inputStream?.let { BitmapRegionDecoder.newInstance(it, false) }
+        decoder = inputStream?.let {
+            BitmapRegionDecoder.newInstance(
+                /* is = */ it,
+                /* isShareable = */ false
+            )
+        }
         return Point(decoder!!.width, decoder!!.height)
     }
 
@@ -31,6 +36,6 @@ class PicassoRegionDecoder(val showHighestQuality: Boolean) : ImageRegionDecoder
     override fun isReady() = decoder != null && !decoder!!.isRecycled
 
     override fun recycle() {
-        decoder!!.recycle()
+        decoder?.recycle()
     }
 }
