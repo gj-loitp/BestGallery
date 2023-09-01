@@ -2,7 +2,7 @@ package com.roy.gallery.pro.activities
 
 import android.os.Bundle
 
-class VideoActivity : com.roy.gallery.pro.activities.PhotoVideoActivity() {
+class VideoActivity : PhotoVideoActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         mIsVideo = true

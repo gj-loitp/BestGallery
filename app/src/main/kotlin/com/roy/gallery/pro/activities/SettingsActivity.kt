@@ -56,7 +56,7 @@ import kotlinx.android.synthetic.main.a_settings.*
 import java.io.File
 import java.util.*
 
-class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
+class SettingsActivity : SimpleActivity() {
     private var mRecycleBinContentSize = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,9 +125,20 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
 
     private fun setupSectionColors() {
         val adjustedPrimaryColor = getAdjustedPrimaryColor()
-        arrayListOf(visibilityLabel, videosLabel, thumbnailsLabel, scrolling_label, fullscreen_media_label, security_label,
-                file_operations_label, deep_zoomable_images_label, extended_details_label, bottom_actions_label, recycle_bin_label,
-                migrating_label).forEach {
+        arrayListOf(
+            visibilityLabel,
+            videosLabel,
+            thumbnailsLabel,
+            scrolling_label,
+            fullscreen_media_label,
+            security_label,
+            file_operations_label,
+            deep_zoomable_images_label,
+            extended_details_label,
+            bottom_actions_label,
+            recycle_bin_label,
+            migrating_label
+        ).forEach {
             it.setTextColor(adjustedPrimaryColor)
         }
     }
@@ -158,9 +169,9 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
         settingsFileLoadingPriority.text = getFileLoadingPriorityText()
         settingsFileLoadingPriorityHolder.setOnClickListener {
             val items = arrayListOf(
-                    RadioItem(PRIORITY_SPEED, getString(R.string.speed)),
-                    RadioItem(PRIORITY_COMPROMISE, getString(R.string.compromise)),
-                    RadioItem(PRIORITY_VALIDITY, getString(R.string.avoid_showing_invalid_files))
+                RadioItem(PRIORITY_SPEED, getString(R.string.speed)),
+                RadioItem(PRIORITY_COMPROMISE, getString(R.string.compromise)),
+                RadioItem(PRIORITY_VALIDITY, getString(R.string.avoid_showing_invalid_files))
             )
 
             RadioGroupDialog(this@SettingsActivity, items, config.fileLoadingPriority) {
@@ -170,28 +181,45 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
         }
     }
 
-    private fun getFileLoadingPriorityText() = getString(when (config.fileLoadingPriority) {
-        PRIORITY_SPEED -> R.string.speed
-        PRIORITY_COMPROMISE -> R.string.compromise
-        else -> R.string.avoid_showing_invalid_files
-    })
+    private fun getFileLoadingPriorityText() = getString(
+        when (config.fileLoadingPriority) {
+            PRIORITY_SPEED -> R.string.speed
+            PRIORITY_COMPROMISE -> R.string.compromise
+            else -> R.string.avoid_showing_invalid_files
+        }
+    )
 
     private fun setupManageIncludedFolders() {
         settingsManageIncludedFoldersHolder.setOnClickListener {
-            startActivity(Intent(this, com.roy.gallery.pro.activities.IncludedFoldersActivity::class.java))
+            startActivity(
+                Intent(
+                    this,
+                    IncludedFoldersActivity::class.java
+                )
+            )
         }
     }
 
     private fun setupManageExcludedFolders() {
         settingsManageExcludedFoldersHolder.setOnClickListener {
-            startActivity(Intent(this, com.roy.gallery.pro.activities.ExcludedFoldersActivity::class.java))
+            startActivity(
+                Intent(
+                    this,
+                    ExcludedFoldersActivity::class.java
+                )
+            )
         }
     }
 
     private fun setupManageHiddenFolders() {
         settingsManageHiddenFoldersHolder.setOnClickListener {
             handleHiddenFolderPasswordProtection {
-                startActivity(Intent(this, com.roy.gallery.pro.activities.HiddenFoldersActivity::class.java))
+                startActivity(
+                    Intent(
+                        this,
+                        HiddenFoldersActivity::class.java
+                    )
+                )
             }
         }
     }
@@ -310,7 +338,8 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
     private fun setupHiddenItemPasswordProtection() {
         settings_hidden_item_password_protection.isChecked = config.isHiddenPasswordProtectionOn
         settings_hidden_item_password_protection_holder.setOnClickListener {
-            val tabToShow = if (config.isHiddenPasswordProtectionOn) config.hiddenProtectionType else SHOW_ALL_TABS
+            val tabToShow =
+                if (config.isHiddenPasswordProtectionOn) config.hiddenProtectionType else SHOW_ALL_TABS
             SecurityDialog(this, config.hiddenPasswordHash, tabToShow) { hash, type, success ->
                 if (success) {
                     val hasPasswordProtection = config.isHiddenPasswordProtectionOn
@@ -320,9 +349,16 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
                     config.hiddenProtectionType = type
 
                     if (config.isHiddenPasswordProtectionOn) {
-                        val confirmationTextId = if (config.hiddenProtectionType == PROTECTION_FINGERPRINT)
-                            R.string.fingerprint_setup_successfully else R.string.protection_setup_successfully
-                        ConfirmationDialog(this, "", confirmationTextId, R.string.ok, 0) { }
+                        val confirmationTextId =
+                            if (config.hiddenProtectionType == PROTECTION_FINGERPRINT)
+                                R.string.fingerprint_setup_successfully else R.string.protection_setup_successfully
+                        ConfirmationDialog(
+                            activity = this,
+                            message = "",
+                            messageId = confirmationTextId,
+                            positive = R.string.ok,
+                            negative = 0
+                        ) { }
                     }
                 }
             }
@@ -332,7 +368,8 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
     private fun setupAppPasswordProtection() {
         settings_app_password_protection.isChecked = config.isAppPasswordProtectionOn
         settings_app_password_protection_holder.setOnClickListener {
-            val tabToShow = if (config.isAppPasswordProtectionOn) config.appProtectionType else SHOW_ALL_TABS
+            val tabToShow =
+                if (config.isAppPasswordProtectionOn) config.appProtectionType else SHOW_ALL_TABS
             SecurityDialog(this, config.appPasswordHash, tabToShow) { hash, type, success ->
                 if (success) {
                     val hasPasswordProtection = config.isAppPasswordProtectionOn
@@ -342,9 +379,16 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
                     config.appProtectionType = type
 
                     if (config.isAppPasswordProtectionOn) {
-                        val confirmationTextId = if (config.appProtectionType == PROTECTION_FINGERPRINT)
-                            R.string.fingerprint_setup_successfully else R.string.protection_setup_successfully
-                        ConfirmationDialog(this, "", confirmationTextId, R.string.ok, 0) { }
+                        val confirmationTextId =
+                            if (config.appProtectionType == PROTECTION_FINGERPRINT)
+                                R.string.fingerprint_setup_successfully else R.string.protection_setup_successfully
+                        ConfirmationDialog(
+                            activity = this,
+                            message = "",
+                            messageId = confirmationTextId,
+                            positive = R.string.ok,
+                            negative = 0
+                        ) { }
                     }
                 }
             }
@@ -354,8 +398,13 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
     private fun setupFileDeletionPasswordProtection() {
         settings_file_deletion_password_protection.isChecked = config.isDeletePasswordProtectionOn
         settings_file_deletion_password_protection_holder.setOnClickListener {
-            val tabToShow = if (config.isDeletePasswordProtectionOn) config.deleteProtectionType else SHOW_ALL_TABS
-            SecurityDialog(this, config.deletePasswordHash, tabToShow) { hash, type, success ->
+            val tabToShow =
+                if (config.isDeletePasswordProtectionOn) config.deleteProtectionType else SHOW_ALL_TABS
+            SecurityDialog(
+                activity = this,
+                requiredHash = config.deletePasswordHash,
+                showTabIndex = tabToShow
+            ) { hash, type, success ->
                 if (success) {
                     val hasPasswordProtection = config.isDeletePasswordProtectionOn
                     settings_file_deletion_password_protection.isChecked = !hasPasswordProtection
@@ -364,9 +413,16 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
                     config.deleteProtectionType = type
 
                     if (config.isDeletePasswordProtectionOn) {
-                        val confirmationTextId = if (config.deleteProtectionType == PROTECTION_FINGERPRINT)
-                            R.string.fingerprint_setup_successfully else R.string.protection_setup_successfully
-                        ConfirmationDialog(this, "", confirmationTextId, R.string.ok, 0) { }
+                        val confirmationTextId =
+                            if (config.deleteProtectionType == PROTECTION_FINGERPRINT)
+                                R.string.fingerprint_setup_successfully else R.string.protection_setup_successfully
+                        ConfirmationDialog(
+                            activity = this,
+                            message = "",
+                            messageId = confirmationTextId,
+                            positive = R.string.ok,
+                            negative = 0
+                        ) { }
                     }
                 }
             }
@@ -536,9 +592,15 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
         settings_screen_rotation.text = getScreenRotationText()
         settings_screen_rotation_holder.setOnClickListener {
             val items = arrayListOf(
-                    RadioItem(ROTATE_BY_SYSTEM_SETTING, getString(R.string.screen_rotation_system_setting)),
-                    RadioItem(ROTATE_BY_DEVICE_ROTATION, getString(R.string.screen_rotation_device_rotation)),
-                    RadioItem(ROTATE_BY_ASPECT_RATIO, getString(R.string.screen_rotation_aspect_ratio))
+                RadioItem(
+                    id = ROTATE_BY_SYSTEM_SETTING,
+                    title = getString(R.string.screen_rotation_system_setting)
+                ),
+                RadioItem(
+                    id = ROTATE_BY_DEVICE_ROTATION,
+                    title = getString(R.string.screen_rotation_device_rotation)
+                ),
+                RadioItem(ROTATE_BY_ASPECT_RATIO, getString(R.string.screen_rotation_aspect_ratio))
             )
 
             RadioGroupDialog(this@SettingsActivity, items, config.screenRotation) {
@@ -548,11 +610,13 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
         }
     }
 
-    private fun getScreenRotationText() = getString(when (config.screenRotation) {
-        ROTATE_BY_SYSTEM_SETTING -> R.string.screen_rotation_system_setting
-        ROTATE_BY_DEVICE_ROTATION -> R.string.screen_rotation_device_rotation
-        else -> R.string.screen_rotation_aspect_ratio
-    })
+    private fun getScreenRotationText() = getString(
+        when (config.screenRotation) {
+            ROTATE_BY_SYSTEM_SETTING -> R.string.screen_rotation_system_setting
+            ROTATE_BY_DEVICE_ROTATION -> R.string.screen_rotation_device_rotation
+            else -> R.string.screen_rotation_aspect_ratio
+        }
+    )
 
     private fun setupBottomActions() {
         settings_bottom_actions.isChecked = config.bottomActions
@@ -613,7 +677,8 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
     private fun setupEmptyRecycleBin() {
         Thread {
             try {
-                mRecycleBinContentSize = galleryDB.MediumDao().getDeletedMedia().sumByLong { it.size }
+                mRecycleBinContentSize =
+                    galleryDB.MediumDao().getDeletedMedia().sumByLong { it.size }
             } catch (ignored: Exception) {
             }
             runOnUiThread {
@@ -765,6 +830,7 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
                         checkAppIconColor()
                     }
                 }
+
                 USE_ENGLISH -> config.useEnglish = value.toBoolean()
                 WAS_USE_ENGLISH_TOGGLED -> config.wasUseEnglishToggled = value.toBoolean()
                 WIDGET_BG_COLOR -> config.widgetBgColor = value.toInt()
@@ -779,11 +845,15 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
                 REMEMBER_LAST_VIDEO_POSITION -> config.rememberLastVideoPosition = value.toBoolean()
                 LAST_VIDEO_PATH -> config.lastVideoPath = value.toString()
                 LOOP_VIDEOS -> config.loopVideos = value.toBoolean()
-                OPEN_VIDEOS_ON_SEPARATE_SCREEN -> config.openVideosOnSeparateScreen = value.toBoolean()
+                OPEN_VIDEOS_ON_SEPARATE_SCREEN -> config.openVideosOnSeparateScreen =
+                    value.toBoolean()
+
                 ALLOW_VIDEO_GESTURES -> config.allowVideoGestures = value.toBoolean()
                 ANIMATE_GIFS -> config.animateGifs = value.toBoolean()
                 CROP_THUMBNAILS -> config.cropThumbnails = value.toBoolean()
-                SHOW_THUMBNAIL_VIDEO_DURATION -> config.showThumbnailVideoDuration = value.toBoolean()
+                SHOW_THUMBNAIL_VIDEO_DURATION -> config.showThumbnailVideoDuration =
+                    value.toBoolean()
+
                 SHOW_MEDIA_COUNT -> config.showMediaCount = value.toBoolean()
                 SHOW_INFO_BUBBLE -> config.showInfoBubble = value.toBoolean()
                 SCROLL_HORIZONTALLY -> config.scrollHorizontally = value.toBoolean()
@@ -831,8 +901,12 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
                 SLIDESHOW_MOVE_BACKWARDS -> config.slideshowMoveBackwards = value.toBoolean()
                 SLIDESHOW_LOOP -> config.loopSlideshow = value.toBoolean()
                 LAST_EDITOR_CROP_ASPECT_RATIO -> config.lastEditorCropAspectRatio = value.toInt()
-                LAST_EDITOR_CROP_OTHER_ASPECT_RATIO_X -> config.lastEditorCropOtherAspectRatioX = value.toInt()
-                LAST_EDITOR_CROP_OTHER_ASPECT_RATIO_Y -> config.lastEditorCropOtherAspectRatioY = value.toInt()
+                LAST_EDITOR_CROP_OTHER_ASPECT_RATIO_X -> config.lastEditorCropOtherAspectRatioX =
+                    value.toInt()
+
+                LAST_EDITOR_CROP_OTHER_ASPECT_RATIO_Y -> config.lastEditorCropOtherAspectRatioY =
+                    value.toInt()
+
                 LAST_EDITOR_DRAW_COLOR -> config.lastEditorDrawColor = value.toInt()
                 LAST_EDITOR_BRUSH_SIZE -> config.lastEditorBrushSize = value.toInt()
                 LAST_CONFLICT_RESOLUTION -> config.lastConflictResolution = value.toInt()

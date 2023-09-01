@@ -28,14 +28,12 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-    private Runnable runnable = () -> {
-        tryFinish();
-    };
+    private final Runnable runnable = this::tryFinish;
 
     private void tryFinish() {
         if (!isFinishing()) {
             finish();
-            overridePendingTransition(R.anim.anim_common_anim_none, R.anim.anim_common_zoom_exit);
+//            overridePendingTransition(R.anim.anim_common_anim_none, R.anim.anim_common_zoom_exit);
         }
     }
 

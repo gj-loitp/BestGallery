@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.RelativeLayout
+import androidx.core.content.ContextCompat
 import com.google.vr.sdk.widgets.pano.VrPanoramaEventListener
 import com.google.vr.sdk.widgets.pano.VrPanoramaView
 import com.roy.gallery.pro.R
@@ -20,8 +21,8 @@ import com.roy.commons.ext.toast
 import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
 import kotlinx.android.synthetic.main.a_panorama_photo.*
 
-open class PanoramaPhotoActivity : com.roy.gallery.pro.activities.SimpleActivity() {
-    private val CARDBOARD_DISPLAY_MODE = 3
+open class PanoramaPhotoActivity : SimpleActivity() {
+    private val cardboardDisplayMode = 3
 
     private var isFullscreen = false
     private var isExploreEnabled = true
@@ -38,7 +39,7 @@ open class PanoramaPhotoActivity : com.roy.gallery.pro.activities.SimpleActivity
         setupButtonMargins()
 
         cardboard.setOnClickListener {
-            panoramaView.displayMode = CARDBOARD_DISPLAY_MODE
+            panoramaView.displayMode = cardboardDisplayMode
         }
 
         explore.setOnClickListener {
@@ -65,7 +66,8 @@ open class PanoramaPhotoActivity : com.roy.gallery.pro.activities.SimpleActivity
             updateStatusbarColor(Color.BLACK)
         }
 
-        window.statusBarColor = resources.getColor(R.color.circle_black_background)
+//        window.statusBarColor = resources.getColor(R.color.circle_black_background)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.circle_black_background)
     }
 
     override fun onPause() {

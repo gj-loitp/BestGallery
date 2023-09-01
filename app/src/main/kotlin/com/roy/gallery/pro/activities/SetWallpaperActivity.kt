@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.roy.gallery.pro.App
 import com.roy.gallery.pro.R
 import com.roy.commons.dlg.RadioGroupDialog
 import com.roy.commons.ext.toast
@@ -21,12 +20,12 @@ import kotlinx.android.synthetic.main.v_bottom_set_wallpaper_actions.*
 
 class SetWallpaperActivity : SimpleActivity(),
     CropImageView.OnCropImageCompleteListener {
-    private val PICK_IMAGE = 1
+    private val pickImage = 1
     private var isLandscapeRatio = true
     private var wallpaperFlag = -1
 
     lateinit var uri: Uri
-    lateinit var wallpaperManager: WallpaperManager
+    private lateinit var wallpaperManager: WallpaperManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +38,7 @@ class SetWallpaperActivity : SimpleActivity(),
             )
             pickIntent.action = Intent.ACTION_PICK
             pickIntent.type = "image/*"
-            startActivityForResult(pickIntent, PICK_IMAGE)
+            startActivityForResult(pickIntent, pickImage)
             return
         }
 
@@ -78,7 +77,10 @@ class SetWallpaperActivity : SimpleActivity(),
         try {
             val wallpaperWidth =
                 if (isLandscapeRatio) wallpaperManager.desiredMinimumWidth else wallpaperManager.desiredMinimumWidth / 2
-            cropImageView.setAspectRatio(wallpaperWidth, wallpaperManager.desiredMinimumHeight)
+            cropImageView.setAspectRatio(
+                /* aspectRatioX = */ wallpaperWidth,
+                /* aspectRatioY = */ wallpaperManager.desiredMinimumHeight
+            )
             bottomSetWallpaperAspectRatio.setImageResource(if (isLandscapeRatio) R.drawable.ic_minimize else R.drawable.ic_maximize)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -140,10 +142,19 @@ class SetWallpaperActivity : SimpleActivity(),
                     val wantedHeight = wallpaperManager.desiredMinimumHeight
                     val ratio = wantedHeight / bitmap.height.toFloat()
                     val wantedWidth = (bitmap.width * ratio).toInt()
-                    val scaledBitmap =
-                        Bitmap.createScaledBitmap(bitmap, wantedWidth, wantedHeight, true)
+                    val scaledBitmap = Bitmap.createScaledBitmap(
+                        /* src = */ bitmap,
+                        /* dstWidth = */ wantedWidth,
+                        /* dstHeight = */ wantedHeight,
+                        /* filter = */ true
+                    )
                     if (isNougatPlus()) {
-                        wallpaperManager.setBitmap(scaledBitmap, null, true, wallpaperFlag)
+                        wallpaperManager.setBitmap(
+                            /* fullImage = */ scaledBitmap,
+                            /* visibleCropHint = */ null,
+                            /* allowBackup = */ true,
+                            /* which = */ wallpaperFlag
+                        )
                     } else {
                         wallpaperManager.setBitmap(scaledBitmap)
                     }
@@ -160,7 +171,7 @@ class SetWallpaperActivity : SimpleActivity(),
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
-        if (requestCode == PICK_IMAGE) {
+        if (requestCode == pickImage) {
             if (resultCode == Activity.RESULT_OK && resultData != null) {
                 handleImage(resultData)
             } else {

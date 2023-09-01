@@ -5,11 +5,13 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.RelativeLayout
 import android.widget.SeekBar
+import androidx.core.content.ContextCompat
 import com.google.vr.sdk.widgets.video.VrVideoEventListener
 import com.google.vr.sdk.widgets.video.VrVideoView
 import com.roy.gallery.pro.R
@@ -25,9 +27,13 @@ import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
 import kotlinx.android.synthetic.main.a_panorama_video.*
 import kotlinx.android.synthetic.main.v_bottom_video_time_holder.*
 import java.io.File
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.roundToInt
 
-open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity(), SeekBar.OnSeekBarChangeListener {
-    private val CARDBOARD_DISPLAY_MODE = 3
+open class PanoramaVideoActivity : SimpleActivity(),
+    SeekBar.OnSeekBarChangeListener {
+    private val cardboardDisplayMode = 3
 
     private var mIsFullscreen = false
     private var mIsExploreEnabled = true
@@ -38,7 +44,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
     private var mDuration = 0
     private var mCurrTime = 0
 
-    private var mTimerHandler = Handler()
+    private var mTimerHandler = Handler(Looper.getMainLooper())
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         useDynamicTheme = false
@@ -242,10 +248,19 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
             }
         }
 
-        videoTimeHolder.setPadding(0, 0, right, bottom)
-        videoTimeHolder.background = resources.getDrawable(R.drawable.shape_gradient_background)
+        videoTimeHolder.setPadding(
+            /* left = */ 0,
+            /* top = */ 0,
+            /* right = */ right,
+            /* bottom = */ bottom
+        )
+//        videoTimeHolder.background = resources.getDrawable(R.drawable.shape_gradient_background)
+        videoTimeHolder.background =
+            ContextCompat.getDrawable(this, R.drawable.shape_gradient_background)
         videoTimeHolder.onGlobalLayout {
-            val newBottomMargin = videoTimeHolder.height - resources.getDimension(R.dimen.video_player_play_pause_size).toInt() - resources.getDimension(R.dimen.activity_margin).toInt()
+            val newBottomMargin =
+                videoTimeHolder.height - resources.getDimension(R.dimen.video_player_play_pause_size)
+                    .toInt() - resources.getDimension(R.dimen.activity_margin).toInt()
             (explore.layoutParams as RelativeLayout.LayoutParams).bottomMargin = newBottomMargin
 
             (cardboard.layoutParams as RelativeLayout.LayoutParams).apply {
@@ -257,7 +272,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
         videoTogglePlayPause.setImageResource(R.drawable.ic_play_outline)
 
         cardboard.setOnClickListener {
-            vrVideoView.displayMode = CARDBOARD_DISPLAY_MODE
+            vrVideoView.displayMode = cardboardDisplayMode
         }
 
         explore.setOnClickListener {
@@ -297,10 +312,10 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
         }
 
         val curr = vrVideoView.currentPosition
-        val twoPercents = Math.max((vrVideoView.duration / 50).toInt(), MIN_SKIP_LENGTH)
+        val twoPercents = max((vrVideoView.duration / 50).toInt(), MIN_SKIP_LENGTH)
         val newProgress = if (forward) curr + twoPercents else curr - twoPercents
-        val roundProgress = Math.round(newProgress / 1000f)
-        val limitedProgress = Math.max(Math.min(vrVideoView.duration.toInt(), roundProgress), 0)
+        val roundProgress = (newProgress / 1000f).roundToInt()
+        val limitedProgress = max(min(vrVideoView.duration.toInt(), roundProgress), 0)
         setVideoProgress(limitedProgress)
         if (!mIsPlaying) {
             togglePlayPause()

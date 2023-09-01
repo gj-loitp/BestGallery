@@ -181,17 +181,17 @@ open class PhotoVideoActivity : SimpleActivity(),
 
         mIsVideo = type == TYPE_VIDEOS
         mMedium = Medium(
-            null,
-            filename,
-            mUri.toString(),
-            mUri!!.path?.getParentPath() ?: "",
-            0,
-            0,
-            file.length(),
-            type,
-            0,
-            false,
-            0L
+            id = null,
+            name = filename,
+            path = mUri.toString(),
+            parentPath = mUri!!.path?.getParentPath() ?: "",
+            modified = 0,
+            taken = 0,
+            size = file.length(),
+            type = type,
+            videoDuration = 0,
+            isFavorite = false,
+            deletedTS = 0L
         )
         supportActionBar?.title = mMedium!!.name
         bundle.putSerializable(MEDIUM, mMedium)
@@ -234,7 +234,7 @@ open class PhotoVideoActivity : SimpleActivity(),
         try {
             if (realPath.isNotEmpty()) {
                 val fis = FileInputStream(File(realPath))
-                parseFileChannel(realPath, fis.channel, 0, 0, 0) {
+                parseFileChannel(path = realPath, fc = fis.channel, level = 0, start = 0, end = 0) {
                     isPanorama = true
                 }
             }
@@ -251,7 +251,7 @@ open class PhotoVideoActivity : SimpleActivity(),
                 startActivity(this)
             }
         } else {
-            val mimeType = getUriMimeType(mUri.toString(), newUri)
+            val mimeType = getUriMimeType(path = mUri.toString(), newUri = newUri)
             Intent(
                 applicationContext,
                 VideoPlayerActivity::class.java

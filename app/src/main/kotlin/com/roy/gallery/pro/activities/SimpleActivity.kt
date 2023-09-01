@@ -13,7 +13,7 @@ import com.roy.commons.ext.getRealPathFromURI
 import com.roy.commons.helpers.isPiePlus
 
 open class SimpleActivity : BaseSimpleActivity() {
-    val observer = object : ContentObserver(null) {
+    private val observer = object : ContentObserver(null) {
         override fun onChange(selfChange: Boolean, uri: Uri?) {
             super.onChange(selfChange, uri)
 
@@ -68,14 +68,14 @@ open class SimpleActivity : BaseSimpleActivity() {
     protected fun registerFileUpdateListener() {
         try {
             contentResolver.registerContentObserver(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                true,
-                observer
+                /* uri = */ MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                /* notifyForDescendants = */ true,
+                /* observer = */ observer
             )
             contentResolver.registerContentObserver(
-                MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
-                true,
-                observer
+                /* uri = */ MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+                /* notifyForDescendants = */ true,
+                /* observer = */ observer
             )
         } catch (ignored: Exception) {
         }
