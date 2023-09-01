@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
@@ -55,6 +56,7 @@ class EditorDrawCanvas(context: Context, attrs: AttributeSet) : View(context, at
         canvas.restore()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val x = event.x
         val y = event.y
@@ -66,11 +68,13 @@ class EditorDrawCanvas(context: Context, attrs: AttributeSet) : View(context, at
                 mStartY = y
                 actionDown(x, y)
             }
+
             MotionEvent.ACTION_MOVE -> {
                 if (event.pointerCount == 1 && !mWasMultitouch) {
                     actionMove(x, y)
                 }
             }
+
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> actionUp()
             MotionEvent.ACTION_POINTER_DOWN -> mWasMultitouch = true
         }
@@ -119,7 +123,8 @@ class EditorDrawCanvas(context: Context, attrs: AttributeSet) : View(context, at
     }
 
     fun updateBrushSize(newBrushSize: Int) {
-        mPaintOptions.strokeWidth = resources.getDimension(R.dimen.full_brush_size) * (newBrushSize / 100f)
+        mPaintOptions.strokeWidth =
+            resources.getDimension(R.dimen.full_brush_size) * (newBrushSize / 100f)
     }
 
     fun updateBackgroundBitmap(bitmap: Bitmap) {

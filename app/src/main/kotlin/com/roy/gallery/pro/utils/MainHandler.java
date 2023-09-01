@@ -6,7 +6,7 @@ import android.os.Looper;
 
 public class MainHandler {
 
-    private static Handler mHandler = new Handler(Looper.getMainLooper());
+    private static final Handler mHandler = new Handler(Looper.getMainLooper());
 
     private MainHandler() {
     }
