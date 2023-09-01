@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <uses-sdk tools:overrideLibrary="com.google.vr.widgets.common, com.google.vr.sdk.widgets.pano" />
 
@@ -16,7 +17,7 @@
         android:required="false" />
 
     <application
-        android:name="com.roy.gallery.pro.App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_launcher_name"
@@ -24,27 +25,22 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        tools:ignore="LockedOrientationActivity"
         tools:replace="android:label">
 
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
-<!--        <meta-data-->
-<!--            android:name="com.google.android.gms.version"-->
-<!--            android:value="@integer/google_play_services_version" />-->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-<!--        <activity-->
-<!--            android:name="com.google.android.gms.ads.AdActivity"-->
-<!--            android:theme="@style/google_ad_style"-->
-<!--            tools:replace="android:theme" />-->
-
         <activity
-            android:name="com.roy.gallery.pro.activities.MainActivity"
+            android:name=".activities.MainActivity"
+            android:exported="true"
             android:resizeableActivity="true"
-            android:theme="@style/common_start_style">
+            android:theme="@style/common_start_style"
+            tools:targetApi="n">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -83,8 +79,9 @@
         </activity>
 
         <activity
-            android:name="com.roy.gallery.pro.activities.MediaActivity"
-            android:parentActivityName="com.roy.gallery.pro.activities.MainActivity">
+            android:name=".activities.MediaActivity"
+            android:exported="true"
+            android:parentActivityName=".activities.MainActivity">
 
             <meta-data
                 android:name="android.app.default_searchable"
@@ -97,9 +94,10 @@
         </activity>
 
         <activity
-            android:name="com.roy.gallery.pro.activities.ViewPagerActivity"
+            android:name=".activities.ViewPagerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="com.roy.gallery.pro.activities.MediaActivity">
+            android:exported="true"
+            android:parentActivityName=".activities.MediaActivity">
 
             <intent-filter>
                 <action android:name="com.android.camera.action.REVIEW" />
@@ -121,7 +119,7 @@
         <activity
             android:name="com.roy.commons.activities.CustomizationActivity"
             android:label="@string/customize_colors"
-            android:parentActivityName="com.roy.gallery.pro.activities.SettingsActivity" />
+            android:parentActivityName=".activities.SettingsActivity" />
 
         <activity
             android:name="com.roy.commons.activities.FAQActivity"
@@ -129,48 +127,49 @@
             android:parentActivityName="com.roy.commons.activities.AboutActivity" />
 
         <activity
-            android:name="com.roy.gallery.pro.activities.SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="@string/settings"
-            android:parentActivityName="com.roy.gallery.pro.activities.MainActivity" />
+            android:parentActivityName=".activities.MainActivity" />
 
         <activity
-            android:name="com.roy.gallery.pro.activities.PhotoVideoActivity"
+            android:name=".activities.PhotoVideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="com.roy.gallery.pro.activities.VideoPlayerActivity"
+            android:name=".activities.VideoPlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="com.roy.gallery.pro.activities.MediaActivity" />
+            android:parentActivityName=".activities.MediaActivity" />
 
         <activity
-            android:name="com.roy.gallery.pro.activities.PanoramaPhotoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/FullScreenTheme" />
-
-        <activity
-            android:name="com.roy.gallery.pro.activities.PanoramaVideoActivity"
+            android:name=".activities.PanoramaPhotoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullScreenTheme" />
 
         <activity
-            android:name="com.roy.gallery.pro.activities.IncludedFoldersActivity"
+            android:name=".activities.PanoramaVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name=".activities.IncludedFoldersActivity"
             android:label="@string/include_folders"
-            android:parentActivityName="com.roy.gallery.pro.activities.SettingsActivity" />
+            android:parentActivityName=".activities.SettingsActivity" />
 
         <activity
-            android:name="com.roy.gallery.pro.activities.ExcludedFoldersActivity"
+            android:name=".activities.ExcludedFoldersActivity"
             android:label="@string/excluded_folders"
-            android:parentActivityName="com.roy.gallery.pro.activities.SettingsActivity" />
+            android:parentActivityName=".activities.SettingsActivity" />
 
         <activity
-            android:name="com.roy.gallery.pro.activities.HiddenFoldersActivity"
+            android:name=".activities.HiddenFoldersActivity"
             android:label="@string/hidden_folders"
-            android:parentActivityName="com.roy.gallery.pro.activities.SettingsActivity" />
+            android:parentActivityName=".activities.SettingsActivity" />
 
         <activity
-            android:name="com.roy.gallery.pro.activities.PhotoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-            <intent-filter>
+            android:name=".activities.PhotoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true">
+            <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -181,9 +180,10 @@
         </activity>
 
         <activity
-            android:name="com.roy.gallery.pro.activities.VideoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-            <intent-filter>
+            android:name=".activities.VideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true">
+            <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -194,7 +194,8 @@
         </activity>
 
         <activity
-            android:name="com.roy.gallery.pro.activities.EditActivity"
+            android:name=".activities.EditActivity"
+            android:exported="true"
             android:label="@string/editor">
             <intent-filter>
                 <action android:name="android.intent.action.EDIT" />
@@ -218,7 +219,8 @@
         </activity>
 
         <activity
-            android:name="com.roy.gallery.pro.activities.SetWallpaperActivity"
+            android:name=".activities.SetWallpaperActivity"
+            android:exported="true"
             android:label="@string/simple_wallpaper">
             <intent-filter>
                 <action android:name="android.intent.action.ATTACH_DATA" />
@@ -236,7 +238,8 @@
         </activity>
 
         <activity
-            android:name="com.roy.gallery.pro.activities.WidgetConfigureActivity"
+            android:name=".activities.WidgetConfigureActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/MyWidgetConfigTheme">
             <intent-filter>
@@ -261,7 +264,8 @@
 
         <receiver
             android:name=".receivers.RefreshMediaReceiver"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="com.roy.REFRESH_MEDIA" />
             </intent-filter>
@@ -269,6 +273,7 @@
 
         <receiver
             android:name=".helpers.MyWidgetProvider"
+            android:exported="true"
             android:icon="@drawable/img_widget_preview">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
