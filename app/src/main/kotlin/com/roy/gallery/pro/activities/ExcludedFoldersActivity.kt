@@ -10,7 +10,7 @@ import com.roy.commons.ext.beVisibleIf
 import com.roy.commons.itf.RefreshRecyclerViewListener
 import kotlinx.android.synthetic.main.a_manage_folders.*
 
-class ExcludedFoldersActivity : com.roy.gallery.pro.activities.SimpleActivity(),
+class ExcludedFoldersActivity : SimpleActivity(),
     RefreshRecyclerViewListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,13 @@ class ExcludedFoldersActivity : com.roy.gallery.pro.activities.SimpleActivity(),
             setTextColor(config.textColor)
         }
 
-        val adapter = com.roy.gallery.pro.adapters.ManageFoldersAdapter(this, folders, true, this, manageFoldersList) {}
+        val adapter = com.roy.gallery.pro.adapters.ManageFoldersAdapter(
+            activity = this,
+            folders = folders,
+            isShowingExcludedFolders = true,
+            listener = this,
+            recyclerView = manageFoldersList
+        ) {}
         manageFoldersList.adapter = adapter
     }
 
@@ -49,7 +55,14 @@ class ExcludedFoldersActivity : com.roy.gallery.pro.activities.SimpleActivity(),
     }
 
     private fun addFolder() {
-        FilePickerDialog(this, config.lastFilepickerPath, false, config.shouldShowHidden, false, true) {
+        FilePickerDialog(
+            activity = this,
+            currPath = config.lastFilepickerPath,
+            pickFile = false,
+            showHidden = config.shouldShowHidden,
+            showFAB = false,
+            canAddShowHiddenButton = true
+        ) {
             config.lastFilepickerPath = it
             config.addExcludedFolder(it)
             updateFolders()

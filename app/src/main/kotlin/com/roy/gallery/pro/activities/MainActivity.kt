@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.activities
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.SearchManager
 import android.content.BroadcastReceiver
@@ -10,6 +11,7 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.Menu
@@ -135,6 +137,8 @@ import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
 import java.io.OutputStream
+import kotlin.math.max
+import kotlin.math.min
 
 class MainActivity : SimpleActivity(),
     DirectoryOperationsListener {
@@ -144,9 +148,9 @@ class MainActivity : SimpleActivity(),
         var leaveTime: Long = 0
     }
 
-    private val PICK_MEDIA = 2
-    private val PICK_WALLPAPER = 3
-    private val LAST_MEDIA_CHECK_PERIOD = 3000L
+    private val pickMedia = 2
+    private val pickWallpaper = 3
+    private val lastMediaCheckPeriod = 3000L
 
     private var mIsPickImageIntent = false
     private var mIsPickVideoIntent = false
@@ -168,8 +172,8 @@ class MainActivity : SimpleActivity(),
         ""                 // used at "Group direct subfolders" for navigation
     private var mOpenedSubfolders =
         arrayListOf("")     // used at "Group direct subfolders" for navigating Up with the back button
-    private var mLastMediaHandler = Handler()
-    private var mTempShowHiddenHandler = Handler()
+    private var mLastMediaHandler = Handler(Looper.getMainLooper())
+    private var mTempShowHiddenHandler = Handler(Looper.getMainLooper())
     private var mZoomListener: MyRecyclerView.MyZoomListener? = null
     private var mSearchMenuItem: MenuItem? = null
     private var mDirs = ArrayList<Directory>()
@@ -360,6 +364,7 @@ class MainActivity : SimpleActivity(),
         EventBus.getDefault().unregister(this)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (config.groupDirectSubfolders) {
             if (mCurrentPathPrefix.isEmpty()) {
@@ -477,7 +482,7 @@ class MainActivity : SimpleActivity(),
                     if (mIsSearchOpen) {
                         mIsSearchOpen = false
                         directoriesRefreshLayout.isEnabled = config.enablePullToRefresh
-                        setupAdapter(mDirs, "")
+                        setupAdapter(dirs = mDirs, textToSearch = "")
                     }
                     return true
                 }
@@ -502,7 +507,11 @@ class MainActivity : SimpleActivity(),
                         String.format(getString(R.string.deleting_folder), config.tempFolderPath),
                         Toast.LENGTH_LONG
                     )
-                    tryDeleteFileDirItem(newFolder.toFileDirItem(applicationContext), true, true)
+                    tryDeleteFileDirItem(
+                        fileDirItem = newFolder.toFileDirItem(applicationContext),
+                        allowDeleteFolder = true,
+                        deleteFromDatabase = true
+                    )
                 }
             }
             config.tempFolderPath = ""
@@ -526,8 +535,8 @@ class MainActivity : SimpleActivity(),
                 if (config.OTGPath.isEmpty()) {
                     runOnUiThread {
                         ConfirmationDialog(
-                            this,
-                            getString(R.string.usb_detected),
+                            activity = this,
+                            message = getString(R.string.usb_detected),
                             positive = R.string.ok,
                             negative = 0
                         ) {
@@ -591,13 +600,21 @@ class MainActivity : SimpleActivity(),
         val getImagesOnly = mIsPickImageIntent || mIsGetImageContentIntent
         val getVideosOnly = mIsPickVideoIntent || mIsGetVideoContentIntent
 
-        getCachedDirectories(getVideosOnly, getImagesOnly, mDirectoryDao) {
+        getCachedDirectories(
+            getVideosOnly = getVideosOnly,
+            getImagesOnly = getImagesOnly,
+            directoryDao = mDirectoryDao
+        ) {
             gotDirectories(addTempFolderIfNeeded(it))
         }
     }
 
     private fun showSortingDialog() {
-        ChangeSortingDialog(this, true, false) {
+        ChangeSortingDialog(
+            activity = this,
+            isDirectorySorting = true,
+            showFolderCheckbox = false
+        ) {
             directoriesGrid.adapter = null
             if (config.directorySorting and SORT_BY_DATE_MODIFIED > 0 || config.directorySorting and SORT_BY_DATE_TAKEN > 0) {
                 getDirectories()
@@ -620,7 +637,7 @@ class MainActivity : SimpleActivity(),
 
     private fun showAllMedia() {
         config.showAll = true
-        Intent(this, MediaActivity::class.java).apply {
+        Intent(/* packageContext = */ this, /* cls = */ MediaActivity::class.java).apply {
             putExtra(DIRECTORY, "")
 
             if (mIsThirdPartyIntent) {
@@ -633,7 +650,7 @@ class MainActivity : SimpleActivity(),
     }
 
     private fun changeViewType() {
-        ChangeViewTypeDialog(this, true) {
+        ChangeViewTypeDialog(activity = this, fromFoldersView = true) {
             invalidateOptionsMenu()
             setupLayoutManager()
             directoriesGrid.adapter = null
@@ -700,7 +717,7 @@ class MainActivity : SimpleActivity(),
             val pathsToDelete = ArrayList<String>()
             itemsToDelete.mapTo(pathsToDelete) { it.path }
 
-            movePathsInRecycleBin(pathsToDelete, mMediumDao) {
+            movePathsInRecycleBin(paths = pathsToDelete, mediumDao = mMediumDao) {
                 if (it) {
                     deleteFilteredFileDirItems(itemsToDelete, folders)
                 } else {
@@ -829,7 +846,14 @@ class MainActivity : SimpleActivity(),
     }
 
     private fun createNewFolder() {
-        FilePickerDialog(this, internalStoragePath, false, config.shouldShowHidden, false, true) {
+        FilePickerDialog(
+            activity = this,
+            currPath = internalStoragePath,
+            pickFile = false,
+            showHidden = config.shouldShowHidden,
+            showFAB = false,
+            canAddShowHiddenButton = true
+        ) {
             CreateNewFolderDialog(this, it) {
                 config.tempFolderPath = it
                 Thread {
@@ -849,6 +873,7 @@ class MainActivity : SimpleActivity(),
         columnCountChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun columnCountChanged() {
         invalidateOptionsMenu()
         directoriesGrid.adapter?.notifyDataSetChanged()
@@ -896,7 +921,7 @@ class MainActivity : SimpleActivity(),
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == PICK_MEDIA && resultData != null) {
+            if (requestCode == pickMedia && resultData != null) {
                 val resultIntent = Intent()
                 var resultUri: Uri? = null
                 if (mIsThirdPartyIntent) {
@@ -921,7 +946,7 @@ class MainActivity : SimpleActivity(),
 
                 setResult(Activity.RESULT_OK, resultIntent)
                 finish()
-            } else if (requestCode == PICK_WALLPAPER) {
+            } else if (requestCode == pickWallpaper) {
                 setResult(Activity.RESULT_OK)
                 finish()
             }
@@ -987,13 +1012,13 @@ class MainActivity : SimpleActivity(),
         intent.apply {
             if (mIsSetWallpaperIntent) {
                 putExtra(SET_WALLPAPER_INTENT, true)
-                startActivityForResult(this, PICK_WALLPAPER)
+                startActivityForResult(this, pickWallpaper)
             } else {
                 putExtra(GET_IMAGE_INTENT, mIsPickImageIntent || mIsGetImageContentIntent)
                 putExtra(GET_VIDEO_INTENT, mIsPickVideoIntent || mIsGetVideoContentIntent)
                 putExtra(GET_ANY_INTENT, mIsGetAnyContentIntent)
                 putExtra(Intent.EXTRA_ALLOW_MULTIPLE, mAllowPickingMultiple)
-                startActivityForResult(this, PICK_MEDIA)
+                startActivityForResult(this, pickMedia)
             }
         }
     }
@@ -1046,13 +1071,13 @@ class MainActivity : SimpleActivity(),
                 }
 
                 val curMedia = mediaFetcher.getFilesFrom(
-                    directory.path,
-                    getImagesOnly,
-                    getVideosOnly,
-                    getProperDateTaken,
-                    getProperFileSize,
-                    favoritePaths,
-                    false
+                    curPath = directory.path,
+                    isPickImage = getImagesOnly,
+                    isPickVideo = getVideosOnly,
+                    getProperDateTaken = getProperDateTaken,
+                    getProperFileSize = getProperFileSize,
+                    favoritePaths = favoritePaths,
+                    getVideoDurations = false
                 )
                 val newDir = if (curMedia.isEmpty()) {
                     if (directory.path != tempFolderPath) {
@@ -1061,13 +1086,13 @@ class MainActivity : SimpleActivity(),
                     directory
                 } else {
                     createDirectoryFromMedia(
-                        directory.path,
-                        curMedia,
-                        albumCovers,
-                        hiddenString,
-                        includedFolders,
-                        isSortingAscending,
-                        getProperFileSize
+                        path = directory.path,
+                        curMedia = curMedia,
+                        albumCovers = albumCovers,
+                        hiddenString = hiddenString,
+                        includedFolders = includedFolders,
+                        isSortingAscending = isSortingAscending,
+                        getProperFileSize = getProperFileSize
                     )
                 }
 
@@ -1093,7 +1118,12 @@ class MainActivity : SimpleActivity(),
                 if (!directory.isRecycleBin()) {
                     mMediumDao.insertAll(curMedia)
                 }
-                getCachedMedia(directory.path, getVideosOnly, getImagesOnly, mMediumDao) {
+                getCachedMedia(
+                    path = directory.path,
+                    getVideosOnly = getVideosOnly,
+                    getImagesOnly = getImagesOnly,
+                    mediumDao = mMediumDao
+                ) {
                     it.forEach {
                         if (!curMedia.contains(it)) {
                             val path = (it as? Medium)?.path
@@ -1135,13 +1165,13 @@ class MainActivity : SimpleActivity(),
             }
 
             val newMedia = mediaFetcher.getFilesFrom(
-                folder,
-                getImagesOnly,
-                getVideosOnly,
-                getProperDateTaken,
-                getProperFileSize,
-                favoritePaths,
-                false
+                curPath = folder,
+                isPickImage = getImagesOnly,
+                isPickVideo = getVideosOnly,
+                getProperDateTaken = getProperDateTaken,
+                getProperFileSize = getProperFileSize,
+                favoritePaths = favoritePaths,
+                getVideoDurations = false
             )
             if (newMedia.isEmpty()) {
                 continue
@@ -1157,13 +1187,13 @@ class MainActivity : SimpleActivity(),
             }
 
             val newDir = createDirectoryFromMedia(
-                folder,
-                newMedia,
-                albumCovers,
-                hiddenString,
-                includedFolders,
-                isSortingAscending,
-                getProperFileSize
+                path = folder,
+                curMedia = newMedia,
+                albumCovers = albumCovers,
+                hiddenString = hiddenString,
+                includedFolders = includedFolders,
+                isSortingAscending = isSortingAscending,
+                getProperFileSize = getProperFileSize
             )
             dirs.add(newDir)
             setupAdapter(dirs)
@@ -1231,23 +1261,23 @@ class MainActivity : SimpleActivity(),
                 lastItem.modified
             )
         val dateTaken =
-            if (isSortingAscending) Math.min(firstItem.taken, lastItem.taken) else Math.max(
+            if (isSortingAscending) min(firstItem.taken, lastItem.taken) else max(
                 firstItem.taken,
                 lastItem.taken
             )
         val size = if (getProperFileSize) curMedia.sumByLong { it.size } else 0L
         val mediaTypes = curMedia.getDirMediaTypes()
         return Directory(
-            null,
-            path,
-            thumbnail,
-            dirName,
-            curMedia.size,
-            lastModified,
-            dateTaken,
-            size,
-            getPathLocation(path),
-            mediaTypes
+            id = null,
+            path = path,
+            tmb = thumbnail,
+            name = dirName,
+            mediaCnt = curMedia.size,
+            modified = lastModified,
+            taken = dateTaken,
+            size = size,
+            location = getPathLocation(path),
+            types = mediaTypes
         )
     }
 
@@ -1270,12 +1300,12 @@ class MainActivity : SimpleActivity(),
             val fastscroller =
                 if (config.scrollHorizontally) directoriesHorizontalFastScroller else directoriesVerticalFastScroller
             com.roy.gallery.pro.adapters.DirectoryAdapter(
-                this,
-                dirsToShow,
-                this,
-                directoriesGrid,
-                isPickIntent(intent) || isGetAnyContentIntent(intent),
-                fastscroller
+                activity = this,
+                dirs = dirsToShow,
+                listener = this,
+                recyclerView = directoriesGrid,
+                isPickIntent = isPickIntent(intent) || isGetAnyContentIntent(intent),
+                fastScroller = fastscroller
             ) {
                 val clickedDir = it as Directory
                 val path = clickedDir.path
@@ -1328,16 +1358,16 @@ class MainActivity : SimpleActivity(),
         if (allowHorizontalScroll) {
             directoriesHorizontalFastScroller.allowBubbleDisplay = config.showInfoBubble
             directoriesHorizontalFastScroller.setViews(
-                directoriesGrid,
-                directoriesRefreshLayout
+                recyclerView = directoriesGrid,
+                swipeRefreshLayout = directoriesRefreshLayout
             ) {
                 directoriesHorizontalFastScroller.updateBubbleText(getBubbleTextItem(it))
             }
         } else {
             directoriesVerticalFastScroller.allowBubbleDisplay = config.showInfoBubble
             directoriesVerticalFastScroller.setViews(
-                directoriesGrid,
-                directoriesRefreshLayout
+                recyclerView = directoriesGrid,
+                swipeRefreshLayout = directoriesRefreshLayout
             ) {
                 directoriesVerticalFastScroller.updateBubbleText(getBubbleTextItem(it))
             }
@@ -1416,7 +1446,7 @@ class MainActivity : SimpleActivity(),
                     checkLastMediaChanged()
                 }
             }.start()
-        }, LAST_MEDIA_CHECK_PERIOD)
+        }, lastMediaCheckPeriod)
     }
 
     private fun checkRecycleBinItems() {
@@ -1427,6 +1457,7 @@ class MainActivity : SimpleActivity(),
                     try {
                         mMediumDao.deleteOldRecycleBinItems(System.currentTimeMillis() - MONTH_MILLISECONDS)
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }.start()
             }, 3000L)
@@ -1447,8 +1478,8 @@ class MainActivity : SimpleActivity(),
                 paths.forEach {
                     val parts = it.split("/")
                     var currentString = ""
-                    for (i in 0 until parts.size) {
-                        currentString += "${parts[i]}/"
+                    for (element in parts) {
+                        currentString += "${element}/"
 
                         if (!checkedPaths.contains(currentString)) {
                             val cnt = paths.count { it.startsWith(currentString) }
@@ -1474,6 +1505,7 @@ class MainActivity : SimpleActivity(),
                     }
                 }
             } catch (e: Exception) {
+                e.printStackTrace()
             }
         }.start()
     }
@@ -1490,7 +1522,7 @@ class MainActivity : SimpleActivity(),
 
     override fun updateDirectories(directories: ArrayList<Directory>) {
         Thread {
-            storeDirectoryItems(directories, mDirectoryDao)
+            storeDirectoryItems(items = directories, directoryDao = mDirectoryDao)
             removeInvalidDBDirectories()
         }.start()
     }
@@ -1507,6 +1539,7 @@ class MainActivity : SimpleActivity(),
     }
 
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private fun registerReceiver() {
         try {
             registerReceiver(

@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.activities
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
@@ -24,16 +25,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import com.roy.gallery.pro.BuildConfig
-import com.roy.gallery.pro.R
-import com.roy.gallery.pro.adapters.FiltersAdapter
-import com.roy.gallery.pro.dialogs.OtherAspectRatioDialog
-import com.roy.gallery.pro.dialogs.ResizeDialog
-import com.roy.gallery.pro.dialogs.SaveAsDialog
-import com.roy.gallery.pro.extensions.config
-import com.roy.gallery.pro.extensions.openEditor
-import com.roy.gallery.pro.helpers.*
-import com.roy.gallery.pro.models.FilterItem
 import com.roy.commons.dlg.ColorPickerDialog
 import com.roy.commons.ext.applyColorFilter
 import com.roy.commons.ext.beGone
@@ -66,6 +57,16 @@ import com.roy.commons.helpers.REAL_FILE_PATH
 import com.roy.commons.helpers.SIDELOADING_TRUE
 import com.roy.commons.helpers.isNougatPlus
 import com.roy.commons.models.FileDirItem
+import com.roy.gallery.pro.BuildConfig
+import com.roy.gallery.pro.R
+import com.roy.gallery.pro.adapters.FiltersAdapter
+import com.roy.gallery.pro.dialogs.OtherAspectRatioDialog
+import com.roy.gallery.pro.dialogs.ResizeDialog
+import com.roy.gallery.pro.dialogs.SaveAsDialog
+import com.roy.gallery.pro.extensions.config
+import com.roy.gallery.pro.extensions.openEditor
+import com.roy.gallery.pro.helpers.*
+import com.roy.gallery.pro.models.FilterItem
 import com.theartofdev.edmodo.cropper.CropImageView
 import com.zomato.photofilters.FilterPack
 import com.zomato.photofilters.imageprocessors.Filter
@@ -76,6 +77,7 @@ import kotlinx.android.synthetic.main.v_bottom_editor_crop_rotate_actions.*
 import kotlinx.android.synthetic.main.v_bottom_editor_draw_actions.*
 import kotlinx.android.synthetic.main.v_bottom_editor_primary_actions.*
 import java.io.*
+import kotlin.math.max
 
 class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener {
     companion object {
@@ -204,8 +206,8 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
         if (isCropIntent) {
             bottomEditorPrimaryActions.beGone()
             (bottomEditorCropRotateActions.layoutParams as RelativeLayout.LayoutParams).addRule(
-                RelativeLayout.ALIGN_PARENT_BOTTOM,
-                1
+                /* verb = */ RelativeLayout.ALIGN_PARENT_BOTTOM,
+                /* subject = */ 1
             )
         }
 
@@ -354,6 +356,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
                 oldExif = inputStream?.let { ExifInterface(it) }
             }
         } catch (e: Exception) {
+            e.printStackTrace()
         } finally {
             inputStream?.close()
         }
@@ -365,19 +368,23 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
             if (saveUri.scheme == "file") {
                 saveUri.path?.let {
                     SaveAsDialog(this, it, true) {
-                        saveBitmapToFile(bitmap, it, true)
+                        saveBitmapToFile(bitmap = bitmap, path = it, showSavingToast = true)
                     }
                 }
             } else if (saveUri.scheme == "content") {
                 val filePathGetter = getNewFilePath()
                 SaveAsDialog(this, filePathGetter.first, filePathGetter.second) {
-                    saveBitmapToFile(bitmap, it, true)
+                    saveBitmapToFile(bitmap = bitmap, path = it, showSavingToast = true)
                 }
             }
         } else {
             val currentFilter = getFiltersAdapter()?.getCurrentFilter() ?: return
             val filePathGetter = getNewFilePath()
-            SaveAsDialog(this, filePathGetter.first, filePathGetter.second) {
+            SaveAsDialog(
+                activity = this,
+                path = filePathGetter.first,
+                appendFilename = filePathGetter.second
+            ) {
                 toast(R.string.saving)
 
                 // clean up everything to free as much memory as possible
@@ -391,7 +398,11 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
                         val originalBitmap = Glide.with(applicationContext).asBitmap().load(uri)
                             .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get()
                         currentFilter.filter.processFilter(originalBitmap)
-                        saveBitmapToFile(originalBitmap, it, false)
+                        saveBitmapToFile(
+                            bitmap = originalBitmap,
+                            path = it,
+                            showSavingToast = false
+                        )
                     } catch (e: OutOfMemoryError) {
                         toast(R.string.out_of_memory_error)
                     }
@@ -443,12 +454,13 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
         val filename = applicationContext.getFilenameFromContentUri(saveUri) ?: "tmp.jpg"
         val newPath = "$folder/$filename"
         val fileDirItem = FileDirItem(newPath, filename)
-        getFileOutputStream(fileDirItem, true) {
+        getFileOutputStream(fileDirItem = fileDirItem, allowCreatingNewFile = true) {
             if (it != null) {
                 try {
                     it.write(bytes.toByteArray())
                     callback(newPath)
                 } catch (e: Exception) {
+                    e.printStackTrace()
                 } finally {
                     it.close()
                 }
@@ -585,7 +597,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
         updateBrushSize(config.lastEditorBrushSize)
 
         bottomDrawColorClickable.setOnClickListener {
-            ColorPickerDialog(this, drawColor) { wasPositivePressed, color ->
+            ColorPickerDialog(activity = this, color = drawColor) { wasPositivePressed, color ->
                 if (wasPositivePressed) {
                     updateDrawColor(color)
                 }
@@ -604,11 +616,12 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
 
     private fun updateBrushSize(percent: Int) {
         editorDrawCanvas.updateBrushSize(percent)
-        val scale = Math.max(0.03f, percent / 100f)
+        val scale = max(0.03f, percent / 100f)
         bottomDrawColor.scaleX = scale
         bottomDrawColor.scaleY = scale
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun updatePrimaryActionButtons() {
         if (cropImageView.isGone() && currPrimaryAction == PRIMARY_ACTION_CROP_ROTATE) {
             loadCropImageView()
@@ -841,14 +854,18 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
                 }
             } else if (saveUri.scheme == "file") {
                 saveUri.path?.let {
-                    SaveAsDialog(this, it, true) {
-                        saveBitmapToFile(bitmap, it, true)
+                    SaveAsDialog(activity = this, path = it, appendFilename = true) {
+                        saveBitmapToFile(bitmap = bitmap, path = it, showSavingToast = true)
                     }
                 }
             } else if (saveUri.scheme == "content") {
                 val filePathGetter = getNewFilePath()
-                SaveAsDialog(this, filePathGetter.first, filePathGetter.second) {
-                    saveBitmapToFile(bitmap, it, true)
+                SaveAsDialog(
+                    activity = this,
+                    path = filePathGetter.first,
+                    appendFilename = filePathGetter.second
+                ) {
+                    saveBitmapToFile(bitmap = bitmap, path = it, showSavingToast = true)
                 }
             } else {
                 toast(R.string.unknown_file_location)
@@ -891,8 +908,8 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
         try {
             Thread {
                 val file = File(path)
-                val fileDirItem = FileDirItem(path, path.getFilenameFromPath())
-                getFileOutputStream(fileDirItem, true) {
+                val fileDirItem = FileDirItem(path = path, name = path.getFilenameFromPath())
+                getFileOutputStream(fileDirItem = fileDirItem, allowCreatingNewFile = true) {
                     if (it != null) {
                         saveBitmap(file, bitmap, it, showSavingToast)
                     } else {
@@ -919,7 +936,12 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
         }
 
         if (resizeWidth > 0 && resizeHeight > 0) {
-            val resized = Bitmap.createScaledBitmap(bitmap, resizeWidth, resizeHeight, false)
+            val resized = Bitmap.createScaledBitmap(
+                /* src = */ bitmap,
+                /* dstWidth = */ resizeWidth,
+                /* dstHeight = */ resizeHeight,
+                /* filter = */ false
+            )
             resized.compress(file.absolutePath.getCompressionFormat(), 90, out)
         } else {
             bitmap.compress(file.absolutePath.getCompressionFormat(), 90, out)
@@ -931,6 +953,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
                 oldExif?.copyTo(newExif, false)
             }
         } catch (e: Exception) {
+            e.printStackTrace()
         }
 
         setResult(Activity.RESULT_OK, intent)

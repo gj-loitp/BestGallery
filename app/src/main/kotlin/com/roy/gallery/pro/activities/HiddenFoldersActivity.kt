@@ -30,7 +30,12 @@ class HiddenFoldersActivity : SimpleActivity(),
                     setTextColor(config.textColor)
                 }
 
-                val adapter = ManageHiddenFoldersAdapter(this, it, this, manageFoldersList) {}
+                val adapter = ManageHiddenFoldersAdapter(
+                    activity = this,
+                    folders = it,
+                    listener = this,
+                    recyclerView = manageFoldersList
+                ) {}
                 manageFoldersList.adapter = adapter
             }
         }
@@ -54,7 +59,14 @@ class HiddenFoldersActivity : SimpleActivity(),
     }
 
     private fun addFolder() {
-        FilePickerDialog(this, config.lastFilepickerPath, false, config.shouldShowHidden, false, true) {
+        FilePickerDialog(
+            activity = this,
+            currPath = config.lastFilepickerPath,
+            pickFile = false,
+            showHidden = config.shouldShowHidden,
+            showFAB = false,
+            canAddShowHiddenButton = true
+        ) {
             config.lastFilepickerPath = it
             Thread {
                 addNoMedia(it) {

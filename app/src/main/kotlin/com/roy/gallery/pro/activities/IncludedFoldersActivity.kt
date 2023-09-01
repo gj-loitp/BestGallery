@@ -28,7 +28,13 @@ class IncludedFoldersActivity : SimpleActivity(),
             setTextColor(config.textColor)
         }
 
-        val adapter = com.roy.gallery.pro.adapters.ManageFoldersAdapter(this, folders, false, this, manageFoldersList) {}
+        val adapter = com.roy.gallery.pro.adapters.ManageFoldersAdapter(
+            activity = this,
+            folders = folders,
+            isShowingExcludedFolders = false,
+            listener = this,
+            recyclerView = manageFoldersList
+        ) {}
         manageFoldersList.adapter = adapter
     }
 
@@ -50,7 +56,14 @@ class IncludedFoldersActivity : SimpleActivity(),
     }
 
     private fun addFolder() {
-        FilePickerDialog(this, config.lastFilepickerPath, false, config.shouldShowHidden, false, true) {
+        FilePickerDialog(
+            activity = this,
+            currPath = config.lastFilepickerPath,
+            pickFile = false,
+            showHidden = config.shouldShowHidden,
+            showFAB = false,
+            canAddShowHiddenButton = true
+        ) {
             config.lastFilepickerPath = it
             config.addIncludedFolder(it)
             updateFolders()
