@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.dialogs
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AlertDialog
 import com.roy.gallery.pro.R
 import com.roy.gallery.pro.extensions.config
@@ -8,7 +9,11 @@ import com.roy.commons.activities.BaseSimpleActivity
 import com.roy.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_manage_extended_details.view.*
 
-class ManageExtendedDetailsDialog(val activity: BaseSimpleActivity, val callback: (result: Int) -> Unit) {
+class ManageExtendedDetailsDialog(
+    val activity: BaseSimpleActivity,
+    val callback: (result: Int) -> Unit,
+) {
+    @SuppressLint("InflateParams")
     private var view = activity.layoutInflater.inflate(R.layout.dlg_manage_extended_details, null)
 
     init {
@@ -28,11 +33,11 @@ class ManageExtendedDetailsDialog(val activity: BaseSimpleActivity, val callback
         }
 
         AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.ok) { dialog, which -> dialogConfirmed() }
-                .setNegativeButton(R.string.cancel, null)
-                .create().apply {
-                    activity.setupDialogStuff(view, this)
-                }
+            .setPositiveButton(R.string.ok) { _, _ -> dialogConfirmed() }
+            .setNegativeButton(R.string.cancel, null)
+            .create().apply {
+                activity.setupDialogStuff(view, this)
+            }
     }
 
     private fun dialogConfirmed() {

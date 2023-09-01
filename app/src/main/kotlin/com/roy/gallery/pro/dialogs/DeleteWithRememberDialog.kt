@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.dialogs
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.appcompat.app.AlertDialog
 import com.roy.gallery.pro.R
@@ -8,20 +9,22 @@ import kotlinx.android.synthetic.main.dlg_delete_with_remember.view.*
 
 class DeleteWithRememberDialog(
     val activity: Activity,
-    val message: String,
+    message: String,
     val callback: (remember: Boolean) -> Unit,
 ) {
     private var dialog: AlertDialog
+
+    @SuppressLint("InflateParams")
     val view = activity.layoutInflater.inflate(R.layout.dlg_delete_with_remember, null)!!
 
     init {
         view.deleteRememberTitle.text = message
         val builder = AlertDialog.Builder(activity)
-            .setPositiveButton(R.string.yes) { dialog, which -> dialogConfirmed() }
+            .setPositiveButton(R.string.yes) { _, _ -> dialogConfirmed() }
             .setNegativeButton(R.string.no, null)
 
         dialog = builder.create().apply {
-            activity.setupDialogStuff(view, this)
+            activity.setupDialogStuff(view = view, dialog = this)
         }
     }
 

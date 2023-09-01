@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.dialogs
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -18,9 +19,15 @@ import com.roy.commons.helpers.SORT_BY_SIZE
 import com.roy.commons.helpers.SORT_DESCENDING
 import kotlinx.android.synthetic.main.dlg_change_sorting.view.*
 
-class ChangeSortingDialog(val activity: BaseSimpleActivity, val isDirectorySorting: Boolean, showFolderCheckbox: Boolean,
-                          val path: String = "", val callback: () -> Unit) :
-        DialogInterface.OnClickListener {
+@SuppressLint("InflateParams")
+class ChangeSortingDialog(
+    val activity: BaseSimpleActivity,
+    private val isDirectorySorting: Boolean,
+    showFolderCheckbox: Boolean,
+    val path: String = "",
+    val callback: () -> Unit,
+) :
+    DialogInterface.OnClickListener {
     private var currSorting = 0
     private var config = activity.config
     private var pathToUse = if (!isDirectorySorting && path.isEmpty()) SHOW_ALL else path
@@ -35,13 +42,14 @@ class ChangeSortingDialog(val activity: BaseSimpleActivity, val isDirectorySorti
         }
 
         AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.ok, this)
-                .setNegativeButton(R.string.cancel, null)
-                .create().apply {
-                    activity.setupDialogStuff(view, this, R.string.sort_by)
-                }
+            .setPositiveButton(R.string.ok, this)
+            .setNegativeButton(R.string.cancel, null)
+            .create().apply {
+                activity.setupDialogStuff(view = view, dialog = this, titleId = R.string.sort_by)
+            }
 
-        currSorting = if (isDirectorySorting) config.directorySorting else config.getFileSorting(pathToUse)
+        currSorting =
+            if (isDirectorySorting) config.directorySorting else config.getFileSorting(pathToUse)
         setupSortRadio()
         setupOrderRadio()
     }
@@ -89,7 +97,7 @@ class ChangeSortingDialog(val activity: BaseSimpleActivity, val isDirectorySorti
             config.directorySorting = sorting
         } else {
             if (view.sortingDialogUseForThisFolder.isChecked) {
-                config.saveFileSorting(pathToUse, sorting)
+                config.saveFileSorting(path = pathToUse, value = sorting)
             } else {
                 config.removeFileSorting(pathToUse)
                 config.sorting = sorting

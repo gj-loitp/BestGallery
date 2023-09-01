@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.dialogs
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AlertDialog
 import com.roy.gallery.pro.R
 import com.roy.gallery.pro.extensions.config
@@ -9,6 +10,7 @@ import com.roy.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_filter_media.view.*
 
 class FilterMediaDialog(val activity: BaseSimpleActivity, val callback: (result: Int) -> Unit) {
+    @SuppressLint("InflateParams")
     private var view = activity.layoutInflater.inflate(R.layout.dlg_filter_media, null)
 
     init {
@@ -22,25 +24,19 @@ class FilterMediaDialog(val activity: BaseSimpleActivity, val callback: (result:
         }
 
         AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.ok) { dialog, which -> dialogConfirmed() }
-                .setNegativeButton(R.string.cancel, null)
-                .create().apply {
-                    activity.setupDialogStuff(view, this, R.string.filter_media)
-                }
+            .setPositiveButton(R.string.ok) { _, _ -> dialogConfirmed() }
+            .setNegativeButton(R.string.cancel, null).create().apply {
+                activity.setupDialogStuff(view, this, R.string.filter_media)
+            }
     }
 
     private fun dialogConfirmed() {
         var result = 0
-        if (view.filterMediaImages.isChecked)
-            result += TYPE_IMAGES
-        if (view.filterMediaVideos.isChecked)
-            result += TYPE_VIDEOS
-        if (view.filterMediaGifs.isChecked)
-            result += TYPE_GIFS
-        if (view.filterMediaRaws.isChecked)
-            result += TYPE_RAWS
-        if (view.filterMediaSvgs.isChecked)
-            result += TYPE_SVGS
+        if (view.filterMediaImages.isChecked) result += TYPE_IMAGES
+        if (view.filterMediaVideos.isChecked) result += TYPE_VIDEOS
+        if (view.filterMediaGifs.isChecked) result += TYPE_GIFS
+        if (view.filterMediaRaws.isChecked) result += TYPE_RAWS
+        if (view.filterMediaSvgs.isChecked) result += TYPE_SVGS
 
         activity.config.filterMedia = result
         callback(result)

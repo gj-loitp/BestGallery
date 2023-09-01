@@ -1,12 +1,18 @@
 package com.roy.gallery.pro.dialogs
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AlertDialog
 import com.roy.gallery.pro.R
 import com.roy.commons.activities.BaseSimpleActivity
 import com.roy.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_other_aspect_ratio.view.*
 
-class OtherAspectRatioDialog(val activity: BaseSimpleActivity, val lastOtherAspectRatio: Pair<Int, Int>?, val callback: (aspectRatio: Pair<Int, Int>) -> Unit) {
+@SuppressLint("InflateParams")
+class OtherAspectRatioDialog(
+    val activity: BaseSimpleActivity,
+    private val lastOtherAspectRatio: Pair<Int, Int>?,
+    val callback: (aspectRatio: Pair<Int, Int>) -> Unit,
+) {
     private val dialog: AlertDialog
 
     init {
@@ -54,10 +60,10 @@ class OtherAspectRatioDialog(val activity: BaseSimpleActivity, val lastOtherAspe
         }
 
         dialog = AlertDialog.Builder(activity)
-                .setNegativeButton(R.string.cancel, null)
-                .create().apply {
-                    activity.setupDialogStuff(view, this)
-                }
+            .setNegativeButton(R.string.cancel, null)
+            .create().apply {
+                activity.setupDialogStuff(view, this)
+            }
     }
 
     private fun customRatioPicked() {

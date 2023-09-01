@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.dialogs
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -11,25 +12,31 @@ import com.roy.commons.ext.beVisibleIf
 import com.roy.commons.ext.setupDialogStuff
 import kotlinx.android.synthetic.main.dlg_change_grouping.view.*
 
-class ChangeGroupingDialog(val activity: BaseSimpleActivity, val path: String = "", val callback: () -> Unit) :
-        DialogInterface.OnClickListener {
+class ChangeGroupingDialog(
+    val activity: BaseSimpleActivity,
+    val path: String = "",
+    val callback: () -> Unit,
+) :
+    DialogInterface.OnClickListener {
     private var currGrouping = 0
     private var config = activity.config
-    private val pathToUse = if (path.isEmpty()) SHOW_ALL else path
-    private var view: View
+    private val pathToUse = path.ifEmpty { SHOW_ALL }
 
-    init {
-        view = activity.layoutInflater.inflate(R.layout.dlg_change_grouping, null).apply {
+    @SuppressLint("InflateParams")
+    private var view: View =
+        activity.layoutInflater.inflate(R.layout.dlg_change_grouping, null).apply {
             groupingDialogUseForThisFolder.isChecked = config.hasCustomGrouping(pathToUse)
             groupingDialogRadioFolder.beVisibleIf(path.isEmpty())
         }
 
+    init {
+
         AlertDialog.Builder(activity)
-                .setPositiveButton(R.string.ok, this)
-                .setNegativeButton(R.string.cancel, null)
-                .create().apply {
-                    activity.setupDialogStuff(view, this, R.string.group_by)
-                }
+            .setPositiveButton(R.string.ok, this)
+            .setNegativeButton(R.string.cancel, null)
+            .create().apply {
+                activity.setupDialogStuff(view = view, dialog = this, titleId = R.string.group_by)
+            }
 
         currGrouping = config.getFolderGrouping(pathToUse)
         setupGroupRadio()
@@ -76,7 +83,7 @@ class ChangeGroupingDialog(val activity: BaseSimpleActivity, val path: String = 
         }
 
         if (view.groupingDialogUseForThisFolder.isChecked) {
-            config.saveFolderGrouping(pathToUse, grouping)
+            config.saveFolderGrouping(path = pathToUse, value = grouping)
         } else {
             config.removeFolderGrouping(pathToUse)
             config.groupBy = grouping
