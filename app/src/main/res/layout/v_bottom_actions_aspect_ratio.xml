@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_aspect_ratios_wrapper"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomAspectRatiosWrapper"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_actions_height"
     android:paddingTop="@dimen/medium_margin">
 
-    <TextView
-        android:id="@+id/bottom_aspect_ratio_free"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bottomAspectRatioFree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -17,12 +17,13 @@
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textSize="@dimen/big_text_size"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_aspect_ratio_one_one"
+        app:layout_constraintEnd_toStartOf="@+id/bottomAspectRatioOneOne"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/bottom_aspect_ratio_one_one"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bottomAspectRatioOneOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -30,12 +31,13 @@
         android:text="1:1"
         android:textColor="@android:color/white"
         android:textSize="@dimen/big_text_size"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_aspect_ratio_four_three"
+        app:layout_constraintEnd_toStartOf="@+id/bottomAspectRatioFourThree"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_aspect_ratio_free"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomAspectRatioFree"
+        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/bottom_aspect_ratio_four_three"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bottomAspectRatioFourThree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -43,12 +45,13 @@
         android:text="4:3"
         android:textColor="@android:color/white"
         android:textSize="@dimen/big_text_size"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_aspect_ratio_sixteen_nine"
+        app:layout_constraintEnd_toStartOf="@+id/bottomAspectRatioSixteenNine"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_aspect_ratio_one_one"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomAspectRatioOneOne"
+        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/bottom_aspect_ratio_sixteen_nine"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bottomAspectRatioSixteenNine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -56,12 +59,13 @@
         android:text="16:9"
         android:textColor="@android:color/white"
         android:textSize="@dimen/big_text_size"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_aspect_ratio_other"
+        app:layout_constraintEnd_toStartOf="@+id/bottomAspectRatioOther"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_aspect_ratio_four_three"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomAspectRatioFourThree"
+        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/bottom_aspect_ratio_other"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bottomAspectRatioOther"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -72,6 +76,7 @@
         android:textSize="@dimen/big_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_aspect_ratio_sixteen_nine"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomAspectRatioSixteenNine"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@ import com.roy.commons.ext.onSeekBarChangeListener
 import com.roy.commons.ext.setBackgroundColor
 import com.roy.commons.ext.setFillWithStroke
 import com.roy.commons.ext.updateTextColors
-import kotlinx.android.synthetic.main.activity_widget_config.*
+import kotlinx.android.synthetic.main.a_widget_config.*
 
 class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() {
     private var mBgAlpha = 0f
@@ -36,7 +36,7 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
         useDynamicTheme = false
         super.onCreate(savedInstanceState)
         setResult(RESULT_CANCELED)
-        setContentView(R.layout.activity_widget_config)
+        setContentView(R.layout.a_widget_config)
         initVariables()
 
         mWidgetId = intent.extras?.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID) ?: AppWidgetManager.INVALID_APPWIDGET_ID
@@ -45,20 +45,20 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
             finish()
         }
 
-        config_save.setOnClickListener { saveConfig() }
-        config_bg_color.setOnClickListener { pickBackgroundColor() }
-        config_text_color.setOnClickListener { pickTextColor() }
-        folder_picker_value.setOnClickListener { changeSelectedFolder() }
-        config_image_holder.setOnClickListener { changeSelectedFolder() }
-        folder_picker_show_folder_name.isChecked = config.showWidgetFolderName
+        configSave.setOnClickListener { saveConfig() }
+        configBgColor.setOnClickListener { pickBackgroundColor() }
+        configTextColor.setOnClickListener { pickTextColor() }
+        folderPickerValue.setOnClickListener { changeSelectedFolder() }
+        configImageHolder.setOnClickListener { changeSelectedFolder() }
+        folderPickerShowFolderName.isChecked = config.showWidgetFolderName
         handleFolderNameDisplay()
-        folder_picker_show_folder_name_holder.setOnClickListener {
-            folder_picker_show_folder_name.toggle()
+        folderPickerShowFolderNameHolder.setOnClickListener {
+            folderPickerShowFolderName.toggle()
             handleFolderNameDisplay()
         }
 
-        updateTextColors(folder_picker_holder)
-        folder_picker_holder.background = ColorDrawable(config.backgroundColor)
+        updateTextColors(folderPickerHolder)
+        folderPickerHolder.background = ColorDrawable(config.backgroundColor)
 
         getCachedDirectories(false, false) {
             mDirectories = it
@@ -74,7 +74,7 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
         mBgAlpha = Color.alpha(mBgColor) / 255f
 
         mBgColorWithoutTransparency = Color.rgb(Color.red(mBgColor), Color.green(mBgColor), Color.blue(mBgColor))
-        config_bg_seekbar.apply {
+        configBgSeekbar.apply {
             progress = (mBgAlpha * 100).toInt()
 
             onSeekBarChangeListener {
@@ -92,7 +92,7 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
         val views = RemoteViews(packageName, R.layout.v_widget)
         views.setBackgroundColor(R.id.widgetHolder, mBgColor)
         AppWidgetManager.getInstance(this).updateAppWidget(mWidgetId, views)
-        config.showWidgetFolderName = folder_picker_show_folder_name.isChecked
+        config.showWidgetFolderName = folderPickerShowFolderName.isChecked
         val widget = Widget(null, mWidgetId, mFolderPath)
         Thread {
             widgetsDB.insertOrUpdate(widget)
@@ -124,15 +124,15 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
 
     private fun updateBackgroundColor() {
         mBgColor = mBgColorWithoutTransparency.adjustAlpha(mBgAlpha)
-        config_save.setBackgroundColor(mBgColor)
-        config_image_holder.setBackgroundColor(mBgColor)
-        config_bg_color.setFillWithStroke(mBgColor, Color.BLACK)
+        configSave.setBackgroundColor(mBgColor)
+        configImageHolder.setBackgroundColor(mBgColor)
+        configBgColor.setFillWithStroke(mBgColor, Color.BLACK)
     }
 
     private fun updateTextColor() {
-        config_save.setTextColor(mTextColor)
-        config_folder_name.setTextColor(mTextColor)
-        config_text_color.setFillWithStroke(mTextColor, Color.BLACK)
+        configSave.setTextColor(mTextColor)
+        configFolderName.setTextColor(mTextColor)
+        configTextColor.setFillWithStroke(mTextColor, Color.BLACK)
     }
 
     private fun pickBackgroundColor() {
@@ -162,23 +162,23 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
     private fun updateFolderImage(folderPath: String) {
         mFolderPath = folderPath
         runOnUiThread {
-            folder_picker_value.text = getFolderNameFromPath(folderPath)
-            config_folder_name.text = getFolderNameFromPath(folderPath)
+            folderPickerValue.text = getFolderNameFromPath(folderPath)
+            configFolderName.text = getFolderNameFromPath(folderPath)
         }
 
         Thread {
             val path = directoryDB.getDirectoryThumbnail(folderPath)
             if (path != null) {
                 runOnUiThread {
-                    loadJpg(path, config_image, config.cropThumbnails)
+                    loadJpg(path, configImage, config.cropThumbnails)
                 }
             }
         }.start()
     }
 
     private fun handleFolderNameDisplay() {
-        val showFolderName = folder_picker_show_folder_name.isChecked
-        config_folder_name.beVisibleIf(showFolderName)
-        (config_image.layoutParams as RelativeLayout.LayoutParams).bottomMargin = if (showFolderName) 0 else resources.getDimension(R.dimen.normal_margin).toInt()
+        val showFolderName = folderPickerShowFolderName.isChecked
+        configFolderName.beVisibleIf(showFolderName)
+        (configImage.layoutParams as RelativeLayout.LayoutParams).bottomMargin = if (showFolderName) 0 else resources.getDimension(R.dimen.normal_margin).toInt()
     }
 }

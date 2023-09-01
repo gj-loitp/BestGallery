@@ -1,135 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/config_holder"
+    android:id="@+id/configHolder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_margin="@dimen/activity_margin">
 
     <RelativeLayout
-        android:id="@+id/folder_picker_holder"
+        android:id="@+id/folderPickerHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_margin">
 
         <RelativeLayout
-            android:id="@+id/folder_picker_show_folder_name_holder"
+            android:id="@+id/folderPickerShowFolderNameHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:paddingLeft="@dimen/activity_margin"
+            android:paddingStart="@dimen/activity_margin"
             android:paddingTop="@dimen/activity_margin"
-            android:paddingRight="@dimen/medium_margin"
+            android:paddingEnd="@dimen/medium_margin"
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MySwitchCompat
-                android:id="@+id/folder_picker_show_folder_name"
+                android:id="@+id/folderPickerShowFolderName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:clickable="false"
                 android:text="@string/show_folder_name"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin" />
 
         </RelativeLayout>
 
         <com.roy.commons.views.MyTextView
-            android:id="@+id/folder_picker_label"
+            android:id="@+id/folderPickerLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/folder_picker_show_folder_name_holder"
+            android:layout_below="@+id/folderPickerShowFolderNameHolder"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginBottom="@dimen/normal_margin"
-            android:paddingLeft="@dimen/activity_margin"
-            android:text="@string/folder_on_widget"/>
+            android:paddingStart="@dimen/activity_margin"
+            android:text="@string/folder_on_widget" />
 
         <com.roy.commons.views.MyTextView
-            android:id="@+id/folder_picker_value"
+            android:id="@+id/folderPickerValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/folder_picker_label"
-            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_below="@+id/folderPickerLabel"
+            android:layout_marginStart="@dimen/activity_margin"
             android:background="@drawable/button_background"
             android:padding="@dimen/normal_margin"
-            tools:text="@string/internal"/>
+            tools:text="@string/internal" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/config_image_holder"
+        android:id="@+id/configImageHolder"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/folder_picker_holder">
+        android:layout_below="@+id/folderPickerHolder">
 
         <com.roy.gallery.pro.views.MySquareImageView
-            android:id="@+id/config_image"
+            android:id="@+id/configImage"
             android:layout_width="@dimen/widget_initial_size"
             android:layout_height="@dimen/widget_initial_size"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/normal_margin"
             android:layout_marginTop="@dimen/normal_margin"
-            android:layout_marginRight="@dimen/normal_margin"/>
+            android:layout_marginRight="@dimen/normal_margin" />
 
         <com.roy.commons.views.MyTextView
-            android:id="@+id/config_folder_name"
+            android:id="@+id/configFolderName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/config_image"
+            android:layout_below="@+id/configImage"
             android:ellipsize="end"
             android:gravity="center"
             android:lines="1"
             android:padding="@dimen/tiny_margin"
             android:textSize="@dimen/bigger_text_size"
-            tools:text="@string/internal"/>
+            tools:text="@string/internal" />
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/config_bg_color"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/configBgColor"
         android:layout_width="@dimen/widget_colorpicker_size"
         android:layout_height="@dimen/widget_colorpicker_size"
-        android:layout_above="@+id/config_save"/>
+        android:layout_above="@+id/configSave" />
 
     <RelativeLayout
-        android:id="@+id/config_bg_seekbar_holder"
+        android:id="@+id/configBgSeekbarHolder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignTop="@+id/config_bg_color"
-        android:layout_alignBottom="@+id/config_bg_color"
-        android:layout_toEndOf="@+id/config_bg_color"
-        android:layout_toRightOf="@+id/config_bg_color"
+        android:layout_alignTop="@+id/configBgColor"
+        android:layout_alignBottom="@+id/configBgColor"
+        android:layout_toEndOf="@+id/configBgColor"
         android:background="@android:color/white">
 
-        <SeekBar
-            android:id="@+id/config_bg_seekbar"
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/configBgSeekbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="@dimen/activity_margin"
-            android:paddingRight="@dimen/activity_margin"/>
+            android:paddingRight="@dimen/activity_margin" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/config_text_color"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/configTextColor"
         android:layout_width="@dimen/widget_colorpicker_size"
         android:layout_height="@dimen/widget_colorpicker_size"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true" />
 
-    <Button
-        android:id="@+id/config_save"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/configSave"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/widget_colorpicker_size"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:fontFamily="sans-serif-light"
         android:paddingLeft="@dimen/activity_margin"
         android:paddingRight="@dimen/activity_margin"
         android:text="@string/ok"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/big_text_size"/>
+        android:textSize="@dimen/big_text_size" />
 
 </RelativeLayout>

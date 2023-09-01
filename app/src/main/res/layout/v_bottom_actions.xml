@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_actions_wrapper"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomActionsWrapper"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_actions_height"
     android:layout_alignParentBottom="true"
     android:background="@drawable/gradient_background"
-    android:paddingTop="@dimen/medium_margin">
+    android:paddingTop="@dimen/medium_margin"
+    tools:ignore="MissingConstraints">
 
-    <ImageView
-        android:id="@+id/bottom_favorite"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomFavorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_star_off"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_edit"
+        app:layout_constraintEnd_toStartOf="@+id/bottomEdit"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/bottom_edit"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_edit"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_share"
+        app:layout_constraintEnd_toStartOf="@+id/bottomShare"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_favorite"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomFavorite" />
 
-    <ImageView
-        android:id="@+id/bottom_share"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_share"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_delete"
+        app:layout_constraintEnd_toStartOf="@+id/bottomDelete"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_edit"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomEdit" />
 
-    <ImageView
-        android:id="@+id/bottom_delete"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -51,109 +52,109 @@
         android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toStartOf="@+id/bottomRotate"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_share"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomShare" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/bottomRotate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_rotate_right"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_properties"
+        app:layout_constraintEnd_toStartOf="@+id/bottomProperties"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_delete"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomDelete" />
 
-    <ImageView
-        android:id="@+id/bottom_properties"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomProperties"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_properties"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_change_orientation"
+        app:layout_constraintEnd_toStartOf="@+id/bottomChangeOrientation"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottomRotate"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomRotate" />
 
-    <ImageView
-        android:id="@+id/bottom_change_orientation"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomChangeOrientation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_orientation_auto"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_slideshow"
+        app:layout_constraintEnd_toStartOf="@+id/bottomSlideshow"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_properties"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomProperties" />
 
-    <ImageView
-        android:id="@+id/bottom_slideshow"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomSlideshow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_slideshow"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_show_on_map"
+        app:layout_constraintEnd_toStartOf="@+id/bottomShowOnMap"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_change_orientation"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomChangeOrientation" />
 
-    <ImageView
-        android:id="@+id/bottom_show_on_map"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomShowOnMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_place"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_toggle_file_visibility"
+        app:layout_constraintEnd_toStartOf="@+id/bottomToggleFileVisibility"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_slideshow"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomSlideshow" />
 
-    <ImageView
-        android:id="@+id/bottom_toggle_file_visibility"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomToggleFileVisibility"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_hide"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_rename"
+        app:layout_constraintEnd_toStartOf="@+id/bottomRename"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_show_on_map"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomShowOnMap" />
 
-    <ImageView
-        android:id="@+id/bottom_rename"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomRename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_rename_new"
-        app:layout_constraintEnd_toEndOf="@+id/bottom_set_as"
+        app:layout_constraintEnd_toEndOf="@+id/bottomSetAs"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_toggle_file_visibility"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomToggleFileVisibility" />
 
-    <ImageView
-        android:id="@+id/bottom_set_as"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomSetAs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_set_as"
-        app:layout_constraintEnd_toEndOf="@+id/bottom_copy"
+        app:layout_constraintEnd_toEndOf="@+id/bottomCopy"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_rename"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomRename" />
 
-    <ImageView
-        android:id="@+id/bottom_copy"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomCopy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/medium_margin"
         android:src="@drawable/ic_copy"
-        app:layout_constraintEnd_toEndOf="@+id/bottom_move"
+        app:layout_constraintEnd_toEndOf="@+id/bottomMove"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_set_as"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomSetAs" />
 
-    <ImageView
-        android:id="@+id/bottom_move"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bottomMove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -161,6 +162,6 @@
         android:src="@drawable/ic_move"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_copy"/>
+        app:layout_constraintStart_toEndOf="@+id/bottomCopy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

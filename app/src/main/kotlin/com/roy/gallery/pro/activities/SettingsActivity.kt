@@ -52,7 +52,7 @@ import com.roy.commons.helpers.WIDGET_TEXT_COLOR
 import com.roy.commons.helpers.isPiePlus
 import com.roy.commons.helpers.sumByLong
 import com.roy.commons.models.RadioItem
-import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.a_settings.*
 import java.io.File
 import java.util.*
 
@@ -61,7 +61,7 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        setContentView(R.layout.a_settings)
     }
 
     override fun onResume() {
@@ -117,7 +117,7 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
         setupShowRecycleBin()
         setupShowRecycleBinLast()
         setupEmptyRecycleBin()
-        updateTextColors(settings_holder)
+        updateTextColors(settingsHolder)
         setupSectionColors()
         setupExportSettings()
         setupImportSettings()
@@ -125,7 +125,7 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
 
     private fun setupSectionColors() {
         val adjustedPrimaryColor = getAdjustedPrimaryColor()
-        arrayListOf(visibility_label, videos_label, thumbnails_label, scrolling_label, fullscreen_media_label, security_label,
+        arrayListOf(visibilityLabel, videosLabel, thumbnailsLabel, scrolling_label, fullscreen_media_label, security_label,
                 file_operations_label, deep_zoomable_images_label, extended_details_label, bottom_actions_label, recycle_bin_label,
                 migrating_label).forEach {
             it.setTextColor(adjustedPrimaryColor)
@@ -133,30 +133,30 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
     }
 
     private fun setupCustomizeColors() {
-        settings_customize_colors_holder.setOnClickListener {
+        settingsCustomizeColorsHolder.setOnClickListener {
             startCustomizationActivity()
         }
     }
 
     private fun setupUseEnglish() {
-        settings_use_english_holder.beVisibleIf(config.wasUseEnglishToggled || Locale.getDefault().language != "en")
-        settings_use_english.isChecked = config.useEnglish
-        settings_use_english_holder.setOnClickListener {
-            settings_use_english.toggle()
-            config.useEnglish = settings_use_english.isChecked
+        settingsUseEnglishHolder.beVisibleIf(config.wasUseEnglishToggled || Locale.getDefault().language != "en")
+        settingsUseEnglish.isChecked = config.useEnglish
+        settingsUseEnglishHolder.setOnClickListener {
+            settingsUseEnglish.toggle()
+            config.useEnglish = settingsUseEnglish.isChecked
             System.exit(0)
         }
     }
 
     private fun setupChangeDateTimeFormat() {
-        settings_change_date_time_format_holder.setOnClickListener {
+        settingsChangeDateTimeFormatHolder.setOnClickListener {
             ChangeDateTimeFormatDialog(this) {}
         }
     }
 
     private fun setupFileLoadingPriority() {
-        settings_file_loading_priority.text = getFileLoadingPriorityText()
-        settings_file_loading_priority_holder.setOnClickListener {
+        settingsFileLoadingPriority.text = getFileLoadingPriorityText()
+        settingsFileLoadingPriorityHolder.setOnClickListener {
             val items = arrayListOf(
                     RadioItem(PRIORITY_SPEED, getString(R.string.speed)),
                     RadioItem(PRIORITY_COMPROMISE, getString(R.string.compromise)),
@@ -165,7 +165,7 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
 
             RadioGroupDialog(this@SettingsActivity, items, config.fileLoadingPriority) {
                 config.fileLoadingPriority = it as Int
-                settings_file_loading_priority.text = getFileLoadingPriorityText()
+                settingsFileLoadingPriority.text = getFileLoadingPriorityText()
             }
         }
     }
@@ -177,19 +177,19 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
     })
 
     private fun setupManageIncludedFolders() {
-        settings_manage_included_folders_holder.setOnClickListener {
+        settingsManageIncludedFoldersHolder.setOnClickListener {
             startActivity(Intent(this, com.roy.gallery.pro.activities.IncludedFoldersActivity::class.java))
         }
     }
 
     private fun setupManageExcludedFolders() {
-        settings_manage_excluded_folders_holder.setOnClickListener {
+        settingsManageExcludedFoldersHolder.setOnClickListener {
             startActivity(Intent(this, com.roy.gallery.pro.activities.ExcludedFoldersActivity::class.java))
         }
     }
 
     private fun setupManageHiddenFolders() {
-        settings_manage_hidden_folders_holder.setOnClickListener {
+        settingsManageHiddenFoldersHolder.setOnClickListener {
             handleHiddenFolderPasswordProtection {
                 startActivity(Intent(this, com.roy.gallery.pro.activities.HiddenFoldersActivity::class.java))
             }
@@ -197,8 +197,8 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
     }
 
     private fun setupShowHiddenItems() {
-        settings_show_hidden_items.isChecked = config.showHiddenMedia
-        settings_show_hidden_items_holder.setOnClickListener {
+        settingsShowHiddenItems.isChecked = config.showHiddenMedia
+        settingsShowHiddenItemsHolder.setOnClickListener {
             if (config.showHiddenMedia) {
                 toggleHiddenItems()
             } else {
@@ -210,45 +210,45 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
     }
 
     private fun toggleHiddenItems() {
-        settings_show_hidden_items.toggle()
-        config.showHiddenMedia = settings_show_hidden_items.isChecked
+        settingsShowHiddenItems.toggle()
+        config.showHiddenMedia = settingsShowHiddenItems.isChecked
     }
 
     private fun setupAutoplayVideos() {
-        settings_autoplay_videos.isChecked = config.autoplayVideos
-        settings_autoplay_videos_holder.setOnClickListener {
-            settings_autoplay_videos.toggle()
-            config.autoplayVideos = settings_autoplay_videos.isChecked
+        settingsAutoplayVideos.isChecked = config.autoplayVideos
+        settingsAutoplayVideosHolder.setOnClickListener {
+            settingsAutoplayVideos.toggle()
+            config.autoplayVideos = settingsAutoplayVideos.isChecked
         }
     }
 
     private fun setupRememberLastVideo() {
-        settings_remember_last_video_position.isChecked = config.rememberLastVideoPosition
-        settings_remember_last_video_position_holder.setOnClickListener {
-            settings_remember_last_video_position.toggle()
-            config.rememberLastVideoPosition = settings_remember_last_video_position.isChecked
+        settingsRememberLastVideoPosition.isChecked = config.rememberLastVideoPosition
+        settingsRememberLastVideoPositionHolder.setOnClickListener {
+            settingsRememberLastVideoPosition.toggle()
+            config.rememberLastVideoPosition = settingsRememberLastVideoPosition.isChecked
         }
     }
 
     private fun setupLoopVideos() {
-        settings_loop_videos.isChecked = config.loopVideos
-        settings_loop_videos_holder.setOnClickListener {
-            settings_loop_videos.toggle()
-            config.loopVideos = settings_loop_videos.isChecked
+        settingsLoopVideos.isChecked = config.loopVideos
+        settingsLoopVideosHolder.setOnClickListener {
+            settingsLoopVideos.toggle()
+            config.loopVideos = settingsLoopVideos.isChecked
         }
     }
 
     private fun setupOpenVideosOnSeparateScreen() {
-        settings_open_videos_on_separate_screen.isChecked = config.openVideosOnSeparateScreen
-        settings_open_videos_on_separate_screen_holder.setOnClickListener {
-            settings_open_videos_on_separate_screen.toggle()
-            config.openVideosOnSeparateScreen = settings_open_videos_on_separate_screen.isChecked
+        settingsOpenVideosOnSeparateScreen.isChecked = config.openVideosOnSeparateScreen
+        settingsOpenVideosOnSeparateScreenHolder.setOnClickListener {
+            settingsOpenVideosOnSeparateScreen.toggle()
+            config.openVideosOnSeparateScreen = settingsOpenVideosOnSeparateScreen.isChecked
         }
     }
 
     private fun setupAnimateGifs() {
         settings_animate_gifs.isChecked = config.animateGifs
-        settings_animate_gifs_holder.setOnClickListener {
+        settingsAnimateGifsHolder.setOnClickListener {
             settings_animate_gifs.toggle()
             config.animateGifs = settings_animate_gifs.isChecked
         }
@@ -390,10 +390,10 @@ class SettingsActivity : com.roy.gallery.pro.activities.SimpleActivity() {
     }
 
     private fun setupAllowVideoGestures() {
-        settings_allow_video_gestures.isChecked = config.allowVideoGestures
-        settings_allow_video_gestures_holder.setOnClickListener {
-            settings_allow_video_gestures.toggle()
-            config.allowVideoGestures = settings_allow_video_gestures.isChecked
+        settingsAllowVideoGestures.isChecked = config.allowVideoGestures
+        settingsAllowVideoGesturesHolder.setOnClickListener {
+            settingsAllowVideoGestures.toggle()
+            config.allowVideoGestures = settingsAllowVideoGestures.isChecked
         }
     }
 

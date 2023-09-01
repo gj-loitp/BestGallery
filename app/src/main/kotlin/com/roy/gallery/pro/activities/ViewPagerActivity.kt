@@ -66,7 +66,7 @@ import com.roy.commons.helpers.REQUEST_SET_AS
 import com.roy.commons.helpers.SORT_BY_RANDOM
 import com.roy.commons.models.FileDirItem
 import kotlinx.android.synthetic.main.activity_medium.*
-import kotlinx.android.synthetic.main.bottom_actions.*
+import kotlinx.android.synthetic.main.v_bottom_actions.*
 import java.io.File
 import java.util.*
 
@@ -352,17 +352,17 @@ class ViewPagerActivity : SimpleActivity(),
                 if (bottom_actions.isVisible()) {
                     bottom_actions.animate().alpha(newAlpha).start()
                     arrayOf(
-                        bottom_favorite,
-                        bottom_edit,
-                        bottom_share,
-                        bottom_delete,
+                        bottomFavorite,
+                        bottomEdit,
+                        bottomShare,
+                        bottomDelete,
                         bottomRotate,
-                        bottom_properties,
-                        bottom_change_orientation,
-                        bottom_slideshow,
-                        bottom_show_on_map,
-                        bottom_toggle_file_visibility,
-                        bottom_rename
+                        bottomProperties,
+                        bottomChangeOrientation,
+                        bottomSlideshow,
+                        bottomShowOnMap,
+                        bottomToggleFileVisibility,
+                        bottomRename
                     ).forEach {
                         it.isClickable = !mIsFullScreen
                     }
@@ -789,23 +789,23 @@ class ViewPagerActivity : SimpleActivity(),
 
     private fun initBottomActionButtons() {
         val visibleBottomActions = if (config.bottomActions) config.visibleBottomActions else 0
-        bottom_favorite.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_TOGGLE_FAVORITE != 0)
-        bottom_favorite.setOnClickListener {
+        bottomFavorite.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_TOGGLE_FAVORITE != 0)
+        bottomFavorite.setOnClickListener {
             toggleFavorite()
         }
 
-        bottom_edit.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_EDIT != 0 && getCurrentMedium()?.isSVG() == false)
-        bottom_edit.setOnClickListener {
+        bottomEdit.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_EDIT != 0 && getCurrentMedium()?.isSVG() == false)
+        bottomEdit.setOnClickListener {
             openEditor(getCurrentPath())
         }
 
-        bottom_share.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SHARE != 0)
-        bottom_share.setOnClickListener {
+        bottomShare.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SHARE != 0)
+        bottomShare.setOnClickListener {
             shareMediumPath(getCurrentPath())
         }
 
-        bottom_delete.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_DELETE != 0)
-        bottom_delete.setOnClickListener {
+        bottomDelete.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_DELETE != 0)
+        bottomDelete.setOnClickListener {
             checkDeleteConfirmation()
         }
 
@@ -813,13 +813,13 @@ class ViewPagerActivity : SimpleActivity(),
             rotateImage(90)
         }
 
-        bottom_properties.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_PROPERTIES != 0)
-        bottom_properties.setOnClickListener {
+        bottomProperties.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_PROPERTIES != 0)
+        bottomProperties.setOnClickListener {
             showProperties()
         }
 
-        bottom_change_orientation.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_CHANGE_ORIENTATION != 0)
-        bottom_change_orientation.setOnClickListener {
+        bottomChangeOrientation.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_CHANGE_ORIENTATION != 0)
+        bottomChangeOrientation.setOnClickListener {
             requestedOrientation = when (requestedOrientation) {
                 ActivityInfo.SCREEN_ORIENTATION_PORTRAIT -> ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE -> ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
@@ -830,18 +830,18 @@ class ViewPagerActivity : SimpleActivity(),
             updateBottomActionIcons(getCurrentMedium())
         }
 
-        bottom_slideshow.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SLIDESHOW != 0)
-        bottom_slideshow.setOnClickListener {
+        bottomSlideshow.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SLIDESHOW != 0)
+        bottomSlideshow.setOnClickListener {
             initSlideshow()
         }
 
-        bottom_show_on_map.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SHOW_ON_MAP != 0)
-        bottom_show_on_map.setOnClickListener {
+        bottomShowOnMap.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SHOW_ON_MAP != 0)
+        bottomShowOnMap.setOnClickListener {
             showOnMap()
         }
 
-        bottom_toggle_file_visibility.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_TOGGLE_VISIBILITY != 0)
-        bottom_toggle_file_visibility.setOnClickListener {
+        bottomToggleFileVisibility.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_TOGGLE_VISIBILITY != 0)
+        bottomToggleFileVisibility.setOnClickListener {
             getCurrentMedium()?.apply {
                 toggleFileVisibility(!isHidden()) {
                     updateBottomActionIcons(getCurrentMedium())
@@ -849,23 +849,23 @@ class ViewPagerActivity : SimpleActivity(),
             }
         }
 
-        bottom_rename.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_RENAME != 0 && getCurrentMedium()?.getIsInRecycleBin() == false)
-        bottom_rename.setOnClickListener {
+        bottomRename.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_RENAME != 0 && getCurrentMedium()?.getIsInRecycleBin() == false)
+        bottomRename.setOnClickListener {
             renameFile()
         }
 
-        bottom_set_as.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SET_AS != 0)
-        bottom_set_as.setOnClickListener {
+        bottomSetAs.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SET_AS != 0)
+        bottomSetAs.setOnClickListener {
             setAs(getCurrentPath())
         }
 
-        bottom_copy.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_COPY != 0)
-        bottom_copy.setOnClickListener {
+        bottomCopy.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_COPY != 0)
+        bottomCopy.setOnClickListener {
             copyMoveTo(true)
         }
 
-        bottom_move.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_MOVE != 0)
-        bottom_move.setOnClickListener {
+        bottomMove.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_MOVE != 0)
+        bottomMove.setOnClickListener {
             moveFileTo()
         }
     }
@@ -876,13 +876,13 @@ class ViewPagerActivity : SimpleActivity(),
         }
 
         val favoriteIcon = if (medium.isFavorite) R.drawable.ic_star_on else R.drawable.ic_star_off
-        bottom_favorite.setImageResource(favoriteIcon)
+        bottomFavorite.setImageResource(favoriteIcon)
 
         val hideIcon = if (medium.isHidden()) R.drawable.ic_unhide else R.drawable.ic_hide
-        bottom_toggle_file_visibility.setImageResource(hideIcon)
+        bottomToggleFileVisibility.setImageResource(hideIcon)
 
         bottomRotate.beVisibleIf(config.visibleBottomActions and BOTTOM_ACTION_ROTATE != 0 && getCurrentMedium()?.isImage() == true)
-        bottom_change_orientation.setImageResource(getChangeOrientationIcon())
+        bottomChangeOrientation.setImageResource(getChangeOrientationIcon())
     }
 
     private fun toggleFavorite() {

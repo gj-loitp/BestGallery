@@ -70,8 +70,8 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import com.zomato.photofilters.FilterPack
 import com.zomato.photofilters.imageprocessors.Filter
 import kotlinx.android.synthetic.main.activity_edit.*
-import kotlinx.android.synthetic.main.bottom_actions_aspect_ratio.*
-import kotlinx.android.synthetic.main.bottom_editor_actions_filter.*
+import kotlinx.android.synthetic.main.v_bottom_actions_aspect_ratio.*
+import kotlinx.android.synthetic.main.v_bottom_editor_actions_filter.*
 import kotlinx.android.synthetic.main.v_bottom_editor_crop_rotate_actions.*
 import kotlinx.android.synthetic.main.v_bottom_editor_draw_actions.*
 import kotlinx.android.synthetic.main.v_bottom_editor_primary_actions.*
@@ -383,8 +383,8 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
                 // clean up everything to free as much memory as possible
                 default_image_view.setImageResource(0)
                 crop_image_view.setImageBitmap(null)
-                bottom_actions_filter_list.adapter = null
-                bottom_actions_filter_list.beGone()
+                bottomActionsFilterList.adapter = null
+                bottomActionsFilterList.beGone()
 
                 Thread {
                     try {
@@ -468,7 +468,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
         }
     }
 
-    private fun getFiltersAdapter() = bottom_actions_filter_list.adapter as? FiltersAdapter
+    private fun getFiltersAdapter() = bottomActionsFilterList.adapter as? FiltersAdapter
 
     private fun setupBottomActions() {
         setupPrimaryActionButtons()
@@ -551,23 +551,23 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
     }
 
     private fun setupAspectRatioButtons() {
-        bottom_aspect_ratio_free.setOnClickListener {
+        bottomAspectRatioFree.setOnClickListener {
             updateAspectRatio(ASPECT_RATIO_FREE)
         }
 
-        bottom_aspect_ratio_one_one.setOnClickListener {
+        bottomAspectRatioOneOne.setOnClickListener {
             updateAspectRatio(ASPECT_RATIO_ONE_ONE)
         }
 
-        bottom_aspect_ratio_four_three.setOnClickListener {
+        bottomAspectRatioFourThree.setOnClickListener {
             updateAspectRatio(ASPECT_RATIO_FOUR_THREE)
         }
 
-        bottom_aspect_ratio_sixteen_nine.setOnClickListener {
+        bottomAspectRatioSixteenNine.setOnClickListener {
             updateAspectRatio(ASPECT_RATIO_SIXTEEN_NINE)
         }
 
-        bottom_aspect_ratio_other.setOnClickListener {
+        bottomAspectRatioOther.setOnClickListener {
             OtherAspectRatioDialog(this, lastOtherAspectRatio) {
                 lastOtherAspectRatio = it
                 config.lastEditorCropOtherAspectRatioX = it.first
@@ -634,7 +634,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
         bottom_editor_crop_rotate_actions.beVisibleIf(currPrimaryAction == PRIMARY_ACTION_CROP_ROTATE)
         bottom_editor_draw_actions.beVisibleIf(currPrimaryAction == PRIMARY_ACTION_DRAW)
 
-        if (currPrimaryAction == PRIMARY_ACTION_FILTER && bottom_actions_filter_list.adapter == null) {
+        if (currPrimaryAction == PRIMARY_ACTION_FILTER && bottomActionsFilterList.adapter == null) {
             Thread {
                 val thumbnailSize =
                     resources.getDimension(R.dimen.bottom_filters_thumbnail_size).toInt()
@@ -677,17 +677,17 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
                     val filterItems = filterThumbnailsManager.processThumbs()
                     val adapter = FiltersAdapter(applicationContext, filterItems) {
                         val layoutManager =
-                            bottom_actions_filter_list.layoutManager as LinearLayoutManager
+                            bottomActionsFilterList.layoutManager as LinearLayoutManager
                         applyFilter(filterItems[it])
 
                         if (it == layoutManager.findLastCompletelyVisibleItemPosition() || it == layoutManager.findLastVisibleItemPosition()) {
-                            bottom_actions_filter_list.smoothScrollBy(thumbnailSize, 0)
+                            bottomActionsFilterList.smoothScrollBy(thumbnailSize, 0)
                         } else if (it == layoutManager.findFirstCompletelyVisibleItemPosition() || it == layoutManager.findFirstVisibleItemPosition()) {
-                            bottom_actions_filter_list.smoothScrollBy(-thumbnailSize, 0)
+                            bottomActionsFilterList.smoothScrollBy(-thumbnailSize, 0)
                         }
                     }
 
-                    bottom_actions_filter_list.adapter = adapter
+                    bottomActionsFilterList.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }
             }.start()
@@ -731,21 +731,21 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
 
     private fun updateAspectRatioButtons() {
         arrayOf(
-            bottom_aspect_ratio_free,
-            bottom_aspect_ratio_one_one,
-            bottom_aspect_ratio_four_three,
-            bottom_aspect_ratio_sixteen_nine,
-            bottom_aspect_ratio_other
+            bottomAspectRatioFree,
+            bottomAspectRatioOneOne,
+            bottomAspectRatioFourThree,
+            bottomAspectRatioSixteenNine,
+            bottomAspectRatioOther
         ).forEach {
             it.setTextColor(Color.WHITE)
         }
 
         val currentAspectRatioButton = when (currAspectRatio) {
-            ASPECT_RATIO_FREE -> bottom_aspect_ratio_free
-            ASPECT_RATIO_ONE_ONE -> bottom_aspect_ratio_one_one
-            ASPECT_RATIO_FOUR_THREE -> bottom_aspect_ratio_four_three
-            ASPECT_RATIO_SIXTEEN_NINE -> bottom_aspect_ratio_sixteen_nine
-            else -> bottom_aspect_ratio_other
+            ASPECT_RATIO_FREE -> bottomAspectRatioFree
+            ASPECT_RATIO_ONE_ONE -> bottomAspectRatioOneOne
+            ASPECT_RATIO_FOUR_THREE -> bottomAspectRatioFourThree
+            ASPECT_RATIO_SIXTEEN_NINE -> bottomAspectRatioSixteenNine
+            else -> bottomAspectRatioOther
         }
 
         currentAspectRatioButton.setTextColor(getAdjustedPrimaryColor())

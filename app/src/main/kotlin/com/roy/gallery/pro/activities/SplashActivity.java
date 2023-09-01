@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.a_splash);
 
         /*startAnim();*/
         MainHandler.getInstance().postDelayed(runnable, 100);

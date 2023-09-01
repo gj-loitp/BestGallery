@@ -36,7 +36,7 @@ import com.roy.commons.ext.showErrorToast
 import com.roy.commons.ext.toast
 import com.roy.commons.ext.updateTextColors
 import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
-import kotlinx.android.synthetic.main.activity_video_player.*
+import kotlinx.android.synthetic.main.a_video_player.*
 import kotlinx.android.synthetic.main.v_bottom_video_time_holder.*
 
 open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListener, TextureView.SurfaceTextureListener {
@@ -67,7 +67,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_video_player)
+        setContentView(R.layout.a_video_player)
         setupOrientation()
         checkNotchSupport()
 
@@ -88,7 +88,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         window.statusBarColor = Color.TRANSPARENT
         window.navigationBarColor = Color.TRANSPARENT
         if (config.blackBackground) {
-            video_player_holder.background = ColorDrawable(Color.BLACK)
+            videoPlayerHolder.background = ColorDrawable(Color.BLACK)
         }
 
         if (config.maxBrightness) {
@@ -97,7 +97,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
             window.attributes = attributes
         }
 
-        updateTextColors(video_player_holder)
+        updateTextColors(videoPlayerHolder)
     }
 
     override fun onPause() {
@@ -186,11 +186,11 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         videoSurface.surfaceTextureListener = this
 
         if (config.allowVideoGestures) {
-            videoBrightnessController.initialize(this, slideInfo, true, video_player_holder) { x, y ->
+            videoBrightnessController.initialize(this, slideInfo, true, videoPlayerHolder) { x, y ->
                 toggleFullscreen()
             }
 
-            videoVolumeController.initialize(this, slideInfo, false, video_player_holder) { x, y ->
+            videoVolumeController.initialize(this, slideInfo, false, videoPlayerHolder) { x, y ->
                 toggleFullscreen()
             }
         } else {
@@ -433,7 +433,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         }
 
         val newAlpha = if (isFullScreen) 0f else 1f
-        arrayOf(videoPrevFile, videoTogglePlayPause, videoNextFile, videoCurrTime, videoSeekbar, videoDuration, topShadow, video_bottom_gradient).forEach {
+        arrayOf(videoPrevFile, videoTogglePlayPause, videoNextFile, videoCurrTime, videoSeekbar, videoDuration, topShadow, videoBottomGradient).forEach {
             it.animate().alpha(newAlpha).start()
         }
         videoSeekbar.setOnSeekBarChangeListener(if (mIsFullscreen) null else this)

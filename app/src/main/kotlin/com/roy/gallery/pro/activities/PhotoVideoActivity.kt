@@ -58,23 +58,13 @@ import com.roy.commons.helpers.IS_FROM_GALLERY
 import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
 import com.roy.commons.helpers.REAL_FILE_PATH
 import com.roy.commons.helpers.SIDELOADING_TRUE
-import kotlinx.android.synthetic.main.bottom_actions.bottom_change_orientation
-import kotlinx.android.synthetic.main.bottom_actions.bottom_copy
-import kotlinx.android.synthetic.main.bottom_actions.bottom_delete
-import kotlinx.android.synthetic.main.bottom_actions.bottom_edit
-import kotlinx.android.synthetic.main.bottom_actions.bottom_favorite
-import kotlinx.android.synthetic.main.bottom_actions.bottom_move
-import kotlinx.android.synthetic.main.bottom_actions.bottom_properties
-import kotlinx.android.synthetic.main.bottom_actions.bottom_rename
-import kotlinx.android.synthetic.main.bottom_actions.bottomRotate
-import kotlinx.android.synthetic.main.bottom_actions.bottom_set_as
-import kotlinx.android.synthetic.main.bottom_actions.bottom_share
-import kotlinx.android.synthetic.main.bottom_actions.bottom_show_on_map
-import kotlinx.android.synthetic.main.bottom_actions.bottom_slideshow
-import kotlinx.android.synthetic.main.bottom_actions.bottom_toggle_file_visibility
+import kotlinx.android.synthetic.main.v_bottom_actions.*
 import kotlinx.android.synthetic.main.f_holder.bottom_actions
 import kotlinx.android.synthetic.main.f_holder.fragmentHolder
 import kotlinx.android.synthetic.main.f_holder.topShadow
+import kotlinx.android.synthetic.main.v_bottom_actions.bottomEdit
+import kotlinx.android.synthetic.main.v_bottom_actions.bottomSetAs
+import kotlinx.android.synthetic.main.v_bottom_actions.bottomShare
 import java.io.File
 import java.io.FileInputStream
 
@@ -346,38 +336,38 @@ open class PhotoVideoActivity : SimpleActivity(),
 
     private fun initBottomActionButtons() {
         arrayListOf(
-            bottom_favorite,
-            bottom_delete,
+            bottomFavorite,
+            bottomDelete,
             bottomRotate,
-            bottom_properties,
-            bottom_change_orientation,
-            bottom_slideshow,
-            bottom_show_on_map,
-            bottom_toggle_file_visibility,
-            bottom_rename,
-            bottom_copy,
-            bottom_move
+            bottomProperties,
+            bottomChangeOrientation,
+            bottomSlideshow,
+            bottomShowOnMap,
+            bottomToggleFileVisibility,
+            bottomRename,
+            bottomCopy,
+            bottomMove
         ).forEach {
             it.beGone()
         }
 
         val visibleBottomActions = if (config.bottomActions) config.visibleBottomActions else 0
-        bottom_edit.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_EDIT != 0 && mMedium?.isImage() == true)
-        bottom_edit.setOnClickListener {
+        bottomEdit.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_EDIT != 0 && mMedium?.isImage() == true)
+        bottomEdit.setOnClickListener {
             if (mUri != null && bottom_actions.alpha == 1f) {
                 openEditor(mUri!!.toString())
             }
         }
 
-        bottom_share.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SHARE != 0)
-        bottom_share.setOnClickListener {
+        bottomShare.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SHARE != 0)
+        bottomShare.setOnClickListener {
             if (mUri != null && bottom_actions.alpha == 1f) {
                 sharePath(mUri!!.toString())
             }
         }
 
-        bottom_set_as.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SET_AS != 0 && mMedium?.isImage() == true)
-        bottom_set_as.setOnClickListener {
+        bottomSetAs.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SET_AS != 0 && mMedium?.isImage() == true)
+        bottomSetAs.setOnClickListener {
             setAs(mUri!!.toString())
         }
     }
