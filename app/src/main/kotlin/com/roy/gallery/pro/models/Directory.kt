@@ -1,6 +1,7 @@
 package com.roy.gallery.pro.models
 
 import android.content.Context
+import androidx.annotation.Keep
 import androidx.room.*
 import com.roy.gallery.pro.helpers.FAVORITES
 import com.roy.gallery.pro.helpers.RECYCLE_BIN
@@ -11,22 +12,24 @@ import com.roy.commons.helpers.SORT_BY_NAME
 import com.roy.commons.helpers.SORT_BY_PATH
 import com.roy.commons.helpers.SORT_BY_SIZE
 
+@Keep
 @Entity(tableName = "directories", indices = [Index(value = ["path"], unique = true)])
 data class Directory(
-        @PrimaryKey(autoGenerate = true) var id: Long?,
-        @ColumnInfo(name = "path") var path: String,
-        @ColumnInfo(name = "thumbnail") var tmb: String,
-        @ColumnInfo(name = "filename") var name: String,
-        @ColumnInfo(name = "media_count") var mediaCnt: Int,
-        @ColumnInfo(name = "last_modified") var modified: Long,
-        @ColumnInfo(name = "date_taken") var taken: Long,
-        @ColumnInfo(name = "size") var size: Long,
-        @ColumnInfo(name = "location") var location: Int,
-        @ColumnInfo(name = "media_types") var types: Int,
+    @PrimaryKey(autoGenerate = true) var id: Long?,
+    @ColumnInfo(name = "path") var path: String,
+    @ColumnInfo(name = "thumbnail") var tmb: String,
+    @ColumnInfo(name = "filename") var name: String,
+    @ColumnInfo(name = "media_count") var mediaCnt: Int,
+    @ColumnInfo(name = "last_modified") var modified: Long,
+    @ColumnInfo(name = "date_taken") var taken: Long,
+    @ColumnInfo(name = "size") var size: Long,
+    @ColumnInfo(name = "location") var location: Int,
+    @ColumnInfo(name = "media_types") var types: Int,
 
-        // used with "Group direct subfolders" enabled
-        @Ignore var subfoldersCount: Int = 0,
-        @Ignore var subfoldersMediaCount: Int = 0) {
+    // used with "Group direct subfolders" enabled
+    @Ignore var subfoldersCount: Int = 0,
+    @Ignore var subfoldersMediaCount: Int = 0,
+) {
 
     constructor() : this(null, "", "", "", 0, 0L, 0L, 0L, 0, 0, 0, 0)
 

@@ -1,6 +1,7 @@
 package com.roy.gallery.pro.models
 
 import android.content.Context
+import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
@@ -16,19 +17,21 @@ import com.roy.commons.helpers.SORT_BY_SIZE
 import java.io.Serializable
 import java.util.*
 
+@Keep
 @Entity(tableName = "media", indices = [(Index(value = ["full_path"], unique = true))])
 data class Medium(
-        @PrimaryKey(autoGenerate = true) var id: Long?,
-        @ColumnInfo(name = "filename") var name: String,
-        @ColumnInfo(name = "full_path") var path: String,
-        @ColumnInfo(name = "parent_path") var parentPath: String,
-        @ColumnInfo(name = "last_modified") val modified: Long,
-        @ColumnInfo(name = "date_taken") var taken: Long,
-        @ColumnInfo(name = "size") val size: Long,
-        @ColumnInfo(name = "type") val type: Int,
-        @ColumnInfo(name = "video_duration") val videoDuration: Int,
-        @ColumnInfo(name = "is_favorite") var isFavorite: Boolean,
-        @ColumnInfo(name = "deleted_ts") var deletedTS: Long) : Serializable, ThumbnailItem() {
+    @PrimaryKey(autoGenerate = true) var id: Long?,
+    @ColumnInfo(name = "filename") var name: String,
+    @ColumnInfo(name = "full_path") var path: String,
+    @ColumnInfo(name = "parent_path") var parentPath: String,
+    @ColumnInfo(name = "last_modified") val modified: Long,
+    @ColumnInfo(name = "date_taken") var taken: Long,
+    @ColumnInfo(name = "size") val size: Long,
+    @ColumnInfo(name = "type") val type: Int,
+    @ColumnInfo(name = "video_duration") val videoDuration: Int,
+    @ColumnInfo(name = "is_favorite") var isFavorite: Boolean,
+    @ColumnInfo(name = "deleted_ts") var deletedTS: Long,
+) : Serializable, ThumbnailItem() {
 
     companion object {
         private const val serialVersionUID = -6553149366975655L
@@ -59,7 +62,9 @@ data class Medium(
             groupBy and GROUP_BY_LAST_MODIFIED != 0 -> getDayStartTS(modified)
             groupBy and GROUP_BY_DATE_TAKEN != 0 -> getDayStartTS(taken)
             groupBy and GROUP_BY_FILE_TYPE != 0 -> type.toString()
-            groupBy and GROUP_BY_EXTENSION != 0 -> name.getFilenameExtension().toLowerCase()
+            groupBy and GROUP_BY_EXTENSION != 0 -> name.getFilenameExtension()
+                .lowercase(Locale.getDefault())
+
             groupBy and GROUP_BY_FOLDER != 0 -> parentPath
             else -> ""
         }
