@@ -44,7 +44,7 @@ import com.roy.commons.ext.isVisible
 import com.roy.commons.ext.onGlobalLayout
 import com.roy.commons.ext.showErrorToast
 import com.roy.commons.ext.updateTextColors
-import kotlinx.android.synthetic.main.bottom_video_time_holder.view.*
+import kotlinx.android.synthetic.main.v_bottom_video_time_holder.view.*
 import kotlinx.android.synthetic.main.v_pager_video_item.view.*
 import java.io.File
 import java.io.FileInputStream
@@ -90,7 +90,7 @@ class VideoFragment : ViewPagerFragment(), TextureView.SurfaceTextureListener, S
         mView = inflater.inflate(R.layout.v_pager_video_item, container, false).apply {
             instantPrevItem.setOnClickListener { listener?.goToPrevItem() }
             instantNextItem.setOnClickListener { listener?.goToNextItem() }
-            video_curr_time.setOnClickListener { skip(false) }
+            videoCurrTime.setOnClickListener { skip(false) }
             videoDuration.setOnClickListener { skip(true) }
             videoHolder.setOnClickListener { toggleFullscreen() }
             videoPreview.setOnClickListener { toggleFullscreen() }
@@ -103,18 +103,18 @@ class VideoFragment : ViewPagerFragment(), TextureView.SurfaceTextureListener, S
                 }
             }
 
-            mPlayPauseButton = video_toggle_play_pause
+            mPlayPauseButton = videoTogglePlayPause
             mPlayPauseButton.setOnClickListener {
                 togglePlayPause()
             }
 
-            mSeekBar = video_seekbar
+            mSeekBar = videoSeekbar
             mSeekBar.setOnSeekBarChangeListener(this@VideoFragment)
             // adding an empty click listener just to avoid ripple animation at toggling fullscreen
             mSeekBar.setOnClickListener { }
 
-            mTimeHolder = video_time_holder
-            mCurrTimeView = video_curr_time
+            mTimeHolder = videoTimeHolder
+            mCurrTimeView = videoCurrTime
             mBrightnessSideScroll = videoBrightnessController
             mVolumeSideScroll = videoVolumeController
             mTextureView = videoSurface
@@ -468,7 +468,7 @@ class VideoFragment : ViewPagerFragment(), TextureView.SurfaceTextureListener, S
         }
 
         mSeekBar.setOnSeekBarChangeListener(if (mIsFullscreen) null else this)
-        arrayOf(mView.video_curr_time, mView.videoDuration).forEach {
+        arrayOf(mView.videoCurrTime, mView.videoDuration).forEach {
             it.isClickable = !mIsFullscreen
         }
 

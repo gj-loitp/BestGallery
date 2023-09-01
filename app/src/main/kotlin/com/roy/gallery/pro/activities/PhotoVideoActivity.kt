@@ -66,7 +66,7 @@ import kotlinx.android.synthetic.main.bottom_actions.bottom_favorite
 import kotlinx.android.synthetic.main.bottom_actions.bottom_move
 import kotlinx.android.synthetic.main.bottom_actions.bottom_properties
 import kotlinx.android.synthetic.main.bottom_actions.bottom_rename
-import kotlinx.android.synthetic.main.bottom_actions.bottom_rotate
+import kotlinx.android.synthetic.main.bottom_actions.bottomRotate
 import kotlinx.android.synthetic.main.bottom_actions.bottom_set_as
 import kotlinx.android.synthetic.main.bottom_actions.bottom_share
 import kotlinx.android.synthetic.main.bottom_actions.bottom_show_on_map
@@ -348,7 +348,7 @@ open class PhotoVideoActivity : SimpleActivity(),
         arrayListOf(
             bottom_favorite,
             bottom_delete,
-            bottom_rotate,
+            bottomRotate,
             bottom_properties,
             bottom_change_orientation,
             bottom_slideshow,

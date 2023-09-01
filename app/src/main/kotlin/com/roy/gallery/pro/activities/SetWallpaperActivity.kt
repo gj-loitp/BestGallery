@@ -17,7 +17,7 @@ import com.roy.commons.helpers.isNougatPlus
 import com.roy.commons.models.RadioItem
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_set_wallpaper.*
-import kotlinx.android.synthetic.main.bottom_set_wallpaper_actions.*
+import kotlinx.android.synthetic.main.v_bottom_set_wallpaper_actions.*
 
 class SetWallpaperActivity : SimpleActivity(),
     CropImageView.OnCropImageCompleteListener {
@@ -65,11 +65,11 @@ class SetWallpaperActivity : SimpleActivity(),
     }
 
     private fun setupBottomActions() {
-        bottom_set_wallpaper_aspect_ratio.setOnClickListener {
+        bottomSetWallpaperAspectRatio.setOnClickListener {
             changeAspectRatio(!isLandscapeRatio)
         }
 
-        bottom_set_wallpaper_rotate.setOnClickListener {
+        bottomSetWallpaperRotate.setOnClickListener {
             crop_image_view.rotateImage(90)
         }
     }
@@ -79,7 +79,7 @@ class SetWallpaperActivity : SimpleActivity(),
             val wallpaperWidth =
                 if (isLandscapeRatio) wallpaperManager.desiredMinimumWidth else wallpaperManager.desiredMinimumWidth / 2
             crop_image_view.setAspectRatio(wallpaperWidth, wallpaperManager.desiredMinimumHeight)
-            bottom_set_wallpaper_aspect_ratio.setImageResource(if (isLandscapeRatio) R.drawable.ic_minimize else R.drawable.ic_maximize)
+            bottomSetWallpaperAspectRatio.setImageResource(if (isLandscapeRatio) R.drawable.ic_minimize else R.drawable.ic_maximize)
         } catch (e: Exception) {
             e.printStackTrace()
         }

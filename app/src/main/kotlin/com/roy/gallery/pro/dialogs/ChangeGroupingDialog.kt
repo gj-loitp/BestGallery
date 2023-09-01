@@ -9,7 +9,7 @@ import com.roy.gallery.pro.helpers.*
 import com.roy.commons.activities.BaseSimpleActivity
 import com.roy.commons.ext.beVisibleIf
 import com.roy.commons.ext.setupDialogStuff
-import kotlinx.android.synthetic.main.dialog_change_grouping.view.*
+import kotlinx.android.synthetic.main.dlg_change_grouping.view.*
 
 class ChangeGroupingDialog(val activity: BaseSimpleActivity, val path: String = "", val callback: () -> Unit) :
         DialogInterface.OnClickListener {
@@ -19,9 +19,9 @@ class ChangeGroupingDialog(val activity: BaseSimpleActivity, val path: String = 
     private var view: View
 
     init {
-        view = activity.layoutInflater.inflate(R.layout.dialog_change_grouping, null).apply {
-            grouping_dialog_use_for_this_folder.isChecked = config.hasCustomGrouping(pathToUse)
-            grouping_dialog_radio_folder.beVisibleIf(path.isEmpty())
+        view = activity.layoutInflater.inflate(R.layout.dlg_change_grouping, null).apply {
+            groupingDialogUseForThisFolder.isChecked = config.hasCustomGrouping(pathToUse)
+            groupingDialogRadioFolder.beVisibleIf(path.isEmpty())
         }
 
         AlertDialog.Builder(activity)
@@ -37,45 +37,45 @@ class ChangeGroupingDialog(val activity: BaseSimpleActivity, val path: String = 
     }
 
     private fun setupGroupRadio() {
-        val groupingRadio = view.grouping_dialog_radio_grouping
+        val groupingRadio = view.groupingDialogRadioGrouping
 
         val groupBtn = when {
-            currGrouping and GROUP_BY_NONE != 0 -> groupingRadio.grouping_dialog_radio_none
-            currGrouping and GROUP_BY_LAST_MODIFIED != 0 -> groupingRadio.grouping_dialog_radio_last_modified
-            currGrouping and GROUP_BY_DATE_TAKEN != 0 -> groupingRadio.grouping_dialog_radio_date_taken
-            currGrouping and GROUP_BY_FILE_TYPE != 0 -> groupingRadio.grouping_dialog_radio_file_type
-            currGrouping and GROUP_BY_EXTENSION != 0 -> groupingRadio.grouping_dialog_radio_extension
-            else -> groupingRadio.grouping_dialog_radio_folder
+            currGrouping and GROUP_BY_NONE != 0 -> groupingRadio.groupingDialogRadioNone
+            currGrouping and GROUP_BY_LAST_MODIFIED != 0 -> groupingRadio.groupingDialogRadioLastModified
+            currGrouping and GROUP_BY_DATE_TAKEN != 0 -> groupingRadio.groupingDialogRadioDateTaken
+            currGrouping and GROUP_BY_FILE_TYPE != 0 -> groupingRadio.groupingDialogRadioFileType
+            currGrouping and GROUP_BY_EXTENSION != 0 -> groupingRadio.groupingDialogRadioExtension
+            else -> groupingRadio.groupingDialogRadioFolder
         }
         groupBtn.isChecked = true
     }
 
     private fun setupOrderRadio() {
-        val orderRadio = view.grouping_dialog_radio_order
-        var orderBtn = orderRadio.grouping_dialog_radio_ascending
+        val orderRadio = view.groupingDialogRadioOrder
+        var orderBtn = orderRadio.groupingDialogRadioAscending
 
         if (currGrouping and GROUP_DESCENDING != 0) {
-            orderBtn = orderRadio.grouping_dialog_radio_descending
+            orderBtn = orderRadio.groupingDialogRadioDescending
         }
         orderBtn.isChecked = true
     }
 
     override fun onClick(dialog: DialogInterface, which: Int) {
-        val groupingRadio = view.grouping_dialog_radio_grouping
+        val groupingRadio = view.groupingDialogRadioGrouping
         var grouping = when (groupingRadio.checkedRadioButtonId) {
-            R.id.grouping_dialog_radio_none -> GROUP_BY_NONE
-            R.id.grouping_dialog_radio_last_modified -> GROUP_BY_LAST_MODIFIED
-            R.id.grouping_dialog_radio_date_taken -> GROUP_BY_DATE_TAKEN
-            R.id.grouping_dialog_radio_file_type -> GROUP_BY_FILE_TYPE
-            R.id.grouping_dialog_radio_extension -> GROUP_BY_EXTENSION
+            R.id.groupingDialogRadioNone -> GROUP_BY_NONE
+            R.id.groupingDialogRadioLastModified -> GROUP_BY_LAST_MODIFIED
+            R.id.groupingDialogRadioDateTaken -> GROUP_BY_DATE_TAKEN
+            R.id.groupingDialogRadioFileType -> GROUP_BY_FILE_TYPE
+            R.id.groupingDialogRadioExtension -> GROUP_BY_EXTENSION
             else -> GROUP_BY_FOLDER
         }
 
-        if (view.grouping_dialog_radio_order.checkedRadioButtonId == R.id.grouping_dialog_radio_descending) {
+        if (view.groupingDialogRadioOrder.checkedRadioButtonId == R.id.groupingDialogRadioDescending) {
             grouping = grouping or GROUP_DESCENDING
         }
 
-        if (view.grouping_dialog_use_for_this_folder.isChecked) {
+        if (view.groupingDialogUseForThisFolder.isChecked) {
             config.saveFolderGrouping(pathToUse, grouping)
         } else {
             config.removeFolderGrouping(pathToUse)

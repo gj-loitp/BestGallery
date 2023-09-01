@@ -23,7 +23,7 @@ import com.roy.commons.ext.showErrorToast
 import com.roy.commons.ext.toast
 import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
 import kotlinx.android.synthetic.main.activity_panorama_video.*
-import kotlinx.android.synthetic.main.bottom_video_time_holder.*
+import kotlinx.android.synthetic.main.v_bottom_video_time_holder.*
 import java.io.File
 
 open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity(), SeekBar.OnSeekBarChangeListener {
@@ -97,7 +97,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
         setupButtons()
         intent.removeExtra(PATH)
 
-        video_curr_time.setOnClickListener { skip(false) }
+        videoCurrTime.setOnClickListener { skip(false) }
         videoDuration.setOnClickListener { skip(true) }
 
         try {
@@ -137,9 +137,9 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
                             mIsPlaying = true
                             resumeVideo()
                         } else {
-                            video_toggle_play_pause.setImageResource(R.drawable.ic_play_outline)
+                            videoTogglePlayPause.setImageResource(R.drawable.ic_play_outline)
                         }
-                        video_toggle_play_pause.beVisible()
+                        videoTogglePlayPause.beVisible()
                     }
 
                     override fun onCompletion() {
@@ -148,7 +148,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
                 })
             }
 
-            video_toggle_play_pause.setOnClickListener {
+            videoTogglePlayPause.setOnClickListener {
                 togglePlayPause()
             }
         } catch (e: Exception) {
@@ -168,7 +168,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
 
     private fun setupDuration(duration: Long) {
         mDuration = (duration / 1000).toInt()
-        video_seekbar.max = mDuration
+        videoSeekbar.max = mDuration
         videoDuration.text = mDuration.getFormattedDuration()
         setVideoProgress(0)
     }
@@ -178,8 +178,8 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
             override fun run() {
                 if (mIsPlaying && !mIsDragged) {
                     mCurrTime = (vr_video_view!!.currentPosition / 1000).toInt()
-                    video_seekbar.progress = mCurrTime
-                    video_curr_time.text = mCurrTime.getFormattedDuration()
+                    videoSeekbar.progress = mCurrTime
+                    videoCurrTime.text = mCurrTime.getFormattedDuration()
                 }
 
                 mTimerHandler.postDelayed(this, 1000)
@@ -197,7 +197,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
     }
 
     private fun resumeVideo() {
-        video_toggle_play_pause.setImageResource(R.drawable.ic_pause_outline)
+        videoTogglePlayPause.setImageResource(R.drawable.ic_pause_outline)
         if (mCurrTime == mDuration) {
             setVideoProgress(0)
             mPlayOnReady = true
@@ -210,22 +210,22 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
 
     private fun pauseVideo() {
         vr_video_view.pauseVideo()
-        video_toggle_play_pause.setImageResource(R.drawable.ic_play_outline)
+        videoTogglePlayPause.setImageResource(R.drawable.ic_play_outline)
         window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
     private fun setVideoProgress(seconds: Int) {
         vr_video_view.seekTo(seconds * 1000L)
-        video_seekbar.progress = seconds
+        videoSeekbar.progress = seconds
         mCurrTime = seconds
-        video_curr_time.text = seconds.getFormattedDuration()
+        videoCurrTime.text = seconds.getFormattedDuration()
     }
 
     private fun videoCompleted() {
         mIsPlaying = false
         mCurrTime = (vr_video_view.duration / 1000).toInt()
-        video_seekbar.progress = video_seekbar.max
-        video_curr_time.text = mDuration.getFormattedDuration()
+        videoSeekbar.progress = videoSeekbar.max
+        videoCurrTime.text = mDuration.getFormattedDuration()
         pauseVideo()
     }
 
@@ -242,10 +242,10 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
             }
         }
 
-        video_time_holder.setPadding(0, 0, right, bottom)
-        video_time_holder.background = resources.getDrawable(R.drawable.gradient_background)
-        video_time_holder.onGlobalLayout {
-            val newBottomMargin = video_time_holder.height - resources.getDimension(R.dimen.video_player_play_pause_size).toInt() - resources.getDimension(R.dimen.activity_margin).toInt()
+        videoTimeHolder.setPadding(0, 0, right, bottom)
+        videoTimeHolder.background = resources.getDrawable(R.drawable.gradient_background)
+        videoTimeHolder.onGlobalLayout {
+            val newBottomMargin = videoTimeHolder.height - resources.getDimension(R.dimen.video_player_play_pause_size).toInt() - resources.getDimension(R.dimen.activity_margin).toInt()
             (explore.layoutParams as RelativeLayout.LayoutParams).bottomMargin = newBottomMargin
 
             (cardboard.layoutParams as RelativeLayout.LayoutParams).apply {
@@ -254,7 +254,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
             }
             explore.requestLayout()
         }
-        video_toggle_play_pause.setImageResource(R.drawable.ic_play_outline)
+        videoTogglePlayPause.setImageResource(R.drawable.ic_play_outline)
 
         cardboard.setOnClickListener {
             vr_video_view.displayMode = CARDBOARD_DISPLAY_MODE
@@ -273,12 +273,12 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
             it.animate().alpha(newAlpha)
         }
 
-        arrayOf(cardboard, explore, video_toggle_play_pause, video_curr_time, videoDuration).forEach {
+        arrayOf(cardboard, explore, videoTogglePlayPause, videoCurrTime, videoDuration).forEach {
             it.isClickable = !mIsFullscreen
         }
 
-        video_seekbar.setOnSeekBarChangeListener(if (mIsFullscreen) null else this)
-        video_time_holder.animate().alpha(newAlpha).start()
+        videoSeekbar.setOnSeekBarChangeListener(if (mIsFullscreen) null else this)
+        videoTimeHolder.animate().alpha(newAlpha).start()
     }
 
     private fun handleClick() {

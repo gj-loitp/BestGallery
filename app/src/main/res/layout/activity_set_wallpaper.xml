@@ -15,6 +15,6 @@
 
     <include
         android:id="@+id/bottom_set_wallpaper_actions"
-        layout="@layout/bottom_set_wallpaper_actions"/>
+        layout="@layout/v_bottom_set_wallpaper_actions"/>
 
 </RelativeLayout>

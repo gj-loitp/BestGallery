@@ -356,7 +356,7 @@ class ViewPagerActivity : SimpleActivity(),
                         bottom_edit,
                         bottom_share,
                         bottom_delete,
-                        bottom_rotate,
+                        bottomRotate,
                         bottom_properties,
                         bottom_change_orientation,
                         bottom_slideshow,
@@ -809,7 +809,7 @@ class ViewPagerActivity : SimpleActivity(),
             checkDeleteConfirmation()
         }
 
-        bottom_rotate.setOnClickListener {
+        bottomRotate.setOnClickListener {
             rotateImage(90)
         }
 
@@ -881,7 +881,7 @@ class ViewPagerActivity : SimpleActivity(),
         val hideIcon = if (medium.isHidden()) R.drawable.ic_unhide else R.drawable.ic_hide
         bottom_toggle_file_visibility.setImageResource(hideIcon)
 
-        bottom_rotate.beVisibleIf(config.visibleBottomActions and BOTTOM_ACTION_ROTATE != 0 && getCurrentMedium()?.isImage() == true)
+        bottomRotate.beVisibleIf(config.visibleBottomActions and BOTTOM_ACTION_ROTATE != 0 && getCurrentMedium()?.isImage() == true)
         bottom_change_orientation.setImageResource(getChangeOrientationIcon())
     }
 

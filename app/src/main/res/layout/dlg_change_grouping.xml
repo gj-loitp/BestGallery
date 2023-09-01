@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/grouping_dialog_scrollview"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/groupingDialogScrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/grouping_dialog_holder"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/groupingDialogHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -15,108 +14,107 @@
         android:paddingRight="@dimen/activity_margin">
 
         <RadioGroup
-            android:id="@+id/grouping_dialog_radio_grouping"
+            android:id="@+id/groupingDialogRadioGrouping"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/medium_margin">
 
             <com.roy.commons.views.MyCompatRadioButton
-                android:id="@+id/grouping_dialog_radio_none"
+                android:id="@+id/groupingDialogRadioNone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/medium_margin"
                 android:paddingBottom="@dimen/medium_margin"
-                android:text="@string/do_not_group_files"/>
+                android:text="@string/do_not_group_files" />
 
             <com.roy.commons.views.MyCompatRadioButton
-                android:id="@+id/grouping_dialog_radio_last_modified"
+                android:id="@+id/groupingDialogRadioLastModified"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/medium_margin"
                 android:paddingBottom="@dimen/medium_margin"
-                android:text="@string/by_last_modified"/>
+                android:text="@string/by_last_modified" />
 
             <com.roy.commons.views.MyCompatRadioButton
-                android:id="@+id/grouping_dialog_radio_date_taken"
+                android:id="@+id/groupingDialogRadioDateTaken"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/medium_margin"
                 android:paddingBottom="@dimen/medium_margin"
-                android:text="@string/by_date_taken"/>
+                android:text="@string/by_date_taken" />
 
             <com.roy.commons.views.MyCompatRadioButton
-                android:id="@+id/grouping_dialog_radio_file_type"
+                android:id="@+id/groupingDialogRadioFileType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/medium_margin"
                 android:paddingBottom="@dimen/medium_margin"
-                android:text="@string/by_file_type"/>
+                android:text="@string/by_file_type" />
 
             <com.roy.commons.views.MyCompatRadioButton
-                android:id="@+id/grouping_dialog_radio_extension"
+                android:id="@+id/groupingDialogRadioExtension"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/medium_margin"
                 android:paddingBottom="@dimen/medium_margin"
-                android:text="@string/by_extension"/>
+                android:text="@string/by_extension" />
 
             <com.roy.commons.views.MyCompatRadioButton
-                android:id="@+id/grouping_dialog_radio_folder"
+                android:id="@+id/groupingDialogRadioFolder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/medium_margin"
                 android:paddingBottom="@dimen/medium_margin"
-                android:text="@string/by_folder"/>
+                android:text="@string/by_folder" />
 
         </RadioGroup>
 
-        <include
-            layout="@layout/v_divider"/>
+        <include layout="@layout/v_divider" />
 
         <RadioGroup
-            android:id="@+id/grouping_dialog_radio_order"
+            android:id="@+id/groupingDialogRadioOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
             android:paddingBottom="@dimen/medium_margin">
 
             <com.roy.commons.views.MyCompatRadioButton
-                android:id="@+id/grouping_dialog_radio_ascending"
+                android:id="@+id/groupingDialogRadioAscending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/medium_margin"
                 android:paddingBottom="@dimen/medium_margin"
-                android:text="@string/ascending"/>
+                android:text="@string/ascending" />
 
             <com.roy.commons.views.MyCompatRadioButton
-                android:id="@+id/grouping_dialog_radio_descending"
+                android:id="@+id/groupingDialogRadioDescending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/medium_margin"
                 android:paddingBottom="@dimen/medium_margin"
-                android:text="@string/descending"/>
+                android:text="@string/descending" />
         </RadioGroup>
 
         <include
             android:id="@+id/useForThisFolderDivider"
-            layout="@layout/v_divider"/>
+            layout="@layout/v_divider" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
-            android:id="@+id/grouping_dialog_use_for_this_folder"
+            android:id="@+id/groupingDialogUseForThisFolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/activity_margin"
             android:paddingBottom="@dimen/activity_margin"
-            android:text="@string/use_for_this_folder"/>
+            android:text="@string/use_for_this_folder" />
 
         <com.roy.commons.views.MyTextView
-            android:id="@+id/grouping_dialog_bottom_note"
+            android:id="@+id/groupingDialogBottomNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/small_margin"
             android:paddingEnd="@dimen/medium_margin"
             android:text="@string/grouping_and_sorting"
-            android:textSize="@dimen/smaller_text_size"/>
+            android:textSize="@dimen/smaller_text_size" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>
