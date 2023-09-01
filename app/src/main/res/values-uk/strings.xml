@@ -5,8 +5,6 @@
     <string name="edit">Редагувати</string>
     <string name="open_camera">Запустити камеру</string>
     <string name="hidden">(приховане)</string>
-    <string name="excluded">(виключене)</string>
-    <string name="pin_folder">Закріпити теку</string>
     <string name="unpin_folder">Відкріпити теку</string>
     <string name="pin_to_the_top">Закріпити зверху</string>
     <string name="show_all">Показати вміст усіх тек</string>
@@ -22,8 +20,6 @@
     <string name="use_default">Використовувати за-замовчуванням</string>
     <string name="volume">Об\'єм</string>
     <string name="brightness">Яскравість</string>
-    <string name="lock_orientation">Закріпити орієнтацію</string>
-    <string name="unlock_orientation">Відкріпити орієнтацію</string>
     <string name="change_orientation">Змінити орієнтацію</string>
     <string name="force_portrait">Примусова портретна орієнтація</string>
     <string name="force_landscape">Примусова ландшафтна орієнтація</string>
@@ -31,8 +27,6 @@
     <string name="fix_date_taken">Виправити дату зйомки</string>
     <string name="fixing">Виправлення…</string>
     <string name="dates_fixed_successfully">Дати успішно виправлені</string>
-    <string name="share_resized">Поділитися зображенням іншого розміру</string>
-    <string name="upgraded_from_free">Йой,\n\nздається, ви перейшли зі старого безкоштовного додатку на цей. Тепер ви можете видалити стару версію, у якій є кнопка \"Перейти на Pro\" вгорі налаштувань додатку.\n\nВи втратите лише елементи з Кошика, позначки улюблених елементів, а також потрібно буде скинути ваші налаштування додатку.\n\nДякую!</string>
 
     <!-- Filter -->
     <string name="filter_media">Фільтр мультимедійних файлів</string>
@@ -52,8 +46,6 @@
     <string name="exclude_folder_description">Ця дія виключить обрані теки з їх підтеками тільки з Best Gallery. Керувати виключеними теками можна у \"Налаштуваннях\".</string>
     <string name="exclude_folder_parent">Виключити батьківську теку натомість?</string>
     <string name="excluded_activity_placeholder">Виключення тек приховає їх разом з їх підтеками тільки у Best Gallery, але вони все ще будуть видимі у інших додатках.\n\nЯкщо ви хочете приховати їх і від інших додатків, використовуйте функцію \"Приховати\".</string>
-    <string name="remove_all">Видалити все</string>
-    <string name="remove_all_description">Видалити всі теки зі списку виключених? Це не видалить теки з пристрою.</string>
     <string name="hidden_folders">Приховані теки</string>
     <string name="manage_hidden_folders">Керування прихованими теками</string>
     <string name="hidden_folders_placeholder">Схоже, у вас немає тек, прихованих за допомогою файлу \".nomedia\".</string>
@@ -65,7 +57,6 @@
     <string name="included_activity_placeholder">Якщо у вас є теки з медіафайлами, але вони не були розпізнані додатком, ви можете додати їх тут вручну.\n\nДодавання елементів сюди не виключить будь-яку іншу теку.</string>
 
     <!-- Resizing -->
-    <string name="resize">Змінити розмір</string>
     <string name="resize_and_save">Змінити розмір вибраного і зберегти</string>
     <string name="width">Ширина</string>
     <string name="height">Висота</string>
@@ -79,28 +70,17 @@
     <string name="path">Шлях</string>
     <string name="invalid_image_path">Неприпустимий шлях до зображення</string>
     <string name="image_editing_failed">Не вдалося редагувати зображення</string>
-    <string name="edit_image_with">Редагувати зображення за допомогою:</string>
-    <string name="no_editor_found">Не знайдено редакторів зображень</string>
     <string name="unknown_file_location">Невідоме розташування файлу</string>
-    <string name="error_saving_file">Не вдалося перезаписати вихідний файл</string>
     <string name="rotate_left">Обернути ліворуч</string>
     <string name="rotate_right">Обернути праворуч</string>
     <string name="rotate_one_eighty">Обернути на 180º</string>
-    <string name="flip">Віддзеркалити</string>
-    <string name="flip_horizontally">Віддзеркалити горизонтально</string>
-    <string name="flip_vertically">Віддзеркалити вертикально</string>
     <string name="free_aspect_ratio">Вільне</string>                        <!-- available as an option: 1:1, 4:3, 16:9, free -->
     <string name="other_aspect_ratio">Інше</string>                        <!-- available as an option: 1:1, 4:3, 16:9, free, other -->
 
     <!-- Set wallpaper -->
     <string name="simple_wallpaper">Simple Wallpaper</string>
-    <string name="set_as_wallpaper">Встановити як шпалери</string>
-    <string name="set_as_wallpaper_failed">Не вдалося встановити шпалери</string>
-    <string name="set_as_wallpaper_with">Встановити шпалери за допомогою:</string>
     <string name="setting_wallpaper">Встановлення шпалер…</string>
     <string name="wallpaper_set_successfully">Шпалери успішно встановлено</string>
-    <string name="portrait_aspect_ratio">Співвідношення сторін в портретній орієнтації</string>
-    <string name="landscape_aspect_ratio">Співвідношення сторін в ландшафтній орієнтації</string>
     <string name="home_screen">Домашній екран</string>
     <string name="lock_screen">Екран блокування</string>
     <string name="home_and_lock_screen">Домашній екран і екран блокування</string>
@@ -108,7 +88,6 @@
     <!-- Slideshow -->
     <string name="slideshow">Слайдшоу</string>
     <string name="interval">Інтервал (секунди):</string>
-    <string name="include_photos">Включити фото</string>
     <string name="include_videos">Включити відео</string>
     <string name="include_gifs">Включити GIF-зображення</string>
     <string name="random_order">Випадковий порядок</string>
@@ -117,7 +96,6 @@
     <string name="loop_slideshow">Зациклити показ слайдів</string>
     <string name="slideshow_ended">Слайдшоу закінчено</string>
     <string name="no_media_for_slideshow">Не знайдено медіафайлів для показу у слайдшоу</string>
-    <string name="use_crossfade_animation">Анімувати перехід між елементами</string>
 
     <!-- View types -->
     <string name="change_view_type">Змінити тип перегляду</string>
@@ -161,7 +139,6 @@
     <string name="show_media_count">Показувати кількість файлів у теці на головному екрані</string>
     <string name="show_extended_details">Показувати розширені подробиці при повноекранному перегляді</string>
     <string name="manage_extended_details">Керування розширеними подробицями</string>
-    <string name="one_finger_zoom">Дозволити масштабування одним пальцем при повноекранному перегляді</string>
     <string name="allow_instant_change">Дозволити миттєво змінювати медіафайл натисканням на сторони екрану</string>
     <string name="allow_deep_zooming_images">Дозволити глибоке масштабування зображень</string>
     <string name="hide_extended_details">Приховати розширені подробиці, коли рядок стану прихований</string>
@@ -223,60 +200,6 @@
 
     <!-- Strings displayed only on Google Playstore. Optional, but good to have -->
     <!-- Short description has to have less than 80 chars -->
-    <string name="app_short_description">Офлайн-галерея без реклами. Впорядкуй, редагуй, віднови та захисти фото і відео.</string>
-    <string name="app_long_description">
-        Best Gallery Pro - це офлайн-галерея з великою кількістю налаштувань. Впорядковуйте та редагуйте ваші фото, відновлюйте видалені файли з кошика, захищайте та приховуйте файли і переглядайте фото і відео різноманітних форматів, включаючи RAW, SVG та багато іншого.
-
-        Цей додаток не містить реклами і непотрібних дозволів. Оскільки додаток не потребує доступу в інтернет, ваша приватність захищена.
-
-        -------------------------------------------------
-        <b>SIMPLE GALLERY PRO – ФУНКЦІЇ</b>
-        -------------------------------------------------
-
-        • Офлайн-галерея без реклами чи спливаючих заставок
-        • Фоторедактор Simple gallery – обрізайте, обертайте, змінюйте розмір, малюйте, накладайте фільтри та інше
-        • Інтернет-з\'єднання не потрібне, що дає більше приватності і безпеки
-        • Не потребуються зайві дозволи
-        • Швидкий пошук зображень, відео і файлів
-        • Відкривайте та переглядайте багато різних фото- і відеоформатів (RAW, SVG, панорамні фото тощо)
-        • Різноманітні інтуїтивно зрозумілі жести для легкого редагуваання та упорядкування файлів
-        • Багато способів фільтрувати, групувати і сортувати файли
-        • Налаштуйте зовнішній вигляд Best Gallery Pro
-        • Доступна 32 мовами
-        • Позначайте файли як улюблені для швидкого доступу
-        • Захищайте ваші фото і відео графічним ключем, PIN-кодом або відбитком пальця
-        • Використовуйте графічний ключ, PIN-код і відбиток пальця також для блокування запуску галереї або окремих її функцій
-        • Відновлюйте видалені фото і відео з кошика
-        • Змінюйте видимість файлів, щоб приховати фото і відео
-        • Створюйте налаштовуване слайд-шоу з ваших файлів
-        • Переглядайте детальну інформацію про ваші файли (роздільна здатність, записи EXIF тощо)
-        • Best Gallery Pro є додатком з відкритим джерельним кодом
-        … та багато-багато іншого!
-
-        <b>ФОТОРЕДАКТОР</b>
-        Best Gallery Pro дозволяє легко редагувати ваші зображення на льоту. Обрізайте, віддзеркалюйте, обертайте та змінюйте розмір своїх зображень. Якщо ви почуваєтеся креативно, можете додавати фільтри та малювати на ваших зображеннях!
-
-        <b>ПІДТРИМКА БАГАТЬОХ ТИПІВ ФАЙЛІВ</b>
-        На відміну від деяких інших переглядачів та організаторів галереї, Best Gallery Pro підтримує величезний перелік різноманітних типів файлів, включаючи JPEG, PNG, MP4, MKV, RAW, SVG, панорамні фото, панорамні відео та багато іншого.
-
-        <b>МЕНЕДЖЕР ГАЛЕРЕЇ З БЕЗЛІЧЧЮ НАЛАШТУВАНЬ</b>
-        Від зовнішнього вигляду до функціональних кнопок у нижній панелі інструментів: Best Gallery Pro має безліч налаштувань та працює у потрібний вам спосіб. Жодний інший менеджер галереї не має такої гнучкості! Завдяки відкритому джерельному коду цей додаток доступний 32 мовами!
-
-        <b>ВІДНОВЛЮЙТЕ ВИДАЛЕНІ ФОТО І ВІДЕО</b>
-        Випадково видалили дорогоцінне фото чи відео? Не хвилюйтеся! Best Gallery Pro пропонує зручний кошик, звідки можна легко відновити видалені фото і відео.
-
-        <b>ЗАХИЩАЙТЕ І ПРИХОВУЙТЕ ФОТО, ВІДЕО І ФАЙЛИ</b>
-        Використовуючи PIN-код, графічний ключ чи сканер відбитку пальця на вашому пристрої, ви можете захистити та приховати фото, відео та цілі альбоми. Ви можете захистити сам додаток або заблокувати окремі його функції. Наприклад, заборона видалення файлів без сканування відбитку пальця допоможе захистити ваші файли від випадкового видалення.
-
-        <b>Перегляньте повний набір додатків Simple Tools тут:</b>
-        https://www.google.com
-
-        <b>Facebook:</b>
-        https://www.facebook.com/roy
-
-        <b>Reddit:</b>
-        https://www.reddit.com/r/roy
-    </string>
 
     <!--
         Haven't found some strings? There's more at

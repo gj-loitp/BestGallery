@@ -306,9 +306,6 @@
     <string name="alarm">Аларм</string>
     <string name="no_reminder">Без подсетника</string>
     <string name="at_start">Приликом старта</string>
-    <string name="system_sounds">Системски звукови</string>
-    <string name="your_sounds">Ваши звукови</string>
-    <string name="add_new_sound">Додај нови звук</string>
     <string name="no_sound">Без звука</string>
 
     <!-- Settings -->
@@ -398,28 +395,12 @@
     <string name="copyright">v %1$s\nАуторска права © Eagle Tools %2$d</string>
     <string name="app_version">Верзија апликације: %s</string>
     <string name="device_os">Оперативни систем уређаја: %s</string>
-    <string name="donate_please">
-        <![CDATA[
-            Поздрав,<br><br>
-            надамо се да уживате у апликацији. Она не садржи огласе, молимо вас да подржите њен развој куповином <a>Simple Thank You</a> апликације, то ће такође спречити овај дијалог од поновног појављивања.<br><br>
-            Хвала вам!
-        ]]>
-    </string>
     <string name="purchase">Купите</string>
     <string name="update_thank_you">Молимо вас ажурирајте Simple Thank You на најскорију верзију</string>
     <string name="before_asking_question_read_faq">Пре постављања питања проверите подешавања апликације и прочитајте најчешће постављана питања. Можда су решења већ ту.</string>
     <string name="read_it">Прочитајте</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            Поздрав,<br><br>
-            само вас обавештавамо да је нова апликација објављена:<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            Можете је преузети притиском на наслов.<br><br>
-            Хвала
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

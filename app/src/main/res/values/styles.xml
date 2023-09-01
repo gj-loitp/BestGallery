@@ -19,10 +19,4 @@
         <item name="android:windowContentTransitions">true</item>
     </style>
 
-    <style name="google_ad_style" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
 </resources>

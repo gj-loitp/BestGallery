@@ -307,9 +307,6 @@
     <string name="alarm">Ειδοποιήσεις</string>
     <string name="no_reminder">Χωρίς υπενθύμιση</string>
     <string name="at_start">Κατά την έναρξη</string>
-    <string name="system_sounds">Ήχοι συστήματος</string>
-    <string name="your_sounds">Οι ήχοι σας</string>
-    <string name="add_new_sound">Προσθέστε νέο ήχο</string>
     <string name="no_sound">Χωρίς ήχο</string>
 
     <!-- Settings -->
@@ -399,28 +396,12 @@
     <string name="copyright">v %1$s\nCopyright © Eagle Tools %2$d</string>
     <string name="app_version">Έκδοση εφαρμογής: %s</string>
     <string name="device_os">OS Συσκευής: %s</string>
-    <string name="donate_please">
-        <![CDATA[
-            Γειά σας,<br><br>
-            Ελπίζω να απολαμβάνετε την εφαρμογή. Δεν περιέχει διαφημίσεις, παρακαλώ υποστηρίξτε την ανάπτυξή της με την αγορά στο <a>Simple Thank You</a>, θα αποτρέψει επίσης την εμφάνιση αυτού του διαλόγου.<br><br>
-            Ευχαριστώ!
-        ]]>
-    </string>
     <string name="purchase">Αγορά</string>
     <string name="update_thank_you">Παρακαλώ ενημερώστε Simple Thank You στην τελευταία έκδοση</string>
     <string name="before_asking_question_read_faq">Πριν κάνετε μια ερώτηση, ελέγξτε τις ρυθμίσεις της εφαρμογής και διαβάστε πρώτα τις Συχνές Ερωτήσεις. Ίσως η λύση είναι εκεί.</string>
     <string name="read_it">Διαβάστε τις</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            Γειά σας,<br><br>
-           απλά σας ενημερώνω ότι πρόσφατα κυκλοφόρησε μια νέα εφαρμογή:<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            Μπορείτε να την κατεβάσετε πατώντας τον τίτλο.<br><br>
-            Ευχαριστώ
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

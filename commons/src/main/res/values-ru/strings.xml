@@ -329,9 +329,6 @@
     <string name="alarm">Будильник</string>
     <string name="no_reminder">Без напоминания</string>
     <string name="at_start">С наступлением события</string>
-    <string name="system_sounds">Системные звуки</string>
-    <string name="your_sounds">Свои звуки</string>
-    <string name="add_new_sound">Добавить новый звук</string>
     <string name="no_sound">Без звука</string>
 
     <!-- Settings -->
@@ -422,28 +419,12 @@
     <string name="copyright">v %1$s\nАвторские права © Eagle Tools %2$d</string>
     <string name="app_version">Версия приложения: %s</string>
     <string name="device_os">ОС устройства: %s</string>
-    <string name="donate_please">
-        <![CDATA[
-            Привет,<br><br>
-            надеюсь, вам нравится приложение. Оно не содержит рекламы, поэтому, пожалуйста, поддержите разработку, купив приложение <a>Simple Thank You</a>. Покупка также предотвратит повторное появление данного диалогового окна.<br><br>
-            Спасибо!
-        ]]>
-    </string>
     <string name="purchase">Купить</string>
     <string name="update_thank_you">Пожалуйста, обновите \"Simple Thank You\" до последней версии.</string>
     <string name="before_asking_question_read_faq">Прежде чем задать вопрос, пожалуйста, проверьте настройки приложения и прочтите FAQ (часто задаваемые вопросы). Возможно, решение есть.</string>
     <string name="read_it">Прочитать</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            Привет,<br><br>
-            просто сообщаю, что недавно было выпущено новое приложение:<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            Вы можете скачать его, нажав на заголовок.<br><br>
-            Спасибо
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

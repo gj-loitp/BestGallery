@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/renameItemsHolder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -30,7 +29,6 @@
             android:text="@string/append_filenames" />
 
         <com.roy.commons.views.MyCompatRadioButton
-            android:id="@+id/renameItemsRadioPrepend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/normal_margin"

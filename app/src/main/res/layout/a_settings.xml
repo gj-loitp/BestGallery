@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/settingsScrollview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -24,7 +23,6 @@
             android:visibility="visible">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settingsCustomizeColors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -70,7 +68,6 @@
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settingsChangeDateTimeFormat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -92,7 +89,6 @@
             android:paddingBottom="@dimen/bigger_margin">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settingsFileLoadingPriorityLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -113,7 +109,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/visibilityDivider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -142,7 +137,6 @@
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settingsManageIncludedFolders"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -164,7 +158,6 @@
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settingsManageExcludedFolders"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -186,7 +179,6 @@
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settingsManageHiddenFolders"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -221,7 +213,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/videosDivider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -359,7 +350,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/thumbnailsDivider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -475,7 +465,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/scrolling_divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -566,7 +555,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/fullscreen_media_divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -764,7 +752,6 @@
             android:paddingBottom="@dimen/bigger_margin">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settings_screen_rotation_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -788,7 +775,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/deep_zoomable_images_divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -903,7 +889,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/extended_details_divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -979,7 +964,6 @@
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settings_manage_extended_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -990,7 +974,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/security_divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -1081,7 +1064,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/file_operations_divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -1172,7 +1154,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/bottom_actions_divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -1226,7 +1207,6 @@
             android:paddingBottom="@dimen/activity_margin">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settings_manage_bottom_actions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -1237,7 +1217,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/recycle_bin_divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -1339,7 +1318,6 @@
             android:paddingBottom="@dimen/bigger_margin">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settings_empty_recycle_bin_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -1363,7 +1341,6 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/migrating_divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_grey"
@@ -1395,7 +1372,6 @@
             android:visibility="gone">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settings_export"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -1418,7 +1394,6 @@
             android:visibility="gone">
 
             <com.roy.commons.views.MyTextView
-                android:id="@+id/settings_import"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

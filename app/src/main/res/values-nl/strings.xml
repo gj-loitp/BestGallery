@@ -5,8 +5,6 @@
     <string name="edit">Bewerken</string>
     <string name="open_camera">Camera</string>
     <string name="hidden">(verborgen)</string>
-    <string name="excluded">(uitgesloten)</string>
-    <string name="pin_folder">Map vastzetten</string>
     <string name="unpin_folder">Map losmaken</string>
     <string name="pin_to_the_top">Bovenaan vastzetten</string>
     <string name="show_all">Alles weergeven</string>
@@ -22,8 +20,6 @@
     <string name="use_default">Standaard gebruiken</string>
     <string name="volume">Volume</string>
     <string name="brightness">Helderheid</string>
-    <string name="lock_orientation">Schermoriëntatie vergrendelen</string>
-    <string name="unlock_orientation">Schermoriëntatie ontgrendelen</string>
     <string name="change_orientation">Schermoriëntatie wijzigen</string>
     <string name="force_portrait">Portretmodus forceren</string>
     <string name="force_landscape">Landschapsmodus forceren</string>
@@ -31,8 +27,6 @@
     <string name="fix_date_taken">Datum opname corrigeren</string>
     <string name="fixing">Corrigeren…</string>
     <string name="dates_fixed_successfully">Datums zijn gecorrigeerd</string>
-    <string name="share_resized">Verkleinde versie delen</string>
-    <string name="upgraded_from_free">Het lijkt erop dat dit een upgrade is vanaf de oude gratis versie. Deze oude versie, met de knop \'Upgraden naar Pro\' bovenaan de instellingen, kan nu gedeïnstalleerd worden.\n\nDe items in de prullenbak zullen dan wel worden verwijderd, favorieten en instellingen zullen ook opnieuw moeten worden geconfigureerd.</string>
 
     <!-- Filter -->
     <string name="filter_media">Media filteren</string>
@@ -52,8 +46,6 @@
     <string name="exclude_folder_description">De selectie en submappen uitsluiten van deze galerij. Uitgesloten mappen kunnen worden beheerd in de instellingen.</string>
     <string name="exclude_folder_parent">De map met dit item uitsluiten?</string>
     <string name="excluded_activity_placeholder">Uitsluiten zal mappen en hun submappen verbergen voor deze galerij, maar niet voor andere apps.\n\nAls u de mappen ook in andere apps wilt verbergen, kies dan voor de functie Verbergen.</string>
-    <string name="remove_all">Alles verwijderen</string>
-    <string name="remove_all_description">De lijst van uitgesloten mappen leegmaken. Dit zal de mappen zelf niet verwijderen.</string>
     <string name="hidden_folders">Verborgen mappen</string>
     <string name="manage_hidden_folders">Verborgen mappen beheren</string>
     <string name="hidden_folders_placeholder">Er zijn geen mappen gevonden die zijn verborgen door bestand \".nomedia\".</string>
@@ -65,7 +57,6 @@
     <string name="included_activity_placeholder">Als er mappen zijn die wel media bevatten, maar niet door de galerij worden herkend, voeg deze mappen dan hier handmatig toe.\n\nHet hier toevoegen van mappen zal andere mappen niet uitsluiten.</string>
 
     <!-- Resizing -->
-    <string name="resize">Grootte aanpassen</string>
     <string name="resize_and_save">Grootte aanpassen en opslaan</string>
     <string name="width">Breedte</string>
     <string name="height">Hoogte</string>
@@ -79,28 +70,17 @@
     <string name="path">Pad</string>
     <string name="invalid_image_path">Ongeldig pad naar afbeelding</string>
     <string name="image_editing_failed">Fout bij bewerken van afbeelding</string>
-    <string name="edit_image_with">Afbeelding bewerken met:</string>
-    <string name="no_editor_found">Geen app gevonden voor fotobewerking</string>
     <string name="unknown_file_location">Onbekende bestandslocatie</string>
-    <string name="error_saving_file">Bronbestand kan niet worden overschreven</string>
     <string name="rotate_left">Linksom draaien</string>
     <string name="rotate_right">Rechtsom draaien</string>
     <string name="rotate_one_eighty">180º draaien</string>
-    <string name="flip">Kantelen</string>
-    <string name="flip_horizontally">Horizontaal kantelen</string>
-    <string name="flip_vertically">Verticaal kantelen</string>
     <string name="free_aspect_ratio">Vrij</string>                  <!-- available as an option: 1:1, 4:3, 16:9, free -->
     <string name="other_aspect_ratio">Anders</string>                <!-- available as an option: 1:1, 4:3, 16:9, free, other -->
 
     <!-- Set wallpaper -->
     <string name="simple_wallpaper">Achtergrond</string>
-    <string name="set_as_wallpaper">Als achtergrond instellen</string>
-    <string name="set_as_wallpaper_failed">Achtergrond instellen mislukt</string>
-    <string name="set_as_wallpaper_with">Achtergrond instellen met:</string>
     <string name="setting_wallpaper">Achtergrond instellen&#8230;</string>
     <string name="wallpaper_set_successfully">Achtergrond is ingesteld</string>
-    <string name="portrait_aspect_ratio">Verhouding in portretmodus</string>
-    <string name="landscape_aspect_ratio">Verhouding in landschapsmodus</string>
     <string name="home_screen">Startscherm</string>
     <string name="lock_screen">Vergrendelscherm</string>
     <string name="home_and_lock_screen">Start- en vergrendelingsscherm</string>
@@ -108,7 +88,6 @@
     <!-- Slideshow -->
     <string name="slideshow">Diavoorstelling</string>
     <string name="interval">Interval (seconden):</string>
-    <string name="include_photos">Afbeeldingen weergeven</string>
     <string name="include_videos">Video’s weergeven</string>
     <string name="include_gifs">GIF-bestanden weergeven</string>
     <string name="random_order">Willekeurige volgorde</string>
@@ -117,7 +96,6 @@
     <string name="loop_slideshow">Voorstelling herhalen</string>
     <string name="slideshow_ended">De diavoorstelling is beëindigd</string>
     <string name="no_media_for_slideshow">Geen media gevonden voor diavoorstelling</string>
-    <string name="use_crossfade_animation">Crossfade-animaties gebruiken</string>
 
     <!-- View types -->
     <string name="change_view_type">Weergave</string>
@@ -161,7 +139,6 @@
     <string name="show_media_count">Aantallen in mappen tonen</string>
     <string name="show_extended_details">Uitgebreide informatie tonen in volledig scherm</string>
     <string name="manage_extended_details">Uitgebreide informatie</string>
-    <string name="one_finger_zoom">Met één vinger zoomen in volledig scherm</string>
     <string name="allow_instant_change">Direct naar vorige/volgende door op de zijkanten van het scherm te tikken</string>
     <string name="allow_deep_zooming_images">Verder inzoomen mogelijk maken</string>
     <string name="hide_extended_details">Uitgebreide informatie niet tonen als de statusbalk is verborgen</string>
@@ -223,60 +200,6 @@
 
     <!-- Strings displayed only on Google Playstore. Optional, but good to have -->
     <!-- Short description has to have less than 80 chars -->
-    <string name="app_short_description">Galerij zonder advertenties. Organiseer, bewerk en beveilig foto’s &amp; video’s</string>
-    <string name="app_long_description">
-        Best Gallery Pro is een volledig aan te passen offline galerij. Organiseer &amp; bewerk foto’s, herstel verwijderde bestanden met de prullenbakfunctie, beveilig &amp; verberg items en bekijk een enorme hoeveelheid aan foto- &amp; videoformaten, waaronder RAW, SVG en nog veel meer.
-
-        Deze privacyvriendelijke app bevat geen advertenties of onnodige machtigingen (zoals verbinden met het internet).
-
-        -------------------------------------------------
-        <b>SIMPLE GALLERY PRO – FUNCTIES</b>
-        -------------------------------------------------
-
-        • Offline galerij zonder advertenties en pop-ups
-        • Best Gallery fotobewerking: bijsnijden, spiegelen, roteren, grootte aanpassen, tekenen, filters &amp; meer
-        • Geen internetverbinding benodigd voor meer privacy and veiligheid
-        • Geen onnodige machtigingen vereist
-        • Beschikbaar in 32 talen
-        • Best Gallery Pro is open-source
-        • Zoek snel naar afbeeldingen, video’s &amp; bestanden
-        • Open &amp; bekijk vele foto- &amp; videoformaten (RAW, SVG, panorama etc.)
-        • Gebruik veeggebaren om bestanden snel te bewerken en te organiseren
-        • Kies uit een verscheidenheid aan manieren om bestanden te filteren, groeperen en sorteren
-        • Pas het uiterlijk van Best Gallery Pro aan
-        • Markeer bestanden als favoriet om ze snel terug te vinden
-        • Beveilig items met een patroon, pincode or vingerafdruk
-        • Gebruik pincode, patroon &amp; vingerafdruk om specifieke functies of het starten van de app te beveiligen
-        • Herstel verwijderde bestanden uit de prullenbak
-        • Toon of verberg foto’s &amp; video’s
-        • Creëer diavoorstellingen
-        • Bekijk gedetailleerde informatie over de bestanden (resolutie, EXIF-waarden etc.)
-        … en nog veel meer!
-
-        <b>FOTO’S BEWERKEN</b>
-        Best Gallery Pro maakt het gemakkelijk om direct afbeeldingen te bewerken. Ga aan de slag met bijsnijden, spiegelen, roteren en de grootte aanpassen, of voeg filters toe en teken over de afbeelding heen!
-
-        <b>ONDERSTEUNING VOOR VEEL VERSCHILLENDE BESTANDSFORMATEN</b>
-        Best Gallery Pro ondersteunt, in tegenstelling tot sommige andere galerij-apps, een enorme hoeveelheid aan bestandsformaten, waaronder JPEG, PNG, MP4, MKV, RAW, SVG, Panorama-foto’s &amp; -videos en nog veel meer.
-
-        <b>ALLES IS AAN TE PASSEN</b>
-        Van de interface tot de knoppen op de werkbalk, Best Gallery Pro is geheel aan te passen en kan dan ook werken naar ieders voorkeur. Geen enkele andere galerij-app bevat zulke flexibiliteit! Dankzij het open karakter en de community is de app maar liefst in 32 talen beschikbaar!
-
-        <b>HERSTEL VERWIJDERDE FOTO’S &amp; VIDEO’S</b>
-        Per ongeluk een foto of video verwijderd? Geen paniek! Best Gallery Pro heeft een handige prullenbak waarmee verwijderde bestanden gemakkelijk zijn terug te halen.
-
-        <b>BEVEILIG &amp; VERBERG FOTO’S, VIDEO’S &amp; BESTANDEN</b>
-        Door middel van een pincode, patroon of een vingerafdruk zijn foto’s, video’s &amp; gehele albums te beveiligen of te verbergen. Ook de gehele app of specifieke functies binnen de galerij zijn zo te beveiligen. Voorbeeld: stel in dat bestanden alleen kunnen worden verwijderd na een vingerafdrukscan.
-
-        <b>Kijk ook eens naar de hele collectie apps van Simple Tools:</b>
-        https://www.google.com
-
-        <b>Facebook:</b>
-        https://www.facebook.com/roy
-
-        <b>Reddit:</b>
-        https://www.reddit.com/r/roy
-    </string>
 
     <!--
         Haven't found some strings? There's more at

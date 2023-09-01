@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activitySetWallpaperHolder"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,8 +11,6 @@
         app:cropBackgroundColor="@color/crop_image_view_background"
         app:cropInitialCropWindowPaddingRatio="0" />
 
-    <include
-        android:id="@+id/bottomSetWallpaperActions"
-        layout="@layout/v_bottom_set_wallpaper_actions" />
+    <include layout="@layout/v_bottom_set_wallpaper_actions" />
 
 </RelativeLayout>

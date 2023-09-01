@@ -307,9 +307,6 @@
     <string name="alarm">Alarm</string>
     <string name="no_reminder">Ingen påmindelse</string>
     <string name="at_start">Ved start</string>
-    <string name="system_sounds">Systemlyde</string>
-    <string name="your_sounds">Dine lyde</string>
-    <string name="add_new_sound">Tilføj en ny lyd</string>
     <string name="no_sound">Ingen lyd</string>
 
     <!-- Settings -->
@@ -399,28 +396,12 @@
     <string name="copyright">v %1$s\nCopyright © Eagle Tools %2$d</string>
     <string name="app_version">App version: %s</string>
     <string name="device_os">Device OS: %s</string>
-    <string name="donate_please">
-        <![CDATA[
-            Hej<br><br>
-            Håber du kan lide denne app. Den indeholder ingen reklamer, så vær sød at købe appen <a>Simple Thank You</a>, som også vil forhindre at denne besked vises igen.<br><br>
-            På forhånd tak!
-        ]]>
-    </string>
     <string name="purchase">Køb</string>
     <string name="update_thank_you">Opdater venligst Simple Thank You til den seneste version</string>
     <string name="before_asking_question_read_faq">Before you ask a question, please check the app settings and read the Frequently Asked Questions first. Maybe the solution is there.</string>
     <string name="read_it">Læs det</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            Hej<br><br>
-            - synes lige du skulle vide at der er kommet en ny app:<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            Du kan downloade den med et klik på titlen.<br><br>
-            Tak
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

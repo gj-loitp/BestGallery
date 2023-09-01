@@ -5,8 +5,6 @@
     <string name="edit">Szerkesztés</string>
     <string name="open_camera">Kamera megnyitása</string>
     <string name="hidden">(rejtett)</string>
-    <string name="excluded">(kizárva)</string>
-    <string name="pin_folder">Mappa kitűzés</string>
     <string name="unpin_folder">Mappa kitűzés megszüntetése</string>
     <string name="pin_to_the_top">Kitűzés felülre</string>
     <string name="show_all">Mutassa az összes mappa tartalmát</string>
@@ -22,8 +20,6 @@
     <string name="use_default">Alapértelmezett használata</string>
     <string name="volume">Hangerő</string>
     <string name="brightness">Fényerő</string>
-    <string name="lock_orientation">Tájolás zárolása</string>
-    <string name="unlock_orientation">Tájolás feloldása</string>
     <string name="change_orientation">Tájolás változtatása</string>
     <string name="force_portrait">Álló mód kényszerítése</string>
     <string name="force_landscape">Fekvő mód kényszerítése</string>
@@ -31,8 +27,6 @@
     <string name="fix_date_taken">Dátum javítása</string>
     <string name="fixing">Javítás…</string>
     <string name="dates_fixed_successfully">Sikeres dátum javítás</string>
-    <string name="share_resized">Átméretezett verzió megosztása</string>
-    <string name="upgraded_from_free">Hey,\n\nseems like you upgraded from the old free app. You can now uninstall the old version, which has an \'Upgrade to Pro\' button at the top of the app settings.\n\nYou will only have the Recycle bin items deleted, favorite items unmarked and you will also have to reset your app settings.\n\nThanks!</string>
 
     <!-- Filter -->
     <string name="filter_media">Média szűrő</string>
@@ -52,8 +46,6 @@
     <string name="exclude_folder_description">Ez kizárja a kijelölést és az alkönyvtárakat a Best Gallery alkalmazásból. A kizárt mappákat a Beállításokban kezelheti.</string>
     <string name="exclude_folder_parent">Kizárja a szülő mappát?</string>
     <string name="excluded_activity_placeholder">A mappák kizárásával az almappákkal együtt elrejti a Best Gallery alkalmazásban, de továbbra is láthatóak maradnak más alkalmazásokban.\n\nHa el szeretné rejteni őket más alkalmazásokban is, használja az Elrejtés funkciót.</string>
-    <string name="remove_all">Összes eltávolítása</string>
-    <string name="remove_all_description">Összes mappa eltávolítása a Kizárás listából. Ez nem törli a mappákat.</string>
     <string name="hidden_folders">Rejtett mappák</string>
     <string name="manage_hidden_folders">Rejtett mappák kezelése</string>
     <string name="hidden_folders_placeholder">Úgy tűnik, a mappái nincsenek elrejtve egy \".nomedia\" fájllal.</string>
@@ -65,7 +57,6 @@
     <string name="included_activity_placeholder">Ha vannak olyan mappák, amelyek média fájlokat tartalmaznak, de az alkalmazás nem ismerte fel, akkor kézzel is  hozzáadhatja ezeket.\n\nAz elemek hozzáadása nem zár ki más mappákat.</string>
 
     <!-- Resizing -->
-    <string name="resize">Átméretezés</string>
     <string name="resize_and_save">Kiválasztás átméretezése és mentés</string>
     <string name="width">Szélesség</string>
     <string name="height">Magasság</string>
@@ -79,29 +70,18 @@
     <string name="path">Elérési útvonal</string>
     <string name="invalid_image_path">Érvénytelen kép elérési útvonal</string>
     <string name="image_editing_failed">Sikertelen kép szerkesztés</string>
-    <string name="edit_image_with">Kép szerkesztés ezzel:</string>
-    <string name="no_editor_found">Nem található kép szerkesztő</string>
     <string name="unknown_file_location">Ismeretlen fájl hely</string>
-    <string name="error_saving_file">Nem lehet felülírni a forrás fájlt</string>
     <string name="rotate_left">Forgatás balra</string>
     <string name="rotate_right">Forgatás jobbra</string>
     <string name="rotate_one_eighty">180º-os forgatás</string>
-    <string name="flip">Tükrözés</string>
-    <string name="flip_horizontally">Tükrözés vízszintesen</string>
-    <string name="flip_vertically">Tükrözés függőlegesen</string>
     <string name="free_aspect_ratio">Kötetlen</string>                <!-- available as an option: 1:1, 4:3, 16:9, free -->
     <string name="other_aspect_ratio">Egyéb</string>                <!-- available as an option: 1:1, 4:3, 16:9, free, other -->
 
     <!-- available as an option: 1:1, 4:3, 16:9, free -->
     <!-- Set wallpaper -->
     <string name="simple_wallpaper">Simple Wallpaper</string>
-    <string name="set_as_wallpaper">Beállítás háttérképként</string>
-    <string name="set_as_wallpaper_failed">Nem sikerült a beállítás háttérképként</string>
-    <string name="set_as_wallpaper_with">Beállítás háttérképként ezzel:</string>
     <string name="setting_wallpaper">Beállítás háttérképként…</string>
     <string name="wallpaper_set_successfully">Sikeresen beállítva háttérképnek</string>
-    <string name="portrait_aspect_ratio">Álló képarány</string>
-    <string name="landscape_aspect_ratio">Fekvő képarány</string>
     <string name="home_screen">Kezdő képernyő</string>
     <string name="lock_screen">Zárolás képernyő</string>
     <string name="home_and_lock_screen">Kezdő és zárolás képernyő</string>
@@ -109,7 +89,6 @@
     <!-- Slideshow -->
     <string name="slideshow">Diavetítés</string>
     <string name="interval">Időköz (másodperc):</string>
-    <string name="include_photos">Fotók befoglalása</string>
     <string name="include_videos">Videók befoglalása</string>
     <string name="include_gifs">GIF befoglalása</string>
     <string name="random_order">Véletlen sorrend</string>
@@ -118,7 +97,6 @@
     <string name="loop_slideshow">Diavetítés ismétlése</string>
     <string name="slideshow_ended">A diavetítés vége</string>
     <string name="no_media_for_slideshow">A diavetítéshez nem található média</string>
-    <string name="use_crossfade_animation">Animáció átmenet használat</string>
 
     <!-- View types -->
     <string name="change_view_type">Nézet típus változtatása</string>
@@ -162,7 +140,6 @@
     <string name="show_media_count">Mutassa a fájlok számát a mappákban</string>
     <string name="show_extended_details">Mutassa a kiterjesztett adatokat a teljes képernyős médián keresztül</string>
     <string name="manage_extended_details">Bővített részletek kezelése</string>
-    <string name="one_finger_zoom">Engedélyezi az egy ujjas nagyítást a teljes képernyős médiában</string>
     <string name="allow_instant_change">Engedélyezi a azonnali média váltást a képernyő oldalára kattintva</string>
     <string name="allow_deep_zooming_images">Engedélyezi a képek mély nagyítását</string>
     <string name="hide_extended_details">Bővített részletek elrejtése az állapotsor rejtett állapotában</string>
@@ -224,60 +201,6 @@ Ezzel csak a kiválasztott mappák láthatók, mivel a kizárás és a befoglal�
 
     <!-- Strings displayed only on Google Playstore. Optional, but good to have -->
     <!-- Short description has to have less than 80 chars -->
-    <string name="app_short_description">Offline gallery without ads. Organize, edit, recover and protect photos &amp; videos</string>
-    <string name="app_long_description">
-        Best Gallery Pro is a highly customizable offline gallery. Organize &amp; edit your photos, recover deleted files with the recycle bin, protect &amp; hide files and view a huge variety of different photo &amp; video formats including RAW, SVG and much more.
-
-        The app contains no ads and unnecessary permissions. As the app doesn’t require internet access either, your privacy is protected.
-
-        -------------------------------------------------
-        <b>SIMPLE GALLERY PRO – FEATURES</b>
-        -------------------------------------------------
-
-        • Offline gallery with no ads or popups
-        • Simple gallery photo editor – crop, rotate, resize, draw, filters &amp; more
-        • No internet access needed, giving you more privacy and security
-        • No unnecessary permissions required
-        • Quickly search images, videos &amp; files
-        • Open &amp; view many different photo and video types (RAW, SVG, panoramic etc)
-        • A variety of intuitive gestures to easily edit &amp; organize files
-        • Lots of ways to filter, group &amp; sort files
-        • Customize the appearance of Best Gallery Pro
-        • Available in 32 languages
-        • Mark files as favorites for quick access
-        • Protect your photos &amp; videos with a pattern, pin or fingerprint
-        • Use pin, pattern &amp; fingerprint to protect the app launch or specific functions too
-        • Recover deleted photos &amp; videos from the recycle bin
-        • Toggle visibility of files to hide photos &amp; videos
-        • Create a customizable slideshow of your files
-        • View detailed information of your files (resolution, EXIF values etc)
-        • Best Gallery Pro is open source
-        … and much much more!
-
-        <b>PHOTO GALLERY EDITOR</b>
-        Best Gallery Pro makes it easy to edit your pictures on the fly. Crop, flip, rotate and resize your pictures. If you’re feeling a little more creative you can add filters and draw on your pictures!
-
-        <b>SUPPORT FOR MANY FILE TYPES</b>
-        Unlike some other gallery viewers &amp; photo organizers, Best Gallery Pro supports a huge range of different file types including JPEG, PNG, MP4, MKV, RAW, SVG, Panoramic photos, Panoramic videos and many more.
-
-        <b>HIGHLY CUSTOMIZABLE GALLERY MANAGER</b>
-        From the UI to the function buttons on the bottom toolbar, Best Gallery Pro is highly customizable and works the way you want it to. No other gallery manager has this kind of flexibility! Thanks to being open source, we’re also available in 32 languages!
-
-        <b>RECOVER DELETED PHOTOS &amp; VIDEOS</b>
-        Accidentally deleted a precious photo or video? Don’t worry! Best Gallery Pro features a handy recycle bin where you can recover deleted photos &amp; videos easily.
-
-        <b>PROTECT &amp; HIDE PHOTOS, VIDEOS &amp; FILES</b>
-        Using pin, pattern or your device’s fingerprint scanner you can protect and hide photos, videos &amp; entire albums. You can protect the app itself or place locks on specific functions of the app. For example, you can’t delete a file without a fingerprint scan, helping to protect your files from accidental deletion.
-
-        <b>Check out the full suite of Simple Tools here:</b>
-        https://www.google.com
-
-        <b>Facebook:</b>
-        https://www.facebook.com/roy
-
-        <b>Reddit:</b>
-        https://www.reddit.com/r/roy
-    </string>
 
     <!--
         Haven't found some strings? There's more at

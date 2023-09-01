@@ -285,9 +285,6 @@
     <string name="alarm">闹钟</string>
     <string name="no_reminder">不再提醒</string>
     <string name="at_start">开始时</string>
-    <string name="system_sounds">系统铃声</string>
-    <string name="your_sounds">你的铃声</string>
-    <string name="add_new_sound">添加新的铃声</string>
     <string name="no_sound">无铃声</string>
 
     <!-- Settings -->
@@ -376,28 +373,12 @@
     <string name="copyright">v %1$s Copyright © Eagle Tools %2$d</string>
     <string name="app_version">应用版本：%s</string>
     <string name="device_os">设备系统：%s</string>
-    <string name="donate_please">
-        <![CDATA[
-            你好，<br><br>
-            希望你喜欢这个应用。它不包含广告，所以请购买<a>Simple Thank You</a> 这个应用支持一下，这样此对话框将不再出现。<br><br>
-            非常感谢！
-        ]]>
-    </string>
     <string name="purchase">购买</string>
     <string name="update_thank_you">请更新 Simple Thank You 到最新版本</string>
     <string name="before_asking_question_read_faq">提问之前，请先打开应用设置并阅读常见问题。也许你可以在那里找到答案。</string>
     <string name="read_it">阅读</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            嘿，<br><br>
-            最近发布了一个新的应用：<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            你可以点击标题来下载。<br><br>
-            谢谢。
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

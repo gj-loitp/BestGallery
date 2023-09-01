@@ -306,9 +306,6 @@
     <string name="alarm">Riasztás</string>
     <string name="no_reminder">Nincs emlékeztető</string>
     <string name="at_start">Kezdete</string>
-    <string name="system_sounds">Rendszer hangok</string>
-    <string name="your_sounds">Saját hangok</string>
-    <string name="add_new_sound">Új hang hozzáadása</string>
     <string name="no_sound">Nincs hang</string>
 
     <!-- Settings -->
@@ -398,28 +395,12 @@
     <string name="copyright">v %1$s\nCopyright © Eagle Tools %2$d</string>
     <string name="app_version">Alkalmazás verzió: %s</string>
     <string name="device_os">Eszköz OS: %s</string>
-    <string name="donate_please">
-		<![CDATA[
-            Hello,<br><br>
-            remélem tetszett az alkalmazás. Nem tartalmaz hirdetéseket. Kérem támogasd a fejlesztést a <a>Simple Thank You</a> megvásárlásával. Utána ez a párbeszédablak sem látszik újra.<br><br>
-            Köszönöm!
-        ]]>
-	</string>
     <string name="purchase">Vásárlás</string>
     <string name="update_thank_you">Kérjük frissítse a Simple Thank You alkalmazást a legújabb verzióra</string>
     <string name="before_asking_question_read_faq">Mielőtt kérdezne, ellenőrizze az alkalmazás beállításait, és először olvassa el a Gyakran Ismételt Kérdéseket. Talán ott van a megoldás.</string>
     <string name="read_it">Olvassa el</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-		<![CDATA[
-            Szia!<br><br>
-            csak tájékoztatni szeretnélek, hogy megjelent egy új alkalmazás:<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            A címre kattintva lehet letölteni.<br><br>
-            Köszönöm
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

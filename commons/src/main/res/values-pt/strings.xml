@@ -307,9 +307,6 @@
     <string name="alarm">Alarme</string>
     <string name="no_reminder">Sem lembrete</string>
     <string name="at_start">No início</string>
-    <string name="system_sounds">Sons do sistema</string>
-    <string name="your_sounds">Meus sons</string>
-    <string name="add_new_sound">Adicionar um novo som</string>
     <string name="no_sound">Sem som</string>
 
     <!-- Settings -->
@@ -399,28 +396,12 @@
     <string name="copyright">V %1$s\nCopyright © Eagle Tools %2$d</string>
     <string name="app_version">Versão da aplicação: %s</string>
     <string name="device_os">SO do dispositivo: %s</string>
-    <string name="donate_please">
-        <![CDATA[
-            Olá,<br><br>
-            espero que esteja a gostar desta aplicação. Não possui anúncios e é open source. Se quiser ajudar no desenvolvimento, pode comprar a aplicação <a>Simple Thank You</a> que também impedirá que este diálogo seja novamente mostrado.<br><br>
-            Obrigado!
-        ]]>
-    </string>
     <string name="purchase">Comprar</string>
     <string name="update_thank_you">Por favor atualize a aplicação Simple Thank You para a versão mais recente</string>
     <string name="before_asking_question_read_faq">Antes de colocar uma questão, verifique as FAQ. Pode ser que a solução esteja lá.</string>
     <string name="read_it">Ler</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            Olá.<br><br>
-            Para que saibas, foi disponibilizada recentemente uma nova aplicação:<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            Podes descarregar a nova aplicação carregando no título.<br><br>
-            Obrigado
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

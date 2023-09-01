@@ -5,8 +5,6 @@
     <string name="edit">Upravit</string>
     <string name="open_camera">Spustit fotoaparát</string>
     <string name="hidden">(skryto)</string>
-    <string name="excluded">(vyloučeno)</string>
-    <string name="pin_folder">Připnout složku</string>
     <string name="unpin_folder">Odepnout složku</string>
     <string name="pin_to_the_top">Připnout nahoru</string>
     <string name="show_all">Zobrazit obsah všech složek</string>
@@ -22,8 +20,6 @@
     <string name="use_default">Použít výchozí</string>
     <string name="volume">Hlasitost</string>
     <string name="brightness">Jas</string>
-    <string name="lock_orientation">Uzamknout orientaci</string>
-    <string name="unlock_orientation">Odemknout orientaci</string>
     <string name="change_orientation">Změnit orientaci</string>
     <string name="force_portrait">Vynutit orientaci na výšku</string>
     <string name="force_landscape">Vynutit orientaci na šířku</string>
@@ -31,8 +27,6 @@
     <string name="fix_date_taken">Opravit datum vytvoření</string>
     <string name="fixing">Opravuji…</string>
     <string name="dates_fixed_successfully">Datumy byly úspěšně opraveny</string>
-    <string name="share_resized">Share a resized version</string>
-    <string name="upgraded_from_free">Hey,\n\nseems like you upgraded from the old free app. You can now uninstall the old version, which has an \'Upgrade to Pro\' button at the top of the app settings.\n\nYou will only have the Recycle bin items deleted, favorite items unmarked and you will also have to reset your app settings.\n\nThanks!</string>
 
     <!-- Filter -->
     <string name="filter_media">Filtr médií</string>
@@ -52,8 +46,6 @@
     <string name="exclude_folder_description">Tato funkce vyloučí výběr včetně podsložek jen z Jednoduché galerie. V nastavení můžete spravovat vyloučené složky.</string>
     <string name="exclude_folder_parent">Chcete vyloučit rodičovskou složku?</string>
     <string name="excluded_activity_placeholder">Vyloučené složky budou spolu s podsložkami vyloučeny jen z Jednoduché Galerie, ostatní aplikace je nadále uvidí.\n\nPokud je chcete skrýt i před ostatními aplikacemi, použijte funkci Skrýt.</string>
-    <string name="remove_all">Odstranit všechny</string>
-    <string name="remove_all_description">Odstranit všechny složky ze seznamu vyloučených? Tato operace neodstraní obsah složek.</string>
     <string name="hidden_folders">Skryté složky</string>
     <string name="manage_hidden_folders">Spravovat skryté složky</string>
     <string name="hidden_folders_placeholder">Zdá se, že nemáte žádné složky skryté pomocí souboru \".nomedia\".</string>
@@ -65,7 +57,6 @@
     <string name="included_activity_placeholder">Pokud máte nějaké složky obsahující média, ale nebyly aplikací nalezeny, můžete je zde přidat ručně.</string>
 
     <!-- Resizing -->
-    <string name="resize">Změnit velikost</string>
     <string name="resize_and_save">Změnit velikost a uložit</string>
     <string name="width">Šířka</string>
     <string name="height">Výška</string>
@@ -79,28 +70,17 @@
     <string name="path">Cesta</string>
     <string name="invalid_image_path">Neplatná cesta</string>
     <string name="image_editing_failed">Úprava souboru selhala</string>
-    <string name="edit_image_with">Upravit soubor pomocí:</string>
-    <string name="no_editor_found">Nebyl nalezen žádný editor</string>
     <string name="unknown_file_location">Neznámé umístění souboru</string>
-    <string name="error_saving_file">Nepodařilo se přepsat zdrojový soubor</string>
     <string name="rotate_left">Otočit doleva</string>
     <string name="rotate_right">Otočit doprava</string>
     <string name="rotate_one_eighty">Otočit o 180°</string>
-    <string name="flip">Překlopit</string>
-    <string name="flip_horizontally">Překlopit vodorovně</string>
-    <string name="flip_vertically">Překlopit svisle</string>
     <string name="free_aspect_ratio">Volný</string>                 <!-- available as an option: 1:1, 4:3, 16:9, free -->
     <string name="other_aspect_ratio">Other</string>                <!-- available as an option: 1:1, 4:3, 16:9, free, other -->
 
     <!-- Set wallpaper -->
     <string name="simple_wallpaper">Jednoduchá tapeta</string>
-    <string name="set_as_wallpaper">Nastavit jako tapetu</string>
-    <string name="set_as_wallpaper_failed">Nastavení tapety selhalo</string>
-    <string name="set_as_wallpaper_with">Nastavit jako tapetu pomocí:</string>
     <string name="setting_wallpaper">Nastavuje se tapeta&#8230;</string>
     <string name="wallpaper_set_successfully">Tapeta byla úspěšně změněna</string>
-    <string name="portrait_aspect_ratio">Poměr stran na výšku</string>
-    <string name="landscape_aspect_ratio">Poměr stran na šířku</string>
     <string name="home_screen">Domovská obrazovka</string>
     <string name="lock_screen">Zamykací obrazovka</string>
     <string name="home_and_lock_screen">Domovská a zamykací obrazovka</string>
@@ -108,7 +88,6 @@
     <!-- Slideshow -->
     <string name="slideshow">Prezentace</string>
     <string name="interval">Interval (sekundy):</string>
-    <string name="include_photos">Zahrnout fotografie</string>
     <string name="include_videos">Zahrnout videa</string>
     <string name="include_gifs">Zahrnout GIFy</string>
     <string name="random_order">Náhodné pořadí</string>
@@ -117,7 +96,6 @@
     <string name="loop_slideshow">Smyčková prezentace</string>
     <string name="slideshow_ended">Prezentace skončila</string>
     <string name="no_media_for_slideshow">Nebyla nalezena žádná média pro prezentaci</string>
-    <string name="use_crossfade_animation">Use crossfade animations</string>
 
     <!-- View types -->
     <string name="change_view_type">Změnit typ zobrazení</string>
@@ -161,7 +139,6 @@
     <string name="show_media_count">Zobrazit počet médií ve složce na hlavní obrazovce</string>
     <string name="show_extended_details">Zobrazit rozšířené vlastnosti přes celoobrazovkové média</string>
     <string name="manage_extended_details">Spravovat rozšířené vlastnosti</string>
-    <string name="one_finger_zoom">Povolit přibližování jedním prstem v celoobrazovkovém režimu</string>
     <string name="allow_instant_change">Povolit okamžité přepínání médií kliknutím na okraj obrazovky</string>
     <string name="allow_deep_zooming_images">Povolit hluboké přibližování obrázků</string>
     <string name="hide_extended_details">Skrýt rozšířené vlastnosti pokud je skrytá stavová lišta</string>
@@ -223,60 +200,6 @@
 
     <!-- Strings displayed only on Google Playstore. Optional, but good to have -->
     <!-- Short description has to have less than 80 chars -->
-    <string name="app_short_description">Offline gallery without ads. Organize, edit, recover and protect photos &amp; videos</string>
-    <string name="app_long_description">
-        Best Gallery Pro is a highly customizable offline gallery. Organize &amp; edit your photos, recover deleted files with the recycle bin, protect &amp; hide files and view a huge variety of different photo &amp; video formats including RAW, SVG and much more.
-
-        The app contains no ads and unnecessary permissions. As the app doesn’t require internet access either, your privacy is protected.
-
-        -------------------------------------------------
-        <b>SIMPLE GALLERY PRO – FEATURES</b>
-        -------------------------------------------------
-
-        • Offline gallery with no ads or popups
-        • Simple gallery photo editor – crop, rotate, resize, draw, filters &amp; more
-        • No internet access needed, giving you more privacy and security
-        • No unnecessary permissions required
-        • Quickly search images, videos &amp; files
-        • Open &amp; view many different photo and video types (RAW, SVG, panoramic etc)
-        • A variety of intuitive gestures to easily edit &amp; organize files
-        • Lots of ways to filter, group &amp; sort files
-        • Customize the appearance of Best Gallery Pro
-        • Available in 32 languages
-        • Mark files as favorites for quick access
-        • Protect your photos &amp; videos with a pattern, pin or fingerprint
-        • Use pin, pattern &amp; fingerprint to protect the app launch or specific functions too
-        • Recover deleted photos &amp; videos from the recycle bin
-        • Toggle visibility of files to hide photos &amp; videos
-        • Create a customizable slideshow of your files
-        • View detailed information of your files (resolution, EXIF values etc)
-        • Best Gallery Pro is open source
-        … and much much more!
-
-        <b>PHOTO GALLERY EDITOR</b>
-        Best Gallery Pro makes it easy to edit your pictures on the fly. Crop, flip, rotate and resize your pictures. If you’re feeling a little more creative you can add filters and draw on your pictures!
-
-        <b>SUPPORT FOR MANY FILE TYPES</b>
-        Unlike some other gallery viewers &amp; photo organizers, Best Gallery Pro supports a huge range of different file types including JPEG, PNG, MP4, MKV, RAW, SVG, Panoramic photos, Panoramic videos and many more.
-
-        <b>HIGHLY CUSTOMIZABLE GALLERY MANAGER</b>
-        From the UI to the function buttons on the bottom toolbar, Best Gallery Pro is highly customizable and works the way you want it to. No other gallery manager has this kind of flexibility! Thanks to being open source, we’re also available in 32 languages!
-
-        <b>RECOVER DELETED PHOTOS &amp; VIDEOS</b>
-        Accidentally deleted a precious photo or video? Don’t worry! Best Gallery Pro features a handy recycle bin where you can recover deleted photos &amp; videos easily.
-
-        <b>PROTECT &amp; HIDE PHOTOS, VIDEOS &amp; FILES</b>
-        Using pin, pattern or your device’s fingerprint scanner you can protect and hide photos, videos &amp; entire albums. You can protect the app itself or place locks on specific functions of the app. For example, you can’t delete a file without a fingerprint scan, helping to protect your files from accidental deletion.
-
-        <b>Check out the full suite of Simple Tools here:</b>
-        https://www.google.com
-
-        <b>Facebook:</b>
-        https://www.facebook.com/roy
-
-        <b>Reddit:</b>
-        https://www.reddit.com/r/roy
-    </string>
 
     <!--
         Haven't found some strings? There's more at

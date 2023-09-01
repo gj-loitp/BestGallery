@@ -5,8 +5,6 @@
     <string name="edit">تعديل</string>
     <string name="open_camera">فتح الكاميرا</string>
     <string name="hidden">(مخفية)</string>
-    <string name="excluded">(excluded)</string>
-    <string name="pin_folder">تثبيت المجلد</string>
     <string name="unpin_folder">ازالة تثبيت الملف</string>
     <string name="pin_to_the_top">Pin to the top</string>
     <string name="show_all">عرض كل محتوى المجلدات</string>
@@ -22,8 +20,6 @@
     <string name="use_default">استخدم الافتراضي</string>
     <string name="volume">الصوت</string>
     <string name="brightness">السطوع</string>
-    <string name="lock_orientation">غلق الاتجاه</string>
-    <string name="unlock_orientation">فتح الاتجاه</string>
     <string name="change_orientation">Change orientation</string>
     <string name="force_portrait">Force portrait</string>
     <string name="force_landscape">Force landscape</string>
@@ -31,8 +27,6 @@
     <string name="fix_date_taken">Fix Date Taken value</string>
     <string name="fixing">Fixing…</string>
     <string name="dates_fixed_successfully">Dates fixed successfully</string>
-    <string name="share_resized">Share a resized version</string>
-    <string name="upgraded_from_free">Hey,\n\nseems like you upgraded from the old free app. You can now uninstall the old version, which has an \'Upgrade to Pro\' button at the top of the app settings.\n\nYou will only have the Recycle bin items deleted, favorite items unmarked and you will also have to reset your app settings.\n\nThanks!</string>
 
     <!-- Filter -->
     <string name="filter_media">فلتر الميديا</string>
@@ -54,8 +48,6 @@
     <string name="excluded_activity_placeholder">باستثناء المجلدات سيجعلها جنبا إلى جنب مع المجلدات الفرعية مخبأة فقط في الاستوديو ، فإنها لا تزال مرئية في تطبيقات أخرى.\n
   \n
   إذا كنت تريد إخفاءها من تطبيقات أخرى أيضا، استخدم ميزة الإخفاء</string>
-    <string name="remove_all">حذف الكل</string>
-    <string name="remove_all_description">هل تريد إزالة جميع المجلدات من القائمة المستبعدة؟ لن يؤدي هذا إلى حذف المجلدات</string>
     <string name="hidden_folders">المجلدات المخفية</string>
     <string name="manage_hidden_folders">إدارة المجلدات المخفية</string>
     <string name="hidden_folders_placeholder">يبدو أنك لا تملك أي مجلد مخفي بملف \".nomedia\".</string>
@@ -69,7 +61,6 @@
   لن تؤدي إضافة بعض العناصر هنا إلى استبعاد أي مجلد آخر.</string>
 
     <!-- Resizing -->
-    <string name="resize">تحجيم</string>
     <string name="resize_and_save">تغيير حجم التحديد وحفظ</string>
     <string name="width">العرض</string>
     <string name="height">الارتفاع</string>
@@ -83,28 +74,17 @@
     <string name="path">المسار</string>
     <string name="invalid_image_path">مسار صورة غير صحيح</string>
     <string name="image_editing_failed">فشل تعديل الصورة</string>
-    <string name="edit_image_with">تعديل الصورة باستخدام:</string>
-    <string name="no_editor_found">لم يتم العثور على أي محرر للصور</string>
     <string name="unknown_file_location">موقع ملف غير معروف</string>
-    <string name="error_saving_file">تعذر الكتابة فوق الملف المصدر</string>
     <string name="rotate_left">تدوير لليسار</string>
     <string name="rotate_right">تدوير لليمين</string>
     <string name="rotate_one_eighty">تدوير 180º</string>
-    <string name="flip">قلب</string>
-    <string name="flip_horizontally">قلب أفقيا</string>
-    <string name="flip_vertically">قلب عموديا</string>
     <string name="free_aspect_ratio">Free</string>                  <!-- available as an option: 1:1, 4:3, 16:9, free -->
     <string name="other_aspect_ratio">Other</string>                <!-- available as an option: 1:1, 4:3, 16:9, free, other -->
 
     <!-- Set wallpaper -->
     <string name="simple_wallpaper">خلفية بسيطة</string>
-    <string name="set_as_wallpaper">تعيين كخلفية الشاشة</string>
-    <string name="set_as_wallpaper_failed">فشل الإعداد كخلفية</string>
-    <string name="set_as_wallpaper_with">تعيين كخلفية بواسطة:</string>
     <string name="setting_wallpaper">… جار تعيين الخلفية ...</string>
     <string name="wallpaper_set_successfully">تم تعيبن الخلفية بنجاح</string>
-    <string name="portrait_aspect_ratio">صورة نسبة العرض إلى الارتفاع</string>
-    <string name="landscape_aspect_ratio">نسبة العرض إلى الارتفاع في المناظر الطبيعية</string>
     <string name="home_screen">الشاشة الرئيسية</string>
     <string name="lock_screen">شاشة القفل</string>
     <string name="home_and_lock_screen">الرئيسية وشاشة القفل</string>
@@ -112,7 +92,6 @@
     <!-- Slideshow -->
     <string name="slideshow">عرض الشرائح</string>
     <string name="interval">الفاصل الزمني (بالثواني):</string>
-    <string name="include_photos">تضمين الصور</string>
     <string name="include_videos">تضمين الفديو</string>
     <string name="include_gifs">تضمين GIF</string>
     <string name="random_order">ترتيب عشوائي</string>
@@ -121,7 +100,6 @@
     <string name="loop_slideshow">حلقة عرض الشرائح</string>
     <string name="slideshow_ended">انتهى عرض الشرائح</string>
     <string name="no_media_for_slideshow">لم يتم العثور على وسائط لعرض الشرائح</string>
-    <string name="use_crossfade_animation">Use crossfade animations</string>
 
     <!-- View types -->
     <string name="change_view_type">تغيير طريقة العرض</string>
@@ -165,7 +143,6 @@
     <string name="show_media_count">إظهار عدد لوسائط المجلد على طريقة العرض الرئيسية</string>
     <string name="show_extended_details">عرض تفاصيل موسعة على وسائط ملء الشاشة</string>
     <string name="manage_extended_details">إدارة المجلدات المستبعدة</string>
-    <string name="one_finger_zoom">السماح بتكبير الوسائط بأصبع واحد في وضع ملء الشاشة</string>
     <string name="allow_instant_change">السماح بتغيير الوسائط على الفور من خلال النقر على جوانب الشاشة</string>
     <string name="allow_deep_zooming_images">Allow deep zooming images</string>
     <string name="hide_extended_details">إخفاء التفاصيل الموسعة عند إخفاء شريط الحالة</string>
@@ -225,60 +202,6 @@
 
     <!-- Strings displayed only on Google Playstore. Optional, but good to have -->
     <!-- Short description has to have less than 80 chars -->
-    <string name="app_short_description">Offline gallery without ads. Organize, edit, recover and protect photos &amp; videos</string>
-    <string name="app_long_description">
-        Best Gallery Pro is a highly customizable offline gallery. Organize &amp; edit your photos, recover deleted files with the recycle bin, protect &amp; hide files and view a huge variety of different photo &amp; video formats including RAW, SVG and much more.
-
-        The app contains no ads and unnecessary permissions. As the app doesn’t require internet access either, your privacy is protected.
-
-        -------------------------------------------------
-        <b>SIMPLE GALLERY PRO – FEATURES</b>
-        -------------------------------------------------
-
-        • Offline gallery with no ads or popups
-        • Simple gallery photo editor – crop, rotate, resize, draw, filters &amp; more
-        • No internet access needed, giving you more privacy and security
-        • No unnecessary permissions required
-        • Quickly search images, videos &amp; files
-        • Open &amp; view many different photo and video types (RAW, SVG, panoramic etc)
-        • A variety of intuitive gestures to easily edit &amp; organize files
-        • Lots of ways to filter, group &amp; sort files
-        • Customize the appearance of Best Gallery Pro
-        • Available in 32 languages
-        • Mark files as favorites for quick access
-        • Protect your photos &amp; videos with a pattern, pin or fingerprint
-        • Use pin, pattern &amp; fingerprint to protect the app launch or specific functions too
-        • Recover deleted photos &amp; videos from the recycle bin
-        • Toggle visibility of files to hide photos &amp; videos
-        • Create a customizable slideshow of your files
-        • View detailed information of your files (resolution, EXIF values etc)
-        • Best Gallery Pro is open source
-        … and much much more!
-
-        <b>PHOTO GALLERY EDITOR</b>
-        Best Gallery Pro makes it easy to edit your pictures on the fly. Crop, flip, rotate and resize your pictures. If you’re feeling a little more creative you can add filters and draw on your pictures!
-
-        <b>SUPPORT FOR MANY FILE TYPES</b>
-        Unlike some other gallery viewers &amp; photo organizers, Best Gallery Pro supports a huge range of different file types including JPEG, PNG, MP4, MKV, RAW, SVG, Panoramic photos, Panoramic videos and many more.
-
-        <b>HIGHLY CUSTOMIZABLE GALLERY MANAGER</b>
-        From the UI to the function buttons on the bottom toolbar, Best Gallery Pro is highly customizable and works the way you want it to. No other gallery manager has this kind of flexibility! Thanks to being open source, we’re also available in 32 languages!
-
-        <b>RECOVER DELETED PHOTOS &amp; VIDEOS</b>
-        Accidentally deleted a precious photo or video? Don’t worry! Best Gallery Pro features a handy recycle bin where you can recover deleted photos &amp; videos easily.
-
-        <b>PROTECT &amp; HIDE PHOTOS, VIDEOS &amp; FILES</b>
-        Using pin, pattern or your device’s fingerprint scanner you can protect and hide photos, videos &amp; entire albums. You can protect the app itself or place locks on specific functions of the app. For example, you can’t delete a file without a fingerprint scan, helping to protect your files from accidental deletion.
-
-        <b>Check out the full suite of Simple Tools here:</b>
-        https://www.google.com
-
-        <b>Facebook:</b>
-        https://www.facebook.com/roy
-
-        <b>Reddit:</b>
-        https://www.reddit.com/r/roy
-    </string>
 
     <!--
         Haven't found some strings? There's more at

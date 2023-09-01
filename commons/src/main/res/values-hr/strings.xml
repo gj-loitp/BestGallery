@@ -328,9 +328,6 @@
     <string name="alarm">Alarm</string>
     <string name="no_reminder">Nema podsjetnika</string>
     <string name="at_start">Na početku</string>
-    <string name="system_sounds">Zvukovi sustava</string>
-    <string name="your_sounds">Vaši zvukovi</string>
-    <string name="add_new_sound">Dodaj novi zvuk</string>
     <string name="no_sound">Nema zvuka</string>
 
     <!-- Settings -->
@@ -420,28 +417,12 @@
     <string name="copyright">v %1$s\nCopyright © Eagle Tools %2$d</string>
     <string name="app_version">Verzija aplikacije: %s</string>
     <string name="device_os">OS uređaja: %s</string>
-    <string name="donate_please">
-        <![CDATA[
-            Pozdrav,<br><br>
-            nadam se da uživate u aplikaciji. Ne sadrži reklame, stoga nas podržite njen razvoj kupovinom <a>Simple Thank You</a> aplikacije, što će spriječiti da se ovaj prozor ponovno pojavljuje.<br><br>
-            Hvala Vam!
-        ]]>
-    </string>
     <string name="purchase">Kupi</string>
     <string name="update_thank_you">Molim ažurirajte Jednostavno hvala na najnoviju verziju</string>
     <string name="before_asking_question_read_faq">Before you ask a question, please check the app settings and read the Frequently Asked Questions first. Maybe the solution is there.</string>
     <string name="read_it">Pročitajte</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            Hej,<br><br>
-            samo da te obavijestim da je nova aplikacija nedavno objavljena:<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            Možeš je preuzeti pritiskom na naslov.<br><br>
-            Hvala
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

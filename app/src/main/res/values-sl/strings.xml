@@ -5,8 +5,6 @@
     <string name="edit">Uredi</string>
     <string name="open_camera">Zaženi fotoaparat</string>
     <string name="hidden">(skrito)</string>
-    <string name="excluded">(izključeno)</string>
-    <string name="pin_folder">Pripni mapo</string>
     <string name="unpin_folder">Odpni mapo</string>
     <string name="pin_to_the_top">Pripni na vrh</string>
     <string name="show_all">Prikaži vso vsebino mape</string>
@@ -22,8 +20,6 @@
     <string name="use_default">Uporabi privzeto</string>
     <string name="volume">Glasnost</string>
     <string name="brightness">Svetlost</string>
-    <string name="lock_orientation">Zakleni usmerjenost</string>
-    <string name="unlock_orientation">Odkleni usmerjenost</string>
     <string name="change_orientation">Spremeni usmerjenost</string>
     <string name="force_portrait">Vsili pokončen format</string>
     <string name="force_landscape">Vsili ležeč format</string>
@@ -31,8 +27,6 @@
     <string name="fix_date_taken">Popravi datum posnetka</string>
     <string name="fixing">Popravljam…</string>
     <string name="dates_fixed_successfully">Datumi uspešno popravljeni</string>
-    <string name="share_resized">Deli spremenjeno verzijo</string>
-    <string name="upgraded_from_free">Hey,\n\nseems like you upgraded from the old free app. You can now uninstall the old version, which has an \'Upgrade to Pro\' button at the top of the app settings.\n\nYou will only have the Recycle bin items deleted, favorite items unmarked and you will also have to reset your app settings.\n\nThanks!</string>
 
     <!-- Filter -->
     <string name="filter_media">Filtriranje datotek</string>
@@ -52,8 +46,6 @@
     <string name="exclude_folder_description">Izbira bo skupaj s podmapami izključena zgolj iz te Galerije. Izključene mape lahko urejate v Nastavitvah.</string>
     <string name="exclude_folder_parent">Namesto tega izključim nadredno mapo?</string>
     <string name="excluded_activity_placeholder">Izključevanje map jih bo skupaj s podmapami skrilo zgolj v tej Galeriji, v ostalih aplikacijah bodo normalno vidne.\n\nČe jih želite skriti tudi v drugih aplikacijah, uporabite funkcijo Skrij.</string>
-    <string name="remove_all">Odstrani vse</string>
-    <string name="remove_all_description">Odstranim vse mape iz seznama izključenih? Mape ne bodo izbrisane.</string>
     <string name="hidden_folders">Skrite mape</string>
     <string name="manage_hidden_folders">Urejaj skrite mape</string>
     <string name="hidden_folders_placeholder">Kot kaže skrite mape z \".nomedia\" datoteko ne obstajajo.</string>
@@ -65,7 +57,6 @@
     <string name="included_activity_placeholder">Če imate mape, ki vsebujejo medijske datoteke, ki jih aplikacija ni prepoznala, jih lahko ročno dodate tukaj.\n\nDodajanje novih elementov ne bo izključilo drugih.</string>
 
     <!-- Resizing -->
-    <string name="resize">Spremeni velikost</string>
     <string name="resize_and_save">Spremeni velikost izbora in shrani</string>
     <string name="width">Širina</string>
     <string name="height">Višina</string>
@@ -79,28 +70,17 @@
     <string name="path">Pot</string>
     <string name="invalid_image_path">Napačna pot</string>
     <string name="image_editing_failed">Urejanje slike ni uspelo</string>
-    <string name="edit_image_with">Uredi sliko z:</string>
-    <string name="no_editor_found">Ne najdem urejevalnika slik</string>
     <string name="unknown_file_location">Neznana lokacija datoteke</string>
-    <string name="error_saving_file">Ne morem prepisati izvorne datoteke</string>
     <string name="rotate_left">Zavrti levo</string>
     <string name="rotate_right">Zavrti desno</string>
     <string name="rotate_one_eighty">Zavrti za 180º</string>
-    <string name="flip">Zrcaljenje</string>
-    <string name="flip_horizontally">Zrcali horizontalno</string>
-    <string name="flip_vertically">Zrcali vertikalno</string>
     <string name="free_aspect_ratio">Prosto</string>                <!-- available as an option: 1:1, 4:3, 16:9, free -->
     <string name="other_aspect_ratio">Drugo</string>                <!-- available as an option: 1:1, 4:3, 16:9, free, other -->
 
     <!-- Set wallpaper -->
     <string name="simple_wallpaper">Simple ozadje</string>
-    <string name="set_as_wallpaper">Nastavi kot ozadje</string>
-    <string name="set_as_wallpaper_failed">Nastavljanje ozadja ni uspelo</string>
-    <string name="set_as_wallpaper_with">Nastavi kot ozadje z:</string>
     <string name="setting_wallpaper">Nastavljam ozadje&#8230;</string>
     <string name="wallpaper_set_successfully">Ozadje uspešno nastavljeno</string>
-    <string name="portrait_aspect_ratio">Pokončno razmerje stranic</string>
-    <string name="landscape_aspect_ratio">Ležeče razmerje stranic</string>
     <string name="home_screen">Domači zaslon</string>
     <string name="lock_screen">Zaklenjeni zaslon</string>
     <string name="home_and_lock_screen">Domači in zaklenjeni zaslon</string>
@@ -108,7 +88,6 @@
     <!-- Slideshow -->
     <string name="slideshow">Diaprojekcija</string>
     <string name="interval">Interval (sekund):</string>
-    <string name="include_photos">Vključi fotografije</string>
     <string name="include_videos">Vključi videoposnetke</string>
     <string name="include_gifs">Vključi GIFe</string>
     <string name="random_order">Naključni vrstni red</string>
@@ -117,7 +96,6 @@
     <string name="loop_slideshow">Ponavljaj diaprojekcijo</string>
     <string name="slideshow_ended">Diaprojekcija se je zaključila</string>
     <string name="no_media_for_slideshow">Ne najdem datotek za diaprojekcijo</string>
-    <string name="use_crossfade_animation">Uporabi križanje animacij</string>
 
     <!-- View types -->
     <string name="change_view_type">Spremeni tip pogleda</string>
@@ -161,7 +139,6 @@
     <string name="show_media_count">Pokaži število elementov v glavnem pogledu</string>
     <string name="show_extended_details">Prikaži razširjene podrobnosti nad celozaslonskim prikazom</string>
     <string name="manage_extended_details">Urejaj razširjene podrobnosti</string>
-    <string name="one_finger_zoom">Dovoli enoprstno povečavo v celozaslonskem načinu</string>
     <string name="allow_instant_change">Dovoli takojšnje spremembe medija s klikanjem na robove zaslona</string>
     <string name="allow_deep_zooming_images">Dovoli globoko povečavo slik</string>
     <string name="hide_extended_details">Skrij razširjene podrobnosti, ko je statusna vrstica skrita</string>
@@ -223,60 +200,6 @@
 
     <!-- Strings displayed only on Google Playstore. Optional, but good to have -->
     <!-- Short description has to have less than 80 chars -->
-    <string name="app_short_description">Offline gallery without ads. Organize, edit, recover and protect photos &amp; videos</string>
-    <string name="app_long_description">
-        Best Gallery Pro is a highly customizable offline gallery. Organize &amp; edit your photos, recover deleted files with the recycle bin, protect &amp; hide files and view a huge variety of different photo &amp; video formats including RAW, SVG and much more.
-
-        The app contains no ads and unnecessary permissions. As the app doesn’t require internet access either, your privacy is protected.
-
-        -------------------------------------------------
-        <b>SIMPLE GALLERY PRO – FEATURES</b>
-        -------------------------------------------------
-
-        • Offline gallery with no ads or popups
-        • Simple gallery photo editor – crop, rotate, resize, draw, filters &amp; more
-        • No internet access needed, giving you more privacy and security
-        • No unnecessary permissions required
-        • Quickly search images, videos &amp; files
-        • Open &amp; view many different photo and video types (RAW, SVG, panoramic etc)
-        • A variety of intuitive gestures to easily edit &amp; organize files
-        • Lots of ways to filter, group &amp; sort files
-        • Customize the appearance of Best Gallery Pro
-        • Available in 32 languages
-        • Mark files as favorites for quick access
-        • Protect your photos &amp; videos with a pattern, pin or fingerprint
-        • Use pin, pattern &amp; fingerprint to protect the app launch or specific functions too
-        • Recover deleted photos &amp; videos from the recycle bin
-        • Toggle visibility of files to hide photos &amp; videos
-        • Create a customizable slideshow of your files
-        • View detailed information of your files (resolution, EXIF values etc)
-        • Best Gallery Pro is open source
-        … and much much more!
-
-        <b>PHOTO GALLERY EDITOR</b>
-        Best Gallery Pro makes it easy to edit your pictures on the fly. Crop, flip, rotate and resize your pictures. If you’re feeling a little more creative you can add filters and draw on your pictures!
-
-        <b>SUPPORT FOR MANY FILE TYPES</b>
-        Unlike some other gallery viewers &amp; photo organizers, Best Gallery Pro supports a huge range of different file types including JPEG, PNG, MP4, MKV, RAW, SVG, Panoramic photos, Panoramic videos and many more.
-
-        <b>HIGHLY CUSTOMIZABLE GALLERY MANAGER</b>
-        From the UI to the function buttons on the bottom toolbar, Best Gallery Pro is highly customizable and works the way you want it to. No other gallery manager has this kind of flexibility! Thanks to being open source, we’re also available in 32 languages!
-
-        <b>RECOVER DELETED PHOTOS &amp; VIDEOS</b>
-        Accidentally deleted a precious photo or video? Don’t worry! Best Gallery Pro features a handy recycle bin where you can recover deleted photos &amp; videos easily.
-
-        <b>PROTECT &amp; HIDE PHOTOS, VIDEOS &amp; FILES</b>
-        Using pin, pattern or your device’s fingerprint scanner you can protect and hide photos, videos &amp; entire albums. You can protect the app itself or place locks on specific functions of the app. For example, you can’t delete a file without a fingerprint scan, helping to protect your files from accidental deletion.
-
-        <b>Check out the full suite of Simple Tools here:</b>
-        https://www.google.com
-
-        <b>Facebook:</b>
-        https://www.facebook.com/roy
-
-        <b>Reddit:</b>
-        https://www.reddit.com/r/roy
-    </string>
 
     <!--
         Haven't found some strings? There's more at

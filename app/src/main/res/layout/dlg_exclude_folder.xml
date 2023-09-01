@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/excludeFolderScrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/excludeFolderHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/activity_margin">
 
         <com.roy.commons.views.MyTextView
-            android:id="@+id/excludeFolderDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/exclude_folder_description"

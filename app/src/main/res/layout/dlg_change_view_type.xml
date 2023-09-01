@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/changeViewTypeDialogScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/changeViewTypeDialogHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -37,9 +35,7 @@
 
         </RadioGroup>
 
-        <include
-            android:id="@+id/groupDirectSubFoldersDivider"
-            layout="@layout/v_divider" />
+        <include layout="@layout/v_divider" />
 
         <com.roy.commons.views.MyAppCompatCheckbox
             android:id="@+id/changeViewTypeDialogGroupDirectSubfolders"

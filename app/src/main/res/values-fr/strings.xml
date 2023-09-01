@@ -5,8 +5,6 @@
     <string name="edit">Modifier</string>
     <string name="open_camera">Ouvrir l\'appareil photo</string>
     <string name="hidden">(caché)</string>
-    <string name="excluded">(exclu)</string>
-    <string name="pin_folder">Épingler le dossier</string>
     <string name="unpin_folder">Désépingler le dossier</string>
     <string name="pin_to_the_top">Épingler en haut</string>
     <string name="show_all">Affichage \"Tous les dossiers\"</string>
@@ -22,8 +20,6 @@
     <string name="use_default">Utiliser par défaut</string>
     <string name="volume">Volume</string>
     <string name="brightness">Luminosité</string>
-    <string name="lock_orientation">Verrouiller la rotation</string>
-    <string name="unlock_orientation">Déverrouiller la rotation</string>
     <string name="change_orientation">Orientation</string>
     <string name="force_portrait">Forcer la vue portrait</string>
     <string name="force_landscape">Forcer la vue paysage</string>
@@ -31,8 +27,6 @@
     <string name="fix_date_taken">Corriger les dates de prise de vue</string>
     <string name="fixing">Correction en cours...</string>
     <string name="dates_fixed_successfully">Dates corrigées</string>
-    <string name="share_resized">Partager une version redimensionnée</string>
-    <string name="upgraded_from_free">Hey,\n\nseems like you upgraded from the old free app. You can now uninstall the old version, which has an \'Upgrade to Pro\' button at the top of the app settings.\n\nYou will only have the Recycle bin items deleted, favorite items unmarked and you will also have to reset your app settings.\n\nThanks!</string>
 
     <!-- Filter -->
     <string name="filter_media">Filtrer les médias</string>
@@ -52,8 +46,6 @@
     <string name="exclude_folder_description">Cela va exclure la sélection ainsi que ses sous-dossiers depuis Best Gallery uniquement. Vous pouvez gérer les dossiers exclus depuis les paramètres.</string>
     <string name="exclude_folder_parent">Exclure un dossier parent ?</string>
     <string name="excluded_activity_placeholder">Exclure des dossiers les cachera ainsi que leurs sous-dossiers uniquement dans Best Gallery, ils seront toujours visibles depuis d\'autres applications.\n\nSi vous voulez aussi les cacher ailleurs, utilisez la fonction \"Cacher\".</string>
-    <string name="remove_all">Tout supprimer</string>
-    <string name="remove_all_description">Supprimer tous les dossiers de la liste des exclusions ? Cela n\'effacera pas les dossiers.</string>
     <string name="hidden_folders">Dossiers cachés</string>
     <string name="manage_hidden_folders">Gérer les dossiers cachés</string>
     <string name="hidden_folders_placeholder">Il semblerait que vous n\'ayez pas de dossier cachés avec un fichier \".nomedia\".</string>
@@ -65,7 +57,6 @@
     <string name="included_activity_placeholder">Si vous avez des dossiers contenant des médias qui ne sont pas affichés dans l\'application, vous pouvez les ajouter manuellement ici.\n\nCet ajout n\'exclura aucun autre dossier.</string>
 
     <!-- Resizing -->
-    <string name="resize">Redimensionner</string>
     <string name="resize_and_save">Redimensionner la sélection et enregistrer</string>
     <string name="width">Largeur</string>
     <string name="height">Hauteur</string>
@@ -79,28 +70,17 @@
     <string name="path">Chemin</string>
     <string name="invalid_image_path">Chemin invalide</string>
     <string name="image_editing_failed">Échec de l\'édition de l\'image</string>
-    <string name="edit_image_with">Modifier l\'image avec :</string>
-    <string name="no_editor_found">Aucun éditeur d\'image trouvé</string>
     <string name="unknown_file_location">Emplacement du fichier inconnu</string>
-    <string name="error_saving_file">Impossible de remplacer le fichier source</string>
     <string name="rotate_left">Pivoter à gauche</string>
     <string name="rotate_right">Pivoter à droite</string>
     <string name="rotate_one_eighty">Pivoter à 180º</string>
-    <string name="flip">Retourner</string>
-    <string name="flip_horizontally">Retourner horizontalement</string>
-    <string name="flip_vertically">Retourner verticalement</string>
     <string name="free_aspect_ratio">Libre</string>                   <!-- available as an option: 1:1, 4:3, 16:9, free -->
     <string name="other_aspect_ratio">Autre</string>                  <!-- available as an option: 1:1, 4:3, 16:9, free, other -->
 
     <!-- Set wallpaper -->
     <string name="simple_wallpaper">Fond d\'écran simple</string>
-    <string name="set_as_wallpaper">Définir comme fond d\'écran</string>
-    <string name="set_as_wallpaper_failed">Échec de la définition en tant que fond d\'écran</string>
-    <string name="set_as_wallpaper_with">Définir comme fond d\'écran avec :</string>
     <string name="setting_wallpaper">Définition du fond d\'écran en cours...</string>
     <string name="wallpaper_set_successfully">Fond d\'écran défini</string>
-    <string name="portrait_aspect_ratio">Rapport d\'affichage portrait</string>
-    <string name="landscape_aspect_ratio">Rapport d\'affichage paysage</string>
     <string name="home_screen">Écran d\'accueil</string>
     <string name="lock_screen">Écran de déverrouillage</string>
     <string name="home_and_lock_screen">Écran d\'accueil et écran de déverrouillage</string>
@@ -108,7 +88,6 @@
     <!-- Slideshow -->
     <string name="slideshow">Diaporama</string>
     <string name="interval">Intervalle (secondes) :</string>
-    <string name="include_photos">Inclure les images</string>
     <string name="include_videos">Inclure les vidéos</string>
     <string name="include_gifs">Inclure les GIFs</string>
     <string name="random_order">Ordre aléatoire</string>
@@ -117,7 +96,6 @@
     <string name="loop_slideshow">Diaporama en boucle</string>
     <string name="slideshow_ended">Diaporama terminé</string>
     <string name="no_media_for_slideshow">Aucun média trouvé pour le diaporama</string>
-    <string name="use_crossfade_animation">Utiliser des animations en fondu enchaîné</string>
 
     <!-- View types -->
     <string name="change_view_type">Changer de mode d\'affichage</string>
@@ -161,7 +139,6 @@
     <string name="show_media_count">Afficher le nombre de fichiers dans les dossiers</string>
     <string name="show_extended_details">Afficher en surimpression les informations supplémentaires du média en plein écran</string>
     <string name="manage_extended_details">Gérer les informations supplémentaires</string>
-    <string name="one_finger_zoom">Activer les zoom à un doigt sur les images en plein écran</string>
     <string name="allow_instant_change">Appuyer sur les cotés de l\'écran pour changer instantanément de média</string>
     <string name="allow_deep_zooming_images">Utiliser le zoom maximal des images</string>
     <string name="hide_extended_details">Cacher les informations supplémentaires si la barre d\'état est masquée</string>
@@ -221,60 +198,6 @@
 
     <!-- Strings displayed only on Google Playstore. Optional, but good to have -->
     <!-- Short description has to have less than 80 chars -->
-    <string name="app_short_description">Offline gallery without ads. Organize, edit, recover and protect photos &amp; videos</string>
-    <string name="app_long_description">
-        Best Gallery Pro is a highly customizable offline gallery. Organize &amp; edit your photos, recover deleted files with the recycle bin, protect &amp; hide files and view a huge variety of different photo &amp; video formats including RAW, SVG and much more.
-
-        The app contains no ads and unnecessary permissions. As the app doesn’t require internet access either, your privacy is protected.
-
-        -------------------------------------------------
-        <b>SIMPLE GALLERY PRO – FEATURES</b>
-        -------------------------------------------------
-
-        • Offline gallery with no ads or popups
-        • Simple gallery photo editor – crop, rotate, resize, draw, filters &amp; more
-        • No internet access needed, giving you more privacy and security
-        • No unnecessary permissions required
-        • Quickly search images, videos &amp; files
-        • Open &amp; view many different photo and video types (RAW, SVG, panoramic etc)
-        • A variety of intuitive gestures to easily edit &amp; organize files
-        • Lots of ways to filter, group &amp; sort files
-        • Customize the appearance of Best Gallery Pro
-        • Available in 32 languages
-        • Mark files as favorites for quick access
-        • Protect your photos &amp; videos with a pattern, pin or fingerprint
-        • Use pin, pattern &amp; fingerprint to protect the app launch or specific functions too
-        • Recover deleted photos &amp; videos from the recycle bin
-        • Toggle visibility of files to hide photos &amp; videos
-        • Create a customizable slideshow of your files
-        • View detailed information of your files (resolution, EXIF values etc)
-        • Best Gallery Pro is open source
-        … and much much more!
-
-        <b>PHOTO GALLERY EDITOR</b>
-        Best Gallery Pro makes it easy to edit your pictures on the fly. Crop, flip, rotate and resize your pictures. If you’re feeling a little more creative you can add filters and draw on your pictures!
-
-        <b>SUPPORT FOR MANY FILE TYPES</b>
-        Unlike some other gallery viewers &amp; photo organizers, Best Gallery Pro supports a huge range of different file types including JPEG, PNG, MP4, MKV, RAW, SVG, Panoramic photos, Panoramic videos and many more.
-
-        <b>HIGHLY CUSTOMIZABLE GALLERY MANAGER</b>
-        From the UI to the function buttons on the bottom toolbar, Best Gallery Pro is highly customizable and works the way you want it to. No other gallery manager has this kind of flexibility! Thanks to being open source, we’re also available in 32 languages!
-
-        <b>RECOVER DELETED PHOTOS &amp; VIDEOS</b>
-        Accidentally deleted a precious photo or video? Don’t worry! Best Gallery Pro features a handy recycle bin where you can recover deleted photos &amp; videos easily.
-
-        <b>PROTECT &amp; HIDE PHOTOS, VIDEOS &amp; FILES</b>
-        Using pin, pattern or your device’s fingerprint scanner you can protect and hide photos, videos &amp; entire albums. You can protect the app itself or place locks on specific functions of the app. For example, you can’t delete a file without a fingerprint scan, helping to protect your files from accidental deletion.
-
-        <b>Check out the full suite of Simple Tools here:</b>
-        https://www.google.com
-
-        <b>Facebook:</b>
-        https://www.facebook.com/roy
-
-        <b>Reddit:</b>
-        https://www.reddit.com/r/roy
-      </string>
 
     <!--
         Haven't found some strings? There's more at

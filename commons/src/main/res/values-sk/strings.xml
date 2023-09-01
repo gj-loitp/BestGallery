@@ -329,9 +329,6 @@
     <string name="alarm">Budík</string>
     <string name="no_reminder">Žiadna pripomienka</string>
     <string name="at_start">Na začiatku</string>
-    <string name="system_sounds">Systémové zvuky</string>
-    <string name="your_sounds">Vaše zvuky</string>
-    <string name="add_new_sound">Pridať nový zvuk</string>
     <string name="no_sound">Žiadny zvuk</string>
 
     <!-- Settings -->
@@ -422,28 +419,12 @@
     <string name="copyright">v %1$s\nCopyright © Eagle Tools %2$d</string>
     <string name="app_version">Verzia aplikácie: %s</string>
     <string name="device_os">Operačný systém zariadenia: %s</string>
-    <string name="donate_please">
-        <![CDATA[
-            Zdravím,<br><br>
-            dúfam, že sa vám moja apka páči. Neobsahuje žiadne reklamy, podporte prosím jej vývoj zakúpením aplikácie <a href="https://play.google.com/store/apps/details?id=com.roy.thankyou">Jednoduché ďakujem</a>. Zaručí to aj to, že tento dialóg už neuvidíte.<br><br>
-            Ďakujem!
-        ]]>
-    </string>
     <string name="purchase">Zakúpiť</string>
     <string name="update_thank_you">Prosím aktualizujte Jednoduché Ďakujem na najnovšiu verziu</string>
     <string name="before_asking_question_read_faq">Predtým, ako sa niečo opýtate, si prosím prejdite nastavenia aplikácie a prečítajte Často Kladené Otázky. Možno v nich nájdete svoju odpoveď.</string>
     <string name="read_it">Prečítať</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            Zdravím,<br><br>
-            iba vám oznamujem, že bola nedávno vydaná nová aplikácia:<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            Viete ju stiahnuť kliknutím na názov.<br><br>
-            Vďaka
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

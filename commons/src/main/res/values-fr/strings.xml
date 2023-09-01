@@ -309,9 +309,6 @@
     <string name="alarm">Réveil</string>
     <string name="no_reminder">Aucun rappel</string>
     <string name="at_start">Au démarrage</string>
-    <string name="system_sounds">Sonneries système</string>
-    <string name="your_sounds">Vos sonneries</string>
-    <string name="add_new_sound">Ajouter une nouvelle sonnerie</string>
     <string name="no_sound">Aucune sonnerie</string>
 
     <!-- Settings -->
@@ -401,28 +398,12 @@
     <string name="copyright">v %1$s\nCopyright © Eagle Tools %2$d</string>
     <string name="app_version">Version de l\'application : %s</string>
     <string name="device_os">Système d\'exploitation de l\'appareil : %s</string>
-    <string name="donate_please">
-        <![CDATA[
-            Bonjour,<br><br>
-            Nous espérons que vous appréciez cette application. Elle ne contient aucune publicité, mais vous pouvez soutenir son développement en achetant l\'application <a>Simple Thank You</a>. Cela nous permettra également de ne plus vous afficher cette boite de dialogue.<br><br>
-            Merci !
-        ]]>
-    </string>
     <string name="purchase">Acheter</string>
     <string name="update_thank_you">Veuillez mettre à jour Simple Thank You</string>
     <string name="before_asking_question_read_faq">Before you ask a question, please check the app settings and read the Frequently Asked Questions first. Maybe the solution is there.</string>
     <string name="read_it">Consulter</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            Bonjour,<br><br>
-            Une nouvelle application a été publiée récemment :<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            Vous pouvez la télécharger en appuyant sur le titre.<br><br>
-            Merci
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

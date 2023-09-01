@@ -5,7 +5,6 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/dialogHolder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -15,19 +14,16 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/dialogTabPattern"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/pattern" />
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/dialogTabPin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/pin" />
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/dialogTabFingerPrint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/fingerprint" />

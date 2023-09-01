@@ -307,9 +307,6 @@
     <string name="alarm">Alarm</string>
     <string name="no_reminder">Hatırlatma yok</string>
     <string name="at_start">Başlangıçta</string>
-    <string name="system_sounds">Sistem sesleri</string>
-    <string name="your_sounds">Sesleriniz</string>
-    <string name="add_new_sound">Yeni bir ses ekle</string>
     <string name="no_sound">Ses yok</string>
 
     <!-- Settings -->
@@ -399,28 +396,12 @@
     <string name="copyright">v %1$s\nTelif hakkı © Eagle Tools %2$d</string>
     <string name="app_version">Uygulama sürümü: %s</string>
     <string name="device_os">Cihaz İS: %s</string>
-    <string name="donate_please">
-        <![CDATA[
-            Merhaba,<br><br>
-            umarım uygulamadan memnunsunuzdur. Hiçbir reklam içermiyor, bu yüzden lütfen <a>Basit Teşekkürler</a> uygulamasını satın alarak geliştirmeyi destekleyip, bu pencerenin tekrar görünmesini de önleyin.<br><br>
-            Teşekkürler!
-        ]]>
-    </string>
     <string name="purchase">Satın al</string>
     <string name="update_thank_you">Lütfen Basit Teşekkürler\'i son sürüme güncelleyin</string>
     <string name="before_asking_question_read_faq">Bir soru sormadan önce, lütfen uygulama ayarlarını kontrol edin ve önce Sık Sorulan Sorular bölümünü okuyun. Belki çözüm oradadır.</string>
     <string name="read_it">Oku</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            Selam,<br><br>
-            kısa bir süre önce yeni uygulamamın yayınlandığını bilmenizi istiyorum:<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            Başlığa basarak indirebilirsiniz.<br><br>
-            Teşekkürler
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

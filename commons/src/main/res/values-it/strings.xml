@@ -307,9 +307,6 @@
     <string name="alarm">Sveglia</string>
     <string name="no_reminder">Nessun promemoria</string>
     <string name="at_start">All\'inizio</string>
-    <string name="system_sounds">Suoni di sistema</string>
-    <string name="your_sounds">I propri suoni</string>
-    <string name="add_new_sound">Aggiungi un nuovo suono</string>
     <string name="no_sound">Nessun suono</string>
 
     <!-- Settings -->
@@ -399,28 +396,12 @@
     <string name="copyright">v %1$s\nCopyright © Eagle Tools %2$d</string>
     <string name="app_version">Versione app: %s</string>
     <string name="device_os">SO dispositivo: %s</string>
-    <string name="donate_please">
-        <![CDATA[
-            Ciao,<br><br>
-            spero che tu sia contento dell\'app. Non contiene pubblicità, supporta lo sviluppo acquistando l\'app <a>Semplice Ringraziamento</a>. Inoltre questa finestra non verrà più mostrata.<br><br>
-            Grazie!
-        ]]>
-    </string>
     <string name="purchase">Acquista</string>
     <string name="update_thank_you">Aggiornare Semplice Ringraziamento all\'ultima versione</string>
     <string name="before_asking_question_read_faq">Prima di fare una domanda, controlla le impostazioni dell\'app e le domande frequenti. Magari si trova la soluzione.</string>
     <string name="read_it">Leggi</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            Ehi,<br><br>
-	    è uscita una nuova app di recente:<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-	    Puoi scaricarla toccando il titolo.
-            Grazie
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[

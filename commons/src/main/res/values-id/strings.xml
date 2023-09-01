@@ -285,9 +285,6 @@
     <string name="alarm">Alarm</string>
     <string name="no_reminder">Tidak ada pengingat</string>
     <string name="at_start">Waktu mulai</string>
-    <string name="system_sounds">Suara sistem</string>
-    <string name="your_sounds">Suara kustom</string>
-    <string name="add_new_sound">Tambah suara baru</string>
     <string name="no_sound">Tanpa suara</string>
 
     <!-- Settings -->
@@ -376,28 +373,12 @@
     <string name="copyright">v %1$s\nHak cipta © Eagle Tools %2$d</string>
     <string name="app_version">Versi aplikasi: %s</string>
     <string name="device_os">OS Perangkat: %s</string>
-    <string name="donate_please">
-        <![CDATA[
-            Halo,<br><br>
-            semoga Anda menyukai aplikasi ini. Aplikasi ini tidak berisi iklan, harap dukung pengembangan dengan membeli aplikasi <a>Simple Thank You</a>, juga untuk mencegah dialog ini muncul kembali.<br><br>
-            Terima kasih!
-        ]]>
-    </string>
     <string name="purchase">Beli</string>
     <string name="update_thank_you">Harap perbarui Simple Thank You ke versi terbaru</string>
     <string name="before_asking_question_read_faq">Before you ask a question, please check the app settings and read the Frequently Asked Questions first. Maybe the solution is there.</string>
     <string name="read_it">Baca</string>
 
     <!-- New app (do not translate anything on the 4th line) -->
-    <string name="new_app">
-        <![CDATA[
-            Hei,<br><br>
-            hanya memberitahu ada aplikasi baru dirilis:<br><br>
-            <a href="%1$s">%2$s</a><br><br>
-            Anda bisa mendownloadnya dengan menekan judulnya.<br><br>
-            Terima kasih
-        ]]>
-    </string>
 
     <string name="sideloaded_app">
         <![CDATA[
