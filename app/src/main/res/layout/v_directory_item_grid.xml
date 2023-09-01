@@ -32,7 +32,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/small_margin"
-        android:background="@drawable/circle_black_background"
+        android:background="@drawable/shape_circle_black_background"
         android:padding="@dimen/small_margin"
         android:src="@drawable/ic_pin"
         android:visibility="gone" />

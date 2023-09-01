@@ -35,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
     private void tryFinish() {
         if (!isFinishing()) {
             finish();
-            overridePendingTransition(R.anim.common_anim_none, R.anim.common_zoom_exit);
+            overridePendingTransition(R.anim.anim_common_anim_none, R.anim.anim_common_zoom_exit);
         }
     }
 
