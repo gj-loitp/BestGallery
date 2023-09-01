@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragmentHolder"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.roy.commons.views.MyViewPager
-        android:id="@+id/view_pager"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <include
-        android:id="@+id/bottom_actions"
-        layout="@layout/v_bottom_actions"/>
+        android:id="@+id/bottomActions"
+        layout="@layout/v_bottom_actions" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/topShadow"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_status_action_height"
-        android:background="@drawable/gradient_background_flipped"/>
+        android:background="@drawable/gradient_background_flipped" />
 
 </RelativeLayout>

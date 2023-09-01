@@ -8,27 +8,27 @@ import com.roy.gallery.pro.extensions.config
 import com.roy.commons.dlg.FilePickerDialog
 import com.roy.commons.ext.beVisibleIf
 import com.roy.commons.itf.RefreshRecyclerViewListener
-import kotlinx.android.synthetic.main.activity_manage_folders.*
+import kotlinx.android.synthetic.main.a_manage_folders.*
 
 class ExcludedFoldersActivity : com.roy.gallery.pro.activities.SimpleActivity(),
     RefreshRecyclerViewListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_manage_folders)
+        setContentView(R.layout.a_manage_folders)
         updateFolders()
     }
 
     private fun updateFolders() {
         val folders = ArrayList<String>()
         config.excludedFolders.mapTo(folders) { it }
-        manage_folders_placeholder.apply {
+        manageFoldersPlaceHolder.apply {
             text = getString(R.string.excluded_activity_placeholder)
             beVisibleIf(folders.isEmpty())
             setTextColor(config.textColor)
         }
 
-        val adapter = com.roy.gallery.pro.adapters.ManageFoldersAdapter(this, folders, true, this, manage_folders_list) {}
-        manage_folders_list.adapter = adapter
+        val adapter = com.roy.gallery.pro.adapters.ManageFoldersAdapter(this, folders, true, this, manageFoldersList) {}
+        manageFoldersList.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -11,27 +11,27 @@ import com.roy.gallery.pro.extensions.getNoMediaFolders
 import com.roy.commons.dlg.FilePickerDialog
 import com.roy.commons.ext.beVisibleIf
 import com.roy.commons.itf.RefreshRecyclerViewListener
-import kotlinx.android.synthetic.main.activity_manage_folders.*
+import kotlinx.android.synthetic.main.a_manage_folders.*
 
 class HiddenFoldersActivity : SimpleActivity(),
     RefreshRecyclerViewListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_manage_folders)
+        setContentView(R.layout.a_manage_folders)
         updateFolders()
     }
 
     private fun updateFolders() {
         getNoMediaFolders {
             runOnUiThread {
-                manage_folders_placeholder.apply {
+                manageFoldersPlaceHolder.apply {
                     text = getString(R.string.hidden_folders_placeholder)
                     beVisibleIf(it.isEmpty())
                     setTextColor(config.textColor)
                 }
 
-                val adapter = ManageHiddenFoldersAdapter(this, it, this, manage_folders_list) {}
-                manage_folders_list.adapter = adapter
+                val adapter = ManageHiddenFoldersAdapter(this, it, this, manageFoldersList) {}
+                manageFoldersList.adapter = adapter
             }
         }
     }

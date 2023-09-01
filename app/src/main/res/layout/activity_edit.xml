@@ -14,7 +14,7 @@
         android:layout_marginBottom="@dimen/bottom_filters_height_with_margin"/>
 
     <com.theartofdev.edmodo.cropper.CropImageView
-        android:id="@+id/crop_image_view"
+        android:id="@+id/cropImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/bottom_actions_height_bigger"

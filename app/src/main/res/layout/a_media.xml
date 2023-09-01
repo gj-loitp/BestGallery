@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/media_refresh_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mediaRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/media_holder"
+        android:id="@+id/mediaHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.roy.commons.views.MyTextView
-            android:id="@+id/media_empty_text_label"
+            android:id="@+id/mediaEmptyTextLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -21,19 +21,19 @@
             android:paddingRight="@dimen/big_margin"
             android:text="@string/no_media_with_filters"
             android:textSize="@dimen/bigger_text_size"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <com.roy.commons.views.MyTextView
-            android:id="@+id/media_empty_text"
+            android:id="@+id/mediaEmptyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/media_empty_text_label"
+            android:layout_below="@+id/mediaEmptyTextLabel"
             android:layout_centerHorizontal="true"
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/activity_margin"
             android:text="@string/change_filters_underlined"
             android:textSize="@dimen/bigger_text_size"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <com.roy.commons.views.MyRecyclerView
             android:id="@+id/mediaGrid"
@@ -41,19 +41,19 @@
             android:layout_height="match_parent"
             android:scrollbars="none"
             app:layoutManager="com.roy.commons.views.MyGridLayoutManager"
-            app:spanCount="@integer/media_columns_vertical_scroll"/>
+            app:spanCount="@integer/media_columns_vertical_scroll" />
 
         <com.roy.commons.views.FastScroller
             android:id="@+id/mediaVerticalFastScroller"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:paddingStart="@dimen/normal_margin"
-            android:paddingLeft="@dimen/normal_margin"
-            android:visibility="gone">
+            android:paddingEnd="0dp"
+            android:visibility="gone"
+            tools:visibility="visible">
 
-            <include layout="@layout/v_fastscroller_handle_vertical"/>
+            <include layout="@layout/v_fastscroller_handle_vertical" />
 
         </com.roy.commons.views.FastScroller>
 
@@ -62,12 +62,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:paddingTop="@dimen/normal_margin"
             android:visibility="gone">
 
-            <include layout="@layout/v_fastscroller_handle_horizontal"/>
+            <include layout="@layout/v_fastscroller_handle_horizontal" />
 
         </com.roy.commons.views.FastScroller>
 

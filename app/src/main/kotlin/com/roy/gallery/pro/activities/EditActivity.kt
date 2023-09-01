@@ -229,7 +229,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
 
     private fun loadDefaultImageView() {
         default_image_view.beVisible()
-        crop_image_view.beGone()
+        cropImageView.beGone()
         editor_draw_canvas.beGone()
 
         val options = RequestOptions()
@@ -285,7 +285,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
     private fun loadCropImageView() {
         default_image_view.beGone()
         editor_draw_canvas.beGone()
-        crop_image_view.apply {
+        cropImageView.apply {
             beVisible()
             setOnCropImageCompleteListener(this@EditActivity)
             setImageUriAsync(uri)
@@ -301,7 +301,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
 
     private fun loadDrawCanvas() {
         default_image_view.beGone()
-        crop_image_view.beGone()
+        cropImageView.beGone()
         editor_draw_canvas.beVisible()
 
         if (!wasDrawCanvasPositioned) {
@@ -358,8 +358,8 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
             inputStream?.close()
         }
 
-        if (crop_image_view.isVisible()) {
-            crop_image_view.getCroppedImageAsync()
+        if (cropImageView.isVisible()) {
+            cropImageView.getCroppedImageAsync()
         } else if (editor_draw_canvas.isVisible()) {
             val bitmap = editor_draw_canvas.getBitmap()
             if (saveUri.scheme == "file") {
@@ -382,7 +382,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
 
                 // clean up everything to free as much memory as possible
                 default_image_view.setImageResource(0)
-                crop_image_view.setImageBitmap(null)
+                cropImageView.setImageBitmap(null)
                 bottomActionsFilterList.adapter = null
                 bottomActionsFilterList.beGone()
 
@@ -416,10 +416,10 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
                     shareBitmap(originalBitmap)
                 }
 
-                crop_image_view.isVisible() -> {
+                cropImageView.isVisible() -> {
                     isSharingBitmap = true
                     runOnUiThread {
-                        crop_image_view.getCroppedImageAsync()
+                        cropImageView.getCroppedImageAsync()
                     }
                 }
 
@@ -520,7 +520,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
 
     private fun setupCropRotateActionButtons() {
         bottomRotate.setOnClickListener {
-            crop_image_view.rotateImage(90)
+            cropImageView.rotateImage(90)
         }
 
         bottomResize.beGoneIf(isCropIntent)
@@ -529,20 +529,20 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
         }
 
         bottomFlipHorizontally.setOnClickListener {
-            crop_image_view.flipImageHorizontally()
+            cropImageView.flipImageHorizontally()
         }
 
         bottomFlipVertically.setOnClickListener {
-            crop_image_view.flipImageVertically()
+            cropImageView.flipImageVertically()
         }
 
         bottomAspectRatio.setOnClickListener {
             currCropRotateAction = if (currCropRotateAction == CROP_ROTATE_ASPECT_RATIO) {
-                crop_image_view.guidelines = CropImageView.Guidelines.OFF
+                cropImageView.guidelines = CropImageView.Guidelines.OFF
                 bottom_aspect_ratios.beGone()
                 CROP_ROTATE_NONE
             } else {
-                crop_image_view.guidelines = CropImageView.Guidelines.ON
+                cropImageView.guidelines = CropImageView.Guidelines.ON
                 bottom_aspect_ratios.beVisible()
                 CROP_ROTATE_ASPECT_RATIO
             }
@@ -610,7 +610,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
     }
 
     private fun updatePrimaryActionButtons() {
-        if (crop_image_view.isGone() && currPrimaryAction == PRIMARY_ACTION_CROP_ROTATE) {
+        if (cropImageView.isGone() && currPrimaryAction == PRIMARY_ACTION_CROP_ROTATE) {
             loadCropImageView()
         } else if (default_image_view.isGone() && currPrimaryAction == PRIMARY_ACTION_FILTER) {
             loadDefaultImageView()
@@ -710,7 +710,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
         config.lastEditorCropAspectRatio = aspectRatio
         updateAspectRatioButtons()
 
-        crop_image_view.apply {
+        cropImageView.apply {
             if (aspectRatio == ASPECT_RATIO_FREE) {
                 setFixedAspectRatio(false)
             } else {
@@ -781,7 +781,7 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
         ResizeDialog(this, point) {
             resizeWidth = it.x
             resizeHeight = it.y
-            crop_image_view.getCroppedImageAsync()
+            cropImageView.getCroppedImageAsync()
         }
     }
 
@@ -795,8 +795,8 @@ class EditActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener
     }
 
     private fun getAreaSize(): Point? {
-        val rect = crop_image_view.cropRect ?: return null
-        val rotation = crop_image_view.rotatedDegrees
+        val rect = cropImageView.cropRect ?: return null
+        val rotation = cropImageView.rotatedDegrees
         return if (rotation == 0 || rotation == 180) {
             Point(rect.width(), rect.height())
         } else {

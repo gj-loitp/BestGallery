@@ -16,7 +16,7 @@ import com.roy.commons.ext.toast
 import com.roy.commons.helpers.isNougatPlus
 import com.roy.commons.models.RadioItem
 import com.theartofdev.edmodo.cropper.CropImageView
-import kotlinx.android.synthetic.main.activity_set_wallpaper.*
+import kotlinx.android.synthetic.main.a_set_wallpaper.*
 import kotlinx.android.synthetic.main.v_bottom_set_wallpaper_actions.*
 
 class SetWallpaperActivity : SimpleActivity(),
@@ -30,7 +30,7 @@ class SetWallpaperActivity : SimpleActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_set_wallpaper)
+        setContentView(R.layout.a_set_wallpaper)
 
         if (intent.data == null) {
             val pickIntent = Intent(
@@ -56,7 +56,7 @@ class SetWallpaperActivity : SimpleActivity(),
         }
 
         wallpaperManager = WallpaperManager.getInstance(applicationContext)
-        crop_image_view.apply {
+        cropImageView.apply {
             setOnCropImageCompleteListener(this@SetWallpaperActivity)
             setImageUriAsync(uri)
         }
@@ -70,7 +70,7 @@ class SetWallpaperActivity : SimpleActivity(),
         }
 
         bottomSetWallpaperRotate.setOnClickListener {
-            crop_image_view.rotateImage(90)
+            cropImageView.rotateImage(90)
         }
     }
 
@@ -78,7 +78,7 @@ class SetWallpaperActivity : SimpleActivity(),
         try {
             val wallpaperWidth =
                 if (isLandscapeRatio) wallpaperManager.desiredMinimumWidth else wallpaperManager.desiredMinimumWidth / 2
-            crop_image_view.setAspectRatio(wallpaperWidth, wallpaperManager.desiredMinimumHeight)
+            cropImageView.setAspectRatio(wallpaperWidth, wallpaperManager.desiredMinimumHeight)
             bottomSetWallpaperAspectRatio.setImageResource(if (isLandscapeRatio) R.drawable.ic_minimize else R.drawable.ic_maximize)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -117,10 +117,10 @@ class SetWallpaperActivity : SimpleActivity(),
 
             RadioGroupDialog(this, items) {
                 wallpaperFlag = it as Int
-                crop_image_view.getCroppedImageAsync()
+                cropImageView.getCroppedImageAsync()
             }
         } else {
-            crop_image_view.getCroppedImageAsync()
+            cropImageView.getCroppedImageAsync()
         }
     }
 

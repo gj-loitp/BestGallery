@@ -18,7 +18,7 @@ import com.roy.commons.ext.onGlobalLayout
 import com.roy.commons.ext.showErrorToast
 import com.roy.commons.ext.toast
 import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
-import kotlinx.android.synthetic.main.activity_panorama_photo.*
+import kotlinx.android.synthetic.main.a_panorama_photo.*
 
 open class PanoramaPhotoActivity : com.roy.gallery.pro.activities.SimpleActivity() {
     private val CARDBOARD_DISPLAY_MODE = 3
@@ -31,19 +31,19 @@ open class PanoramaPhotoActivity : com.roy.gallery.pro.activities.SimpleActivity
         useDynamicTheme = false
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_panorama_photo)
+        setContentView(R.layout.a_panorama_photo)
         supportActionBar?.hide()
 
         checkNotchSupport()
         setupButtonMargins()
 
         cardboard.setOnClickListener {
-            panorama_view.displayMode = CARDBOARD_DISPLAY_MODE
+            panoramaView.displayMode = CARDBOARD_DISPLAY_MODE
         }
 
         explore.setOnClickListener {
             isExploreEnabled = !isExploreEnabled
-            panorama_view.setPureTouchTracking(isExploreEnabled)
+            panoramaView.setPureTouchTracking(isExploreEnabled)
             explore.setImageResource(if (isExploreEnabled) R.drawable.ic_explore else R.drawable.ic_explore_off)
         }
 
@@ -59,7 +59,7 @@ open class PanoramaPhotoActivity : com.roy.gallery.pro.activities.SimpleActivity
 
     override fun onResume() {
         super.onResume()
-        panorama_view.resumeRendering()
+        panoramaView.resumeRendering()
         isRendering = true
         if (config.blackBackground) {
             updateStatusbarColor(Color.BLACK)
@@ -70,14 +70,14 @@ open class PanoramaPhotoActivity : com.roy.gallery.pro.activities.SimpleActivity
 
     override fun onPause() {
         super.onPause()
-        panorama_view.pauseRendering()
+        panoramaView.pauseRendering()
         isRendering = false
     }
 
     override fun onDestroy() {
         super.onDestroy()
         if (isRendering) {
-            panorama_view.shutdown()
+            panoramaView.shutdown()
         }
     }
 
@@ -97,7 +97,7 @@ open class PanoramaPhotoActivity : com.roy.gallery.pro.activities.SimpleActivity
             Thread {
                 val bitmap = getBitmapToLoad(path)
                 runOnUiThread {
-                    panorama_view.apply {
+                    panoramaView.apply {
                         beVisible()
                         loadImageFromBitmap(bitmap, options)
                         setFlingingEnabled(true)
@@ -163,12 +163,12 @@ open class PanoramaPhotoActivity : com.roy.gallery.pro.activities.SimpleActivity
         (explore.layoutParams as RelativeLayout.LayoutParams).bottomMargin = navigationBarHeight
 
         cardboard.onGlobalLayout {
-            panorama_gradient_background.layoutParams.height = navBarHeight + cardboard.height
+            panoramaGradientBackground.layoutParams.height = navBarHeight + cardboard.height
         }
     }
 
     private fun toggleButtonVisibility() {
-        arrayOf(cardboard, explore, panorama_gradient_background).forEach {
+        arrayOf(cardboard, explore, panoramaGradientBackground).forEach {
             it.animate().alpha(if (isFullscreen) 0f else 1f)
             it.isClickable = !isFullscreen
         }

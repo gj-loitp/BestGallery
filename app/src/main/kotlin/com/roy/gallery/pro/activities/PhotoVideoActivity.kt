@@ -59,7 +59,7 @@ import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
 import com.roy.commons.helpers.REAL_FILE_PATH
 import com.roy.commons.helpers.SIDELOADING_TRUE
 import kotlinx.android.synthetic.main.v_bottom_actions.*
-import kotlinx.android.synthetic.main.f_holder.bottom_actions
+import kotlinx.android.synthetic.main.f_holder.bottomActions
 import kotlinx.android.synthetic.main.f_holder.fragmentHolder
 import kotlinx.android.synthetic.main.f_holder.topShadow
 import kotlinx.android.synthetic.main.v_bottom_actions.bottomEdit
@@ -325,12 +325,12 @@ open class PhotoVideoActivity : SimpleActivity(),
     }
 
     private fun initBottomActionsLayout() {
-        bottom_actions.layoutParams.height =
+        bottomActions.layoutParams.height =
             resources.getDimension(R.dimen.bottom_actions_height).toInt() + navigationBarHeight
         if (config.bottomActions) {
-            bottom_actions.beVisible()
+            bottomActions.beVisible()
         } else {
-            bottom_actions.beGone()
+            bottomActions.beGone()
         }
     }
 
@@ -354,14 +354,14 @@ open class PhotoVideoActivity : SimpleActivity(),
         val visibleBottomActions = if (config.bottomActions) config.visibleBottomActions else 0
         bottomEdit.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_EDIT != 0 && mMedium?.isImage() == true)
         bottomEdit.setOnClickListener {
-            if (mUri != null && bottom_actions.alpha == 1f) {
+            if (mUri != null && bottomActions.alpha == 1f) {
                 openEditor(mUri!!.toString())
             }
         }
 
         bottomShare.beVisibleIf(visibleBottomActions and BOTTOM_ACTION_SHARE != 0)
         bottomShare.setOnClickListener {
-            if (mUri != null && bottom_actions.alpha == 1f) {
+            if (mUri != null && bottomActions.alpha == 1f) {
                 sharePath(mUri!!.toString())
             }
         }
@@ -382,8 +382,8 @@ open class PhotoVideoActivity : SimpleActivity(),
 
         val newAlpha = if (mIsFullScreen) 0f else 1f
         topShadow.animate().alpha(newAlpha).start()
-        if (!bottom_actions.isGone()) {
-            bottom_actions.animate().alpha(newAlpha).start()
+        if (!bottomActions.isGone()) {
+            bottomActions.animate().alpha(newAlpha).start()
         }
     }
 

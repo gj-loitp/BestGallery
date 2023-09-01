@@ -16,7 +16,7 @@
         android:background="@drawable/gradient_background_flipped" />
 
     <include
-        android:id="@+id/bottom_actions"
+        android:id="@+id/bottomActions"
         layout="@layout/v_bottom_actions" />
 
 </RelativeLayout>

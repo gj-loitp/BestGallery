@@ -65,7 +65,7 @@ import com.roy.commons.helpers.REQUEST_EDIT_IMAGE
 import com.roy.commons.helpers.REQUEST_SET_AS
 import com.roy.commons.helpers.SORT_BY_RANDOM
 import com.roy.commons.models.FileDirItem
-import kotlinx.android.synthetic.main.activity_medium.*
+import kotlinx.android.synthetic.main.a_medium.*
 import kotlinx.android.synthetic.main.v_bottom_actions.*
 import java.io.File
 import java.util.*
@@ -95,7 +95,7 @@ class ViewPagerActivity : SimpleActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_medium)
+        setContentView(R.layout.a_medium)
 
         topShadow.layoutParams.height = statusBarHeight + actionBarHeight
         checkNotchSupport()
@@ -313,7 +313,7 @@ class ViewPagerActivity : SimpleActivity(),
         }
         supportActionBar?.title = mPath.getFilenameFromPath()
 
-        view_pager.onGlobalLayout {
+        viewPager.onGlobalLayout {
             if (!isDestroyed) {
                 if (mMediaFiles.isNotEmpty()) {
                     gotMedia(mMediaFiles as ArrayList<ThumbnailItem>)
@@ -323,14 +323,14 @@ class ViewPagerActivity : SimpleActivity(),
         }
 
         refreshViewPager()
-        view_pager.offscreenPageLimit = 2
+        viewPager.offscreenPageLimit = 2
 
         if (config.blackBackground) {
-            view_pager.background = ColorDrawable(Color.BLACK)
+            viewPager.background = ColorDrawable(Color.BLACK)
         }
 
         if (config.hideSystemUI) {
-            view_pager.onGlobalLayout {
+            viewPager.onGlobalLayout {
                 Handler().postDelayed({
                     fragmentClicked()
                 }, HIDE_SYSTEM_UI_DELAY)
@@ -344,13 +344,13 @@ class ViewPagerActivity : SimpleActivity(),
                 visibility and View.SYSTEM_UI_FLAG_FULLSCREEN != 0
             }
 
-            view_pager.adapter?.let {
+            viewPager.adapter?.let {
                 (it as com.roy.gallery.pro.adapters.MyPagerAdapter).toggleFullscreen(mIsFullScreen)
                 checkSystemUI()
                 val newAlpha = if (mIsFullScreen) 0f else 1f
                 topShadow.animate().alpha(newAlpha).start()
-                if (bottom_actions.isVisible()) {
-                    bottom_actions.animate().alpha(newAlpha).start()
+                if (bottomActions.isVisible()) {
+                    bottomActions.animate().alpha(newAlpha).start()
                     arrayOf(
                         bottomFavorite,
                         bottomEdit,
@@ -430,7 +430,7 @@ class ViewPagerActivity : SimpleActivity(),
         val pagerAdapter =
             com.roy.gallery.pro.adapters.MyPagerAdapter(this, supportFragmentManager, media)
         if (!isDestroyed) {
-            view_pager.apply {
+            viewPager.apply {
                 adapter = pagerAdapter
                 currentItem = mPos
                 removeOnPageChangeListener(this@ViewPagerActivity)
@@ -453,7 +453,7 @@ class ViewPagerActivity : SimpleActivity(),
 
     private fun startSlideshow() {
         if (getMediaForSlideshow()) {
-            view_pager.onGlobalLayout {
+            viewPager.onGlobalLayout {
                 if (!isDestroyed) {
                     hideSystemUI(true)
                     mSlideshowInterval = config.slideshowInterval
@@ -467,28 +467,28 @@ class ViewPagerActivity : SimpleActivity(),
     }
 
     private fun animatePagerTransition(forward: Boolean) {
-        val oldPosition = view_pager.currentItem
-        val animator = ValueAnimator.ofInt(0, view_pager.width)
+        val oldPosition = viewPager.currentItem
+        val animator = ValueAnimator.ofInt(0, viewPager.width)
         animator.addListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(animation: Animator) {
             }
 
             override fun onAnimationEnd(animation: Animator) {
-                if (view_pager.isFakeDragging) {
+                if (viewPager.isFakeDragging) {
                     try {
-                        view_pager.endFakeDrag()
+                        viewPager.endFakeDrag()
                     } catch (ignored: Exception) {
                         stopSlideshow()
                     }
 
-                    if (view_pager.currentItem == oldPosition) {
+                    if (viewPager.currentItem == oldPosition) {
                         slideshowEnded(forward)
                     }
                 }
             }
 
             override fun onAnimationCancel(animation: Animator) {
-                view_pager.endFakeDrag()
+                viewPager.endFakeDrag()
             }
 
             override fun onAnimationStart(animation: Animator) {
@@ -499,12 +499,12 @@ class ViewPagerActivity : SimpleActivity(),
         animator.addUpdateListener(object : ValueAnimator.AnimatorUpdateListener {
             var oldDragPosition = 0
             override fun onAnimationUpdate(animation: ValueAnimator) {
-                if (view_pager?.isFakeDragging == true) {
+                if (viewPager?.isFakeDragging == true) {
                     val dragPosition = animation.animatedValue as Int
                     val dragOffset = dragPosition - oldDragPosition
                     oldDragPosition = dragPosition
                     try {
-                        view_pager.fakeDragBy(dragOffset * (if (forward) -1f else 1f))
+                        viewPager.fakeDragBy(dragOffset * (if (forward) -1f else 1f))
                     } catch (e: Exception) {
                         stopSlideshow()
                     }
@@ -513,16 +513,16 @@ class ViewPagerActivity : SimpleActivity(),
         })
 
         animator.duration = SLIDESHOW_SCROLL_DURATION
-        view_pager.beginFakeDrag()
+        viewPager.beginFakeDrag()
         animator.start()
     }
 
     private fun slideshowEnded(forward: Boolean) {
         if (config.loopSlideshow) {
             if (forward) {
-                view_pager.setCurrentItem(0, false)
+                viewPager.setCurrentItem(0, false)
             } else {
-                view_pager.setCurrentItem(view_pager.adapter!!.count - 1, false)
+                viewPager.setCurrentItem(viewPager.adapter!!.count - 1, false)
             }
         } else {
             stopSlideshow()
@@ -704,8 +704,8 @@ class ViewPagerActivity : SimpleActivity(),
     }
 
     private fun getCurrentFragment() =
-        (view_pager.adapter as com.roy.gallery.pro.adapters.MyPagerAdapter).getCurrentFragment(
-            view_pager.currentItem
+        (viewPager.adapter as com.roy.gallery.pro.adapters.MyPagerAdapter).getCurrentFragment(
+            viewPager.currentItem
         )
 
     private fun showProperties() {
@@ -778,12 +778,12 @@ class ViewPagerActivity : SimpleActivity(),
     }
 
     private fun initBottomActionsLayout() {
-        bottom_actions.layoutParams.height =
+        bottomActions.layoutParams.height =
             resources.getDimension(R.dimen.bottom_actions_height).toInt() + navigationBarHeight
         if (config.bottomActions) {
-            bottom_actions.beVisible()
+            bottomActions.beVisible()
         } else {
-            bottom_actions.beGone()
+            bottomActions.beGone()
         }
     }
 
@@ -1103,12 +1103,12 @@ class ViewPagerActivity : SimpleActivity(),
     }
 
     override fun goToPrevItem() {
-        view_pager.setCurrentItem(view_pager.currentItem - 1, false)
+        viewPager.setCurrentItem(viewPager.currentItem - 1, false)
         checkOrientation()
     }
 
     override fun goToNextItem() {
-        view_pager.setCurrentItem(view_pager.currentItem + 1, false)
+        viewPager.setCurrentItem(viewPager.currentItem + 1, false)
         checkOrientation()
     }
 
@@ -1122,8 +1122,8 @@ class ViewPagerActivity : SimpleActivity(),
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 putExtra(IS_FROM_GALLERY, true)
                 putExtra(REAL_FILE_PATH, path)
-                putExtra(SHOW_PREV_ITEM, view_pager.currentItem != 0)
-                putExtra(SHOW_NEXT_ITEM, view_pager.currentItem != mMediaFiles.size - 1)
+                putExtra(SHOW_PREV_ITEM, viewPager.currentItem != 0)
+                putExtra(SHOW_NEXT_ITEM, viewPager.currentItem != mMediaFiles.size - 1)
 
                 if (resolveActivity(packageManager) != null) {
                     try {

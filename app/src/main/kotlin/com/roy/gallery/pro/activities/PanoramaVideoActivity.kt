@@ -22,7 +22,7 @@ import com.roy.commons.ext.onGlobalLayout
 import com.roy.commons.ext.showErrorToast
 import com.roy.commons.ext.toast
 import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
-import kotlinx.android.synthetic.main.activity_panorama_video.*
+import kotlinx.android.synthetic.main.a_panorama_video.*
 import kotlinx.android.synthetic.main.v_bottom_video_time_holder.*
 import java.io.File
 
@@ -44,7 +44,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
         useDynamicTheme = false
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_panorama_video)
+        setContentView(R.layout.a_panorama_video)
         supportActionBar?.hide()
 
         checkNotchSupport()
@@ -60,7 +60,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
 
     override fun onResume() {
         super.onResume()
-        vr_video_view.resumeRendering()
+        vrVideoView.resumeRendering()
         mIsRendering = true
         if (config.blackBackground) {
             updateStatusbarColor(Color.BLACK)
@@ -71,14 +71,14 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
 
     override fun onPause() {
         super.onPause()
-        vr_video_view.pauseRendering()
+        vrVideoView.pauseRendering()
         mIsRendering = false
     }
 
     override fun onDestroy() {
         super.onDestroy()
         if (mIsRendering) {
-            vr_video_view.shutdown()
+            vrVideoView.shutdown()
         }
 
         if (!isChangingConfigurations) {
@@ -104,7 +104,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
             val options = VrVideoView.Options()
             options.inputType = VrVideoView.Options.TYPE_MONO
 
-            vr_video_view.apply {
+            vrVideoView.apply {
                 loadVideo(Uri.fromFile(File(path)), options)
                 pauseVideo()
 
@@ -177,7 +177,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
         runOnUiThread(object : Runnable {
             override fun run() {
                 if (mIsPlaying && !mIsDragged) {
-                    mCurrTime = (vr_video_view!!.currentPosition / 1000).toInt()
+                    mCurrTime = (vrVideoView!!.currentPosition / 1000).toInt()
                     videoSeekbar.progress = mCurrTime
                     videoCurrTime.text = mCurrTime.getFormattedDuration()
                 }
@@ -204,18 +204,18 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
             return
         }
 
-        vr_video_view.playVideo()
+        vrVideoView.playVideo()
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
     private fun pauseVideo() {
-        vr_video_view.pauseVideo()
+        vrVideoView.pauseVideo()
         videoTogglePlayPause.setImageResource(R.drawable.ic_play_outline)
         window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
     private fun setVideoProgress(seconds: Int) {
-        vr_video_view.seekTo(seconds * 1000L)
+        vrVideoView.seekTo(seconds * 1000L)
         videoSeekbar.progress = seconds
         mCurrTime = seconds
         videoCurrTime.text = seconds.getFormattedDuration()
@@ -223,7 +223,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
 
     private fun videoCompleted() {
         mIsPlaying = false
-        mCurrTime = (vr_video_view.duration / 1000).toInt()
+        mCurrTime = (vrVideoView.duration / 1000).toInt()
         videoSeekbar.progress = videoSeekbar.max
         videoCurrTime.text = mDuration.getFormattedDuration()
         pauseVideo()
@@ -257,12 +257,12 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
         videoTogglePlayPause.setImageResource(R.drawable.ic_play_outline)
 
         cardboard.setOnClickListener {
-            vr_video_view.displayMode = CARDBOARD_DISPLAY_MODE
+            vrVideoView.displayMode = CARDBOARD_DISPLAY_MODE
         }
 
         explore.setOnClickListener {
             mIsExploreEnabled = !mIsExploreEnabled
-            vr_video_view.setPureTouchTracking(mIsExploreEnabled)
+            vrVideoView.setPureTouchTracking(mIsExploreEnabled)
             explore.setImageResource(if (mIsExploreEnabled) R.drawable.ic_explore else R.drawable.ic_explore_off)
         }
     }
@@ -296,11 +296,11 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
             return
         }
 
-        val curr = vr_video_view.currentPosition
-        val twoPercents = Math.max((vr_video_view.duration / 50).toInt(), MIN_SKIP_LENGTH)
+        val curr = vrVideoView.currentPosition
+        val twoPercents = Math.max((vrVideoView.duration / 50).toInt(), MIN_SKIP_LENGTH)
         val newProgress = if (forward) curr + twoPercents else curr - twoPercents
         val roundProgress = Math.round(newProgress / 1000f)
-        val limitedProgress = Math.max(Math.min(vr_video_view.duration.toInt(), roundProgress), 0)
+        val limitedProgress = Math.max(Math.min(vrVideoView.duration.toInt(), roundProgress), 0)
         setVideoProgress(limitedProgress)
         if (!mIsPlaying) {
             togglePlayPause()
@@ -314,7 +314,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar?) {
-        vr_video_view.pauseVideo()
+        vrVideoView.pauseVideo()
         mIsDragged = true
     }
 
