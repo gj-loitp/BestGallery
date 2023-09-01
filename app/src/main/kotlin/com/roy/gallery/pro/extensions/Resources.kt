@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.extensions
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
@@ -12,6 +13,7 @@ fun Resources.getActionBarHeight(context: Context): Int {
         0
 }
 
+@SuppressLint("InternalInsetResource", "DiscouragedApi")
 fun Resources.getStatusBarHeight(): Int {
     val id = getIdentifier("status_bar_height", "dimen", "android")
     return if (id > 0) {
@@ -20,6 +22,7 @@ fun Resources.getStatusBarHeight(): Int {
         0
 }
 
+@SuppressLint("InternalInsetResource", "DiscouragedApi")
 fun Resources.getNavBarHeight(): Int {
     val id = getIdentifier("navigation_bar_height", "dimen", "android")
     return if (id > 0) {

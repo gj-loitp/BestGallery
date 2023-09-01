@@ -112,8 +112,7 @@ fun Activity.launchCamera() {
 
 fun com.roy.gallery.pro.activities.SimpleActivity.launchAbout() {
     val licenses =
-        LICENSE_GLIDE or LICENSE_CROPPER or LICENSE_RTL or LICENSE_SUBSAMPLING or LICENSE_PATTERN or LICENSE_REPRINT or LICENSE_GIF_DRAWABLE or
-                LICENSE_PICASSO or LICENSE_EXOPLAYER or LICENSE_PANORAMA_VIEW or LICENSE_SANSELAN or LICENSE_FILTERS or LICENSE_GESTURE_VIEWS
+        LICENSE_GLIDE or LICENSE_CROPPER or LICENSE_RTL or LICENSE_SUBSAMPLING or LICENSE_PATTERN or LICENSE_REPRINT or LICENSE_GIF_DRAWABLE or LICENSE_PICASSO or LICENSE_EXOPLAYER or LICENSE_PANORAMA_VIEW or LICENSE_SANSELAN or LICENSE_FILTERS or LICENSE_GESTURE_VIEWS
 
     val faqItems = arrayListOf(
         FAQItem(R.string.faq_5_title_commons, R.string.faq_5_text_commons),
@@ -142,9 +141,8 @@ fun AppCompatActivity.showSystemUI(toggleActionBarVisibility: Boolean) {
         supportActionBar?.show()
     }
 
-    window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
-            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+    window.decorView.systemUiVisibility =
+        View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 }
 
 fun AppCompatActivity.hideSystemUI(toggleActionBarVisibility: Boolean) {
@@ -152,13 +150,8 @@ fun AppCompatActivity.hideSystemUI(toggleActionBarVisibility: Boolean) {
         supportActionBar?.hide()
     }
 
-    window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
-            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
-            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-            View.SYSTEM_UI_FLAG_LOW_PROFILE or
-            View.SYSTEM_UI_FLAG_FULLSCREEN or
-            View.SYSTEM_UI_FLAG_IMMERSIVE
+    window.decorView.systemUiVisibility =
+        View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LOW_PROFILE or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE
 }
 
 fun BaseSimpleActivity.addNoMedia(path: String, callback: () -> Unit) {
@@ -319,13 +312,13 @@ fun BaseSimpleActivity.restoreRecycleBinPaths(
             var out: OutputStream? = null
             try {
                 out = getFileOutputStreamSync(destination, source.getMimeType())
-                inputStream = getFileInputStreamSync(source)!!
+                inputStream = getFileInputStreamSync(source)
                 inputStream.copyTo(out!!)
                 if (File(source).length() == File(destination).length()) {
                     mediumDao.updateDeleted(
-                        destination.removePrefix(recycleBinPath),
-                        0,
-                        "$RECYCLE_BIN$destination"
+                        newPath = destination.removePrefix(recycleBinPath),
+                        deletedTS = 0,
+                        oldPath = "$RECYCLE_BIN$destination"
                     )
                 }
                 newPaths.add(destination)
@@ -366,11 +359,7 @@ fun BaseSimpleActivity.emptyAndDisableTheRecycleBin(callback: () -> Unit) {
 
 fun BaseSimpleActivity.showRecycleBinEmptyingDialog(callback: () -> Unit) {
     ConfirmationDialog(
-        this,
-        "",
-        R.string.empty_recycle_bin_confirmation,
-        R.string.yes,
-        R.string.no
+        this, "", R.string.empty_recycle_bin_confirmation, R.string.yes, R.string.no
     ) {
         callback()
     }
@@ -401,7 +390,7 @@ fun Activity.hasNavBar(): Boolean {
 }
 
 fun Activity.fixDateTaken(paths: ArrayList<String>, callback: (() -> Unit)? = null) {
-    val BATCH_SIZE = 50
+    val batchSize = 50
     toast(R.string.fixing)
     try {
         var didUpdateFile = false
@@ -428,7 +417,7 @@ fun Activity.fixDateTaken(paths: ArrayList<String>, callback: (() -> Unit)? = nu
                 operations.add(build())
             }
 
-            if (operations.size % BATCH_SIZE == 0) {
+            if (operations.size % batchSize == 0) {
                 contentResolver.applyBatch(MediaStore.AUTHORITY, operations)
                 operations.clear()
             }
@@ -493,9 +482,7 @@ fun BaseSimpleActivity.saveRotatedImageToFile(
 
             if (File(newPath).exists()) {
                 tryDeleteFileDirItem(
-                    FileDirItem(newPath, newPath.getFilenameFromPath()),
-                    false,
-                    true
+                    FileDirItem(newPath, newPath.getFilenameFromPath()), false, true
                 )
             }
 

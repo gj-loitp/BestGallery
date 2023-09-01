@@ -5,6 +5,8 @@ import com.bumptech.glide.signature.ObjectKey
 import com.roy.gallery.pro.helpers.NOMEDIA
 import java.io.File
 import java.io.IOException
+import java.util.Locale
+import kotlin.math.roundToInt
 
 fun String.getFileSignature() = ObjectKey(getFileKey())
 
@@ -58,9 +60,9 @@ fun String.shouldFolderBeVisible(
 // recognize /sdcard/DCIM as the same folder as /storage/emulated/0/DCIM
 fun String.getDistinctPath(): String {
     return try {
-        File(this).canonicalPath.toLowerCase()
+        File(this).canonicalPath.lowercase(Locale.getDefault())
     } catch (e: IOException) {
-        toLowerCase()
+        lowercase(Locale.getDefault())
     }
 }
 
@@ -69,11 +71,11 @@ fun String.getVideoDuration(): Int {
     try {
         val retriever = MediaMetadataRetriever()
         retriever.setDataSource(this)
-        seconds = Math.round(
-            (retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)?.toIntOrNull()
-                ?: 0) / 1000f
-        )
+        seconds =
+            ((retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)?.toIntOrNull()
+                ?: 0) / 1000f).roundToInt()
     } catch (e: Exception) {
+        e.printStackTrace()
     }
     return seconds
 }

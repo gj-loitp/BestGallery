@@ -15,6 +15,7 @@ import com.roy.commons.ext.getExifProperties
 import com.roy.commons.ext.getLongValue
 import com.roy.commons.ext.getResolution
 import java.io.File
+import kotlin.math.abs
 
 abstract class ViewPagerFragment : Fragment() {
     var listener: FragmentListener? = null
@@ -45,40 +46,44 @@ abstract class ViewPagerFragment : Fragment() {
             return ""
         }
 
-        val path = "${file.parent.trimEnd('/')}/"
+        val path = "${file.parent?.trimEnd('/')}/"
         val exif = android.media.ExifInterface(medium.path)
         val details = StringBuilder()
         val detailsFlag = requireContext().config.extendedDetails
         if (detailsFlag and EXT_NAME != 0) {
-            medium.name.let { if (it.isNotEmpty()) details.appendln(it) }
+            medium.name.let { if (it.isNotEmpty()) details.appendLine(it) }
         }
 
         if (detailsFlag and EXT_PATH != 0) {
-            path.let { if (it.isNotEmpty()) details.appendln(it) }
+            path.let { if (it.isNotEmpty()) details.appendLine(it) }
         }
 
         if (detailsFlag and EXT_SIZE != 0) {
-            file.length().formatSize().let { if (it.isNotEmpty()) details.appendln(it) }
+            file.length().formatSize().let { if (it.isNotEmpty()) details.appendLine(it) }
         }
 
         if (detailsFlag and EXT_RESOLUTION != 0) {
-            file.absolutePath.getResolution()?.formatAsResolution().let { if (it?.isNotEmpty() == true) details.appendln(it) }
+            file.absolutePath.getResolution()?.formatAsResolution()
+                .let { if (it?.isNotEmpty() == true) details.appendLine(it) }
         }
 
         if (detailsFlag and EXT_LAST_MODIFIED != 0) {
-            getFileLastModified(file).let { if (it.isNotEmpty()) details.appendln(it) }
+            getFileLastModified(file).let { if (it.isNotEmpty()) details.appendLine(it) }
         }
 
         if (detailsFlag and EXT_DATE_TAKEN != 0) {
-            getExifDateTaken(exif, requireContext()).let { if (it.isNotEmpty()) details.appendln(it) }
+            getExifDateTaken(
+                exif,
+                requireContext()
+            ).let { if (it.isNotEmpty()) details.appendLine(it) }
         }
 
         if (detailsFlag and EXT_CAMERA_MODEL != 0) {
-            getExifCameraModel(exif).let { if (it.isNotEmpty()) details.appendln(it) }
+            getExifCameraModel(exif).let { if (it.isNotEmpty()) details.appendLine(it) }
         }
 
         if (detailsFlag and EXT_EXIF_PROPERTIES != 0) {
-            getExifProperties(exif).let { if (it.isNotEmpty()) details.appendln(it) }
+            getExifProperties(exif).let { if (it.isNotEmpty()) details.appendLine(it) }
         }
         return details.toString().trim()
     }
@@ -88,10 +93,17 @@ abstract class ViewPagerFragment : Fragment() {
         val uri = MediaStore.Files.getContentUri("external")
         val selection = "${MediaStore.MediaColumns.DATA} = ?"
         val selectionArgs = arrayOf(file.absolutePath)
-        val cursor = requireContext().contentResolver.query(uri, projection, selection, selectionArgs, null)
+        val cursor = requireContext().contentResolver.query(
+            /* uri = */ uri,
+            /* projection = */ projection,
+            /* selection = */ selection,
+            /* selectionArgs = */ selectionArgs,
+            /* sortOrder = */ null
+            )
         cursor?.use {
             return if (cursor.moveToFirst()) {
-                val dateModified = cursor.getLongValue(MediaStore.Images.Media.DATE_MODIFIED) * 1000L
+                val dateModified =
+                    cursor.getLongValue(MediaStore.Images.Media.DATE_MODIFIED) * 1000L
                 dateModified.formatDate(requireContext())
             } else {
                 file.lastModified().formatDate(requireContext())
@@ -107,13 +119,14 @@ abstract class ViewPagerFragment : Fragment() {
                 mTouchDownX = event.x
                 mTouchDownY = event.y
             }
+
             MotionEvent.ACTION_POINTER_DOWN -> mIgnoreCloseDown = true
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 val diffX = mTouchDownX - event.x
                 val diffY = mTouchDownY - event.y
 
                 val downGestureDuration = System.currentTimeMillis() - mTouchDownTime
-                if (!mIgnoreCloseDown && Math.abs(diffY) > Math.abs(diffX) && diffY < -mCloseDownThreshold && downGestureDuration < MAX_CLOSE_DOWN_GESTURE_DURATION) {
+                if (!mIgnoreCloseDown && abs(diffY) > abs(diffX) && diffY < -mCloseDownThreshold && downGestureDuration < MAX_CLOSE_DOWN_GESTURE_DURATION) {
                     activity?.supportFinishAfterTransition()
                 }
                 mIgnoreCloseDown = false
