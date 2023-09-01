@@ -134,7 +134,7 @@ class SetWallpaperActivity : SimpleActivity(),
             Thread {
                 val bitmap = result.bitmap
                 if (wallpaperManager == null) {
-                    wallpaperManager = WallpaperManager.getInstance(App.mContext)
+                    wallpaperManager = WallpaperManager.getInstance(this)
                 }
                 try {
                     val wantedHeight = wallpaperManager.desiredMinimumHeight

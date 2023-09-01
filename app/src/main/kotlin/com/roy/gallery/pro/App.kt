@@ -10,26 +10,20 @@ class App : MultiDexApplication() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        if (base != null) {
-            mContext = base
-        }
+//        if (base != null) {
+//            mContext = base
+//        }
     }
 
     override fun onCreate() {
         super.onCreate()
-        mContext = applicationContext
-
-//        Thread {
-//            FirebaseApp.initializeApp(this)
-//        }.start()
-
-
+//        mContext = applicationContext
         checkUseEnglish()
         Reprint.initialize(this)
         registerActivityLifecycleCallbacks(ActivityLifeCallbacks())
     }
 
-    companion object {
-        lateinit var mContext: Context
-    }
+//    companion object {
+//        lateinit var mContext: Context
+//    }
 }
