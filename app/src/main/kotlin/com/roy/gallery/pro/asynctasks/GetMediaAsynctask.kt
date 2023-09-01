@@ -22,6 +22,7 @@ class GetMediaAsynctask(
     AsyncTask<Void, Void, ArrayList<ThumbnailItem>>() {
     private val mediaFetcher = MediaFetcher(context)
 
+    @Deprecated("Deprecated in Java")
     override fun doInBackground(vararg params: Void): ArrayList<ThumbnailItem> {
         val pathToUse = if (showAll) SHOW_ALL else mPath
         val getProperDateTaken =
@@ -37,14 +38,14 @@ class GetMediaAsynctask(
             val media = ArrayList<Medium>()
             foldersToScan.forEach {
                 val newMedia = mediaFetcher.getFilesFrom(
-                    it,
-                    isPickImage,
-                    isPickVideo,
-                    getProperDateTaken,
-                    getProperFileSize,
-                    favoritePaths,
-                    getVideoDurations,
-                    false
+                    curPath = it,
+                    isPickImage = isPickImage,
+                    isPickVideo = isPickVideo,
+                    getProperDateTaken = getProperDateTaken,
+                    getProperFileSize = getProperFileSize,
+                    favoritePaths = favoritePaths,
+                    getVideoDurations = getVideoDurations,
+                    sortMedia = false
                 )
                 media.addAll(newMedia)
             }
@@ -53,18 +54,19 @@ class GetMediaAsynctask(
             media
         } else {
             mediaFetcher.getFilesFrom(
-                mPath,
-                isPickImage,
-                isPickVideo,
-                getProperDateTaken,
-                getProperFileSize,
-                favoritePaths,
-                getVideoDurations
+                curPath = mPath,
+                isPickImage = isPickImage,
+                isPickVideo = isPickVideo,
+                getProperDateTaken = getProperDateTaken,
+                getProperFileSize = getProperFileSize,
+                favoritePaths = favoritePaths,
+                getVideoDurations = getVideoDurations
             )
         }
         return mediaFetcher.groupMedia(media, pathToUse)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onPostExecute(media: ArrayList<ThumbnailItem>) {
         super.onPostExecute(media)
         callback(media)

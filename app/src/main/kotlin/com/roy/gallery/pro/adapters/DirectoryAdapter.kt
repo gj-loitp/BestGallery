@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.adapters
 
+import android.annotation.SuppressLint
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
@@ -74,7 +75,11 @@ class DirectoryAdapter(
 
     override fun onBindViewHolder(holder: MyRecyclerViewAdapter.ViewHolder, position: Int) {
         val dir = dirs.getOrNull(position) ?: return
-        holder.bindView(dir, true, !isPickIntent) { itemView, adapterPosition ->
+        holder.bindView(
+            any = dir,
+            allowSingleClick = true,
+            allowLongClick = !isPickIntent
+        ) { itemView, _ ->
             setupView(itemView, dir)
         }
         bindViewHolder(holder)
@@ -99,8 +104,8 @@ class DirectoryAdapter(
             findItem(R.id.cabEmptyDisableRecycleBin).isVisible =
                 isOneItemSelected && selectedPaths.first() == RECYCLE_BIN
 
-            checkHideBtnVisibility(this, selectedPaths)
-            checkPinBtnVisibility(this, selectedPaths)
+            checkHideBtnVisibility(menu = this, selectedPaths = selectedPaths)
+            checkPinBtnVisibility(menu = this, selectedPaths = selectedPaths)
         }
     }
 
@@ -191,10 +196,10 @@ class DirectoryAdapter(
                     updateDirs(dirs)
                     Thread {
                         activity.galleryDB.DirectoryDao().updateDirectoryAfterRename(
-                            firstDir.tmb,
-                            firstDir.name,
-                            firstDir.path,
-                            sourcePath
+                            thumbnail = firstDir.tmb,
+                            name = firstDir.name,
+                            newPath = firstDir.path,
+                            oldPath = sourcePath
                         )
                         listener?.refreshItems()
                     }.start()
@@ -227,8 +232,8 @@ class DirectoryAdapter(
                 } else {
                     config.wasHideFolderTooltipShown = true
                     ConfirmationDialog(
-                        activity,
-                        activity.getString(R.string.hide_folder_description)
+                        activity = activity,
+                        message = activity.getString(R.string.hide_folder_description)
                     ) {
                         hideFolder(path)
                     }
@@ -423,16 +428,16 @@ class DirectoryAdapter(
             return
         }
 
-        var SAFPath = ""
+        var safPath = ""
         val selectedDirs = getSelectedItems()
         selectedDirs.forEach {
             val path = it.path
             if (activity.needsStupidWritePermissions(path) && config.treeUri.isEmpty()) {
-                SAFPath = path
+                safPath = path
             }
         }
 
-        activity.handleSAFDialog(SAFPath) {
+        activity.handleSAFDialog(safPath) {
             val foldersToDelete = ArrayList<File>(selectedKeys.size)
             selectedDirs.forEach {
                 if (it.areFavorites() || it.isRecycleBin()) {
@@ -505,6 +510,7 @@ class DirectoryAdapter(
     private fun getItemWithKey(key: Int): Directory? =
         dirs.firstOrNull { it.path.hashCode() == key }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateDirs(newDirs: ArrayList<Directory>) {
         val directories = newDirs.clone() as ArrayList<Directory>
         if (directories.hashCode() != currentDirectoriesHash) {
@@ -515,21 +521,25 @@ class DirectoryAdapter(
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateAnimateGifs(animateGifs: Boolean) {
         this.animateGifs = animateGifs
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateCropThumbnails(cropThumbnails: Boolean) {
         this.cropThumbnails = cropThumbnails
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateShowMediaCount(showMediaCount: Boolean) {
         this.showMediaCount = showMediaCount
         notifyDataSetChanged()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupView(view: View, directory: Directory) {
         val isSelected = selectedKeys.contains(directory.path.hashCode())
         view.apply {

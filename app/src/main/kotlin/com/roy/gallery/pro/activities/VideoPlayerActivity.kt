@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.activities
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -11,6 +12,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.DisplayMetrics
 import android.view.*
 import android.widget.SeekBar
@@ -38,9 +40,13 @@ import com.roy.commons.ext.updateTextColors
 import com.roy.commons.helpers.PERMISSION_WRITE_STORAGE
 import kotlinx.android.synthetic.main.a_video_player.*
 import kotlinx.android.synthetic.main.v_bottom_video_time_holder.*
+import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
 
-open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListener, TextureView.SurfaceTextureListener {
-    private val PLAY_WHEN_READY_DRAG_DELAY = 100L
+open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListener,
+    TextureView.SurfaceTextureListener {
+    private val playWhenReadyDragDelay = 100L
 
     private var mIsFullscreen = false
     private var mIsPlaying = false
@@ -60,8 +66,8 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
     private var mUri: Uri? = null
     private var mExoPlayer: SimpleExoPlayer? = null
     private var mVideoSize = Point(0, 0)
-    private var mTimerHandler = Handler()
-    private var mPlayWhenReadyHandler = Handler()
+    private var mTimerHandler = Handler(Looper.getMainLooper())
+    private var mPlayWhenReadyHandler = Handler(Looper.getMainLooper())
 
     private var mIgnoreCloseDown = false
 
@@ -155,6 +161,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun initPlayer() {
         mUri = intent.data ?: return
         supportActionBar?.title = getFilenameFromUri(mUri!!)
@@ -177,7 +184,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         videoPrevFile.beVisibleIf(intent.getBooleanExtra(SHOW_PREV_ITEM, false))
         videoPrevFile.setOnClickListener { handlePrevFile() }
 
-        videoSurfaceFrame.setOnTouchListener { view, event ->
+        videoSurfaceFrame.setOnTouchListener { _, event ->
             handleEvent(event)
             false
         }
@@ -186,11 +193,21 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         videoSurface.surfaceTextureListener = this
 
         if (config.allowVideoGestures) {
-            videoBrightnessController.initialize(this, slideInfo, true, videoPlayerHolder) { x, y ->
+            videoBrightnessController.initialize(
+                activity = this,
+                slideInfoView = slideInfo,
+                isBrightness = true,
+                parentView = videoPlayerHolder
+            ) { x, y ->
                 toggleFullscreen()
             }
 
-            videoVolumeController.initialize(this, slideInfo, false, videoPlayerHolder) { x, y ->
+            videoVolumeController.initialize(
+                activity = this,
+                slideInfoView = slideInfo,
+                isBrightness = false,
+                parentView = videoPlayerHolder
+            ) { x, y ->
                 toggleFullscreen()
             }
         } else {
@@ -217,7 +234,13 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         }
 
         val factory = DataSource.Factory { fileDataSource }
-        val audioSource = ExtractorMediaSource(fileDataSource.uri, factory, DefaultExtractorsFactory(), null, null)
+        val audioSource = ExtractorMediaSource(
+            /* uri = */ fileDataSource.uri,
+            /* dataSourceFactory = */ factory,
+            /* extractorsFactory = */ DefaultExtractorsFactory(),
+            /* eventHandler = */ null,
+            /* eventListener = */ null
+        )
         mExoPlayer = ExoPlayerFactory.newSimpleInstance(applicationContext).apply {
             seekParameters = SeekParameters.CLOSEST_SYNC
             audioStreamType = C.STREAM_TYPE_MUSIC
@@ -232,7 +255,11 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
 
             override fun onSeekProcessed() {}
 
-            override fun onTracksChanged(trackGroups: TrackGroupArray?, trackSelections: TrackSelectionArray?) {}
+            override fun onTracksChanged(
+                trackGroups: TrackGroupArray?,
+                trackSelections: TrackSelectionArray?,
+            ) {
+            }
 
             override fun onPlayerError(error: ExoPlaybackException?) {}
 
@@ -255,7 +282,12 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         })
 
         mExoPlayer!!.addVideoListener(object : VideoListener {
-            override fun onVideoSizeChanged(width: Int, height: Int, unappliedRotationDegrees: Int, pixelWidthHeightRatio: Float) {
+            override fun onVideoSizeChanged(
+                width: Int,
+                height: Int,
+                unappliedRotationDegrees: Int,
+                pixelWidthHeightRatio: Float,
+            ) {
                 mVideoSize.x = width
                 mVideoSize.y = height
                 setVideoSize()
@@ -413,11 +445,12 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
 
     private fun changeOrientation() {
         mIsOrientationLocked = true
-        requestedOrientation = if (resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-            ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        } else {
-            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        }
+        requestedOrientation =
+            if (resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            } else {
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            }
     }
 
     private fun toggleFullscreen() {
@@ -433,7 +466,16 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         }
 
         val newAlpha = if (isFullScreen) 0f else 1f
-        arrayOf(videoPrevFile, videoTogglePlayPause, videoNextFile, videoCurrTime, videoSeekbar, videoDuration, topShadow, videoBottomGradient).forEach {
+        arrayOf(
+            videoPrevFile,
+            videoTogglePlayPause,
+            videoNextFile,
+            videoCurrTime,
+            videoSeekbar,
+            videoDuration,
+            topShadow,
+            videoBottomGradient
+        ).forEach {
             it.animate().alpha(newAlpha).start()
         }
         videoSeekbar.setOnSeekBarChangeListener(if (mIsFullscreen) null else this)
@@ -455,7 +497,12 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
             }
         }
 
-        videoTimeHolder.setPadding(0, 0, right, bottom)
+        videoTimeHolder.setPadding(
+            /* left = */ 0,
+            /* top = */ 0,
+            /* right = */ right,
+            /* bottom = */ bottom
+        )
         videoSeekbar.setOnSeekBarChangeListener(this)
         videoSeekbar.max = mDuration
         videoDuration.text = mDuration.getFormattedDuration()
@@ -501,12 +548,16 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
                 mTouchDownTime = System.currentTimeMillis()
                 mProgressAtDown = mExoPlayer!!.currentPosition
             }
+
             MotionEvent.ACTION_POINTER_DOWN -> mIgnoreCloseDown = true
             MotionEvent.ACTION_MOVE -> {
                 val diffX = event.x - mTouchDownX
                 val diffY = event.y - mTouchDownY
 
-                if (mIsDragged || (Math.abs(diffX) > mDragThreshold && Math.abs(diffX) > Math.abs(diffY)) && videoSurfaceFrame.controller.state.zoom == 1f) {
+                if (mIsDragged || (abs(diffX) > mDragThreshold && abs(diffX) > abs(
+                        diffY
+                    )) && videoSurfaceFrame.controller.state.zoom == 1f
+                ) {
                     if (!mIsDragged) {
                         arrayOf(videoCurrTime, videoSeekbar, videoDuration).forEach {
                             it.animate().alpha(1f).start()
@@ -515,24 +566,27 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
                     mIgnoreCloseDown = true
                     mIsDragged = true
                     var percent = ((diffX / mScreenWidth) * 100).toInt()
-                    percent = Math.min(100, Math.max(-100, percent))
+                    percent = min(100, max(-100, percent))
 
                     val skipLength = (mDuration * 1000f) * (percent / 100f)
                     var newProgress = mProgressAtDown + skipLength
-                    newProgress = Math.max(Math.min(mExoPlayer!!.duration.toFloat(), newProgress), 0f)
+                    newProgress =
+                        max(min(mExoPlayer!!.duration.toFloat(), newProgress), 0f)
                     val newSeconds = (newProgress / 1000).toInt()
                     setPosition(newSeconds)
                     resetPlayWhenReady()
                 }
             }
+
             MotionEvent.ACTION_UP -> {
                 val diffX = mTouchDownX - event.x
                 val diffY = mTouchDownY - event.y
 
                 val downGestureDuration = System.currentTimeMillis() - mTouchDownTime
-                if (config.allowDownGesture && !mIgnoreCloseDown && Math.abs(diffY) > Math.abs(diffX) && diffY < -mCloseDownThreshold &&
-                        downGestureDuration < MAX_CLOSE_DOWN_GESTURE_DURATION &&
-                        videoSurfaceFrame.controller.state.zoom == 1f) {
+                if (config.allowDownGesture && !mIgnoreCloseDown && abs(diffY) > abs(diffX) && diffY < -mCloseDownThreshold &&
+                    downGestureDuration < MAX_CLOSE_DOWN_GESTURE_DURATION &&
+                    videoSurfaceFrame.controller.state.zoom == 1f
+                ) {
                     supportFinishAfterTransition()
                 }
 
@@ -574,7 +628,7 @@ open class VideoPlayerActivity : SimpleActivity(), SeekBar.OnSeekBarChangeListen
         mPlayWhenReadyHandler.removeCallbacksAndMessages(null)
         mPlayWhenReadyHandler.postDelayed({
             mExoPlayer?.playWhenReady = true
-        }, PLAY_WHEN_READY_DRAG_DELAY)
+        }, playWhenReadyDragDelay)
     }
 
     private fun releaseExoPlayer() {

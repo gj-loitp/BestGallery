@@ -13,7 +13,11 @@ import com.roy.gallery.pro.fragments.ViewPagerFragment
 import com.roy.gallery.pro.helpers.MEDIUM
 import com.roy.gallery.pro.models.Medium
 
-class MyPagerAdapter(val activity: com.roy.gallery.pro.activities.ViewPagerActivity, fm: FragmentManager, val media: MutableList<Medium>) : FragmentStatePagerAdapter(fm) {
+class MyPagerAdapter(
+    val activity: com.roy.gallery.pro.activities.ViewPagerActivity,
+    fm: FragmentManager,
+    val media: MutableList<Medium>,
+) : FragmentStatePagerAdapter(fm) {
     private val fragments = HashMap<Int, ViewPagerFragment>()
     override fun getCount() = media.size
 

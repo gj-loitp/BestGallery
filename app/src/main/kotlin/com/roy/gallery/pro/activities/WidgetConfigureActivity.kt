@@ -1,5 +1,6 @@
 package com.roy.gallery.pro.activities
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.Intent
@@ -23,7 +24,7 @@ import com.roy.commons.ext.setFillWithStroke
 import com.roy.commons.ext.updateTextColors
 import kotlinx.android.synthetic.main.a_widget_config.*
 
-class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() {
+class WidgetConfigureActivity : SimpleActivity() {
     private var mBgAlpha = 0f
     private var mWidgetId = 0
     private var mBgColor = 0
@@ -39,7 +40,8 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
         setContentView(R.layout.a_widget_config)
         initVariables()
 
-        mWidgetId = intent.extras?.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID) ?: AppWidgetManager.INVALID_APPWIDGET_ID
+        mWidgetId = intent.extras?.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
+            ?: AppWidgetManager.INVALID_APPWIDGET_ID
 
         if (mWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
             finish()
@@ -60,7 +62,7 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
         updateTextColors(folderPickerHolder)
         folderPickerHolder.background = ColorDrawable(config.backgroundColor)
 
-        getCachedDirectories(false, false) {
+        getCachedDirectories(getVideosOnly = false, getImagesOnly = false) {
             mDirectories = it
             val path = it.firstOrNull()?.path
             if (path != null) {
@@ -73,7 +75,8 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
         mBgColor = config.widgetBgColor
         mBgAlpha = Color.alpha(mBgColor) / 255f
 
-        mBgColorWithoutTransparency = Color.rgb(Color.red(mBgColor), Color.green(mBgColor), Color.blue(mBgColor))
+        mBgColorWithoutTransparency =
+            Color.rgb(Color.red(mBgColor), Color.green(mBgColor), Color.blue(mBgColor))
         configBgSeekbar.apply {
             progress = (mBgAlpha * 100).toInt()
 
@@ -88,12 +91,13 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
         updateTextColor()
     }
 
+    @SuppressLint("RemoteViewLayout")
     private fun saveConfig() {
         val views = RemoteViews(packageName, R.layout.v_widget)
         views.setBackgroundColor(R.id.widgetHolder, mBgColor)
         AppWidgetManager.getInstance(this).updateAppWidget(mWidgetId, views)
         config.showWidgetFolderName = folderPickerShowFolderName.isChecked
-        val widget = Widget(null, mWidgetId, mFolderPath)
+        val widget = Widget(id = null, widgetId = mWidgetId, folderPath = mFolderPath)
         Thread {
             widgetsDB.insertOrUpdate(widget)
         }.start()
@@ -116,7 +120,12 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
     }
 
     private fun requestWidgetUpdate() {
-        Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, this, MyWidgetProvider::class.java).apply {
+        Intent(
+            /* action = */ AppWidgetManager.ACTION_APPWIDGET_UPDATE,
+            /* uri = */ null,
+            /* packageContext = */ this,
+            /* cls = */ MyWidgetProvider::class.java
+        ).apply {
             putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(mWidgetId))
             sendBroadcast(this)
         }
@@ -136,7 +145,10 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
     }
 
     private fun pickBackgroundColor() {
-        ColorPickerDialog(this, mBgColorWithoutTransparency) { wasPositivePressed, color ->
+        ColorPickerDialog(
+            activity = this,
+            color = mBgColorWithoutTransparency
+        ) { wasPositivePressed, color ->
             if (wasPositivePressed) {
                 mBgColorWithoutTransparency = color
                 updateBackgroundColor()
@@ -145,7 +157,7 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
     }
 
     private fun pickTextColor() {
-        ColorPickerDialog(this, mTextColor) { wasPositivePressed, color ->
+        ColorPickerDialog(activity = this, color = mTextColor) { wasPositivePressed, color ->
             if (wasPositivePressed) {
                 mTextColor = color
                 updateTextColor()
@@ -154,7 +166,7 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
     }
 
     private fun changeSelectedFolder() {
-        PickDirectoryDialog(this, "", false) {
+        PickDirectoryDialog(activity = this, sourcePath = "", showOtherFolderButton = false) {
             updateFolderImage(it)
         }
     }
@@ -179,6 +191,7 @@ class WidgetConfigureActivity : com.roy.gallery.pro.activities.SimpleActivity() 
     private fun handleFolderNameDisplay() {
         val showFolderName = folderPickerShowFolderName.isChecked
         configFolderName.beVisibleIf(showFolderName)
-        (configImage.layoutParams as RelativeLayout.LayoutParams).bottomMargin = if (showFolderName) 0 else resources.getDimension(R.dimen.normal_margin).toInt()
+        (configImage.layoutParams as RelativeLayout.LayoutParams).bottomMargin =
+            if (showFolderName) 0 else resources.getDimension(R.dimen.normal_margin).toInt()
     }
 }

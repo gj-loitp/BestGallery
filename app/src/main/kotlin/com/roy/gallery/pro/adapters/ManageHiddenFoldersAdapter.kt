@@ -20,7 +20,12 @@ class ManageHiddenFoldersAdapter(
     val listener: RefreshRecyclerViewListener?,
     recyclerView: MyRecyclerView,
     itemClick: (Any) -> Unit,
-) : MyRecyclerViewAdapter(activity, recyclerView, null, itemClick) {
+) : MyRecyclerViewAdapter(
+    activity = activity,
+    recyclerView = recyclerView,
+    fastScroller = null,
+    itemClick = itemClick
+) {
 
     private val config = activity.config
 
@@ -51,8 +56,12 @@ class ManageHiddenFoldersAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val folder = folders[position]
-        holder.bindView(folder, true, true) { itemView, adapterPosition ->
-            setupView(itemView, folder)
+        holder.bindView(
+            any = folder,
+            allowSingleClick = true,
+            allowLongClick = true
+        ) { itemView, _ ->
+            setupView(view = itemView, folder = folder)
         }
         bindViewHolder(holder)
     }

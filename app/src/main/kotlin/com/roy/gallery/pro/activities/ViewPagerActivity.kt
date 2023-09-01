@@ -13,6 +13,7 @@ import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
@@ -69,10 +70,11 @@ import kotlinx.android.synthetic.main.a_medium.*
 import kotlinx.android.synthetic.main.v_bottom_actions.*
 import java.io.File
 import java.util.*
+import kotlin.math.min
 
 class ViewPagerActivity : SimpleActivity(),
     ViewPager.OnPageChangeListener, ViewPagerFragment.FragmentListener {
-    private val REQUEST_VIEW_VIDEO = 1
+    private val requestViewVideo = 1
 
     private var mPath = ""
     private var mDirectory = ""
@@ -82,7 +84,7 @@ class ViewPagerActivity : SimpleActivity(),
     private var mIsSlideshowActive = false
     private var mPrevHashcode = 0
 
-    private var mSlideshowHandler = Handler()
+    private var mSlideshowHandler = Handler(Looper.getMainLooper())
     private var mSlideshowInterval = SLIDESHOW_DEFAULT_INTERVAL
     private var mSlideshowMoveBackwards = false
     private var mSlideshowMedia = mutableListOf<Medium>()
@@ -259,7 +261,13 @@ class ViewPagerActivity : SimpleActivity(),
             var cursor: Cursor? = null
             try {
                 val proj = arrayOf(MediaStore.Images.Media.DATA)
-                cursor = contentResolver.query(uri, proj, null, null, null)
+                cursor = contentResolver.query(
+                    /* uri = */ uri,
+                    /* projection = */ proj,
+                    /* selection = */ null,
+                    /* selectionArgs = */ null,
+                    /* sortOrder = */ null
+                )
                 if (cursor?.moveToFirst() == true) {
                     mPath = cursor.getStringValue(MediaStore.Images.Media.DATA)
                 }
@@ -384,17 +392,17 @@ class ViewPagerActivity : SimpleActivity(),
 
                         val duration = if (type == TYPE_VIDEOS) mPath.getVideoDuration() else 0
                         val medium = Medium(
-                            null,
-                            mPath.getFilenameFromPath(),
-                            mPath,
-                            mPath.getParentPath(),
-                            System.currentTimeMillis(),
-                            System.currentTimeMillis(),
-                            File(mPath).length(),
-                            type,
-                            duration,
-                            false,
-                            0
+                            id = null,
+                            name = mPath.getFilenameFromPath(),
+                            path = mPath,
+                            parentPath = mPath.getParentPath(),
+                            modified = System.currentTimeMillis(),
+                            taken = System.currentTimeMillis(),
+                            size = File(mPath).length(),
+                            type = type,
+                            videoDuration = duration,
+                            isFavorite = false,
+                            deletedTS = 0
                         )
                         galleryDB.MediumDao().insert(medium)
                     }
@@ -520,9 +528,11 @@ class ViewPagerActivity : SimpleActivity(),
     private fun slideshowEnded(forward: Boolean) {
         if (config.loopSlideshow) {
             if (forward) {
-                viewPager.setCurrentItem(0, false)
+                viewPager.setCurrentItem(/* position = */ 0, /* smoothScroll = */ false)
             } else {
-                viewPager.setCurrentItem(viewPager.adapter!!.count - 1, false)
+                viewPager.setCurrentItem(/* position = */ viewPager.adapter!!.count - 1, /* smoothScroll = */
+                    false
+                )
             }
         } else {
             stopSlideshow()
@@ -613,7 +623,7 @@ class ViewPagerActivity : SimpleActivity(),
             val newFileName = it.getFilenameFromPath()
             supportActionBar?.title = newFileName
 
-            getCurrentMedium()!!.apply {
+            getCurrentMedium()?.apply {
                 name = newFileName
                 path = it
                 getCurrentMedia()[mPos] = this
@@ -666,10 +676,10 @@ class ViewPagerActivity : SimpleActivity(),
                 Thread {
                     val photoFragment = getCurrentPhotoFragment() ?: return@Thread
                     saveRotatedImageToFile(
-                        currPath,
-                        newPath,
-                        photoFragment.mCurrentRotationDegrees,
-                        true
+                        oldPath = currPath,
+                        newPath = newPath,
+                        degrees = photoFragment.mCurrentRotationDegrees,
+                        showToasts = true
                     ) {
                         toast(R.string.file_saved)
                         getCurrentPhotoFragment()?.mCurrentRotationDegrees = 0
@@ -710,7 +720,7 @@ class ViewPagerActivity : SimpleActivity(),
 
     private fun showProperties() {
         if (getCurrentMedium() != null) {
-            PropertiesDialog(this, getCurrentPath(), false)
+            PropertiesDialog(activity = this, path = getCurrentPath(), countHiddenItems = false)
         }
     }
 
@@ -723,20 +733,20 @@ class ViewPagerActivity : SimpleActivity(),
             return
         }
         val lat = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE)
-        val lat_ref = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF)
+        val latRef = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF)
         val lon = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE)
-        val lon_ref = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF)
+        val lonRef = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF)
 
-        if (lat == null || lat_ref == null || lon == null || lon_ref == null) {
+        if (lat == null || latRef == null || lon == null || lonRef == null) {
             toast(R.string.unknown_location)
         } else {
-            val geoLat = if (lat_ref == "N") {
+            val geoLat = if (latRef == "N") {
                 convertToDegree(lat)
             } else {
                 0 - convertToDegree(lat)
             }
 
-            val geoLon = if (lon_ref == "E") {
+            val geoLon = if (lonRef == "E") {
                 convertToDegree(lon)
             } else {
                 0 - convertToDegree(lon)
@@ -912,7 +922,7 @@ class ViewPagerActivity : SimpleActivity(),
             refreshViewPager()
         } else if (requestCode == REQUEST_SET_AS && resultCode == Activity.RESULT_OK) {
             toast(R.string.wallpaper_set_successfully)
-        } else if (requestCode == REQUEST_VIEW_VIDEO && resultCode == Activity.RESULT_OK && resultData != null) {
+        } else if (requestCode == requestViewVideo && resultCode == Activity.RESULT_OK && resultData != null) {
             if (resultData.getBooleanExtra(GO_TO_NEXT_ITEM, false)) {
                 goToNextItem()
             } else if (resultData.getBooleanExtra(GO_TO_PREV_ITEM, false)) {
@@ -964,7 +974,11 @@ class ViewPagerActivity : SimpleActivity(),
         if (config.useRecycleBin && !getCurrentMedium()!!.getIsInRecycleBin()) {
             movePathsInRecycleBin(arrayListOf(path)) {
                 if (it) {
-                    tryDeleteFileDirItem(fileDirItem, false, false) {
+                    tryDeleteFileDirItem(
+                        fileDirItem = fileDirItem,
+                        allowDeleteFolder = false,
+                        deleteFromDatabase = false
+                    ) {
                         refreshViewPager()
                     }
                 } else {
@@ -972,7 +986,11 @@ class ViewPagerActivity : SimpleActivity(),
                 }
             }
         } else {
-            tryDeleteFileDirItem(fileDirItem, false, true) {
+            tryDeleteFileDirItem(
+                fileDirItem = fileDirItem,
+                allowDeleteFolder = false,
+                deleteFromDatabase = true
+            ) {
                 refreshViewPager()
             }
         }
@@ -1011,11 +1029,11 @@ class ViewPagerActivity : SimpleActivity(),
     private fun refreshViewPager() {
         if (config.getFileSorting(mDirectory) and SORT_BY_RANDOM == 0) {
             com.roy.gallery.pro.asynctasks.GetMediaAsynctask(
-                applicationContext,
-                mDirectory,
-                false,
-                false,
-                mShowAll
+                context = applicationContext,
+                mPath = mDirectory,
+                isPickImage = false,
+                isPickVideo = false,
+                showAll = mShowAll
             ) {
                 gotMedia(it)
             }.execute()
@@ -1034,7 +1052,7 @@ class ViewPagerActivity : SimpleActivity(),
         mPos = if (mPos == -1) {
             getPositionInList(media)
         } else {
-            Math.min(mPos, mMediaFiles.size - 1)
+            min(mPos, mMediaFiles.size - 1)
         }
 
         updateActionbarTitle()
@@ -1078,6 +1096,7 @@ class ViewPagerActivity : SimpleActivity(),
                 flipSides =
                     orientation == ExifInterface.ORIENTATION_ROTATE_90 || orientation == ExifInterface.ORIENTATION_ROTATE_270
             } catch (e: Exception) {
+                e.printStackTrace()
             }
             val res = getCurrentPath().getResolution() ?: return
             val width = if (flipSides) res.y else res.x
@@ -1127,7 +1146,7 @@ class ViewPagerActivity : SimpleActivity(),
 
                 if (resolveActivity(packageManager) != null) {
                     try {
-                        startActivityForResult(this, REQUEST_VIEW_VIDEO)
+                        startActivityForResult(this, requestViewVideo)
                     } catch (e: NullPointerException) {
                         showErrorToast(e)
                     }
