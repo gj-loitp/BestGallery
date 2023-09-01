@@ -127,13 +127,7 @@ import com.roy.commons.models.FileDirItem
 import com.roy.commons.models.Release
 import com.roy.commons.views.MyGridLayoutManager
 import com.roy.commons.views.MyRecyclerView
-import kotlinx.android.synthetic.main.activity_main.directories_empty_text
-import kotlinx.android.synthetic.main.activity_main.directories_empty_text_label
-import kotlinx.android.synthetic.main.activity_main.directoriesGrid
-import kotlinx.android.synthetic.main.activity_main.directoriesHorizontalFastScroller
-import kotlinx.android.synthetic.main.activity_main.directories_refresh_layout
-import kotlinx.android.synthetic.main.activity_main.directoriesVerticalFastScroller
-import kotlinx.android.synthetic.main.activity_main.loading
+import kotlinx.android.synthetic.main.a_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.io.File
@@ -193,7 +187,7 @@ class MainActivity : SimpleActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.a_main)
         appLaunched(BuildConfig.APPLICATION_ID)
 
         mMediumDao = galleryDB.MediumDao()
@@ -218,12 +212,12 @@ class MainActivity : SimpleActivity(),
             mIsPickImageIntent || mIsPickVideoIntent || mIsGetImageContentIntent || mIsGetVideoContentIntent ||
                     mIsGetAnyContentIntent || mIsSetWallpaperIntent
 
-        directories_refresh_layout.setOnRefreshListener { getDirectories() }
-        directories_refresh_layout.setColorSchemeResources(R.color.color_primary)
+        directoriesRefreshLayout.setOnRefreshListener { getDirectories() }
+        directoriesRefreshLayout.setColorSchemeResources(R.color.color_primary)
         storeStateVariables()
         checkWhatsNewDialog()
 
-        directories_empty_text.setOnClickListener {
+        directoriesEmptyText.setOnClickListener {
             showFilterMediaDialog()
         }
 
@@ -306,10 +300,10 @@ class MainActivity : SimpleActivity(),
         directoriesVerticalFastScroller.updateBubbleColors()
         directoriesHorizontalFastScroller.allowBubbleDisplay = config.showInfoBubble
         directoriesVerticalFastScroller.allowBubbleDisplay = config.showInfoBubble
-        directories_refresh_layout.isEnabled = config.enablePullToRefresh
+        directoriesRefreshLayout.isEnabled = config.enablePullToRefresh
         invalidateOptionsMenu()
-        directories_empty_text_label.setTextColor(config.textColor)
-        directories_empty_text.setTextColor(getAdjustedPrimaryColor())
+        directoriesEmptyTextLabel.setTextColor(config.textColor)
+        directoriesEmptyText.setTextColor(getAdjustedPrimaryColor())
 
         if (mIsPasswordProtectionPending && !mWasProtectionHandled) {
             handleAppPasswordProtection {
@@ -328,7 +322,7 @@ class MainActivity : SimpleActivity(),
 
     override fun onPause() {
         super.onPause()
-        directories_refresh_layout.isRefreshing = false
+        directoriesRefreshLayout.isRefreshing = false
         mIsGettingDirs = false
         storeStateVariables()
         mLastMediaHandler.removeCallbacksAndMessages(null)
@@ -474,7 +468,7 @@ class MainActivity : SimpleActivity(),
             object : MenuItemCompat.OnActionExpandListener {
                 override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
                     mIsSearchOpen = true
-                    directories_refresh_layout.isEnabled = false
+                    directoriesRefreshLayout.isEnabled = false
                     return true
                 }
 
@@ -482,7 +476,7 @@ class MainActivity : SimpleActivity(),
                 override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
                     if (mIsSearchOpen) {
                         mIsSearchOpen = false
-                        directories_refresh_layout.isEnabled = config.enablePullToRefresh
+                        directoriesRefreshLayout.isEnabled = config.enablePullToRefresh
                         setupAdapter(mDirs, "")
                     }
                     return true
@@ -618,7 +612,7 @@ class MainActivity : SimpleActivity(),
     private fun showFilterMediaDialog() {
         FilterMediaDialog(this) {
             mShouldStopFetching = true
-            directories_refresh_layout.isRefreshing = true
+            directoriesRefreshLayout.isRefreshing = true
             directoriesGrid.adapter = null
             getDirectories()
         }
@@ -747,13 +741,13 @@ class MainActivity : SimpleActivity(),
         val layoutManager = directoriesGrid.layoutManager as MyGridLayoutManager
         if (config.scrollHorizontally) {
             layoutManager.orientation = RecyclerView.HORIZONTAL
-            directories_refresh_layout.layoutParams = FrameLayout.LayoutParams(
+            directoriesRefreshLayout.layoutParams = FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
         } else {
             layoutManager.orientation = RecyclerView.VERTICAL
-            directories_refresh_layout.layoutParams = FrameLayout.LayoutParams(
+            directoriesRefreshLayout.layoutParams = FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
@@ -815,7 +809,7 @@ class MainActivity : SimpleActivity(),
         val layoutManager = directoriesGrid.layoutManager as MyGridLayoutManager
         layoutManager.spanCount = 1
         layoutManager.orientation = RecyclerView.VERTICAL
-        directories_refresh_layout.layoutParams = FrameLayout.LayoutParams(
+        directoriesRefreshLayout.layoutParams = FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
@@ -1156,8 +1150,8 @@ class MainActivity : SimpleActivity(),
             if (isPlaceholderVisible) {
                 isPlaceholderVisible = false
                 runOnUiThread {
-                    directories_empty_text_label.beGone()
-                    directories_empty_text.beGone()
+                    directoriesEmptyTextLabel.beGone()
+                    directoriesEmptyText.beGone()
                     directoriesGrid.beVisible()
                 }
             }
@@ -1186,7 +1180,7 @@ class MainActivity : SimpleActivity(),
         checkLastMediaChanged()
 
         runOnUiThread {
-            directories_refresh_layout.isRefreshing = false
+            directoriesRefreshLayout.isRefreshing = false
             checkPlaceholderVisibility(dirs)
         }
         checkInvalidDirectories(dirs)
@@ -1207,9 +1201,9 @@ class MainActivity : SimpleActivity(),
     }
 
     private fun checkPlaceholderVisibility(dirs: ArrayList<Directory>) {
-        directories_empty_text_label.beVisibleIf(dirs.isEmpty() && mLoadedInitialPhotos)
-        directories_empty_text.beVisibleIf(dirs.isEmpty() && mLoadedInitialPhotos)
-        directoriesGrid.beVisibleIf(directories_empty_text_label.isGone())
+        directoriesEmptyTextLabel.beVisibleIf(dirs.isEmpty() && mLoadedInitialPhotos)
+        directoriesEmptyText.beVisibleIf(dirs.isEmpty() && mLoadedInitialPhotos)
+        directoriesGrid.beVisibleIf(directoriesEmptyTextLabel.isGone())
     }
 
     private fun createDirectoryFromMedia(
@@ -1335,7 +1329,7 @@ class MainActivity : SimpleActivity(),
             directoriesHorizontalFastScroller.allowBubbleDisplay = config.showInfoBubble
             directoriesHorizontalFastScroller.setViews(
                 directoriesGrid,
-                directories_refresh_layout
+                directoriesRefreshLayout
             ) {
                 directoriesHorizontalFastScroller.updateBubbleText(getBubbleTextItem(it))
             }
@@ -1343,7 +1337,7 @@ class MainActivity : SimpleActivity(),
             directoriesVerticalFastScroller.allowBubbleDisplay = config.showInfoBubble
             directoriesVerticalFastScroller.setViews(
                 directoriesGrid,
-                directories_refresh_layout
+                directoriesRefreshLayout
             ) {
                 directoriesVerticalFastScroller.updateBubbleText(getBubbleTextItem(it))
             }

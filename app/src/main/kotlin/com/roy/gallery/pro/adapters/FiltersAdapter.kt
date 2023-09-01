@@ -13,7 +13,7 @@ import java.util.*
 class FiltersAdapter(val context: Context, val filterItems: ArrayList<FilterItem>, val itemClick: (Int) -> Unit) : RecyclerView.Adapter<com.roy.gallery.pro.adapters.FiltersAdapter.ViewHolder>() {
 
     private var currentSelection = filterItems.first()
-    private var strokeBackground = context.resources.getDrawable(R.drawable.stroke_background)
+    private var strokeBackground = context.resources.getDrawable(R.drawable.shape_stroke_background)
 
     override fun onBindViewHolder(holder: com.roy.gallery.pro.adapters.FiltersAdapter.ViewHolder, position: Int) {
         holder.bindView(filterItems[position])

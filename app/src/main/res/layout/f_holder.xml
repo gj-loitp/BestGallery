@@ -13,7 +13,7 @@
         android:id="@+id/topShadow"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_status_action_height"
-        android:background="@drawable/gradient_background_flipped" />
+        android:background="@drawable/shape_gradient_background_flipped" />
 
     <include
         android:id="@+id/bottomActions"

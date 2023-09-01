@@ -44,7 +44,7 @@
         android:layout_alignStart="@+id/dirBottomHolder"
         android:layout_alignEnd="@+id/dirBottomHolder"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/gradient_background" />
+        android:background="@drawable/shape_gradient_background" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/dirBottomHolder"

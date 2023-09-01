@@ -19,7 +19,7 @@
         android:layout_height="@dimen/bottom_filters_thumbnail_size"
         android:layout_above="@+id/editorFilterItemLabel"
         android:layout_margin="1dp"
-        android:background="@drawable/stroke_background"
+        android:background="@drawable/shape_stroke_background"
         android:scaleType="centerCrop" />
 
     <androidx.appcompat.widget.AppCompatTextView

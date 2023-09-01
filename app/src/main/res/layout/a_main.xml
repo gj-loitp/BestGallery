@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/directories_refresh_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/directoriesRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <com.roy.commons.views.MyTextView
-            android:id="@+id/directories_empty_text_label"
+            android:id="@+id/directoriesEmptyTextLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -23,10 +24,10 @@
             android:visibility="gone" />
 
         <com.roy.commons.views.MyTextView
-            android:id="@+id/directories_empty_text"
+            android:id="@+id/directoriesEmptyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/directories_empty_text_label"
+            android:layout_below="@+id/directoriesEmptyTextLabel"
             android:layout_centerHorizontal="true"
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/activity_margin"
@@ -47,10 +48,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:paddingStart="@dimen/normal_margin"
-            android:paddingLeft="@dimen/normal_margin"
-            android:visibility="gone">
+            android:paddingEnd="0dp"
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <include layout="@layout/v_fastscroller_handle_vertical" />
 
@@ -61,10 +62,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:paddingTop="@dimen/normal_margin"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <include layout="@layout/v_fastscroller_handle_horizontal" />
 

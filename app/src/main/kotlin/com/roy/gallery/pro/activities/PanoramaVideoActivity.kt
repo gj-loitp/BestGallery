@@ -243,7 +243,7 @@ open class PanoramaVideoActivity : com.roy.gallery.pro.activities.SimpleActivity
         }
 
         videoTimeHolder.setPadding(0, 0, right, bottom)
-        videoTimeHolder.background = resources.getDrawable(R.drawable.gradient_background)
+        videoTimeHolder.background = resources.getDrawable(R.drawable.shape_gradient_background)
         videoTimeHolder.onGlobalLayout {
             val newBottomMargin = videoTimeHolder.height - resources.getDimension(R.dimen.video_player_play_pause_size).toInt() - resources.getDimension(R.dimen.activity_margin).toInt()
             (explore.layoutParams as RelativeLayout.LayoutParams).bottomMargin = newBottomMargin
