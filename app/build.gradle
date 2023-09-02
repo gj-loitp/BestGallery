@@ -8,6 +8,7 @@ android {
     ndkVersion "25.2.9519653"
 
     defaultConfig {
+        targetSdk 33
         applicationId "com.roy.gallery.photos.videos.album.hd.gallery.editor"
         minSdkVersion 21
         versionCode 20230902
