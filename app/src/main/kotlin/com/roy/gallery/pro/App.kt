@@ -9,14 +9,14 @@ import com.roy.commons.ext.checkUseEnglish
 //TODO firebase analytic
 //TODO ad applovin
 
-//TODO proguard
-//TODO leak canary
 //TODO rate, more app, share app
 //TODO policy
 //TODO keystore
 //done
 //rename app
 //ic_launcher
+//proguard
+//leak canary
 
 class App : MultiDexApplication() {
 
