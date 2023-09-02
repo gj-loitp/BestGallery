@@ -10,7 +10,6 @@ import com.roy.commons.ext.checkUseEnglish
 //TODO ad applovin
 //TODO con file a_setting.xml chua refactor
 
-//TODO keystore
 //done
 //rename app
 //ic_launcher
@@ -18,6 +17,7 @@ import com.roy.commons.ext.checkUseEnglish
 //leak canary
 //rate, more app, share app
 //policy
+//keystore
 
 class App : MultiDexApplication() {
 
