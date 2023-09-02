@@ -68,4 +68,20 @@
         android:title="@string/about"
         android:visible="false"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/rateApp"
+        android:title="@string/rate_app"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/moreApp"
+        android:title="@string/more_app"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/shareApp"
+        android:title="@string/share_app"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/policy"
+        android:title="@string/policy"
+        app:showAsAction="never" />
 </menu>

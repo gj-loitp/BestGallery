@@ -8,15 +8,16 @@ import com.roy.commons.ext.checkUseEnglish
 
 //TODO firebase analytic
 //TODO ad applovin
+//TODO con file a_setting.xml chua refactor
 
-//TODO rate, more app, share app
-//TODO policy
 //TODO keystore
 //done
 //rename app
 //ic_launcher
 //proguard
 //leak canary
+//rate, more app, share app
+//policy
 
 class App : MultiDexApplication() {
 

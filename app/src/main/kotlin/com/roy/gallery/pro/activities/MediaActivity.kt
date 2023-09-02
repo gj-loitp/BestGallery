@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -54,6 +55,10 @@ import com.roy.gallery.pro.dialogs.ChangeSortingDialog
 import com.roy.gallery.pro.dialogs.ChangeViewTypeDialog
 import com.roy.gallery.pro.dialogs.ExcludeFolderDialog
 import com.roy.gallery.pro.dialogs.FilterMediaDialog
+import com.roy.gallery.pro.ext.moreApp
+import com.roy.gallery.pro.ext.openBrowserPolicy
+import com.roy.gallery.pro.ext.rateApp
+import com.roy.gallery.pro.ext.shareApp
 import com.roy.gallery.pro.extensions.addNoMedia
 import com.roy.gallery.pro.extensions.config
 import com.roy.gallery.pro.extensions.containsNoMedia
@@ -322,6 +327,22 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
             R.id.slideshow -> startSlideshow()
             R.id.settings -> launchSettings()
             R.id.about -> launchAbout()
+            R.id.rateApp -> {
+                rateApp(packageName)
+            }
+
+            R.id.moreApp -> {
+                moreApp()
+            }
+
+            R.id.shareApp -> {
+                shareApp()
+            }
+
+            R.id.policy -> {
+                openBrowserPolicy()
+            }
+
             else -> return super.onOptionsItemSelected(item)
         }
         return true

@@ -129,6 +129,10 @@ import com.roy.commons.models.FileDirItem
 import com.roy.commons.models.Release
 import com.roy.commons.views.MyGridLayoutManager
 import com.roy.commons.views.MyRecyclerView
+import com.roy.gallery.pro.ext.moreApp
+import com.roy.gallery.pro.ext.openBrowserPolicy
+import com.roy.gallery.pro.ext.rateApp
+import com.roy.gallery.pro.ext.shareApp
 import kotlinx.android.synthetic.main.a_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -420,6 +424,21 @@ class MainActivity : SimpleActivity(),
             R.id.reduceColumnCount -> reduceColumnCount()
             R.id.settings -> launchSettings()
             R.id.about -> launchAbout()
+            R.id.rateApp -> {
+                rateApp(packageName)
+            }
+
+            R.id.moreApp -> {
+                moreApp()
+            }
+
+            R.id.shareApp -> {
+                shareApp()
+            }
+
+            R.id.policy -> {
+                openBrowserPolicy()
+            }
             else -> return super.onOptionsItemSelected(item)
         }
         return true
