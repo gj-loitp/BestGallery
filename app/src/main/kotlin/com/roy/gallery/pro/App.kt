@@ -8,7 +8,7 @@ import com.roy.commons.ext.checkUseEnglish
 
 //TODO firebase analytic
 //TODO ad applovin
-//TODO ic_launcher
+
 //TODO proguard
 //TODO leak canary
 //TODO rate, more app, share app
@@ -16,6 +16,7 @@ import com.roy.commons.ext.checkUseEnglish
 //TODO keystore
 //done
 //rename app
+//ic_launcher
 
 class App : MultiDexApplication() {
 
